@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.6, created on 2014-11-25 09:38:49
+<?php /* Smarty version Smarty-3.1.6, created on 2014-11-28 14:29:57
          compiled from "./Application/Home/View\Index\left.html" */ ?>
 <?php /*%%SmartyHeaderCode:30075546d8b650af4f8-53690178%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cae000923b2e34945454416691a6f8f694dee83c' => 
     array (
       0 => './Application/Home/View\\Index\\left.html',
-      1 => 1416879524,
+      1 => 1417156168,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_546d8b652591d')) {function content_546d8b652591d($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'D:\\wamp\\www\\thinkPHP\\ThinkPHP\\Library\\Vendor\\Smarty\\plugins\\modifier.replace.php';
+<?php if ($_valid && !is_callable('content_546d8b652591d')) {function content_546d8b652591d($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include 'D:\\wamp\\www\\thinkphp\\ThinkPHP\\Library\\Vendor\\Smarty\\plugins\\modifier.replace.php';
 ?>﻿<?php  $_smarty_tpl->tpl_vars['a'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['a']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['nav_2nd']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
  $_smarty_tpl->tpl_vars['a']->index=-1;
@@ -56,7 +56,8 @@ foreach ($_from as $_smarty_tpl->tpl_vars['t']->key => $_smarty_tpl->tpl_vars['t
 $_smarty_tpl->tpl_vars['t']->_loop = true;
  $_smarty_tpl->tpl_vars['smarty']->value['foreach']['index']['iteration']++;
 ?>
-    <li><a href="http://localhost/thinkphp/index.php/Home/<?php echo smarty_modifier_replace($_smarty_tpl->tpl_vars['t']->value['action'],'_','');?>
+    <li><a href="http://localhost/thinkphp/index.php/Home/<?php echo smarty_modifier_replace($_smarty_tpl->tpl_vars['a']->value['action'],'_','');?>
+/<?php echo smarty_modifier_replace($_smarty_tpl->tpl_vars['t']->value['action'],'_','');?>
 "><?php echo $_smarty_tpl->tpl_vars['t']->value['label'];?>
 </a></li>
     <?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['index']['iteration']%3==0){?>

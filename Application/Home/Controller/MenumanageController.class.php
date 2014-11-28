@@ -76,6 +76,16 @@ class MenuManageController extends Controller {
      * @return void
      */
     public function listMenu() {
-        echo THINK_PATH;
+        echo microtime(), '<br>';
+        echo substr(microtime(), 2, 8);
+    }
+    /**
+     * 执行时间计算
+     *
+     * @return float
+     */
+    public function mtime() {
+        $time = explode(' ', microtime());
+        return round($time[0] + $time[1], 8);
     }
 }
