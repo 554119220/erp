@@ -1,0 +1,45 @@
+<br />
+<link rel="stylesheet" href="/thinkphp/Public/style/system.css" type="text/css" charset="utf-8">
+<form action="{$post_url}" name="privilegeForm" method="POST" onsubmit="return savePrivilege();">
+    <label>解决方案：<input type="text" value="" name="privilege_template"/></label>
+    <input type="submit" value="保存" class="b_submit"/>
+    <table id="privilegeList" border="0" cellpadding="0" cellspacing="0" width="600px">
+        {foreach from=$menu_1st item=val key=k_1st}
+        <tbody>
+        <tr>
+            <td width="30%">
+                <label><input type="checkbox" value="{$val.action_code}" level="1" onchange="chkboxSelected(this)"/>{$val.label}</label>
+            </td>
+            <td>
+                <table name="subTable" border="0" cellpadding="0" cellspacing="0" width="100%" id="{$val.action_code}">
+                    <tbody>
+                    {foreach from=$menu_2nd[$val.action_id] item=val_2nd}
+                    <tr>
+                        <td width="50%">
+                            <label>
+                                <input type="checkbox" value="{$val_2nd.action_code}" parentCode="{$val.action_code}" level="2" onchange="chkboxSelected(this)"/>
+                                {$val_2nd.label}
+                            </label>
+                        </td>
+                        <td width="50%">
+                            <ul style="list-style:none; padding:0; margin:5px 5px">
+                                {foreach from=$menu_3rd[$val_2nd.action_id] item=val_3rd}
+                                <li>
+                                <label>
+                                    <input type="checkbox" value="{$val_3rd.action_code}" parentCode="{$val_2nd.action_code}" level="3" onchange="chkboxSelected(this)"/>
+                                    {$val_3rd.label}
+                                </label>
+                                </li>
+                                {/foreach}
+                            </ul>
+                        </td>
+                    </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+        {/foreach}
+    </table>
+</form>

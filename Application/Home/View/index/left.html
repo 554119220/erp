@@ -1,0 +1,14 @@
+﻿{foreach from=$nav_2nd name=i item=a}
+<details class='left-menu'{if $smarty.foreach.i.first} open{/if}><!--循环时　加if $smarty.foreach.xx.first 就输出 border-top:0-->
+    <summary onclick="showSubMenu(this)">{$a.label}</summary>
+    {foreach from=$nav_3rd key=e item=l}
+    {if $a.action eq $e}
+    {foreach from=$l item=t name=index}
+    <li><a href="http://localhost/thinkphp/index.php/Home/{$t.action|replace:'_':''}">{$t.label}</a></li>
+    {if $smarty.foreach.index.iteration%3 eq 0}
+    {/if}
+    {/foreach}
+    {/if}
+    {/foreach}
+</details>
+{/foreach}
