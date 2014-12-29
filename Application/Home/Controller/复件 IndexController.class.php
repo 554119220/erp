@@ -1,10 +1,9 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class IndexController extends PublicController {
-    public function __construct(){
-        parent::__construct();
-        $_SESSION =  D('Session')->getSessionInfo();
+class IndexController extends Controller {
+    public function _initialize(){
+        //$this->set_session();
     }
 
     public function index(){
@@ -139,6 +138,27 @@ class IndexController extends PublicController {
         $this->assign('s',$schedule);
         $res['main'] = $this->fetch('statistics');
         $this->ajaxReturn($res);
+    }
+
+    //设置SESSION
+    private function set_session(){
+        $mSessionData = M('sessions_data');
+        $mSessionInfo = M('sessions');
+        $sesskey = substr($_COOKIE['ECSCP_ID'],0,32);
+        $where = "sesskey='$sesskey'";
+        $sessionData = $mSessionData->where($where)->getField('data');
+        $sessionInfo = $mSessionInfo->field('adminid')->where($where)->find();
+        if ($sessionData && $sessionInfo) {
+            $sessionData = unserialize($sessionData);
+            $session = array_merge($sessionData,$sessionInfo);
+            $_SESSION = array(
+                'admin_id'       => $session['adminid'],
+                'admin_name'  => $session['admin_name'],
+                'role_id'     => $session['role_id'],
+                'group_id'    => $session['group_id'],
+                'action_list' => $session['action_list'],
+            );
+        }
     }
 
     //获取管理员首页各指标排行

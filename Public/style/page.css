@@ -1,0 +1,4 @@
+#pageDiv {width:70%}
+#pageDiv>div {width:440px; margin:0 auto}
+#pageDiv .current, #pageDiv .num, #pageDiv .prev, #pageDiv .next, #pageDiv .end, #pageDiv .first{display:inline-block; border:1px solid #000; width:20px; height:20px; text-align:center; margin:0 2px; border-radius:2px}
+#pageDiv .num:hover {background:-webkit-gradient(linear,0 0,0 100%, from(#0A51CC), to(#7C9ACC))}

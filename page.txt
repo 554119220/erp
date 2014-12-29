@@ -1,0 +1,21 @@
+Think\Page::__set_state(array(
+   'firstRow' => 0,
+   'listRows' => 5,
+   'parameter' => 'Arraycustomer_type=2&',
+   'totalRows' => '40',
+   'totalPages' => NULL,
+   'rollPage' => 11,
+   'lastSuffix' => true,
+   'p' => 'p',
+   'url' => '',
+   'nowPage' => 1,
+   'config' => 
+  array (
+    'header' => '<span class="rows">共 %TOTAL_ROW% 条记录</span>',
+    'prev' => '<<',
+    'next' => '>>',
+    'first' => '1...',
+    'last' => '...%TOTAL_PAGE%',
+    'theme' => '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END%',
+  ),
+))

@@ -1,0 +1,171 @@
+<link rel="stylesheet" href="/thinkphp/Public/style/page.css" type="text/css">
+<link rel="stylesheet" href="/thinkphp/Public/style/users.css" type="text/css">
+<div class="mt10 w830">
+    {if $full_page}
+    {if $search eq 0}
+    <div class="content-head">
+        <div class="finder-title">顾客列表</div>
+        <div class="finder-packet">
+            <div class="packet-items">
+                <ul id="sub_tag" style="position:relative; left:-00px">
+                    <!-- 针对订单状态进行的分类 -->
+                    {foreach from=$group_list item=val key=key}
+                    <li id="tag_{$key}" class="{if $current_group eq $key}current-tab{else}last{/if}">
+                    <a href="{$list_url}/tag/{$key}/type/{$key}/is_ajax/0">{$val}</a>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+            <span class="linkButton"><a href="users.php?act=add_users">添加新顾客</a></span>
+        </div>
+
+        <div class="gridlist-action" style="height:30px">
+            <div class="nav-search">
+                <script language="javascript" type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+                添加时间：<input class="Wdate" id="start_time" type="text" value="{$start_time}" onClick="WdatePicker()" disabled>
+                至<input class="Wdate"  id="end_time" type="text" value="{$end_time}" onClick="WdatePicker()" disabled>
+                <select id="keyfields" onblur="changeKeywordsArae(this)">
+                    <option value="user_name"{if $kf eq 'user_name'} selected{/if}>姓名</option>
+                    <option value="qq"{if $kf eq 'qq'} selected{/if}>QQ</option>
+                    <option value="aliww"{if $kf eq 'aliww'} selected{/if}>旺旺</option>
+                    <option value="wechat"{if $kf eq 'wechat'} selected{/if}>微信</option>
+                    <option value="email"{if $kf eq 'email'} selected{/if}>邮箱</option>
+                    <option value="mobile_phone"{if $kf eq 'mobile_phone'} selected{/if}>手机号码</option>
+                    <option value="home_phone"{if $kf eq 'home_phone'} selected{/if}>固话</option>
+                    <option value="region"{if $kf eq 'region'} selected{/if}>所在地区</option>
+                    <option value="address"{if $kf eq 'address'} selected{/if}>详细地址</option>
+                    {if $section}
+                    <option value="admin_name"{if $kf eq 'admin_name'} selected{/if}>健康顾问</option>
+                    {/if}
+                    <option value="eff_id"{if $kf eq 'eff_id'} selected{/if}>功效</option>
+                    <option value="type_id"{if $kf eq 'type_id'} selected{/if}>分类</option>
+                    <option value="from_where"{if $kf eq 'from_where'} selected{/if}>顾客来源</option>
+                    <option value="sex"{if $kf eq 'sex'} selected{/if}>性别</option>
+                </select>
+                <span id="keywordsArea">
+                    <input type="text" value="{$kw}" id="keywords"/>
+                </span>
+                <button value="{$file}.php?act={$act}&tag={$tag}&type={$type}" onclick="searchOrder(this)" class="b_submit">搜索</button>
+            </div>
+        </div>
+        {/if}
+
+        <!--新加入订单结构-->
+        <!-- 查询订单 -->
+        <div class="finder-header-wrapper">
+            {/if}
+            <table border="0" cellpadding="0" cellspacing="0" class="w830">
+                <tr class="f_l">
+                    <td class="left_scroll f_l">
+                        <!--  左上-BEGIN  -->
+                        <table height="100%" cellpadding="0" cellspacing="1" width="795px">
+                            <tr>
+                                <td align="center" width="30px"> </td>
+                                <td align="center" width="60px">顾客</td>
+                                <td align="center" width="60px">性别</td>
+                                <td align="center" width="60px">年龄</td>
+                                <td align="center" width="60px">会员卡号</td>
+                                <td align="center" width="60px">添加时间</td>
+                                <td align="center" width="60px">上次服务</td>
+                                <td align="center" width="60px">所属客服</td>
+                                <td align="center" width="60px">转移时间</td>
+                                <td align="center" width="60px">备注</td>
+                            </tr>
+                        </table>
+                        <!--  左上-END  -->
+                    </td>
+                </tr>
+
+                <tr class="f_l">
+                    <td align="left" valign="top">
+                        <div class="list-div" id="listDiv">
+                            <!--  左下-BEGIN  -->
+                            <table cellpadding="0" cellspacing="1" class="rb_border">
+                                {foreach name=no from=$user_list item=user}
+                                <tr id="tr_{$user.user_id}" height="30px">
+                                    <td align="center" width="40px">
+                                        <input type="checkbox" name="checkboxes[]" value="{$user.user_id}" onclick="addToRecycle(this)" notice="{if $user.user_money neq 0}1{else}0{/if}"/>
+                                    </td>
+                                    <td class="first-cell pos" width="80px">
+                                        {$user.user_name}
+                                        <a href="{$detail_url}/id/{$user.user_id}"><img src="images/add.gif" style="margin-top:7px"/></a>
+                                    </td>
+                                    <td align="center" width="80px">
+                                        {if $user.sex eq 1}男{elseif $user.sex eq 2}女{elseif $user.sex eq 0}未知{/if}
+                                    </td>
+                                    <td align="center" width="80px">{$user.age_group}</td>
+                                    <td align="center" width="88px" title="绑定时间：{$user.bind_time}">{$user.card_number}</td>
+                                    <td align="center" width="80px">{$user.add_time}</td>
+                                    <td align="center" width="80px">
+                                        {if $user.service_time eq '1970-01-01' || $user.service_time eq 0}-{else}{$user.service_time}{/if}
+                                    </td>
+                                    <td align="center" width="80px">{$user.admin_name}</td>
+                                    <td align="center" width="80px">{$user.transfer_time}</td>
+                                    <td align="center" width="80px" title="{$user.remarks}">{$user.remarks|truncate:5}</td>
+                                </tr>
+                                {foreachelse}
+                                <tr>
+                                    <td class="no-records"{if $transfer eq 1} colspan="11"{else} colspan="10"{/if}>
+                                        {$lang.no_records}
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </table>
+                            <!--  左下-END  -->
+                        </div>
+                    </td>
+                </tr>
+            </tr>
+        </table>
+    </div>
+
+    <div class="bottom_tip" id="pageDiv">
+        {$page}
+    </div>
+    <!-- 分页 -->
+    <!--div class="bottom_tip" id="pageDiv">
+        <div class="tip_left">
+            <p>共{$record_count}条记录,当前页:{$page_start}-{$page_end}条，每页<input type="text" name="page_size" value="" size="4" onkeyup="sendPageValue(this)"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        </div>
+        <div class="tip_center">
+            <span><a href="users.php?act={$act}{$page_link}&page=1&page_size={$page_size}&a=page_link" id="page_link"><<</a></span>
+            {foreach from=$page_set item=v}
+            <span{if $v eq $page} class="cur"{/if}>{if $v eq $page}{$v}{else}<a href="users.php?act={$act}{$page_link}&page={$v}&page_size={$page_size}&a=page_link">{$v}</a>{/if}</span>
+            {/foreach}
+            <span><a href="users.php?act={$act}{$page_link}&page={$page_count}&page_size={$page_size}&a=page_link">>></a></span>
+        </div>
+        <div class="tip_right">跳转到第
+            <input type="text" name="page" size="4" onkeyup="sendPageValue(this)">&nbsp;页
+        </div>
+    </div-->
+    {if $full_page}
+</div>
+<div id="recycle" onmouseover="showThis(this, 190)" onmouseout="showThis(this, 0)" onclick="stopAction(this)">
+    <h3>中转站</h3>
+    <h3></h3>
+    <ul id="user_list">
+    </ul>
+    <div>
+        <form action="javascript:void(0)" name="usersStash">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>
+                        <input type="text" name="admin_name" value="" placeholder="员工姓名" oninput="getBySendAdmin(this.form)"/>
+                    </td>
+                </tr> 
+                <tr>
+                    <td>
+                        <select id="admin_id" name="admin_id">
+                            <option value="0">请选择</option>
+                            {foreach from=$by_send_to_admin item=val}
+                            <option value="{$val.user_id}">{$val.user_name}</option>
+                            {/foreach}
+                        </select>
+                        <input type="button" onclick="sendUsersTo()" value="确 定" class="b_submit" style="padding:3px;"/>
+                    </td>
+                </tr> 
+            </table>
+        </form>
+    </div>
+</div>
+{/if}

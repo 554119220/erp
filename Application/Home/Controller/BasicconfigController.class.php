@@ -76,7 +76,10 @@ class BasicConfigController extends Controller {
      * @return void
      */
     public function listMenu() {
-        echo __URL__;
+        $Operator = D('Operatormanage');
+        $Operator->role_id = 1;
+        $Operator->status = 1;
+        $Operator->salerList();
     }
     /**
      * 执行时间计算
