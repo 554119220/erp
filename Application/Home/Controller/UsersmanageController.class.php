@@ -74,7 +74,7 @@ class UsersmanageController extends PublicController {
         $source         = I('get.source','users');
         $rankList       = $mVip->rankList('rank_id,rank_name');
         $page           = I('get.p','1');
-        $pageSize       = I('get.page_size',5);
+        $pageSize       = I('get.page_size',20);
         $rankId         = I('get.rank_id',0);
         $item           = I('get.item');
         $keyword        = I('get.keyword');
@@ -109,7 +109,7 @@ class UsersmanageController extends PublicController {
         }
 
         if($item && !empty($keyword)){
-            $where .= 1 == $item ? " AND m.card_number=$keyword" : " AND u.user_name LIKE '$keyword'";
+            $where .= 1 == $item ? " AND m.card_number=$keyword" : " AND u.user_name LIKE '%$keyword%'";
             $condition['item']    = $item;
             $condition['keywork'] = $keyword;
         }
@@ -136,11 +136,18 @@ class UsersmanageController extends PublicController {
             $Page->parameter[$key] = urlencode($val);
         }
 
-        $mVip->first_row = $Page->firstRow;
-        $mVip->list_rows = $Page->listRows;
+        //$mVip->first_row = $Page->firstRow;
+        //$mVip->list_rows = $Page->listRows;
         $limit = ' LIMIT '.($page-1)*$pageSize.",$pageSize";
         $where .= " ORDER BY $orderBy $sort $limit ";
         $userList = $mVip->vipList($where,$condition);
+        if ($userList) {
+            foreach ($userList as &$val) {
+                if ('1970-01-01' == $val['birthday'] || empty($val['birthday'])) {
+                    $val['birthday'] = '-';
+                }
+            }
+        }
 
         $this->assign('url',U('vipList'));
         $this->assign('count',$count);
@@ -153,10 +160,11 @@ class UsersmanageController extends PublicController {
 
         if(I('get.from_sel')){
             $res['response_action'] = 'search_service';
-            $res['main']            = $this->fetch('vipPart');
+            $res['main']            = $this->fetch('vipSearch');
         }else{
             $this->assign('role_list',D('RoleManage')->roleList());
             $this->assign('rankList',$rankList);
+            $this->assign('vipSearch',$this->fetch('vipSearch'));
             $res['main'] = $this->fetch('vipList');
         }
 

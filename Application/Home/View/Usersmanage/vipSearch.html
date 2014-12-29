@@ -1,35 +1,38 @@
-<div>
-  <table border="0" id="tb_insert" cellpadding="0" cellspacing="0" class="wu_table_list rb_border wu_rb_border" width="100%">
-    <tr>
-      <th width="8%">姓名</th>
-      <th width="10%" class="a_sort"><a href="users.php?act=vip_list&source=users&sort=user_id&sort_type={$sort_type}&rank_id={$rank_id}">会员卡ID</a></th>
-      <th width="8%" class="a_sort"><a href="users.php?act=vip_list&source=users&sort=rank_points&sort_type={$sort_type}&rank_id={$rank_id}&from_sel=true">积分</a></th>
-      {if $section eq 'by_rank'}
-      <th width="10%" class="a_sort"><a href="users.php?act=vip_list&source=users&by_upgrade=by_upgrade&sort_type={$sort_type}&rank_id={$rank_id}">升级需积分</a></th>
-      {/if}
-      <th width="15%" class="a_sort"><a href="users.php?act=vip_list&source=order&sort=recently_pur&sort_type={$sort_type}&rank_id={$rank_id}">最近购买</a></th>
-      <th width="10%" class="a_sort"><a href="users.php?act=vip_list&source=order&sort=total&sort_type={$sort_type}&rank_id={$rank_id}">
-          成功订单数</a></th>
-      <th width="10%" class="a_sort"><a href="users.php?act=vip_list&source=order&sort=final_amount&sort_type={$sort_type}&rank_id={$rank_id}">消费总额</a></th>
-    </tr>
-    {if $rank_list neq null}
-    {foreach from=$rank_list item=val}
-    <tr>
-      <td><label style="cursor:pointer" ondblclick="getInfo({$val.user_id},'')">{$val.user_name}</label></td>
-      <td>{if $val.card_number}{$val.card_number}{else}-{/if}</td>
-      <td>{$val.rank_points}</td>
-      {if $section eq 'by_rank'}
-      <td>{$val.up_rank_id}</td>
-      {/if}
-      <td>{$val.earliest_pur}</td>
-      <td>{if $val.total eq ''|| $val.total lt 0}0{else}{$val.total}{/if}</td>
-      <td>{if $val.final_amount eq ''|| $val.final_amount lt 0}0{else}{$val.final_amount}{/if}</td>
-    </tr>
-    {/foreach}
-    {else}<tr><td colspan=10>
-        该组未有成员加入
-    </td></tr>
+<table width="100%" cellspacing="0" cellpadding="0" class="wu_table_list rb_border wu_rb_border tr_hover" id="vip_list">
+  <tr>
+    <th width="8%">姓名</th>
+    <th width="10%">生日</th>
+    <th width="10%" class="a_sort"><a href="">会员卡ID</a></th>
+    <th width="8%" class="a_sort"><a href="">积分</a></th>
+    {if $section eq 'by_rank'}
+    <th width="10%" class="a_sort"><a href="">升级需积分</a></th>
     {/if}
-  </table>
-  <input type="hidden" id="select_rank_id" value="{$rank_id}" />
-</div>
+    <th width="15%" class="a_sort"><a href="">最近购买</a></th>
+    <th width="10%" class="a_sort"><a href="">成功订单数</a></th>
+    <th width="10%" class="a_sort"><a href="">消费总额</a></th>
+  </tr>
+  {if $user_list}
+  {foreach from=$user_list item=val name=i}
+  <tr>
+    <td>{$val.user_name}</td>
+    <td>{$val.birthday}</td>
+    <td>{if $val.card_number}{$val.card_number}{else}-{/if}</td>
+    <td>{$val.rank_points}</td>
+    {if $section eq 'by_rank'}
+    <td>{$val.up_rank_id}</td>
+    {/if}
+    <td>{$val.earliest_pur}</td>
+    <td>{if $val.total eq ''|| $val.total lt 0}0{else}{$val.total}{/if}</td>
+    <td>{if $val.final_amount eq ''|| $val.final_amount lt 0}0{else}{$val.final_amount}{/if}</td>
+  </tr>
+  {/foreach}
+  {else}
+  <tr>
+    <td colspan="7">没有搜到相关会员</td>
+  </tr>
+  {/if}
+</table>
+<div class="bottom_tip page" id="pageDiv">
+  {$page}
+</div>  
+<input type="hidden" id="rank_id" value="{$rank_id}"/>

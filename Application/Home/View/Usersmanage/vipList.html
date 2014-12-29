@@ -8,7 +8,7 @@
       <div class="detail_tab" style="margin:0">
         <ul>
           {foreach from=$rank_list item=val name=i}
-          <li type="rank_{$val.rank_id}" {if $smarty.foreach.i.iteration eq 1}class="o_select"{/if}>
+          <li type="{$rank_id}" {if $rank_id eq $val.rank_id}class="o_select"{/if}>
           <span><a href="{$url}&rank_id={$val.rank_id}">{$val.rank_name}</a></span>
           </li>
           {/foreach}
@@ -38,37 +38,6 @@
     </form>
   </div>
   <div class="user_list_info" id="resource">
-    <table width="100%" cellspacing="0" cellpadding="0" class="wu_table_list rb_border wu_rb_border tr_hover" id="vip_list">
-      <tr>
-        <th width="8%">姓名</th>
-        <th width="10%">生日</th>
-        <th width="10%" class="a_sort"><a href="">会员卡ID</a></th>
-        <th width="8%" class="a_sort"><a href="">积分</a></th>
-        {if $section eq 'by_rank'}
-        <th width="10%" class="a_sort"><a href="">升级需积分</a></th>
-        {/if}
-        <th width="15%" class="a_sort"><a href="">最近购买</a></th>
-        <th width="10%" class="a_sort"><a href="">成功订单数</a></th>
-        <th width="10%" class="a_sort"><a href="">消费总额</a></th>
-      </tr>
-      {foreach from=$user_list item=val name=i}
-      <tr>
-        <td>{$val.user_name}</td>
-        <td></td>
-        <td>{if $val.card_number}{$val.card_number}{else}-{/if}</td>
-        <td>{$val.rank_points}</td>
-        {if $section eq 'by_rank'}
-        <td>{$val.up_rank_id}</td>
-        {/if}
-        <td>{$val.earliest_pur}</td>
-        <td>{if $val.total eq ''|| $val.total lt 0}0{else}{$val.total}{/if}</td>
-        <td>{if $val.final_amount eq ''|| $val.final_amount lt 0}0{else}{$val.final_amount}{/if}</td>
-      </tr>
-      {/foreach}
-    </table>
-    <div class="bottom_tip" id="pageDiv">
-      {$page}
-    </div>  
-    <input type="hidden" id="rank_id" value="{$rank_id}"/>
+    {$vipSearch}
   </div>
 </div>

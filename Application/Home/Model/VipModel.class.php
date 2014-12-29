@@ -36,7 +36,7 @@ class VipModel extends Model{
     //无参数
     public function vipList($where,$condition,$page='1',$pageSize=20){
         $m   = new Model();
-        $sql = 'SELECT u.user_id,user_name,rank_points,user_rank,m.card_number FROM '.
+        $sql = 'SELECT u.user_id,user_name,u.rank_points,u.user_rank,m.card_number,u.birthday FROM '.
             __USERS__.' u LEFT JOIN '.__MEMSHIP_NUMBER__
             ." m ON u.user_id=m.user_id AND m.user_id<>0 WHERE $where ";
         $userList = $m->query($sql);
@@ -56,13 +56,11 @@ class VipModel extends Model{
             foreach ($userList as $key=>$user) {
                 foreach ($orderList as &$order) {
                     if($user['user_id'] == $order['user_id']){
-                        $userList[$key] = array_merge($user,$order);
                         $order['earliest_pur'] = date('Y-m-d',$order['earliest_pur']);
-                        print_r($userList);exit;
+                        $userList[$key] = array_merge($user,$order);
                     }
                 }
             }
-
             return $userList;
         }else return false;
     }
