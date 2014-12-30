@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.6, created on 2014-12-26 14:42:19
+<?php /* Smarty version Smarty-3.1.6, created on 2014-12-29 14:47:14
          compiled from "./Application/Home/View\Usersmanage\health_file.html" */ ?>
 <?php /*%%SmartyHeaderCode:184455498e05894c5f0-95367328%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'dd03e2ea8517ff5a1eccdd96326a20e459bb2e2c' => 
     array (
       0 => './Application/Home/View\\Usersmanage\\health_file.html',
-      1 => 1419576028,
+      1 => 1419835609,
       2 => 'file',
     ),
   ),
@@ -103,6 +103,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <th width="15%">血糖 mmol/L</th>
             <th width="20%">血脂 mmol/L</th>
             <th width="15%">血压 mmHg</th>
+            <th width="15%">体检时间</th>
           </tr>
           <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['user_health']->value['blood']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -115,6 +116,8 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
             <td width="20%"><?php echo $_smarty_tpl->tpl_vars['val']->value['blood_fat'];?>
 </td>
             <td width="15%"><?php echo $_smarty_tpl->tpl_vars['val']->value['blood_pressure'];?>
+</td>
+            <td width="15%"><?php echo $_smarty_tpl->tpl_vars['val']->value['add_time'];?>
 </td>
           </tr>
           <?php } ?>
@@ -158,6 +161,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
             <th width="15%">腰围</th>
             <th width="15%">臀围</th>
             <th width="20%">WHR</th>
+            <th width="20%">体验时间</th>
           </tr>
           <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['user_health']->value['weight']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -176,6 +180,8 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
             <td><?php echo $_smarty_tpl->tpl_vars['val']->value['hipline'];?>
 </td>
             <td><?php echo $_smarty_tpl->tpl_vars['val']->value['WHR'];?>
+</td>
+            <td><?php echo $_smarty_tpl->tpl_vars['val']->value['add_time'];?>
 </td>
           </tr>
           <?php } ?>

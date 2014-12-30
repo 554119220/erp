@@ -64,12 +64,14 @@
             <th width="15%">血糖 mmol/L</th>
             <th width="20%">血脂 mmol/L</th>
             <th width="15%">血压 mmHg</th>
+            <th width="15%">体检时间</th>
           </tr>
           {foreach from=$user_health.blood item=val}
           <tr>
             <td width="15%">{$val.blood_sugar}</td>
             <td width="20%">{$val.blood_fat}</td>
             <td width="15%">{$val.blood_pressure}</td>
+            <td width="15%">{$val.add_time}</td>
           </tr>
           {/foreach}
         </table>
@@ -112,6 +114,7 @@
             <th width="15%">腰围</th>
             <th width="15%">臀围</th>
             <th width="20%">WHR</th>
+            <th width="20%">体验时间</th>
           </tr>
           {foreach from=$user_health.weight item=val}
           <tr>
@@ -121,6 +124,7 @@
             <td>{$val.waistline}</td>
             <td>{$val.hipline}</td>
             <td>{$val.WHR}</td>
+            <td>{$val.add_time}</td>
           </tr>
           {/foreach}
         </table>

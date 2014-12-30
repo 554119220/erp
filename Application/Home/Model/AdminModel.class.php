@@ -21,7 +21,7 @@ class AdminModel extends Model{
      * @where 查询条件
      * $role  查询同一部门的管理员 
      * */
-    public function get_admin_list($where,$role){
+    public function adminList($where,$role){
         $append = " AND status>0 AND stats>0 AND user_id<>74";
         if($role){
             $mRole = M('role');

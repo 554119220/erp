@@ -35,19 +35,25 @@ class ServiceManageController extends PulicController{
 
     //服务列表
     public function serviceList(){
+        if(admin_priv('all','',false)) {
+            $roleList  = D('role')->('','role_id,role_name');
+            $adminList = D('admin')->adminList('','');
+        } elseif(admin_priv('service_role_view','',false)) {
+            $adminList = adminList('',$_SESSION['role_id']);
+            $groupList = D('role')->groupList("role_id={$_SESSION['role_id']}");
+        } elseif(admin_priv('service_group_view','',false)) {
+            $where = "role_id={$_SESSION['role_id']}";
+            if ($_SESSION['group_id']) {
+                $where .= "AND group_id={$_SESSION['group_id']}";
+            }
+        }
         $condition = '';
+        $where     = '';
+
         $serviceList = $mService->serviceList($where);
+
+        $this->assign('role_list',$roleList);
+        $this->assign('admin_list',$adminList);
     }
-
-    /*会员积分管理*/
-
-    public function rankLog(){
-
-    }
-
-    public function siteRank(){
-        
-    }
-
 }
 ?>
