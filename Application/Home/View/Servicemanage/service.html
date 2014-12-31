@@ -1,7 +1,7 @@
 ﻿<div>
   <div class="finder-title">服务记录</div>
   <div id="search_div" class="sch_div">
-    <form name="schServiceForm" action="javascript:void(0)" onsubmit="fullSearch(this)" >
+    <form name="schServiceForm" action="javascript:void(0)" onsubmit="fullSearch(this)">
       <span> 顾客 
         <input type="text" name="user_name" maxlength="6"/>
       </span>
@@ -40,6 +40,7 @@
           {/if}
         </select>
       </span>
+      <input type="hidden" name="url" value="{$url}"/>
       <input type="submit" class="input_submits" value="搜索" />
     </form>
   </div>

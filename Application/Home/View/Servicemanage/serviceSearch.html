@@ -1,25 +1,26 @@
 <table border="0" cellpadding="0" cellspacing="0" class="wu_table_list rb_border wu_rb_border tr_hover" width="100%">
   <tr>
-    <th width="7%">顾客姓名</th>
-    <th width="8%">客服</th>
-    <th width="40%">过程记录</th>
+    <th width="10%">顾客姓名</th>
+    <th width="10%">客服</th>
+    <th width="50%">过程记录</th>
     <th width="10%">通话录音</th>
-    <th width="15%">服务时间</th>
-    {if $role_id eq 5}
+    <th width="20%">服务时间</th>
+    {if $manage}
     <th>操作</th>
     {/if}
   </tr>
   {if $service_list}
-  {foreach from=$service_list item=val} <tr style="color:{if $val.show_sev eq 0}#777 !important{/if}"/>
+  {foreach from=$service_list item=val} 
+  <tr>
     <td >{$val.user_name}</td>
     <td>{$val.admin_name}</td>
-    <td class="td_al_3">{$val.logbook}</td>
+    <td style="padding-left:8px;text-align:left;">{$val.logbook}</td>
     <td onclick="showRecList({$val.service_id})" style="cursor:pointer">点击查看</td>
     <td>{$val.service_time}</td>
     {if $manage}
     <td align="center">
-      <a href="service.php?act=service_delete&service_id={$val.service_id}" ><img src="images/no.gif" alt="删除" title="删除"></a>
-      <a onclick="javascript:update_service({$val.service_id})" href="#" ><img src="images/edit.gif" alt="修改" title="修改"></a>
+      <a href="{$url}&d=del"><img src="images/no.gif" alt="删除" title="删除"></a>
+      <a href="{$url}&d=upd"><img src="images/edit.gif" alt="修改" title="修改"></a>
     </td>
     {/if}
   </tr>

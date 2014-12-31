@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.6, created on 2014-12-30 17:51:37
+<?php /* Smarty version Smarty-3.1.6, created on 2014-12-31 10:44:43
          compiled from "./Application/Home/View\Servicemanage\service.html" */ ?>
 <?php /*%%SmartyHeaderCode:3024654a265abe8b255-35020713%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '025bad2198f540605fe0181dedb886ac3da35dd2' => 
     array (
       0 => './Application/Home/View\\Servicemanage\\service.html',
-      1 => 1419932999,
+      1 => 1419993783,
       2 => 'file',
     ),
   ),
@@ -23,6 +23,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'val' => 0,
     'group_list' => 0,
     'admin_list' => 0,
+    'url' => 0,
     'serviceDiv' => 0,
   ),
   'has_nocache_code' => false,
@@ -30,7 +31,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <?php if ($_valid && !is_callable('content_54a265ac03d09')) {function content_54a265ac03d09($_smarty_tpl) {?>﻿<div>
   <div class="finder-title">服务记录</div>
   <div id="search_div" class="sch_div">
-    <form name="schServiceForm" action="javascript:void(0)" onsubmit="fullSearch(this)" >
+    <form name="schServiceForm" action="javascript:void(0)" onsubmit="fullSearch(this)">
       <span> 顾客 
         <input type="text" name="user_name" maxlength="6"/>
       </span>
@@ -87,6 +88,8 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           <?php }?>
         </select>
       </span>
+      <input type="hidden" name="url" value="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+"/>
       <input type="submit" class="input_submits" value="搜索" />
     </form>
   </div>
