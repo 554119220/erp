@@ -14,9 +14,6 @@ use Think\Model\RelationModel;
 use Think\Model;
 
 class ServiceModel extends Model{
-    public function _cunstruct(){
-    }
-
     /*获取服务数量*/
     public function get_service_num($where,$returnArray=false){
         $mService = M('service');
@@ -40,7 +37,7 @@ class ServiceModel extends Model{
     }
 
     /*顾客详情中的服务记录显示*/
-    public function serviceList($where){
+    public function userDetailServiceList($where){
         $mService = M('service');
         $serviceList = $mService->where($where)->getField('service_time,logbook,admin_name');
         if ($serviceList) {
@@ -50,5 +47,30 @@ class ServiceModel extends Model{
         }
 
         return $serviceList;
+    }
+
+    //服务
+    public function serviceList($where,$page){
+        $mService = M('service');
+        $fields = 's.user_name,s.admin_name,s.service_id,s.logbook,'
+            .'s.service_time,s.show_sev';
+        $serviceList = $mService->alias('s')
+            ->join(array('LEFT JOIN __SERVICE__ s ON s.user_id=u.user_id'))
+            ->join(array('LEFT JOIN __ADMIN_USER__ a ON s.admin_id=a.user_id'))
+            ->field($fields)->where($where)
+            ->order('s.service_time DESC')->page($page)->select();
+        if ($serviceList) {
+            foreach ($serviceList as &$val) {
+                $val['service_time'] = date('Y-m-d H:i',$val['service_time']);
+            }
+        }
+
+        return $serviceList;
+    }
+
+    //服务数量
+    function serviceCount($where){
+        $count = M('service')->alias('s')->where($where)->count();
+        return $count;
     }
 }

@@ -30,6 +30,7 @@ class PublicController extends Controller {
         $actionList = array_filter($actionList);
         $this->actionList = preg_replace('/_/', '', implode(',', $actionList));
         $this->checkAuthorise();
+        $this->initConstant();
     }
 
     // 全部             all
@@ -163,6 +164,17 @@ class PublicController extends Controller {
         );
         $this->ajaxReturn($msg, 'JSON');
         return;
+    }
+
+    function initConstant(){
+        define('SALE', '1,9,13,27,28,29');
+        define('OFFLINE_SALE', '1,9,27,28,29');
+        define('ONLINE_SALE', 13);
+        define('ONLINE_STORE', '2,6,7,10,12,14,15,16,17,18,21,22,24,25,26');
+        define('MEMBER_SALE', '9,27,28');
+        define('ZHONGLAONIAN_SALE', '1,29');
+        define('TAOBAO_STORE', '21,22,26');
+        define('FINANCE', 8);
     }
 }
 

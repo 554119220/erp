@@ -22,7 +22,6 @@ class AdminModel extends Model{
      * $role  查询同一部门的管理员 
      * */
     public function adminList($where,$role){
-        $append = " AND status>0 AND stats>0 AND user_id<>74";
         if($role){
             $mRole = M('role');
             $action   = $mRole->where("role_id={$_SESSION['role_id']}")->getField('action');
@@ -34,8 +33,7 @@ class AdminModel extends Model{
                 return $adminList;
             }
         }
-
-        $where .= $append;
+        $where .= ' AND status>0 AND stats>0 AND user_id<>74';
         $adminList = M('admin_user')->field('user_id,user_name')->where($where)->select();
         return $adminList;
     }
