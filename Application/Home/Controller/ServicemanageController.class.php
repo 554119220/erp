@@ -1,18 +1,7 @@
 <?php
-/*=============================================================================
-#     FileName: ServicemanageController.class.php
-#         Desc:  营销
-#       Author: Wuyuanhang
-#        Email: 1828343841@qq.com
-#     HomePage: kjrs_crm
-#      Version: 0.0.1
-#   LastChange: 2014-12-24 09:28:15
-#      History:
-=============================================================================*/
 namespace Home\Controller;
 use Think\Controller;
 use Think\Page;
-
 class ServiceManageController extends PublicController{
     //服务操作
     public function addServie(){
@@ -86,9 +75,10 @@ class ServiceManageController extends PublicController{
             $where .= " AND s.user_name LIKE '$userName'";
             $parameter['user_name'] = $userName;
         }
-        $limit       = "$p,$pageSize";
-        $count       = $mService->serviceCount($where);
-        $Page        = new Page($count,$pageSize);
+        $limit = "$p,$pageSize";
+        $count = $mService->serviceCount($where);
+        $Page  = new Page($count,$pageSize);
+
         foreach($parameter as $key=>&$val) {   
             $Page->parameter[$key] = urldecode($val);   
         }

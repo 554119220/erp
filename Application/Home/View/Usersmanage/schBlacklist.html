@@ -1,0 +1,34 @@
+<table cellspacing="0" cellpadding="0" width="100%" class="wu_table_list rb_border wu_rb_border tr_hover" id="blacklist_table">
+  <tr>
+    <th width="10%">姓名</th>
+    <th width="10%">所属客服</th>
+    <th width="15%">理由</th>
+    <th width="10%">谁拉进的</th>
+    <th width="20%">具体原因</th>
+    <th width="15%">拉黑时间</th>
+    <th width="10%">操作</th>
+  </tr>
+  {if $blacklist neq ''}
+  {foreach from=$blacklist item=val}
+  <tr>
+    <td>{$val.user_name}</td>
+    <td>{$val.admin_name}</td>
+    <td>{if $val.type_name neq ''}{$val.type_name}{else}没理由{/if}</td>
+    <td>{$val.operator_in}</td>
+    <td style="text-align:left;padding-left:6px;">{if $val.reason}{$val.reason}{else}无{/if}</td>
+    <td>{$val.in_time}</td>
+    <td>
+      {if $blackstatus eq 2}
+      <button class="btn_new" onclick="moveOutBlack({$val.user_id},'{$val.user_name}',this)">移出黑名单</button>
+      {elseif $blackstatus eq 0}
+      <button class="btn_new" onclick="checkBlack({$val.user_id},'{$val.user_name}',this,2)">审核</button>&nbsp;|&nbsp;
+      <button class="btn_new" onclick="checkBlack({$val.user_id},'{$val.user_name}',this,1)">撤消</button>
+      {/if}
+    </td>
+  </tr>
+  {/foreach}
+  {else}
+  <tr><td colspan="8" align="center">没有黑名单记录</td></tr>
+  {/if}
+</table>
+<div class="bottom_tip" id="bottom_tip">{$page}</div>

@@ -1,0 +1,66 @@
+<br />
+<h3>黑名单顾客</h3>
+<div class="wd750">
+  <div class="box_nav">
+    <div class="detail_tab" style="margin:0">
+      <ul>
+        <li {if !$net}class="o_select"{/if}>
+        <span><a href="{$url}">黑名单顾客</a></span>
+        </li>
+        <li {if $net }class="o_select"{/if}>
+        <span><a href="{$url}&net={$net}">网络黑名单</a></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="tools_div">
+    <div id="div_general_blacklist">
+      <form action="javascript:void(0)" name="sch_blacklist" onsubmit="schBlacklist()">
+        <table cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td>
+              <input type="text" name="user_name" placeholder="顾客姓名" />
+            </td>
+            <td>
+              <select name="item_type">
+                <option value="0">选择联系方式</option>
+                {foreach from=$account_type item=val}
+                <option value="{$val.type_id}">{$val.type_name}</option>
+                {/foreach}
+              </select>        
+              <input type="text" name="number" />
+            </td>
+            <td>
+              <input type="text" name="admin_name" value="" placeholder="谁拉进的(回车搜索)" oninput="getBySendAdmin(this.form)">
+            </td>
+            <td>
+              <select id="admin_id" name="admin_id">
+                <option value="0">请选择员工</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <select name="type_id">
+                <option value="0">请选择欺骗类型</option>
+                {foreach from=$blacklist_type_list item=val}
+                <option value="{$val.type_id}">{$val.type_name}</option>
+                {/foreach}
+              </select>
+            </td>
+            <td>
+              <select name="status" onchage="getBlacklistStatUser(this.value)">
+                <option value="1" {if $status eq 1}selected{/if}>未审核</option>
+                <option value="2" {if $status eq 2}selected{/if}>已审核</option>
+              </select>
+              <input type="submit" class="b_submit" name="user_name" value="搜索"/>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+  <div id="resource">
+    {$schBlacklist}
+  </div>
+</div>

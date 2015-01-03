@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.6, created on 2015-01-03 09:08:36
-         compiled from "./Application/Home/View\Usersmanage\users_detail.html" */ ?>
-<?php /*%%SmartyHeaderCode:214425498e058d59f80-69281372%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.6, created on 2015-01-03 10:08:50
+         compiled from "./Application/Home/View\Usersmanage\usersDetail.html" */ ?>
+<?php /*%%SmartyHeaderCode:1858454a74f32c28cb3-86336481%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '04c41ecdc952062d090453f001ed4e2770cd6064' => 
+    '9a36bbcace753b86afab35a9af7456948f385972' => 
     array (
-      0 => './Application/Home/View\\Usersmanage\\users_detail.html',
+      0 => './Application/Home/View\\Usersmanage\\usersDetail.html',
       1 => 1420247295,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '214425498e058d59f80-69281372',
+  'nocache_hash' => '1858454a74f32c28cb3-86336481',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.6',
-  'unifunc' => 'content_5498e05944aa2',
   'variables' => 
   array (
     'user' => 0,
@@ -57,8 +55,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'user_id' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.6',
+  'unifunc' => 'content_54a74f335f5e1',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5498e05944aa2')) {function content_5498e05944aa2($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\xampp\\htdocs\\thinkphp\\ThinkPHP\\Library\\Vendor\\Smarty\\plugins\\modifier.date_format.php';
+<?php if ($_valid && !is_callable('content_54a74f335f5e1')) {function content_54a74f335f5e1($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_date_format')) include 'D:\\xampp\\htdocs\\thinkphp\\ThinkPHP\\Library\\Vendor\\Smarty\\plugins\\modifier.date_format.php';
 if (!is_callable('smarty_modifier_truncate')) include 'D:\\xampp\\htdocs\\thinkphp\\ThinkPHP\\Library\\Vendor\\Smarty\\plugins\\modifier.truncate.php';
 ?><div class="user_detail">
   <!-- 顾客详细信息 -->

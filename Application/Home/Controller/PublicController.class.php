@@ -177,4 +177,3 @@ class PublicController extends Controller {
         define('FINANCE', 8);
     }
 }
-

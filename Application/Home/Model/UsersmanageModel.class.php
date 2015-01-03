@@ -5,7 +5,7 @@ use Think\Model;
  * Class UsersmanageModel
  * @author Nixus
  */
-class UsersmanageModel extends Model {
+class UsersmanageModel extends PublicModel {
     public $first_row;
     public $list_rows;
     public $data = array();
@@ -33,7 +33,7 @@ class UsersmanageModel extends Model {
             }
         }
     }
-    
+
     /**
      * 设置查询时间段
      *
@@ -52,7 +52,8 @@ class UsersmanageModel extends Model {
      * @return array 
      */
     public function usersList() {
-       return $this->User->where($this->map)->order('add_time')->limit($this->first_row.','.$this->list_rows)->select();
+        $usersList = $this->User->where($this->map)->order('add_time')->limit($this->first_row.','.$this->list_rows)->select();
+        return $usersList;
     }
 
     /**
@@ -82,8 +83,7 @@ class UsersmanageModel extends Model {
     public function userDetail() {
         $base_info = $this->baseInfo();
         $user_addr = $this->userAddress();
-
-        $user_detail = array (
+        return array (
             'base_info'        => end($base_info)+end($user_addr),
             'contact_info'     => $this->contactInfo(),
             'purchase_history' => $this->purchaseHistory(),
@@ -95,11 +95,25 @@ class UsersmanageModel extends Model {
             'platform_list'    => $this->platform(),
             'order_type'       => $this->orderType(),
             'saler_list'       => $this->salerList(),
-            'service_class'    => $this->serviceClass(),
-            'service_manner'   => $this->serviceManner(),
-    );
+            'service_class'    => D('Service')->serviceClass(),
+            'service_manner'   => D('Service')->serviceManner(),
+        );
+    }
 
-        return $user_detail;
+    /**
+     * 顾客流失列表
+     *
+     * @return array 
+     */
+    public function outFlow($field) {
+        $User = M('users');
+        $result = $User->where($this->map)->group('user_id')->order("$field DESC")->limit($this->first_row.','.$this->list_rows)->getField("user_id,user_name,add_time,admin_name,CONCAT(home_phone,' ',mobile_phone)mobile_phone,$field");
+        // 格式化时间
+        foreach ($result as &$val){
+            $val[$field] = $val[$query_field] ? date('Y-m-d', $val[$query_field]) : '-';
+            $val['add_time']   = date('Y-m-d', $val['add_time']);
+        }
+        return $result;
     }
 
     /**
@@ -108,7 +122,7 @@ class UsersmanageModel extends Model {
      * @return array 
      */
     private function baseInfo() {
-        return $this->User->where($this->data)->getField('user_name,sex,mobile_phone,home_phone,aliww,qq,email,wechat,rank_points,id_card,income,from_where,parent_id,family_id');
+        return $this->User->where($this->data)->getField('user_id,user_name,sex,mobile_phone,home_phone,aliww,qq,email,wechat,rank_points,id_card,income,from_where,parent_id');
     }
 
     /**
@@ -205,7 +219,10 @@ class UsersmanageModel extends Model {
      * @return array 
      */
     private function salerList() {
-        //$data['role_id'] = $_SESSION['role_id'];
+        $data = array(
+            'status' => 1,
+            'stats'  => 1,
+        );
         return M('admin_user')->where($data)->getField('user_id,user_name');
     }
 
@@ -230,20 +247,87 @@ class UsersmanageModel extends Model {
             " ON c.region_id=u.city LEFT JOIN `crm_region` d ON d.region_id=u.district WHERE u.user_id={$this->data['user_id']}";
         return $UserAddr->query($sql_select);
     }
-
     /**
-     * 服务方式
+     * 获取订单平台类型 移动端 OR PC端
+     *
+     * @return array 
      */
-    public function serviceClass(){
-        $mSeviceClass = M('service_class');
-        return $mSeviceClass->select();
+    private function orderSource() {
+        return M('order_source')->where()->order('sort')->getField('source_id,source_name');
     }
 
-    /**
-     * 服务类别
-     */
-    public function serviceManner(){
-        $mSeviceManner = M('service_manner');
-        return $mSeviceManner->select();
+    //顾客黑名单
+    //author wyh
+    function blacklist($where,$fields,$page='1,20'){
+        $mUserblack = M('user_blacklist');
+        $userBlacklist = $mUserblack->alias('b')
+            ->join(array('LEFT JOIN __ADMIN_USER__ a ON a.user_id=b.admin_id'))
+            ->join(array('LEFT JOIN __ROLE__ r ON b.role_id=r.role_id'))
+            ->join(array('LEFT JOIN __BLACKLIST_TYPE__ bt ON b.type_id=bt.type_id'))
+            ->field($fields)->where($where)->page($page)->select();
+        if ($userBlacklist) {
+            foreach($blacklist AS &$val) {
+                $val['in_time'] = date('Y-m-d',$val['in_time']);
+            }
+        }
+
+        return $userBlacklist;
+    }
+
+    //统计黑名单
+    public function countBlacklist($where){
+        $mUserblack = M('user_blacklist');
+        $count = $mUserblack->alias('b')
+            ->join(array('LEFT JOIN __ADMIN_USER__ a ON a.user_id=b.admin_id'))
+            ->join(array('LEFT JOIN __ROLE__ r ON b.role_id=r.role_id'))
+            ->join(array('LEFT JOIN __BLACKLIST_TYPE__ bt ON b.type_id=bt.type_id'))
+            ->where($where)->page($page)->count();
+        return $count;
+    }
+
+    //黑名单类型
+    public function blacklistType(){
+        return M('blacklsit_type')->select();
+    }
+
+    //是否已经存在黑名单中
+    public function existInBlacklist($userId){
+        return M('user_blacklist')->where("user_id=$userId")
+            ->getField('user_id,COUNT(*) AS total,status');
+    }
+
+    //加入黑名单列表
+    public function insertBlacklist($userId,$blacklistType,$reason){
+        $m = new Model();
+        $sql = " SELECT user_id,user_name,admin_name,'"
+            .$_SESSION['admin_name']."',".$_SERVER['REQUEST_TIME'].
+            ",$blacklistType,'$reason' FROM ".__USERS__.
+            " WHERE user_id=$userId";
+
+        $sqlInsert = 'INSERT INTO '.__USER_BLACKLIST__.
+            '(user_id,user_name,admin_name,operator_in,in_time,type_id,reason)'
+            .$sql;
+        $code = $m->query($sqlInsert);
+        return $code;
+    }
+
+    //帐号黑名单（QQ,Email,旺旺,微信）
+    public function existAccountBlaklict($where){
+        return M('account_blacklist')->where($where)->count();
+    }
+
+    /*修改顾客黑名单existAccountBlaklict表*/
+    public function updateUserBlacklist($data,$userId){
+        return M('user_blacklist')->where("user_id=$userId")->save($data);
+    }
+
+    /*更新顾客的黑名单字段*/
+    public  function updateUsersInfo($userId,$blackData){
+        $data['is_black'] = 1;
+        $code =  M('users')->where("user_id=$userId")->save($data);
+        if ($data && $code) {
+            $code = M('account_blacklist')->add($blackData);
+        }
+        return $code;
     }
 }

@@ -15,10 +15,10 @@ return array(
     'COOKIE_PATH'          => __ROOT__,
     'SESSION_OPTIONS'      => array('cookie_path'=>__ROOT__),
     'MODULE_ALLOW_LIST'    => array('Home','Admin','User'),
-    'DEFAULT_AJAX_RETURN'  => 'JSON',
-    'DEFAULT_FILTER'   => 'strip_tags,stripslashes',  //输入过滤
-    'LANG_SWITCH_ON'   => true,
-    'LANG_AUTO_DETECT' => true,
-	'DEFAULT_LANG'     => 'zh-cn', // 默认语言
-    'LANG_LIST'        => 'zh-cn',
+    'DEFAULT_AJAX_RETURN' => 'JSON',
+    'DEFAULT_FILTER'      => 'strip_tags,stripslashes',  //输入过滤
+    'LANG_SWITCH_ON'      => true,
+    'LANG_AUTO_DETECT'    => true,
+	'DEFAULT_LANG'        => 'zh-cn', // 默认语言
+    'LANG_LIST'           => 'zh-cn',
 );
