@@ -20,5 +20,13 @@ return array(
     'LANG_AUTO_DETECT'    => true,
 	'DEFAULT_LANG'        => 'zh-cn', // 默认语言
     'LANG_LIST'           => 'zh-cn',
+    'SALE'                => '1,9,13,27,28,29',
+    'OFFLINE_SALE'        => '1,9,27,28,29',
+    'ONLINE_SALE'         => 13,
+    'ONLINE_STORE'        => '2,6,7,10,12,14,15,16,17,18,21,22,24,25,26',
+    'MEMBER_SALE'         => '9,27,28',
+    'ZHONGLAONIAN_SALE'   => '1,29',
+    'TAOBAO_STORE'        => '21,22,26',
+    'FINANCE'             => 8,
     //'URL_PATHINFO_FETCH' => 'ORIG_PATH_INFO,REDIRECT_URL',
 );

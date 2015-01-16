@@ -21,4 +21,11 @@ class RoleManageModel extends Model {
         $groupList = M('group')->where($where)->getField($field); 
         return $groupList;
     }
+
+    public function platformList($where='',$field='role_id,role_name'){
+        if (empty($where)) {
+            $where = 'role_id IN ('.C('ONLINE_STORE').')'; 
+        }
+        return M('role')->where($where)->field($field)->select(); 
+    }
 }

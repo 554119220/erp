@@ -35,7 +35,10 @@ class SalaryController extends PublicController{
         if ('view' == $b) {
             $commissionList = $mHrm->commissionList();
             $this->assign('role_list',D('RoleManage')->roleList('','role_id,role_name'));
+            $this->assign('platform_list',D('RoleManage')->platformList());
             $this->assign('group_list',D('RoleManage')->groupList('','group_id,group_name'));
+            $this->assign('payment',D('Common')->payment());
+            $this->assign('shipping',D('Common')->shipping());
             $res['main'] = $this->fetch('commission');
             return $this->ajaxReturn($res);
         }elseif('add' == $b){

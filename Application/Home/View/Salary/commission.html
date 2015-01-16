@@ -7,7 +7,7 @@
   <div id="commission_site">
     <div id="step1">
       <form name="commissionSiteForm1" action="javascript:void(0)" method="POST">
-      <table cellpadding="0" cellspacing="6px" border="0" width="100%">
+        <table cellpadding="0" cellspacing="6px" border="0" width="100%">
           <tr>
             <th>部门</th>
             <td>
@@ -59,56 +59,59 @@
             </td>
             <th>支付方式</th>
             <td>
-              <select name="pay">
+              <select name="pay_id" onchange="getShipping(this)" href="/thinkphp/index.php/usersmanage/shippinglist">
                 <option value="0">不限</option>
-                {foreach from=$pay_list item=$val}
-                <option value="{$val.pay_id}">{$val.pay_name}</option>
+                {foreach from=$payment key=key item=val}
+                <option value="{$key}">{$val}</option>
                 {/foreach}
               </select>
             </td>
             <th>快递方式</th>
             <td>
-              <select name="shipping">
+              <select name="shipping_id" id="shipping_id">
                 <option value="0">不限</option>
-                {foreach from=$shipping_list item=val}
-                <option value="{$val.shipping_id}">{$val.shipping_name}</option>
+                {foreach from=$shipping key=key item=val}
+                <option value="{$key}">{$val}</option>
                 {/foreach}
               </select>
             </td>
           </tr>
           <tr>
-            <td colspan="6"><input type="submit" class="b_submit" value="保存并下一步"/></td></tr>
+            <td colspan="6">
+              <input type="submit" class="b_submit" value="保存并下一步" style="padding:3px;"/>
+            </td>
+          </tr>
         </table>
       </form>
     </div>
-  </div>
-  <div id="step2">
-    <form name="commissionSiteForm2" action="javascript:void(0)" method="POST">
-      <table cellpadding="0" cellspacing="0" border="0" width="100%">
-        <tr>
-          <th>职位级别</th>
-          <th>保底销量</th>
-          <th>最大销量</th>
-          <th>提成系数</th>
-        </tr>
-        <tr>
-          <td>
-            <select name="position_level">
-              <option value="0">职位级别</option> 
-              {foreach from=$position_level_list item=val}
-              <option value="{$val.level_id}">{$val.level_name}</option>
-              {/foreach}
-            </select>
-          </td>
-          <td><input type="number" min="1000" name="min_sales" value=""/></td>
-          <td><input type="number" min="1000" name="min_sales" value=""/></td>
-          <td><input type="number" max="10" name="commission" value=""/></td>
-        </tr>
-        <tr>
-          <td><input type="submit" value="保存" class="b_submit"/></td>
-        </tr>
-      </table>
-    </form>
+    <div id="step2">
+      <form name="commissionSiteForm2" action="javascript:void(0)" method="POST">
+        <table cellpadding="0" cellspacing="0" border="1px" width="100%">
+          <tr>
+            <th>职位级别</th>
+            <th>保底销量</th>
+            <th>最大销量</th>
+            <th>提成系数</th>
+          </tr>
+          <tr>
+            <td>
+              <select name="position_level">
+                <option value="0">职位级别</option> 
+                {foreach from=$position_level_list item=val}
+                <option value="{$val.level_id}">{$val.level_name}</option>
+                {/foreach}
+              </select>
+            </td>
+            <td><input type="number" min="1000" name="min_sales" value=""/></td>
+            <td><input type="number" min="1000" name="max_sales" value=""/></td>
+            <td><input type="number" max="10" name="commission" value=""/></td>
+          </tr>
+          <tr>
+            <td colspan="4"><input type="submit" value="保存"/></td>
+          </tr>
+        </table>
+      </form>
+    </div>
   </div>
   <div id="resource"></div>
 </div>
