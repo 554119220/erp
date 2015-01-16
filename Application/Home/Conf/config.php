@@ -1,8 +1,7 @@
 <?php
 return array(
-    'URL_MODEL'            => 0,
+    'URL_MODEL'            => 1,
     //'TMPL_TEMPLATE_SUFFIX' => '.htm',
-
     'URL_CASE_INSENSITIVE' => true,
     'TMPL_ACTION_ERROR'    => 'Public:message',
     'TMPL_ACTION_SUCCESS'  => 'Public:message',
@@ -21,4 +20,5 @@ return array(
     'LANG_AUTO_DETECT'    => true,
 	'DEFAULT_LANG'        => 'zh-cn', // 默认语言
     'LANG_LIST'           => 'zh-cn',
+    //'URL_PATHINFO_FETCH' => 'ORIG_PATH_INFO,REDIRECT_URL',
 );

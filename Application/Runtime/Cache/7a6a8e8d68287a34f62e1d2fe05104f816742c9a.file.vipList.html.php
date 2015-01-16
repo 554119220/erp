@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.6, created on 2014-12-29 15:48:02
+<?php /* Smarty version Smarty-3.1.6, created on 2015-01-16 09:26:53
          compiled from "./Application/Home/View\Usersmanage\vipList.html" */ ?>
-<?php /*%%SmartyHeaderCode:18369549e0558ca2dd3-42413971%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:859954b868dd3567e2-14023271%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,12 +11,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '18369549e0558ca2dd3-42413971',
+  'nocache_hash' => '859954b868dd3567e2-14023271',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.6',
-  'unifunc' => 'content_549e05590b71b',
   'variables' => 
   array (
     'count' => 0,
@@ -28,8 +26,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'vipSearch' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.6',
+  'unifunc' => 'content_54b868dd40d99',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_549e05590b71b')) {function content_549e05590b71b($_smarty_tpl) {?><br/>
+<?php if ($_valid && !is_callable('content_54b868dd40d99')) {function content_54b868dd40d99($_smarty_tpl) {?><br/>
 <div class="finder-title">会员列表
   <font id=record_count>(共<?php echo $_smarty_tpl->tpl_vars['count']->value;?>
 条)</font>

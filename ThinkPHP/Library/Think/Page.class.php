@@ -76,7 +76,6 @@ class Page{
      */
     public function show() {
         if(0 == $this->totalRows) return '';
-
         /* 生成URL */
         $this->parameter[$this->p] = '[PAGE]';
         $this->url = U(ACTION_NAME, $this->parameter);

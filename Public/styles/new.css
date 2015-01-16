@@ -1,0 +1,454 @@
+button{border:0; background:0;}
+body,html{height:100%; background:#f1f1f1}
+.flt dl{border-bottom: 1px solid #C1CFE2;border-top: 1px solid white; padding:0; margin:0}
+.flt dl dt{ background:url(../images/sprite.png) no-repeat 0 -1054px;cursor: pointer;padding: 0px 20px 0 20px;font-size: 12px;color: black;line-height: 22px; font-weight:bold;margin:8px 0 5px 10px;  }
+.f_r{ float:right}
+.f_l{ float:left}
+.ml10{margin-left:10px}
+.pt10{padding-top:10px}
+.flt dl dd{ margin:0 0 8px 30px}
+.flt dl dd a{color: #3C5283;}
+.va{vertical-align:sub}
+/*.gridlist-action select,.gridlist-action input{height:23px;}*/
+.finder-action {background: url(images/tile_bg.png) repeat-x 0 -100px;padding: 7px 0 3px 7px;position: relative;z-index: 99;height: 25px;overflow: visible;margin-top: -1px;}
+.first-cell a img{ float:right}
+
+#main {padding:0 0 30px 10px; overflow:hidden}
+.border{border:1px #ccc solid}
+
+.t_center tr td{text-align:center}
+.t_right tr td{text-align:right}
+.t_left tr td{text-align:left}
+.icon_check{ background:url(../images/add.gif) no-repeat 0 5px; width:16px; height:25px; float:right}
+.icon_category{ background:url(../images/category.jpg) no-repeat 0 6px; width:16px; height:25px; float:right; cursor:pointer}
+.break_all tr td {word-wrap:break-word;word-break:break-all}
+/*边框样式*/
+.rb_border tr td{ border-right:1px #e3e6eb solid;border-bottom:1px #e3e6eb solid;}/*允许右边框和下边框加样式*/
+
+/*边框样式 end*/
+
+/*不动头信息*/
+.nav_position{position:fixed; top:91px;z-index:999; background:#fff;}
+.tab2{ position:relative}
+.bg_table { background:#f8f8f8}/*用于table颜色切换*/
+.c_1{font-weight: normal;font-style: normal;color: #999;font-size: .9em;margin: 0 2px;}
+.tab_list{ float:left; width:100%; height:24px;}
+.tab_list li{text-decoration: none;cursor: pointer;margin-top: 0;height: 24px;line-height: 24px;padding: 0 0 0 25px;float: left;color: #333;background: url(../images/sliding.png) no-repeat 0 -761px;font-weight: bold;margin-right:1px;}
+.tab_list li span{background:url(../images/sliding.png) no-repeat right -761px;float: right;
+padding: 0 24px 0 0; width:1px; height:25px;cursor: pointer; }
+
+.tab_list li.selected {color: #3A5999;margin-top: 0;height: 25px;line-height: 25px;padding: 0 0 0 25px;float: left;
+background: url(../images/sliding.png) no-repeat 0 -720px; font-weight:bold;cursor: pointer;}
+  .order_search{background: url(../images/tile_bg.png) repeat-x 0 -100px; color: #425A78; padding: 2px 5px; border-bottom: 1px solid #C6D7E4;height: 25px;overflow: hidden; line-height:25px; width:130%}
+.order_out button{ padding:1px 7px; margin-top:3px}
+
+.order_frt{background: white;border: 1px solid #898989;height: 19px;line-height: 19px; float:right;
+width:260px; margin-top:3px;position:relative}
+
+.finder-header {color: #222;border-bottom: 1px #CCC solid;background: #EFEFEF; height:20px; }
+.finder-header .cell {padding: 0 0 0 5px;height: 20px;line-height: 20px;overflow: hidden;border-bottom: 1px white solid;border-right: 1px white solid;}
+
+.list_crm_num{width:126%; height:600px; float:left; overflow-y:auto; margin-top:100px;}
+.index_position table:hover{  background:#EBEFF4}
+
+.nav_position h3{padding:10px 0px;}
+.o_headle {float:left; overflow:hidden}
+.o_headle dl{float:left; border-right:1px #ededed solid; padding:0 10px 10px 10px;  margin:0}
+.o_headle_info span a{ border-radius:3px; border:1px #ccc solid; background:#ededed;padding:5px 10px;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFF), color-stop(1, #e9ecef));text-decoration:none;color:#3A5999}
+.o_headle_info span a:hover{border:1px #999 solid}
+.o_headle_info{ border-top:1px #ededed solid; width:99%; float:left; padding:20px 0 10px 0; text-align:right}
+.o_headle dl dt{font-weight:bold;}
+.o_headle dl dd{ margin-left:15px; padding-top:5px}
+
+.order_details{ border-radius:5px; border:1px #ccc solid; margin:10px 0 10px 10px;padding:10px; float:left;overflow:hidden;width:96%}
+
+#usually{border:1px red solid;background:url(../images/icon_search.png) no-repeat 0 4px;;padding-left:20px; border:0}
+/*不动信息*/
+*{padding:0; margin:0}
+
+.mt10{margin-top:10px}
+.mt2{margin-top:1px}
+.mt20{margin-top:20px}
+.mr10{margin-top:10px}
+.mb10{margin-bottom:10px}
+.ml{ margin-left:10px}
+.b_b{border-bottom:1px #ccc solid}
+.b_b_ed{border-bottom:1px #ededed solid}
+.b_r{border-right:1px #e3e6eb solid}
+.c_b{clear:both}
+
+.pt{padding-top:10px}
+.pl{padding-left:10px}
+.pr{padding-right:10px}
+.pb10{padding-bottom:10px}
+.pb5{padding-bottom:5px}
+
+/*设置统一高度*/
+.h500{ height:500px;}
+.h800{ height:800px;}
+.mh800{max-height:600px}
+.mh500{max-height:500px}
+/*设置统一高度 end*/
+
+.align_left td{ text-align:left !important;padding-left:5px}
+/*订单信息切换*/
+.detail_tab {background:url(../images/tile_bg.png) repeat-x 0 -700px; width:100%; height:31px; margin-top:-15px;}
+.detail_tab ul{margin-left:10px}
+.detail_tab ul li{ float:left;margin-left:2px;border:#b2c0d1 solid 1px ;border-bottom:0; border-radius:5px 5px 0 0; padding:0 15px; background:#e1e7ee;  text-decoration:none;color:#3A5999;height:26px; margin-top:3px; line-height:28px; cursor:pointer}
+
+.o_select{background:#F1F1F1 !important;border:1px solid #5381D1;border-bottom:0 !important;width:90px !important; height:28px !important; padding:0px !important; margin-top:2px !important; text-align:center}
+
+.lh24{ padding-bottom:20px}
+.menu_headle{ float:left;padding-bottom:10px; width:105px;}
+.menu_headle dd{ float:left; margin:10px 5px 0px 0}
+
+.menu_headle dl{ margin-left:30px}
+.ml30{ margin-left:30px}
+
+
+
+.finder-header-wrapper tr td,#scroll1 table tr th{height:25px; line-height:25px;font-weight:normal !important; padding:0}
+
+#scroll1 table tr td,.left_scroll table tr td,#scroll1 table tr th{background:url(../images/tile_bg.png) 0 -1795px; border-right:1px #ccc solid;}
+#scroll1 table tr td{background:none !important}
+#scroll1 table,.left_scroll table,#scroll1 table tr th,#scroll1 table tr td{border-bottom:1px #ccc solid}
+#scroll1 table{border:0 !important}
+.tr_list td {border-bottom:1px #e3e6eb solid; padding:0;margin:0 ;border-right:1px #e3e6eb solid;}
+.tr_bg_list td {background:#5779bd !important; color:#fff}
+.blank {height:10px;line-height:10px; clear:both; visibility:hidden;}
+.o_headle button{border:0;cursor:pointer; background:none}
+
+.s_result{border:1px #ccc solid;border-left:0;}
+.s_result th{border:1px #fff solid; border-left:1px #ccc solid;}
+.s_result td{border:1px #fff solid; border-left:1px #ccc solid;border-top:1px #ccc solid; text-align:center }
+.h_f{height:20px; float:left}
+/*#order_detail{ width:100%;position:absolute; background:red;z-index:999; border:1px red solid;display: block;}*/
+
+/*订单　搜索框*/
+.o_goods_search{ margin-bottom:10px}
+.o_goods_search form select{ height:24px; width:250px}
+.o_goods_search form input[name="search"]{ border:1px #ccc solid; background:url(../images/icon_search.png) no-repeat 0 4px;padding-left:20px; height:17px;width:150px; margin-left:10px }
+
+.s_radius{border-radius: 4px;padding:3px 10px;background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2673C4), to(#75A6DA));color: white;font-weight: bold; border:1px solid #ccc; cursor:pointer}
+.s_radius:hover{border:1px #4377b0 solid}
+
+#scroll2 table tr td a{margin-left:2px}
+#scroll2{max-height:600px;overflow-y:hidden;/*overflow-x:scroll*/}
+{border:1px #ccc solid}
+/*订单订单  搜索框 end*/
+
+
+/*订单菜单栏*/
+.o_menu_select ul li{ margin-bottom:10px}
+.o_menu_select ul li select{width:102px}
+.h3_order_number{float:left;}
+.top_tip{border:1px #ccc solid; margin:5px 0 5px 10px;padding-left:5px; border-radius:5px;background:#f8f8f8; }
+.top_tip span{ font:bold 14px "宋体";}
+.top_tip button{border:0;background:0; cursor:pointer}
+.bg_pay{background:red}
+/*订单菜单栏 end*/
+.pos sup{/*background:url(../images/650-Vector.gif) no-repeat 100px -10px; */width:30px; height:30px;}
+
+/*===================通用样式（导航，表单，消息窗口）========================*/
+/*消息窗*/
+.m_window{border:1px #5779bd solid; padding:10px; position:fixed; top:40%;left:40%;background:#fff; border-radius:3px;text-shadow:3px 3px 7px #999}
+
+.m_window h5{padding: 5px 28px 5px 10px;text-shadow: 0 1px 0 rgba(18, 91, 167, .7);font:bold 14px "宋体";background: linear-gradient(top, #2673c4, #75a6da);background: -moz-linear-gradient(top, #2673c4, #75a6da);background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2673c4), to(#75a6da));filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2673c4', endColorstr='#75a6da');border-top: 1px solid #1e6bbc;border-bottom: 1px solid #699bd1; color:#FFF}
+.m_window p{height:32px; font:bold 20px "宋体"; color:#3F4D69}
+.change_cat{float:left; width:393px;}
+.change_cat label{float:left; margin:2px 5px}
+
+.m_window tr td{ font-weight:normal; font-size:14px }
+
+/*消息窗 end*/
+
+/*右侧底部(提示信息，分页，通知)*/
+.bottom_tip{background:#eef0f2; width:120%; height:25px;line-height:25px; position:fixed; bottom:0}
+.tip_left input[type="text"]{ text-align:center;margin-left:5px;}
+.tip_left{ width:28%; float:left;padding-left:10px}
+.tip_center span a{border:1px solid #ccdbe4;padding:3px 8px; background:#f3f3f3; color:#3e5b74}
+.tip_center span a:hover{background:#6a8aca; color:#fff; text-decoration:none}
+.tip_center span.cur{background-color: #6a8aca;border: 1px solid #3F4D69;color: white;padding:3px 8px;}
+.tip_center{float:left;margin-right:20px;}
+.tip_right{float:left}
+/*右侧底部(提示信息，分页，通知) end*/
+
+/*栏目导航*/
+.finder-title {overflow: hidden;zoom: 1;padding-bottom:5px;font-weight:bolder;font-size:14px;}
+.finder-title font{ font-weight: normal;font-style: normal;color: #999;font-size: .9em;margin: 0 2px; font-size:12px}
+.finder-title h2{ font-size:16px; }
+.finder-title h2 span{color: #999;font-size: .9em;margin: 0 2px; font-size:14px}
+.finder-title h2 span em{font-weight: normal;font-style: normal;}
+
+.nav-search{ float:left; }
+/*栏目导航 end*/
+
+/*通用表单样式*/
+input{height: 18px;padding: 2px 0 2px 5px;border: 1px solid #d0d0d0;background: #FFF url(../images/input.png) repeat-x;font-family: Verdana, Geneva, sans-serif,"宋体";font-size: 12px;vertical-align: middle;}
+.form-table { border-bottom:1px #f1f1f1 solid; width:65%;float:left;margin-bottom:10px;}
+.form-table th{margin-right:10px; float:left}
+.spread_area{float:left;padding-top:30px}
+.no_border{border:0 !important}
+
+.table_form td, .table_form th {border-bottom: 1px solid #eee !important; border-right:0 !important}
+/*.table_form tr{ background:none !important}*/
+.table_form th {font-weight: normal;text-align: center;padding-right: 10px;color: #333; background:none !important}
+.table_form td, .table_form th {padding: 4px 0 4px 8px;}
+.table_form td input[type='radio']{vertical-align:middle }
+.table_form td label{margin-right:20px}
+select {vertical-align: middle;background: none repeat scroll 0 0 #F9F9F9;border-color: #666666 #CCCCCC #CCCCCC #666666;border-style: solid;border-width: 1px;color: #333;padding: 2px;}
+.input_resert{ width:30px; height:24px !important}
+.w835{width:835px}
+
+/*通用表单样式 end*/
+
+/*通用提交按钮*/
+.input_submit{border-radius: 3px;height: 30px;background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2673C4), to(#75A6DA));text-align: center;color: #fff;font-weight: bold;font-size: 14px; padding:3px 15px;cursor:pointer; border:0;}
+.input_submit:hover{background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#033b74), to(#2e78c6));}
+
+.input_submit_right{border-radius: 3px;height: 30px;background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2673C4), to(#75A6DA));text-align: center;color: #fff;font-weight: bold;font-size: 14px; padding:3px 15px;cursor:pointer; border:0;
+float:right;margin-top:10px}
+
+.input_submit_right:hover{background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#033b74), to(#2e78c6)); float:right;margin-top:10px}
+
+.input_submit_right_disable{border-radius: 3px;height: 30px;background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#fff));text-align: center;color: #444;font-weight: bold;font-size: 14px; padding:3px 15px; border:0; margin-top:10px; float:right}
+
+
+.b_submit {border-radius:3px; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2673C4), to(#75A6DA));text-align: center;color: #fff;font-size: 12px; padding:2px 5px;cursor:pointer; border:0;height:25px; text-decoration:none}
+.b_submit:hover {background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#033b74), to(#2e78c6)) !important;text-decoration:none}
+
+.input_submits{border-radius: 3px;height: 25px;background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2673C4), to(#75A6DA));text-align: center;color: #fff;font-weight: bold;font-size: 14px; padding:3px 13px;cursor:pointer; border:0; float:right; margin-bottom:5px}
+.input_submits:hover{background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#033b74), to(#2e78c6));text-decoration:none}
+
+.input_submit_h{border-radius: 3px;height: 25px;background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2673C4), to(#75A6DA));text-align: center;color: #fff;font-weight: bold;font-size: 14px; padding:6px 13px;cursor:pointer; border:0;}
+.input_submit_h:hover{background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#033b74), to(#2e78c6));text-decoration:none}
+/*通用提交按钮*/
+
+/*===================通用样式（导航，表单，消息窗口）end========================*/
+
+
+
+.layout{overflow:hidden; padding-bottom:10px;border: 5px solid #edf1f5;}
+
+
+/*导航样式*/
+.box_nav{border-left:1px #ccc solid}
+/*导航样式 end*/
+
+/*菜单栏样式*/
+.box_menu{height:300px; width:110px;float:left; margin-top:30px; border-top:1px #9dafc3 solid;border-right:1px #e7e6e6  solid}
+.box_menu ul li{height: 30px;line-height: 30px;background: url(../images/ha_top_nav.jpg) repeat-x 0 1px;padding-left: 10px;
+border:1px #e7e6e6 solid; border-top:0;border-right:0;}
+.box_menu ul li a{background: url(../images/methodcansuccessfully_9.gif) no-repeat 0 10px;padding-left: 15px;display: block;}
+.box_menu ul li a:hover{color:red}
+
+.menu_cur{ background:#fff !important; border-right:0 !important;z-index:999;width:100px; }
+/*菜单栏样式 end*/
+
+/*内容样式*/
+.box_center{float:left; padding:10px; border:1px #d9d9d9 solid; border-radius:5px; background:#fff; width:760px; margin-left:10px; margin-right:10px}
+.box_center table tr{background:#fff !important}
+.cursor{cursor:pointer} 
+
+#contact th {width:10%; text-align:right}
+#contact td {width:20%; vertical-align:middle; height:30px; line-height:30px; border:none; border-bottom:1px dashed #DFDFDF; border-right:1px dashed #DFDFDF}
+#contact td:last-child {vertical-align:top; width:20%; border-right:none}
+#contact tbody:first-child td {border:none !important}
+#contact tbody:first-child td select {width:90px; height:auto; font-weight:normal; font-size:12px}
+#contact td[rowspan='3'] {text-align:right; vertical-align:bottom; padding:2px 5px 5px 2px}
+
+/*内容样式 end*/
+
+/*=====================================顾客列表====================================*/
+.user_detail{ height:450px}
+.user_list_info button{ background:url(../images/edit.gif) no-repeat right; height:17px; width:17px;padding-left:22px;cursor:pointer;}
+#purchase,#cancel{overflow-y: scroll ;height: 370px}
+#new_service table td,#new_order table td{border:0 !important; border-bottom:1px #eee solid !important}
+#new_service label{float:left; margin-right:20px}
+.purchase th {background:#efefef !important; text-align:center;}
+.purchase tr td {vertical-align:top; padding-left:20px}
+
+/* 顾客详情|订单详情--基本信息 */
+#general table {width:100%}
+#general table tr td {border:0; border-bottom:1px dashed #CCC}
+#general table tr th {text-align:right}
+
+.user-handover {width:100%; text-align:right; margin-top:5px}
+
+/* 订单信息 */
+#new_order form[name='order_info'] table {margin:0 auto}
+#new_order form[name='order_info'] table th {width:100px; text-align:right}
+#new_order form[name='order_info'] table td {padding:0 10px; text-align:left}
+#new_order form[name='order_info'] table td input {width:100px}
+#new_order form[name='order_info'] table td input[name='remarks'] {width:330px}
+#new_order form[name='order_info'] table td input[name='address'] {width:230px}
+#new_order form[name='order_info'] table td select {width:107px}
+#remark label{padding:5px; float:left}
+
+/* 添加订单-添加商品 */
+fieldset {border-radius:5px; padding:10px 10px; margin-top:10px}
+fieldset legend {font-size:14px; font-weight:bolder; margin-left:10px}
+.o_goods_search form,#new_order table td{border-bottom:1px #eee solid;padding-bottom:5px}
+#goods_list {text-align:center; vertical-align:middle}
+#goods_list tr th {text-align:right}
+#goods_list tr th[align='center'] {text-align:center}
+
+.r_form {position:absolute; bottom:20px; left:280px}
+.l_txt {position:absolute; bottom:50px; left:208px}
+
+.user_list_info label{ display:block }
+.t_pd{margin-left:30px}
+.w240{width:240px}
+.w200{width:200px}
+.w110{width:110px}
+.w150{width:150px}
+.w70{width:70px}
+.w260{width:260px}
+.w370{width:370px}
+.pt7{padding-top:7px}
+.pt2{padding-top:2px}
+
+
+/*服务记录*/
+#listDiv th{ overflow:hidden }
+#records{height:650px; width:1000px; overflow:scroll; float:left}
+/*服务记录 end*/
+.fav_start-x{ background:url(../images/fav_start.png) no-repeat 4px 7px;width:20px; height:14px; float:left ;padding-top:10px;cursor:pointer}
+.fav_start-y{ background:url(../images/fav_start.png) no-repeat -17px 7px;width:20px; height:14px;  float:left ;padding-top:10px;cursor:pointer}
+
+/*转移顾客*/
+.batch_transfer{padding:50px 0 100px 150px}
+.batch_transfer select{height:25px;}
+/*转移顾客end*/
+
+/*=====================================顾客列表 end=================================*/
+
+/*=======================================报表=====================================*/
+.max_box{width:102%; float:left; overflow:hidden;overflow:hidden;}
+.add_up dl{ float:left}
+.add_up dl dd{ float:left; margin-right:20px}
+.add_flash{ width:99.9%; height:200px;float:left; text-align:center;border:1px #000 solid }
+.list-div h4{padding:5px 0; border-bottom:1px #ccc solid; width:99.7%; font-size:14px}
+.max_box .list-div{float:left; width:32.1%;margin-right:10px;}
+.max_box .list-div table{ border-left:1px #ccc solid !important}
+
+.nature_th th{font-weight:normal}
+.w1000{width:1100px}
+/*=======================================报表 end=====================================*/
+
+/*=======================================绩效==========================================*/
+.table_form .ad_table{border:0 !important;}
+#ad_table td{border:0 !important ;padding:0 0px 0 15px}
+/*=======================================绩效 end==========================================*/
+
+/*=======================================商品列表============================================*/
+.goods_list{ border:1px #ccc solid; width:80%;overflow-y:scroll;clear:both;max-height:500px; }
+.goods_list table th{ text-align:center; border-right:1px #ccc solid !important; border-left:1px #fff solid !important;
+color:#222;}
+.goods_fixed{ background:url(../images/tile_bg.png) 0 -1798px; height:23px; line-height:23px}
+/*=======================================商品列表 end============================================*/
+
+/*=======================================公共查询============================================*/
+#showRes{margin-top:20px; float:left}
+.all_table_list{border:1px #ccc solid }
+.all_table_list th{border-left:1px #ccc solid;border-right:1px #fff solid;border-top:1px #FFF solid;border-bottom:1px #ccc solid; background:url(../images/tile_bg.png) 0 -1790px;height:25px;line-height:25px;text-align:center }
+.all_table_list td{height:30px; line-height:30px;border-bottom:1px #eee solid;text-align:center}
+.all_table_list th:nth-child(1){border-left:1px #FFF solid}
+
+.title_desc{font:bold 14px "宋体";background:#F1F1F1;text-align:left;line-height:30px; height:30px; padding-left:10px;width:100%; margin:10px 10px 5px 0}
+
+
+.na_td_bg td:hover{background:#5779bd; color:#fff}
+.na_td_bg span{}
+.na_td_bg font{ width:40px; float:left;height:28px;border-right:1px #ccc solid;border-left:1px #ccc solid;}
+
+.b_red{color:red; font-weight:bold}
+.public_search {border:1px #f1f1f1 solid; width:1000px; overflow-y:hidden; background:#fff; overflow-x:scroll;padding-bottom:30px}
+.public_search ul { margin:30px 0px 0 100px }
+
+/*=======================================公共查询 end============================================*/
+
+/*=====================================会员（服务记录，添加服务）=================================*/
+.recordes_form{border-bottom:1px #ccc solid;padding-bottom:10px}
+.recordes_form span{ padding-right:20px}
+/*=================================会员（服务记录，添加服务）end===================================*/
+
+/*滚动条处理*/
+.x-scroll{overflow-x:scroll}
+.y-scroll{ overflow-y:scroll}
+.scroll{ overflow:scroll}
+/*滚动条处理 end*/
+/*操作管理*/
+.action-span a{color:#fff;}
+.add_role li{width:100px; float:left; height:25px; line-height:25px}
+.tab th{ text-align:right; }
+.tab td,.tab th{ border-bottom:1px #ededed solid; padding-bottom:5px; height:30px; line-height:30px}
+/*操作管理*/
+
+/*推广列表*/
+.personal_list dl{padding-bottom:10px}
+.personal_list dl dt{font-weight:bold;padding-bottom:5px }
+.personal_list dl dd{ line-height:20px; border-bottom:1px #ededed solid;}
+/*推广列表 end*/
+
+/*健康档案*/
+.table_form caption{font:bold 14px "宋体";background:#F1F1F1;text-align:left;line-height:30px; height:30px; padding-left:10px;width:824px; margin:20px 0 5px 0}
+.healthy_files th{ font:bold 12px "宋体"; text-align:right}
+/*健康档案 end*/
+
+/*销售统计*/
+#person_style {clear:both; overflow-x:scroll; padding-bottom:10px}
+#person_style tbody tr:hover {color:#356CCC; cursor:pointer}
+
+td[align="left"] {padding-left:5px; text-align:left}
+label>input[name='filter'] {display:none}
+div[class='nav-search']>label {border:2px solid #999; color:#fff; font-weight:bold; padding:2px 10px; margin:0 5px; background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#09D9EB),color-stop(1,#0977EB)); cursor:pointer}
+.input_checked {color:#FFF140 !important; background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#00FF34),color-stop(1,#449D0F)) !important}
+
+input[id^='t_'] {display:none}
+
+/* 介绍人详细信息 */
+table[class='referralsDetail'] td {font-size:12px !important; height:34px !important; color:dimgray; width:120px; margin:5px}
+table[class='referralsPurchase'] {width:570px}
+table[class='referralsPurchase'] th {background:#efefef !important; text-align:center;}
+table[class='referralsPurchase'] td {text-align:center; font-size:12px !important}
+table[class='referralsPurchase'] td details p {font-size:14px !important; color:orangered !important}
+table[class='referralsPurchase'] td details summary a {color:navy !important}
+
+/* 消息提示 */
+.hide {display:none}
+.show {display:block}
+#msg {background:#ffffff; position:absolute; min-width:30%; min-height:100px; text-align:center; border:1px solid rgb(87,121,189); border-radius:5px; z-index:1000; padding:5px}
+#msg h3 {float:left; width:100%; position:relative; background:rgba(82,143,208,1); text-align:left; color:rgb(255,255,255); border-radius:2px; height:27px; line-height:27px; text-indent:0.5em}
+#msg p {clear:both; color:rgb(63,77,105); font-size:18px; font-weight:bolder; margin:0; padding:5px 0 0 10px; text-align:left}
+#msgBtn {float:right; margin:0 7px 7px 0; color:#fff; font-weight:bolder;padding:2px 10px; height:30px; border-radius:5px; cursor:pointer; background:-webkit-gradient(linear,0 0,0 100%,from(rgb(7,65,124)),to(rgb(109,161,216)))}
+
+/* 会员卡号备选列表 */
+.CardNumber {color:#000; border:#000 1px solid; margin-left:5px; position:absolute; overflow:hidden; z-index:100}
+ul[class='CardNumber']>li {cursor:pointer; padding:0 3px; border-bottom:#000 1px dashed}
+ul[class='CardNumber']>li:last-child {cursor:pointer; border-bottom:none}
+ul[class='CardNumber']>li:hover {color:#fff; font-weight:border; background:skyblue}
+
+/* 每页的小标题 */
+/*.content-head {padding-top:10px}*/
+
+/* 修正样式 */
+td[align='center'] {text-align:center}
+textarea[name='others']::-webkit-input-placeholder {font-size:22px}
+div[id='general'] label {display:inline-block}
+div[id='general'] label>input {margin-right:2px}
+div[id='general'] input[type='button'] {padding:2px 5px; border-radius:2px; background:#F1F1F1 url(); height:25px}
+.fillCell {padding:0 !important}
+.around {margin:0 !important}
+
+/* 按钮：拉进黑名单 */
+.blacklist {background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2673C4), to(#75A6DA)) !important;}
+
+select {line-height:22px; font-size:14px; height:22px}
+
+#sortByThis th {cursor:pointer}
+.noSort:after {content:''}
+.upSortByCurrent {color:red}
+.downSortByCurrent {color:red}
+.upSortByCurrent:after {content:'↑'}
+.downSortByCurrent:after {content:'↓'}

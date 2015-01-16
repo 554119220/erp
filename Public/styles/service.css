@@ -1,0 +1,62 @@
+buttong[onclick='collectTape()'] {font-size:21px;margin-left:10px}
+.wd750{width:750px;}
+.wd64{width:64px;}
+
+/*多选员工容器*/
+#select_admin_box{width:97%;border:1px solid #ccc;padding:10px;font-size:12px;font-weight:normal !important}
+#select_admin_boxg td {padding:6px;}
+.btn_down_up{margin-left:32px;}
+.service_box{text-align:center;background:#ccc}
+.textarea-long{resize:none;padding:3px;margin-top:3px;}
+
+/*表格样式*/
+.center{text-align:center} 
+.tdright{text-align:right;padding-right:3px;}
+.tdleft{text-align:left;padding-left:3px;}
+.fright{float:right;margin-right:3px;}
+.fleft{float:left;margin-left:3px;}
+/*朋友圈*/
+#friends_tableg th,#friends_table td{border-bottom:1px #e3e6eb solid;border-right:1px #e3e6eb solid}
+#friends_tableg th ,#table_family_user th{background:#eee}
+
+/*label按钮*/
+.btn{cursor:pointer;color:#3367AC;}
+
+/*展开缩小*/
+.menu-minus {background:url('../images/accordion_arrows.png') no-repeat 0 0;}
+.menu-plus {background:url('../images/accordion_arrows.png') no-repeat -16px 0;}
+.menu-minus,.menu-plus{float:right;cursor:pointer;width:15px;height:15px;display:inline-block;vertical-align:sub}
+
+.pointer{cursor:pointer;}
+.dinline{display:inline!important;}
+.dblock{display:block!important;}
+.pabsolute{position:absolute}
+.prelative{position:relative}
+
+/*提醒图标*/
+.new_update_ico{width:13px;height:13px;display:inline-block;background:red;vertical-align:sub;position:absolute;border-radius:25px;left:92%;top:-6px;line-height:13px;text-align:center;color:#eee;font-weight:bolder;}
+
+/*家庭*/
+.family_table label{display:inline;cursor:pointer;margin-left:6px;}
+/*健康档案*/
+.healthy_file table {width:100%;}
+.healthy_file table caption{font-size:14px;background:#F1F1F1;text-align:left;line-height:32px;padding-left:10px;font-weight:bold;}
+.healthy_file table th{width:15%;text-align:right;}
+/*.healthy_file table td{width:75%;}*/
+.healthy_file table input[type=radio]{margin-right:2px}
+.healthy_file table input[type=checkbox]{margin-right:2px}
+.healthy_file table input[type=number]{margin-right:2px}
+.healthy_file table input[type=text]{margin:3px 0px; 3px; 3px;}
+.healthy_file label{float:left;padding:3px;}
+.healthy_file input[type=submit]{display:inline;margin-bottom:6px;color:#CBCED2}
+.healthy_file input[type=submit]:hover{color:#6088BD}
+
+.healthy_file div[class=title] h3 {display:inline;color:#666} 
+.healthy_file div[class=title] .appendix {color:#ccc;font-size:8px;} 
+.healthy_file div[class=title] {border:1px solid #ddd;padding:3px;margin-bottom:3px;padding-left:5px;} 
+.healthy_file .content {border:1px solid #ddd;border-top:0px;margin-bottom:3px;padding:3px;}
+.healthy_file .examination th{text-align:center}
+#table_weight tr th{border-bottom:1px solid #D32424;border-right:1px solid #eee}
+#table_weight tr td{text-align:center;}
+#table_blood tr th{border-bottom:1px solid #D32424;border-right:1px solid #eee}
+#table_blood tr td{text-align:center;}

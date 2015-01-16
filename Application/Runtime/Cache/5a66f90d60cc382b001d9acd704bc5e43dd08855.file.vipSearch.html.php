@@ -1,22 +1,20 @@
-<?php /* Smarty version Smarty-3.1.6, created on 2014-12-31 17:02:04
+<?php /* Smarty version Smarty-3.1.6, created on 2015-01-16 09:26:53
          compiled from "./Application/Home/View\Usersmanage\vipSearch.html" */ ?>
-<?php /*%%SmartyHeaderCode:2098754a0caec81b322-42323681%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:104654b868dd1ab3f5-76605495%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '5a66f90d60cc382b001d9acd704bc5e43dd08855' => 
     array (
       0 => './Application/Home/View\\Usersmanage\\vipSearch.html',
-      1 => 1419929524,
+      1 => 1420687162,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2098754a0caec81b322-42323681',
+  'nocache_hash' => '104654b868dd1ab3f5-76605495',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.6',
-  'unifunc' => 'content_54a0caec98968',
   'variables' => 
   array (
     'section' => 0,
@@ -26,8 +24,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'rank_id' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.6',
+  'unifunc' => 'content_54b868dd31975',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_54a0caec98968')) {function content_54a0caec98968($_smarty_tpl) {?><table width="100%" cellspacing="0" cellpadding="0" class="wu_table_list rb_border wu_rb_border tr_hover" id="vip_list">
+<?php if ($_valid && !is_callable('content_54b868dd31975')) {function content_54b868dd31975($_smarty_tpl) {?><table width="100%" cellspacing="0" cellpadding="0" class="wu_table_list rb_border wu_rb_border tr_hover" id="vip_list">
   <tr>
     <th width="8%">姓名</th>
     <th width="10%">生日</th>
@@ -76,7 +76,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 <div class="bottom_tip page" id="pageDiv">
   <?php echo $_smarty_tpl->tpl_vars['page']->value;?>
 
-</div>  
+</div>
 <input type="hidden" id="rank_id" value="<?php echo $_smarty_tpl->tpl_vars['rank_id']->value;?>
 "/>
 <?php }} ?>

@@ -1,0 +1,176 @@
+/*首页信息样式*/
+.stuffsortab-div { overflow-y:auto;overflow-x:hidden;height:280px;width:48%;float:left;
+}
+.portlet { border-color:#fff #665 #665 #fff;border-style:solid;border-left:1px solid #dedede;border-right:1px solid #dedede;border-bottom:1px solid #dedede;border-top:1px solid #dedede;margin:5px;position:relative;visibility:visible;height:250px;border-radius:5px;box-shadow:0 1px 3px #B3B3B3;color:#444;} 
+.center{text-align:center;}
+.pd25{padding-top:25%;padding-bottom:25%}
+.portlet input[type=text]{width:120px;}
+
+.index-info-table{ width:100%;border-collapse:collapse;}
+.index_small{ padding-right:0px;padding-left:0px;padding-top:0px;}
+.index_small td{padding:3px;margin:3px;}
+
+/*项目分类主题名*/
+.home-stuff-heading { background-color:rgb(214, 211, 211);font-size:14px;height:30px;color:#666;cursor:default;}
+
+.home-stuff-heading img{ height:14px;width:14px;float:right;margin-right:6px}
+.home-stuff-heading span{background :url('../images/more.png');}
+.home-stuff-heading label{float:left;margin-left:6px;}
+.portlet table th {color:#444;line-height:20px;font-weight:normal;font-size:14px;}
+/*.portlet table th{text-align:center;}*/
+/*.portlet table td{text-align:center;}*/
+.portlet table tr:nth-child(2n){background:#EAEEF4;}
+
+/*--------------------------------*/
+.portlet textarea{margin:6px 0px 0px 6px;height:120px;width:360px;padding:5px;resize:vertical}
+
+/*右下角提醒框*/
+#bottom_remind{ position:fixed;right:0;bottom:-152px;width:304px;max-width:304px;max-height:150px;height:150px;border:1px solid #5F9BD9;border-radius:5px;box-shadow:0 1px 3px 2px #fff;background:#fff;overflow:hidden;}
+
+.layerHeading {width:100%;height:15%;color:#fff;background:#2D6DAD;padding:3px;vertical-align:middle;}
+.layerHeading label{cursor:pointer;float:right;margin-right:5px;font-size:16px;}
+#remind_content{background:#fff;height:120px;padding:6px;width:100%;color:#000;}
+#remind_content p{margin-bottom:4px;}
+/*-------------------------------*/
+
+.index_title{ width:100%;display:block;text-align:center;}
+
+/*首页统计情况*/
+#nature_stats_index ul{padding-left:5px;margin-left:20px;margin-top:8px;display:block;}
+#nature_stats_index ul li {float:left;text-align:center;margin-left:48px;}
+#ranking_ul li {margin-left:4px !important;float:left;}
+
+/*个人统计*/
+.datalist ul li {width:96px;}
+.datalist ul li h3{font-size:16px;color:#666666;font-weight:400;}
+.datalist ul li h4{ font-size:38px;font-weight:400;font-family:Arial;padding:8px 0;text-shadow:#fff 0 0 50px;color:#333333;margin-top:34px;height:70px;cursor:default;}
+.datalist ul li h4 span{display:none}
+.datalist ul li h4 span{position:absolute;width:186px;height:120px;border:1px solid #6FCA77;padding:3px;color:#666;border-radius:5px;margin-top:6px;font-size:12px;font-weight:bold;background-color:#fff}
+.datalist ul li span{ color:#666;font-size:12px;line-height:21px;width:100%;}
+/*==========end============*/
+
+#nature_stats_index table tr:nth-child(2n){background:inherit}
+#nature_stats_index table tr:hover{background:inherit !important}
+#ranking_list{margin-top:34px;height:70px;}
+
+/*排行榜*/
+.ranklist_div {border:1px solid #300101;width:180px;margin-top:6px;min-height:180px;}
+.ranklist_div_title{ background-color:rgb(214, 211, 211);color:#464141;padding:2px;font-weight:bold;line-height:24px;}
+.ranklist_div_title table th td{text-align:center;border:0px;font-size:14px}
+.ranklist_div_title label{ float:right;font-size:smaller;color:chocolate;margin-right:3px;cursor:pointer;}
+.ranklist_div .bottom{padding:3px;} 
+.ranklist_div h3[class=big]{font-size:43px;} 
+.ranklist_div h3[class=small]{font-size:43px;} 
+
+.hide_site_div em,.ranklist_div em{ border:1px solid;padding:0 2px;margin-left:6px;float:left;font-weight:bold;border-radius:3px;color:#fff;width:12px;font-style:normal;font-size:12px;line-height:16px }
+.top_three{background-color:#970000;}
+.top_ten{background-color:#000;}
+.ranklist_div p {margin-top:5px;font-size:14px} 
+/*.ranklist_div label {float:left;margin-left:10px;}*/
+
+.index_filter_page{ width:100%;background-color:#D4DADB;position:absolute;bottom:0;text-align:center;}
+.index_filter_page button{margin:2px;cursor:pointer;}
+.index_filter_page button.visted{border-bottom:1px solid #000;font-weight:bold}
+
+/*首页公告*/
+#public_notice select {width:84px}
+#public_notice input[type=text] {width:235px;margin-top:3px}
+.public_notice_list td:nth-chlid(2){text-align:left;padding-left:3px}
+
+/*更多排行榜*/
+.hide_site_div{height:328px;position:fixed;background:#fff;margin:0px;top:184px;left:0px;border:1px solid #300101;width:0px;z-index:1000;overflow:inherit}
+
+#role_id, #group_id,#admin_id{width:114px}
+
+/*库存警报商品列表*/
+#alarm_stock_goods {font-size:14px;}
+#alarm_stock_goods th {border:1px solid #999;padding:3px;margin:0px}
+#alarm_stock_goods td {border:1px solid #999;padding:3px;}
+#alarm_stock_goods table {border-collapse:collapse}
+
+/*公共查询*/
+.goods_search_res{ margin    :5px;background:#ccc;border    :1px solid #999;padding   :5px;font-size :16px;text-align:left;}
+.sch_select { height:32px;margin-right:5px;}
+
+/*公司公告*/
+.company_role{font-size:18px;line-height:20px;text-indent:2em;margin-bottom:30px;width:100%;} 
+.company_role h2{margin-top:30px;margin-bottom:10px;float:none;display:inline-block} 
+.company_role h2:first-child{text-indent:0em}
+.company_role h1{ float:none;}
+.company_role p{margin:6px;}
+.role_title{font-size:32px;font-weight:bold;margin:20px 0 20px 100px;width:100%;}
+
+/*6位数字以内的input框*/
+.lt36_input {width:36px}
+
+/*公共查询*/
+#res_search img{ position:relative;top:6px;}
+
+/*弹窗表单*/
+.popup_form th,.popup_form td{line-height:29px;}
+.popup_form input[type=text] {width:168px;}
+.popup_form input[type=number] {width:64px;}
+.popup_form select{width:176px}
+.popup_form select[class=small]{width:64px;}
+
+/*红色字体*/
+.font_red {color:#A51010};
+
+/*行距12px*/
+.lh10 {line-height:12px;}
+
+/*每个操作标题*/
+.h3title{display:inline}
+
+/*居中大按钮*/
+.center_button {margin-left:43%;margin-right:30%;margin-top:7px;}
+.mb_10{margin-bottom:10px;}
+
+/*表单式表格*/
+.form_table{border:1px solid #CFC2C2;border-collapse:collapse;background:#FAFAFA}
+.form_table th,.form_table td{ border-right:1px #e3e6eb solid;border-bottom:1px #e3e6eb solid;border-collapse:collapse;line-height:30px;text-align:center}
+
+.block_span{width:132px;border:1px solid #EDEDED;padding:5px;}
+.mgl_7{margin-left:2px}
+.td_al {text-align:left;padding-left:3px;}
+
+/*输入框警报*/
+.input_alarm{background:#FF9F9;border:1px solid #5F91B0;}
+
+.bd1 {border:1px solid #ccc}
+.btnWhite { border:1px solid #1e7db9;padding:0 8px;height:24px;cursor:pointer;box-shadow:0 -1px 0px #8fcaee inset,0 -1px 0 #497897 inset,0 1px 1px #8fcaee inset;-webkit-linear-gradient(top,#42a4e0,#2e88c0) color:#fff;border-radius:5px;overflow:hidden;}
+
+.btnWhite:active{position:relative;top:1px;}
+
+/*浮动查询*/
+.ibx_advice{ position:fixed;top:140px;right:0px;overflow:hidden;height:44px;width:50px;background-color:#FFF;cursor:pointer;z-index:10;}
+
+/*意见反馈*/
+.ibx_advice_ctx{
+  float:left;line-height:42px;height:42px;width:80px;border:1px solid #D6D6D6;border-left:none; color:#000;font-weight:bolder;font-size:14px;text-align:center;} 
+
+.ibx_advice_logo{background:#1796F9;color:#fff ;float:left;width:47px;height:42px;border:1px solid #D6D6D6;border-right:none;cursor:pointer;line-height:42px;text-align:center } 
+
+.font-size14 td{font-size:14px;line-height:20px;}
+
+.font-ico-btn{cursor:pointer}
+.font-ico-btn :hover{ color:#EB8A3D;}
+.pd-l-3{padding-left:3px;}
+
+.alarm-content{left:46%;padding:0px;padding-bottom:3px;width:405px;border:1px solid #BAAEAE;background:#fff;display:none;position:absolute}
+.alarm-content .title{background:#eee;padding-right:6px;margin-bottom:5px;padding-bottom:6px;padding-top:3px;}
+.alarm-content .title .btn{cursor:pointer}
+
+/*进度条*/
+.process_div{padding:12px;margin-top:12px;width:87%;margin-left:1%;}
+.font-size-31{font-size:31px;}
+
+/*分页*/
+.page{margin-left:20%;}
+.page span.current {background-color:#6a8aca;border:1px solid #3F4D69;color:white;padding:3px 8px;margin-left:3px}
+.page a.num{border:1px solid #ccdbe4;padding:3px 8px;background:#f3f3f3;color:#3e5b74;margin-left:3px}
+.page a.prev,.page a.next,.page a.first, .page a.end {border:1px solid #ccdbe4;padding:3px 8px;background:#f3f3f3;color:#3e5b74;margin-left:3px}
+.detail_tab a,.wu_table_list a{color:#3A5999}
+
+.tools_div input[type=button]{margin-bottom:10px;}
+.tools_div input[type=submit]{margin-bottom:10px;}

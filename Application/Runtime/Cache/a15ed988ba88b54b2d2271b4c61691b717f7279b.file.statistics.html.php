@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.6, created on 2014-12-23 11:18:40
+<?php /* Smarty version Smarty-3.1.6, created on 2015-01-14 17:21:51
          compiled from "./Application/Home/View\Index\statistics.html" */ ?>
-<?php /*%%SmartyHeaderCode:147775498df1066ff39-47034449%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:2879654b6352f250eb5-25525302%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '147775498df1066ff39-47034449',
+  'nocache_hash' => '2879654b6352f250eb5-25525302',
   'function' => 
   array (
   ),
@@ -29,9 +29,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.6',
-  'unifunc' => 'content_5498df10a4083',
+  'unifunc' => 'content_54b6352f43933',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5498df10a4083')) {function content_5498df10a4083($_smarty_tpl) {?><!--=============================================================================
+<?php if ($_valid && !is_callable('content_54b6352f43933')) {function content_54b6352f43933($_smarty_tpl) {?><!--=============================================================================
 #     FileName: statistics.htm
 #         Desc:  
 #       Author: Wuyuanhang

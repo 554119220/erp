@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>康健人生入职申请表</title>
+    <meta charset="utf-8" />
+    <link type="text/css" href="{$publicUrl}/styles/staff.css" rel="stylesheet" />
+    <script src="{$publicUrl}/js/tp-register.js" type="text/javascript"></script>
+    <script src="{$publicUrl}/js/tp-region.js" type="text/javascript"></script>
+    <script src="{$publicUrl}/js/tp-hrm.js" type="text/javascript"></script>
+    <script src="{$publicUrl}/js/tp-transport.js" type="text/javascript"></script>
+    <script src="{$publicUrl}/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <form action="{$formUrl}" name="staff" id="staff" method="post" enctype="multipart/form-data" onsubmit="return formValidation()">
+      <table border="1" cellspacing="0" cellpadding="0">
+        <thead>
+          <td colspan="9">
+            康健人生入职申请表
+            <h6>编号：{$number}&nbsp;</h6>
+            <input type="hidden" name="number" value="{$number}"/>
+          </td>
+        </thead>
+        <tbody>
+          <!-- 公司信息 -->
+          <tr>
+            <th>部门</th>
+            <td>
+              <select name="branch_id" id="branch_id">
+                <option value="0">请选择</option>
+                {foreach from=$role_list item=val}
+                <option value="{$val.role_id}" >{$val.role_name}</option>
+                {/foreach}
+              </select>
+            </td>
+            <th>应聘职位</th>
+            <td>
+              <input type="text" name="job_title" value="程序员" id="job_title" placeholder="应聘或当前职位"/></td>
+            <td>
+              <input class="datePicker" type="text" name="joined_date" value="1980-04-01" onClick="WdatePicker()" placeholder="入职日期">
+            </td>
+            <th>公司宿舍</th>
+            <td>
+              <select name="dormitory">
+                <option value="0">不入住</option>
+                <option value="1">入住</option>
+              </select>
+            </td>
+          </tr>
+          <!-- 个人信息 -->
+          <tr>
+            <th>姓名</th><td>
+              <input type="text" name="staff_name" value="吴远航"/></td>
+            <th>性别</th>
+            <td>
+              &nbsp;<label><input type="radio" name="sex" value="1" checked/> 男</label>
+              &nbsp;<label><input type="radio" name="sex" value="2" /> 女</label>
+            </td>
+            <th>出生日期</th>
+            <td>
+              <input class="datePicker" type="text" name="birthday" value="1990-06-17" placeholder="农历" onClick="WdatePicker()">
+            </td>
+            <td rowspan="6" id="tdPhoto">
+              <label for="avator">点击上传照片</label>
+            </td>
+            <input type="file" name="avator" id="avator" onchange="showPhoto(this)"/>
+          </tr>
+          <tr>
+            <th>民族</th><td> <input type="text" name="nation" value="汉" maxlength="18"/></td>
+            <th>身高</th><td><input type="text" name="stature" value="170" maxlength="3"/></td>
+            <th>婚姻状况</th>
+            <td>
+              &nbsp;<label><input type="radio" name="marital_status" value="0" checked/>未婚</label>
+              <label><input type="radio" name="marital_status" value="1" />已婚</label>
+            </td>
+          </tr>
+          <tr>
+            <th>学历</th>
+            <td>
+              <select name="education">
+                <option value="0">初中</option>
+                <option value="1">高中/中专</option>
+                <option value="2">大专</option>
+                <option value="3">本科</option>
+                <option value="4">硕士</option>
+              </select>
+            </td>
+            <th>籍贯</th>
+            <td>
+              <select name="native_province" onchange="region.changed(this, 2, 'native_city')">
+                <option value="0">选择省份</option>
+                {foreach $province_list as $key=>$val}
+                <option value="{$key}">{$val}</option>
+                {/foreach}
+              </select>
+            </td>
+            <td colspan="2">
+              <select name="native_city" id="native_city">
+                <option value="0">选择市区</option>
+                {foreach $native_city as $key=>$val}
+                <option value="{$key}">{$val}</option>
+                {/foreach}
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th>联系电话</th><td><input type="text" name="staff_phone" value="13413665188" maxlength="11"/></td>
+            <th>身份证号</th><td colspan="3"><input type="text" name="identity_card" value="440803199006172918" maxlength="18" style="text-align:left;"/></td>
+          </tr>
+          <tr>
+            <th>家庭地址</th>
+            <td colspan="5">
+              <div class="address">
+                <select name="province" id="selProvinces" onchange="region.changed(this, 2, 'selCities')">
+                  <option value="0">选择省份</option>
+                  {foreach $province_list as $key=>$val}
+                  <option value="{$key}">{$val}</option>
+                  {/foreach}
+                </select>
+              </div>
+              <div class="address">
+                <select name="city" id="selCities" onchange="region.changed(this, 3, 'selDistricts')">
+                  <option value="0">选择市区</option>
+                  {foreach $city as $key=>$val}
+                  <option value="{$key}">{$val}</option>
+                  {/foreach}
+                </select>
+              </div>
+              <div class="address">
+                <select name="district" id="selDistricts">
+                  <option value="0">选择城镇</option>
+                  {foreach $district as $key=>$val}
+                  <option value="{$key}">{$val}</option>
+                  {/foreach}
+                </select>
+              </div>
+              <div class="address">
+                <input type="text" name="home_address" value="测试地址" placeholder="精确到街道门牌号或村"/>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>兴趣爱好</th>
+            <td colspan="6"><input type="text" name="habbit" value="编程" style="text-align:left;"/></td>
+          </tr>
+          <!-- 联系方式 --> <tr>
+            <th>QQ</th><td><input type="text" name="QQ" value="554119220"/> </td>
+            <th>微信</th><td> <input type="text" name="wechat" value="554119220"/> </td>
+            <th>E-mail</th><td colspan="2"> <input type="text" name="email" value="" placeholder="务必填写常用邮箱"/></td>
+          </tr>
+          <tr> <td colspan="8"> </td> </tr>
+
+          <!-- 教育经历 -->
+          <tr>
+            <th rowspan="4">教育经历</th>
+            <th>开始日期</th>
+            <th>结束日期</th>
+            <th colspan="2">学校名称</th>
+            <th>专业</th>
+            <th>学历</th>
+          </tr>
+          <tr>
+            <td>
+              <input class="datePicker" type="text" name="edu_start[]" value="1990-10-18" onClick="WdatePicker()">
+            </td>
+            <td>
+              <input class="datePicker" type="text" name="edu_end[]" value="1991-12-04" onClick="WdatePicker()">
+            </td>
+            <td colspan="2"><input type="text" name="school[]" value="初中"/></td>
+            <td><input type="text" name="major[]" value="无"/></td>
+            <td>
+              <select name="graduater[]">
+                <option value="1" selected>初中</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input class="datePicker" type="text" name="edu_start[]" value="" onClick="WdatePicker()">
+            </td>
+            <td>
+              <input class="datePicker" type="text" name="edu_end[]" value="" onClick="WdatePicker()">
+            </td>
+            <td colspan="2"><input type="text" name="school[]" value="高中"/></td>
+            <td><input type="text" name="major[]" value="无"/></td>
+            <td>
+              <select name="graduater[]">
+                <option value="2">高中/大专</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input class="datePicker" type="text" name="edu_start[]" value="" onClick="WdatePicker()">
+            </td>
+            <td>
+              <input class="datePicker" type="text" name="edu_end[]" value="" onClick="WdatePicker()">
+            </td>
+            <td colspan="2"><input type="text" name="school[]" value="大专"/></td>
+            <td><input type="text" name="major[]" value="编程"/></td>
+            <td>
+              <select name="graduater[]">
+                <option value="3">大专/本科</option>
+              </select>
+            </td>
+          </tr>
+          <tr> <td colspan="7"> </td> </tr>
+          <!-- 工作经历 -->
+          <tr>
+            <th rowspan="4">工作经历</th>
+            <th>开始日期</th>
+            <th>结束日期</th>
+            <th colspan="2">工作单位</th>
+            <th colspan="2">职位及职责</th>
+          </tr>
+          <tr>
+            <td>
+              <input class="datePicker" type="text" name="work_start[]" value="1990-06-17" onClick="WdatePicker()">
+            </td>
+            <td>
+              <input class="datePicker" type="text" name="work_end[]" value="1990-06-17" onClick="WdatePicker()">
+            </td>
+            <td colspan="2"><input type="text" name="company[]" value="公司1" placeholder="请填写公司全名"/> </td>
+            <td colspan="2"> 
+              <textarea name="position[]">{$val.position}</textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input class="datePicker" type="text" name="work_start[]" value="1990-06-17" onClick="WdatePicker()">
+            </td>
+            <td>
+              <input class="datePicker" type="text" name="work_end[]" value="1990-06-17" onClick="WdatePicker()">
+            </td>
+            <td colspan="2"><input type="text" name="company[]" value="公司2" placeholder="请填写公司全名"/></td>
+            <td colspan="2"> 
+              <textarea name="position[]">{$val.position}</textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input class="datePicker" type="text" name="work_start[]" value="" onClick="WdatePicker()">
+            </td>
+            <td>
+              <input class="datePicker" type="text" name="work_end[]" value="" onClick="WdatePicker()">
+            </td>
+            <td colspan="2"><input type="text" name="company[]" value="" placeholder="请填写公司全名"/> </td>
+            <td colspan="2"> 
+              <textarea name="position[]">{$val.position}</textarea>
+            </td>
+          </tr>
+          <tr> <td colspan="7"> </td> </tr>
+          <!-- 紧急联系人 -->
+          <tr>
+            <th rowspan="2">紧急联系人</th>
+            <th>姓名</th><td><input type="text" name="contact_name[]" value="吴远航"/></td>
+            <th>关系</th><td> <input type="text" name="relation[]" value="父子"/></td>
+            <th>联系电话</th><td colspan="2"> <input type="text" name="contact_phone[]" value="15218125669" maxlength="11"/></td>
+          </tr>
+          <tr>
+            <th>姓名</th><td><input type="text" name="contact_name[]" value="吴远航"/></td>
+            <th>关系</th><td> <input type="text" name="relation[]" value="母子"/></td>
+            <th>联系电话</th><td colspan="2"> <input type="text" name="contact_phone[]" value="13413665186" maxlength="11"/></td>
+          </tr>
+          <tr><td colspan="7"></td></tr>
+          <tr>
+            <th rowspan="2">上传证书</th>
+            <td colspan="6">
+              <input type="file" name="pic[]" value="" multiple />
+            </td>
+          </tr>
+          <tr><td colspan="6"><strong> ↑↑↑ 毕业证、学位证及其它资格证 可一次上传多个文件 </strong></td></tr>
+          <tr><td colspan="7"></td></tr>
+          <tr>
+            <th style="height:65px">自我评价</th>
+            <td colspan="6" style="padding-top:3px;">
+              <textarea name="self_appraisal" style="resize:none;padding-left:3px;width:99%;">自我我评介</textarea>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <td colspan="7">
+            <span style="color:#665B5B;font-size:12px;">
+              ※注：本档案所有内容，请务必准确详实填写。如因信息错误，造成的后果由本人承担！
+            </span>
+            <input type="submit" name="submit_records" value="提交" id="submit_records"/>
+          </td>
+        </tfoot>
+      </table>
+    </form>
+    <div id="msg" class="hide">
+      <h3></h3>
+      <p></p>
+      <input type="button" value="" id="msgBtn" class="hide">
+    </div>
+  </body>
+</html>

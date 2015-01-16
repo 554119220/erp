@@ -1,0 +1,166 @@
+/*弹出层*/
+.pop_ups { border:1px #5779BD solid; padding:10px; 
+ position:fixed; top:30%; left:20%; background:#FFF; border-radius:3px }
+.black_overlay{ display:none; position:absolute; top:0%; left:0%; width:100%; height:100%; background-color:#333; border-radius:5px; z-index:1001; -moz-opacity:0.8; opacity:.40; filter:alpha(opacity=40) }
+.white_content { display:none; position:absolute; top:20%; left:20%; padding:10px; border-radius:3px; background-color:white; z-index:1002; overflow:auto }
+/*---------------------*/
+/*充值申请 */
+#new_apply_form tr td{ border:0 !important; border-bottom:1px #eee solid !important }
+/*公共表格*/
+.wu_rb_border tr:nth-child(even){ background:#f8f8f8 !important }
+ 
+.tr_hover tr:hover { background:#E0E0E0 !important; filter:alpha(opacity=40) }
+.wu_table_list{ border:1px #ccc solid }
+.wu_table_list th{ border-left:1px #ccc solid; border-right:1px #fff solid; border-top:1px #FFF solid; border-bottom:1px #ccc solid; background:url(../images/tile_bg.png) 0 -1790px; height:25px; line-height:25px; text-align:center }
+.wu_table_list td{ height:30px; line-height:30px; border-bottom:1px #eee solid; text-align:center; border-right:1px #eee solid }
+.wu_table_list th:nth-child(1){ border-left:1px #FFF solid }
+.wu_rb_border{ border:1px #ccc solid }
+.wu_rb_border th{ border-left:1px #ccc solid; border-right:1px #fff solid; border-top:1px #FFF solid; border-bottom:1px #ccc solid; background:url(../images/tile_bg.png) 0 -1790px; height:25px; line-height:25px; text-align:center }
+.wu_rb_border td{ height:30px; line-height:30px; border-bottom:1px #eee solid; text-align:center }
+/*----------------------------------*/
+/*白色div背景*/
+.white_bg_filter{ margin-bottom:10px; padding-bottom:10px; background:#FFF; padding:10px }
+.white_bg_filter span,input,select,textarea{ margin-left:6px; /*margin-right:10px; */ }
+/*-------------------------------*/
+/*带黑色背景标签*/
+.tab1 ul{ list-style:none; float:left }
+ 
+.tab1 li{ float:left; margin:10px }
+.btn_a{ cursor:pointer; line-height:19px; padding:3px; text-decoration:underline }
+.btn_a:hover{ background:#000; color:#FFF; border-radius:5px; text-decoration:none }
+.btn_s{ padding:3px; background:#000; color:#FFF; cursor:pointer; border-radius:5px }
+/*---------------------------*/
+/*主题栏*/
+.title_font{ line-height:14px; font-weight:normal; margin-bottom:3px; border:1px solid #888; border-radius:3px; color:#FFF; padding:4px; background:#888 }
+.top_title{ margin-bottom:5px }
+/*----------------------------*/
+.under_button{ border-top:0px; border-left:0px; border-right:0px; border-bottom:1px solid #000; 
+ margin:3px 5px; 
+ line-height:10px; background:transparent }
+.wu_table table th{ text-align:right !important; width:20% }
+.wu_button{ background:#8ab923; background-color:#9dcc4a; background-image:-moz-linear-gradient(top,#adda4d,#86b846); background-image:-ms-linear-gradient(top,#adda4d,#86b846); background-image:-webkit-gradient(linear,0 0,0 100%,from(#adda4d),to(#86b846)); background-image:-webkit-linear-gradient(top,#adda4d,#86b846); background-image:-o-linear-gradient(top,#adda4d,#86b846); background-image:linear-gradient(top,#adda4d,#86b846); background-repeat:repeat-x; height:22px; filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#adda4d', endColorstr='#86b846', GradientType=0); text-shadow:0 1px 0 rgba(255,255,255,.3); border:1px solid #6d8f29; color:#3e5e00!important; min-width:56px; width:auto; _width:56px; box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 1px 0 rgba(0,0,0,.2) }
+.wu_button_vist{ font-size:12px; text-decoration:none!important; vertical-align:middle; display:inline-block; _display:inline!important; text-align:center; padding:2px 5px !important; cursor:pointer; border-radius:3px; white-space:nowrap }
+.a_sort a:link{ color:#192E32 }
+.wu_table_form{ margin-bottom:8px }
+.wu_table_form th{ text-align:right }
+.wu_table_form th td{ border-bottom:1px dashed !important }
+/*固定DIV*/
+.online_close { width:33px; height:169px; position:fixed; right:0; /*
+ top:30%; */
+ z-index:100; display:none }
+.wu_min_input input[type=text] { width:130px; margin-right:5px }
+.btn_new{ color:#3367AC; border: 0px; background: transparent; cursor:pointer }
+.btn_new:hover{ color:rgb(202,103,47) }
+.tab1{ width:96%; font-family:'微软雅黑' }
+
+h2{ display:inline; 
+ float:left }
+img{ cursor:pointer }
+.top_form label,input,{ margin-left:10px; margin-left:5px }
+
+/*平台账号查询*/
+#explain { height:60px; border-bottom:1px solid #999999; background:#eee; font-size:14px; color:#666; text-align:
+center; line-height:60px }
+ 
+#explain a { color:#990000; font-weight:bold; text-decoration:none; border-bottom:1px dotted #990000 }
+ 
+#explain a:hover { border-bottom:2px solid #990000 }
+ 
+#explain strong { color:#990000 }
+ 
+li { list-style:none }
+ 
+#box_ed { width:450px; padding:10px; border:1px solid #ccc; background:#f4f4f4; margin:10px auto }
+ 
+#fill_in { margin-bottom:10px }
+ 
+#fill_in li { padding:5px 0; 
+ text-align:center }
+ 
+#fill_in label{ float:right; padding-right:5px }
+#fill_in .text { width:280px; height:30px; padding:0 10px; border:1px solid #ccc; font-size:14px; 
+font-family:arial }
+ 
+14px; font-family:arial; overflow:auto; vertical-align:top }
+ 
+#fill_in .btn { border:none; width:100px; height:30px; border:1px solid #ccc; background:#fff; color:#666; font-size:
+14px; position:relative; left:42px }
+ 
+#message_text { display:none }
+ 
+#message_text h2 { font-size:14px; padding:6px 0 4px 10px; background:#ddd; border-bottom:1px solid #ccc }
+ 
+#message_text li { background:#f9f9f9; border-bottom:1px solid #ccc; color:#666; overflow:hidden }
+ 
+#message_text h3 { padding:10px; font-size:14px; line-height:24px }
+ 
+#message_text p { padding:0 10px 10px; text-indent:28px; line-height:20px }
+/*--------------------------------*/
+/*信纸式的输入框*/
+.bottom_input{ background:transparent; border-top:0px; 
+ border-right:0px; border-left:0px; border-bottom:1px #666 dashed; padding:5px 10px; line-height:12px; margin-bottom:3px }
+/*表单验证友好提示*/
+.friend_alarm{ border:1px solid rgb(97, 194, 97); background:#F0FFF0; color:red; padding:5px 8px; line-height:14px; width:160px }
+.check_box_list{ position:relative; border:1px solid green; margin:6px; padding:5px; height:34px }
+.check_box_list span{ width:64px; clear:both; display:inline; margin-right:5px }
+.list_panel{ background:-webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#cccccc)); padding:5px; margin-bottom:5px }
+.healthy_table table th,.healthy_table table td{ border-bottom:1px solid #e3e6eb }
+.healthy_table th{ text-align:right }
+.btn_data { 	-moz-box-shadow:inset 0px 1px 0px 0px #54a3f7; 	-webkit-box-shadow:inset 0px 1px 0px 0px #54a3f7; 	box-shadow:inset 0px 1px 0px 0px #54a3f7; 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #007dc1), color-stop(1, #0061a7)); 	background:-moz-linear-gradient(top, #007dc1 5%, #0061a7 100%); 	background:-webkit-linear-gradient(top, #007dc1 5%, #0061a7 100%); 	background:-o-linear-gradient(top, #007dc1 5%, #0061a7 100%); 	background:-ms-linear-gradient(top, #007dc1 5%, #0061a7 100%); 	background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%); 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#007dc1', endColorstr='#0061a7',GradientType=0); 	background-color:#007dc1; 	-moz-border-radius:3px; 	-webkit-border-radius:3px; 	border-radius:3px; 	border:1px solid #124d77; 	display:inline-block; 	cursor:pointer; 	color:#FFF; 	font-family:arial; 	font-size:13px; 	padding:3px 24px; 	text-decoration:none; 	text-shadow:0px 1px 0px #154682 }
+.btn_data:hover { 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1)); 	background:-moz-linear-gradient(top, #0061a7 5%, #007dc1 100%); 	background:-webkit-linear-gradient(top, #0061a7 5%, #007dc1 100%); 	background:-o-linear-gradient(top, #0061a7 5%, #007dc1 100%); 	background:-ms-linear-gradient(top, #0061a7 5%, #007dc1 100%); 	background:linear-gradient(to bottom, #0061a7 5%, #007dc1 100%); 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0); 	background-color:#0061a7 }
+.btn_data:active { position:relative; top:1px }
+.input_submit{ position:relative; top:1px }
+/*健康档案*/
+.healthy{ border:1px #ddd solid; padding:6px }
+.healthy td{ text-align:center }
+.healthy th{ font-weight:bold; text-align:right }
+table.gridtable { font-family:verdana,arial,sans-serif; color:#333333; border-width:1px; border-color:#666666; border-collapse:collapse }
+table.gridtable th { border-width:1px; padding:8px; border-style:solid; border-color:#666666; background-color:#dedede }
+table.gridtable td { border-width:1px; padding:8px; border-style:solid; border-color:#666666; background-color:#ffffff }
+div.caption_div{ width:99%; margin-bottom:0px; font-size:14px; background:#ddd; line-height:32px; padding-left:10px; font-weight:bold; text-align:center }
+table.gridtable caption{ font-weight:bold; line-height:32px; font-size:14px }
+.backgroud_div{ background:#eee; border:1px solid #ccc; padding:10px; margin:10px 0; margin-top:6px }
+.png_btn{ width:15px; vertical-align:middle }
+.wu_table_list thead tr { position:relative; top:0; background:#000 }
+.content-main{ height:450px; overflow-x:hidden; overflow-y:scroll; position:relative; zoom:1 }
+.right_span { float:right }
+#detail th { background:#fff; border:none }
+.user_detail { background:rgb(241,241,241) }
+#dataList tr>td:first-child a { float:right }
+.banner_plane{ margin-bottom:5px; background:-webkit-gradient(linear, left top, left bottom, from(#eeeeee), to(#cccccc)); padding:5px }
+/*弹出层的内容样式*/
+.pop_title{ margin:1px 3px; background:#2673C4; color:#FFF; text-align:center; padding:5px; border-radius:3px }
+.pop_title span{ background:#68af02; color:#FFFFFF; display:none; width:60px; padding-left:14px; padding-right:14px }
+.pop_title label{ float:right; margin-right:6px; cursor:pointer }
+/*用于存空白列表的div*/
+.list_field{ width:99%; height:64px; border:1px solid; padding:3px }
+/*商品名下拉框*/
+select[name="goods_id"] { width:229px }
+p.right_btn{ padding-right:6px; float:right }
+#pop_alarm{ float:left; clear:both }
+#recycle { position:fixed; width:0px; right:0; bottom:20px; box-shadow:1px 1px 1px; height:200px }
+#recycle h3 { margin:1px; padding:1px; width:160px; overflow:hidden; background:#5779BD; color:#fff }
+#recycle h3 label { width:inherit; font-size:12px; overflow:hidden }
+#recycle ul { height:135px; padding:5px; margin:0; position:absolute; width:160px; overflow:auto }
+#recycle ul li { min-width:70px; height:20px }
+#recycle ul li span { float:right; cursor:pointer }
+#recycle div { position:absolute; bottom:2px; background:#F1F1F1; width:165px; overflow:hidden }
+#recycle h3:first-child { width:20px; height:50px; position:absolute; left:-22px; top:75px; border-radius:5px 0 0 5px; text-align:center }
+.pointer { cursor:pointer }
+
+/* 顾客资料 */
+#data-users {font-size:14px}
+#data-users ul li {line-height:25px; height:30px}
+#data-users fieldset {width:750px}
+#data-users fieldset ul:first-child {border-bottom:1px dashed rgb(50,50,50); margin-bottom:10px; font-size:24px}
+#data-users fieldset ul:first-child li:last-child {font-size:14px}
+#data-users input[name='mobile_phone'],#data-users input[name='home_phone'] {width:150px}
+#data-users fieldset input[class='b_submit'] {float:right}
+#data-users fieldset ul:last-child li:last-child {vertical-align:top}
+
+#view_admin_cate #admin_list {border:1px solid #000; width:150px; height:400px; margin-top:12px; padding:5px; overflow-x:hidden; float:left}
+#view_admin_cate #admin_list li a {color:#192e32; text-decoration:none; font-size:14px; height:20px; line-height:20px}
+#view_admin_cate #admin_list li a:hover {color:#fff; background:#8f8aca}
+#rightShowArea {border:1px solid #000; float:left; min-width:830px; min-height:410px; margin-top:12px; margin-left:5px}
+
+input[name="order_source"] {display:inline !important; width:auto !important}

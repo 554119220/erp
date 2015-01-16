@@ -26,7 +26,6 @@ class IndexController extends PublicController {
 
         $Menu = D('Menu');
         $menuList = $Menu->menuList();
-
         $this->assign('nav_2nd', $menuList['nav_2nd'][$menuCode]);
         $this->assign('nav_3rd', $menuList['nav_3rd']);
         $this->assign('file_name', 'index');
@@ -63,14 +62,14 @@ class IndexController extends PublicController {
 
         }else{
             $whereGroup     = " group_id={$_SESSION['group_id']}";
-            $groupAdminList = D('Admin')->get_admin_list($whereGroup,'');   //小组成员 
+            $groupAdminList = D('Admin')->adminList($whereGroup,'');   //小组成员 
             $adminIdList    = get_admin_id_list($groupAdminList);
             $groupAdminList = implode(',',$adminIdList);
             $where          = " admin_id IN($groupAdminList)";
             $groupTodayOrderNum  = $mReport->get_order_report($where,$today,'admin_id');   //统计小组成员今天订单
             $groupMonthOrderNum  = $mReport->get_order_report($where,$month,'admin_id');   //统计小组成员当月订单
             $groupRanking   = $this->get_ranking($groupTodayOrderNum,$groupMonthOrderNum);
-            $roleAdminList  = D('Admin')->get_admin_list('','role');
+            $roleAdminList  = D('Admin')->adminList('','role');
             $adminIdList    = get_admin_id_list($roleAdminList);
             $roleAdminList  = implode(',',$adminIdList);
             $where          = " admin_id IN($roleAdminList)";

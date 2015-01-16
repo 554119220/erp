@@ -46,7 +46,7 @@ class UsersmanageController extends PublicController {
         $Page = new \Think\Page($count, 20);
         // 查询条件
         foreach ($map as $key=>$val) {
-            $Page->parameter .= "$key=".urlencode($val).'&';
+            $Page->parameter .= "$key=".urldecode($val).'&';
         }
 
         $User->first_row = $Page->firstRow;
@@ -168,6 +168,9 @@ class UsersmanageController extends PublicController {
         }
 
         if($item && !empty($keyword)){
+            if (stristr($keyword,'%')){
+                $keyword = urldecode($keyword);
+            }
             $where .= 1 == $item ? " AND m.card_number=$keyword" : " AND u.user_name LIKE '%$keyword%'";
             $condition['item']    = $item;
             $condition['keywork'] = $keyword;
@@ -396,6 +399,7 @@ class UsersmanageController extends PublicController {
             'f'=>$f,
             'net'=>$net,
         );
+
         if(!empty($user_name)) {
             $where .= " AND b.user_name LIKE '%$user_name%'";
             $parameter['user_name'] = $userName;
@@ -418,11 +422,17 @@ class UsersmanageController extends PublicController {
         $accountTypeList = D('Account')->accountType();
         $typeList        = D('Usersmanage')->blacklistType();
 
+        $Page = new Page($pageSize,$count);
+        foreach ($parameter as $key=>$val) {
+            $Page->parameter[$key] = urlencode($val);
+        }
+
         $this->assign('role_list',$roleList);
         $this->assign('blacklist',$blacklist);
         $this->assign('type',$type);
         $this->assign('status',$status);
         $this->assign('type_list',$typeList);
+        $this->assign('page',$Page->show());
 
         $this->assign('url',U('Home/Usersmanage/blacklist'));
         if($f){

@@ -1,0 +1,39 @@
+<table width="100%" cellpadding="0" cellspacing="0" border="0" class="wu_table_list rb_border wu_rb_border tr_hover">
+  <tr>
+    <th width="5%">序号</th>
+    <th width="8%">姓名</th>
+    <th width="13%">编号</th>
+    <th width="5%">性别</th>
+    <th width="15%">部门</th>
+    <th width="10%">岗位</th>
+    <!--<th width="13%">入职时长</th>-->
+    <th width="13%">入职时间</th>
+    <th width="5%">状态</th>
+    <th width="8%">员工类型</th>
+    <th width="29%">操作</th>
+  </tr>
+  {if $staff_list}
+  {foreach from=$staff_list item=val}
+  <tr>
+    <td>{$val.staff_id}</td>
+    <td>{$val.staff_name}</td>
+    <td>{$val.number}</td>
+    <td>{$val.sex}</td>
+    <td>{$val.role_name}</td>
+    <td>{$val.job_title}</td>
+    <!--<td>{$val.joined_long}</td>-->
+    <td>{$val.joined_date}</td>
+    <td>{$val.status}</td>
+    <td>{$val.type}</td>
+    <td>
+      <a class="btn_new" {if !$staffListUrl}target="_blank"{/if} href="{$archivesUrl}/staff_id/{$val.staff_id}/tp/true">查看</a>|&nbsp; 
+      <a class="btn_new" {if !$staffListUrl}target="_blank"{/if} href="{$archivesPrint}/staff_id/{$val.staff_id}/tp/true">打印</a>|&nbsp; 
+      <a class="btn_new" {if !$staffListUrl}target="_blank"{/if} href="{$editUrl}/staff_id/{$val.staff_id}/tp/true">编辑</a>
+    </td>
+  </tr>
+  {/foreach}
+  {else}
+  <td colspan="10">没有员工记录</td>
+  {/if}
+</table>
+<div class="bottom_tip page" id="pageDiv"> {$page} </div>

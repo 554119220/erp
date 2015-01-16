@@ -1,0 +1,8 @@
+#staff table tbody tr td,#staff table tbody tr th{padding-left:3px;}
+#staff table tr td,#staff table tr th{border:1px solid #000}
+#staff table tbody tr td{text-align:center}
+#staff table tr td[id=tdPhoto]{padding-left:0px}
+#staff img[class=avator]{display: block; width: 140px; height: 155px;}
+#staff tfoot td p[class=text]{text-align:left;margin-left:75px;}
+#staff tfoot td[class=inscribe]{text-align:right;padding-right:35px;height:100px;}
+#staff p[class=foot]{text-align:right;padding-right:10px;line-height:25px;font-size:12px;margin-top:180px;}

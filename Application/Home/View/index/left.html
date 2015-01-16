@@ -4,7 +4,7 @@
     {foreach from=$nav_3rd key=e item=l}
     {if $a.action eq $e}
     {foreach from=$l item=t name=index}
-    <li><a href="http://localhost/thinkphp/index.php/Home/{$a.action|replace:'_':''}/{$t.action|replace:'_':''}">{$t.label}</a></li>
+    <li><a href="http://localhost/thinkphp/index.php/Home/{$a.action|replace:'_':''}/{$t.action|replace:'_':''}" title="{$t.label}">{$t.label}</a></li>
     {if $smarty.foreach.index.iteration%3 eq 0}
     {/if}
     {/foreach}

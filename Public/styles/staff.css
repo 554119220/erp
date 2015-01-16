@@ -1,0 +1,53 @@
+/* 员工档案  表格 */
+* {margin:0; padding:0}
+body {width:100%; overflow:auto;height:100%;}
+th,td{font-style:normal;font-weight:normal;}
+#staff {width:740px; margin:20px auto; padding:5px 5px}
+#staff table {border:1px solid skyblue;border-collapse:collapse;}
+#staff table tr td, #staff table tr th {border:1px solid skyblue}
+#staff table thead td {font-size:22px; font-weight:bolder; height:40px; padding-top:10px; padding-left:265px}
+#staff table thead td h6 {float:right; padding-top:20px}
+#staff tbody tr {height:25px}
+#staff tbody tr th {width:80px;font-weight:bold}
+#staff tbody tr td {width:100px; height:25px; background:#fff}
+#staff tbody tr td[rowspan='6'] {width:140px; text-align:center; font-size:14px; font-weight:bold}
+#staff table tbody td input[name='stature'] { background: url(../images/stature.jpg); }
+#staff input[type='text'], #staff input[type='file'],#staff input[type='date'] {border:0; padding:0; margin:0; height:100%; width:100%}
+#staff textarea {margin:0;padding:0;border:0;height:100%;width:100%;}
+#staff input[type='text']{text-align:center;}
+#staff table tbody td input[name='stature']{background:url(../images/stature.jpg)}
+#staff select {margin:0; padding:0; width:100%; height:100%; line-height:100%;border:0px;}
+/*#staff input[name='sex'] {margin-top:5px}*/
+#staff label {vertical-align:baseline;cursor:pointer;}
+#staff input[name='sex'] {vertical-align:bottom}
+#staff td[class='notice'] {font-size:13px; font-weight:bolder;color:#E82020;}
+
+/* datePicker */
+.datePicker {background:#fff url(../images/datePicker.gif) no-repeat right}
+
+/* 毕业证等证件上传 */
+#staff table tfoot:last-child {text-align:right}
+#staff input[type='submit'], #staff input[type='reset'] {height:28px; width:96px; font-size:14px; padding:4px; margin:5px;cursor:pointer;}
+/* 照片 */
+#staff label[for='avator'] {padding-top:45%; pointer:cursor; height:100%; display:block}
+#staff input[name='avator'] {display:none}
+/* 修正 区级行政地址 的隐藏*/
+#staff #selDistricts {display:block !important}
+/* 优化毕业选项 */
+#staff select[name='graduater[]'] {}
+#staff .address {width:100px;float:left;}
+#staff .address select{width:80px;height:100%;border:0px;}
+#staff .address input[type='text']{width:195px;height:100%;border:0px;margin-left:3px;padding:3px; }
+#staff textarea[name="position[]"]{margin-top: 0px;resize:none; margin-bottom: 0px; height: 50px !important;width:90%;padding:5px;}
+/* 消息提示 */
+.hide {display:none}
+.show {display:block}
+#msg {background:#ffffff; position:absolute; min-width:30%; min-height:100px; text-align:center; border:1px solid rgb(87,121,189); border-radius:5px; z-index:1000; padding:5px}
+#msg h3 {float:left; width:100%; position:relative; background:rgba(82,143,208,1); text-align:left; color:rgb(255,255,255); border-radius:2px; height:27px; line-height:27px; text-indent:0.5em}
+#msg p {clear:both; color:rgb(63,77,105); font-size:18px; font-weight:bolder; margin:0; padding:5px 0 0 10px; text-align:left}
+#msgBtn {float:right; margin:0 7px 7px 0; color:#fff; font-weight:bolder;padding:2px 10px; height:30px; border-radius:5px; cursor:pointer; background:-webkit-gradient(linear,0 0,0 100%,from(rgb(7,65,124)),to(rgb(109,161,216)))}
+
+/*相片预览*/
+.rahmen {display:inline;margin-left:5px;float:left;}
+.rahmen img{display:block;border:1px solid #999;cursor:pointer;}
+.rahmen span{cursor:pointer;font-size:12px;padding-left:40%;color:#0F7EAE;}
