@@ -1,0 +1,98 @@
+{$header}
+{$nav}
+<div class="pd12px">
+  <div>
+    <form action="{$url}/commissionRule/" name="ruleForm" >
+      <table style="width:100%;" class="tool-table">
+        <tr>
+          <td style="font-size:16px;">提成规则列表</td>
+          <td width="8px;"></td>
+          <td>
+            <select name="role_id">
+              <option value="0">部门</option>
+              {foreach from=$role_list item=val}
+              <option value="{$val.role_id}">{$val.role_name}</option>
+              {/foreach}
+            </select>
+          </td>
+          <td>
+            <select name="group_id">
+              <option value="0">小组</option>
+              {foreach from=$group_list key=k item=val}
+              <option value="{$k}">{$val}</option>
+              {/foreach}
+            </select>
+          </td>
+          <td>
+            <select name="staff_id">
+              <option value="0">员工</option>
+              {foreach from=$staff_list item=val}
+              <option value="{$val.staff_id}">{$val.staff_name}</option>
+              {/foreach}
+            </select>
+          </td>
+          {foreach from=$assignParameter key=ke item=val}
+          <td>
+            <select name="{$ke}">
+              {foreach from=$val key=k item=v}
+              <option value="{$k}">{$v}</option>
+              {/foreach}
+            </select>
+          </td>
+          {/foreach}
+          <td>
+            <button type="submit">搜索</button>
+          </td>
+        </table>
+      </tr>
+    </form>
+  </div>
+  <div id="source">
+    <table class="table gridtable" >
+      <tr>
+        <th width="12%">参与者</th>
+        <th width="10%">备注</th>
+        <th width="5%">保底</th>
+        <th width="10%">购买平台</th>
+        <th width="9%">配送方式</th>
+        <th width="8%">基数</th>
+        <th width="6%">类型</th>
+        <th width="8%">下限</th>
+        <th width="8%">上限</th>
+        <th width="6%">比例</th>
+        <th width="8%">添加人</th>
+        <th width="10%">添加时间</th>
+        <th width="10%">操作</th>
+      </tr>
+      {if $commission_rule}
+      {foreach from=$commission_rule item=val name=i}
+      <tr>
+        <td>
+          {foreach from=$val.participant_name item=p} {$p} {/foreach}
+        </td>
+        <td>{$val.rule_name}</td>
+        <td>{$val.base_sales}</td>
+        <td>{$val.platform}</td>
+        <td>{$val.shipping_name}</td>
+        <td>{$val.cardinality}</td>
+        <td>{$val.proportion_type}</td>
+        <td>{$val.min_sales}</td>
+        <td>{$val.max_sales}</td>
+        <td>{$val.commission}</td>
+        <td>{$val.add_admin}</td>
+        <td>{$val.add_time}</td>
+        <td>
+          <input type="button" class="btn-link" value="修改"
+          onclick="editCommissionRule({$val.rule_id})"/>
+        </td>
+      </tr>
+      {/foreach}
+      {else}
+      <tr>
+        <td colspan="13">没有设置提成规则</td>
+      </tr>
+      {/if}
+    </table>
+  </div>
+</div>
+{$footer}

@@ -1,0 +1,12 @@
+{$header}
+{$nav}
+<div class="pd12px" >
+  <table class="table gridtable">
+    <tr>
+      {foreach from=$item_list item=val}
+      <th>{$val.item_name}</th>
+      {/foreach}
+    </tr>
+  </table>
+</div>
+{$footer}

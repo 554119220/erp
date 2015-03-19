@@ -28,7 +28,7 @@ class CommonModel extends PublicModel{
      * @return array 
      */
     public function shipping() {
-        return M('shipping')->where()->getField();
+        return M('shipping')->where()->getField('shipping_id,shipping_name');
     }   
 }
 

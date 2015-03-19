@@ -1,0 +1,116 @@
+.erp-pane{border-bottom:1px solid #ccc;}
+.erp-table th {border:1px solid #000}
+.erp-table th {background:#ccc}
+.erp-table td {line-height:33px;}
+.erp-table tr:nth-child(even) { background: #f8f8f8;}
+.erp-table tr:hover { background: #ddd;}
+.erp-table {width:100%}
+
+/*公用*/
+.wd750{width:750px;}
+.wd850{width:850px;}
+.pd12px{padding:12px;}
+.unresize{resize:none}
+.red{color:red}
+.lf{float:left}
+font.red{margin-left:5px;color:red;}
+span.remind,.remind{color:#777}
+input[type=number].number{width:60px;}
+
+/*存放多选*/
+.item-div label{float:left;cursor:pointer;margin:3px;font-weight:normal;color:#777}
+.item-div label:hover{color:#000}
+
+/*副工具栏*/
+div.panel-div label{font-weight:normal;cursor:pointer;}
+
+.item-div{border:1px solid #ccc;min-height:64px;margin-top:3px;}
+
+/*表格表单*/
+table.form th,table.form td{font-weight:normal;padding:6px;}
+table.form th{width:100px;text-align:right;}
+table.form tr{border-right:1px solid #ccc; border-left:1px solid #ccc;border-bottom:1px solid #ccc;}
+table.form caption,caption.title{background:#ccc;padding-left:6px;color:#3C3B3B}
+table{width:750px;}
+table.form{font-weight:normal;}
+table.form label{font-weight:normal;cursor:pointer;}
+table.form td select{height:26px;}
+
+table.form table{width:100%;}
+table.form table th,table.form td,table.form table tr{border:0px;}
+table.form table{width:100%;}
+table.form table{width:100%;}
+
+/*表格表单,铺满表格*/
+.table-form select,.table-form textarea{width:100%;border:0px;height:100%}
+.table-form input[type=text],.table-form input[type=number]{width:100%;border:0px;height:100%}
+.table-form textarea{width:100%;height:100%;}
+.table-form input[type=submit]{height:28px;width:96px;font-size:14px;padding:4px;margin:5px;cursor:pointer;}
+.table-form label{font-weight:normal;cursor:pointer;}
+.table-form td,.table-form th,.tabel-form td span{font-weight:normal;}
+.table-form th{width:100px;text-align:center}
+.table-form td{width:80px;text-align:center}
+.table-form td.item{width:60px;} 
+.table-form td,.table-form th{border:1px solid #999}
+.table-form table{border-collapse:collapse;border:1px solid #999;}
+.table-form td input[disabled=true]{background:transparent;}
+.single th{border-right:1px solid #ccc}
+.bigform th,.bigform td{height:36px;} 
+
+/*表格表单非铺满*/
+.tr-form{width:100%}
+.tr-form th{width:10%;text-align:right;padding-right:6px;}
+.tr-form td{width:20%;}
+.tr-form td input[type=text],.tr-form td input[type=number],.tr-form td select{width:100%;height:100%;}
+.tr-form td textarea{width:100%;height:100%;resize:none;}
+.tr-form label{font-weight:normal;}
+
+/*表格样式*/
+table.gridtable caption.title{
+background: #F5F5F5;
+padding-left: 6px;
+color: #4C4747;
+border-bottom: 1px solid #ccc;
+font-weight: bold;
+}
+table.gridtable th {
+  border-width: 1px;
+  /*color:#767676;*/
+  padding: 6px;
+  border-style: solid;
+  border-color: #ccc;
+  background-color: #dedede;
+  font-weight:normal;
+}
+table.gridtable td {
+  border-width: 1px;
+  padding-left: 4px;
+  border-style: solid;
+  border-color: #ccc;
+  background-color: #ffffff;
+}
+/*================================*/
+
+/*bootstrap 复杂表格*/
+.bootstrap-table-title{float:left;line-height:2em;font-size:24px;}
+.th-inner{background:#dedede;}
+
+.tool-table input,.tool-table select{height:100%;width:90%}
+.tool-table select{height:28px;}
+.tool-table{margin-bottom:3px;}
+.tool-table td.title{font-size:16px;}
+.tool-table td.caption{font-size:24px;}
+
+/*span按钮*/
+.breadcrumb li{width:118px;}
+.breadcrumb li span{cursor:pointer;color:#428bca}
+.breadcrumb li span:hover{text-decoration:underline}
+
+/*表格中的操作按钮*/
+.link-btn{color:#428bca;cursor:pointer;border:0px;background:transparent;display:inline;
+  margin-left:4px;
+}
+.link-btn:hover{text-decoration:underline}
+
+/*模态框表格*/
+.modal-body form table tr{border-top:1px solid #ccc};

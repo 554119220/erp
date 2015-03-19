@@ -209,7 +209,7 @@ class UsersmanageController extends PublicController {
             }
         }
 
-        $this->assign('url',U('vipList'));
+        $this->assign('url',U('home/usersmanage/vipList','',''));
         $this->assign('count',$count);
         $this->assign('page',$Page->show());
         $this->assign('sort_type', $sort);

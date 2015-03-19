@@ -33,8 +33,24 @@ class AdminModel extends Model{
                 return $adminList;
             }
         }
-        $where .= ' AND status>0 AND stats>0 AND user_id<>74';
+        $where .= ' AND status>0 AND stats>0 AND user_id<>74 AND freeze=0 ';
         $adminList = M('admin_user')->field('user_id,user_name')->where($where)->select();
         return $adminList;
+    }
+
+    /*分组的管理员列表*/
+    public function groupAdminList(){
+        $where = 'status>0 AND stats>0 AND user_id<>74 AND freeze=0 ';
+        $adminList = M('admin_user')->where($where)->field('user_id,role_id,user_name')->select();
+        $roleList = M('role')->field('role_id,role_name')->select();
+        $roleList[] = array('role_id'=>0,'role_name'=>'未分配部门');
+        foreach($roleList as $key=>&$role){
+            foreach($adminList as &$admin){
+                if ($role['role_id'] == $admin['role_id']) {
+                    $roleList[$key]['admin_list'][] = $admin;
+                }
+            }
+        }
+        return $roleList;
     }
 }

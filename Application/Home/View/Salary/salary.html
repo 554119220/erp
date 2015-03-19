@@ -1,11 +1,13 @@
+{$header}
+{$nav}
 <div id="salary">
   <br />
   <div style="text-align:center;font-size:24px;font-weight:bold">
-    康健人生{$date}薪资相关信息
+    康健人生薪资记录
   </div>
   <div class="list_panel">
     <form action="{$searchUrl}" name="monthForm">
-      月份: <input name="month" type="text" onClick="WdatePicker()"/>
+      月份: <input name="month" type="text" placeholder="{$smarty.now|date_format:"%Y%m"}"/>
       部门: <select name="role">
         <option value="0">部门</option>
         {foreach from=$role_list item=val}
@@ -14,9 +16,6 @@
       </select>
       员工: <input type="text" name="staff_name" value=""/>
       <input type="submit" value="搜索" class="b_submit"/>
-    <span class="fright">
-     <input class="btn_new" type="button" onclick="siteCommission()" value="提成系数设置"/> 
-    </span>
     </form>
   </div>
   <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -25,7 +24,7 @@
       <th rowspan="2">姓名</th> 
       <th rowspan="2">基本工资</th> 
       <th rowspan="2">岗位补贴</th> 
-      <th rowspan="2">客服等级</th> 
+      <th rowspan="2">职位级别</th> 
       <th rowspan="2">出勤</th> 
       <th rowspan="2">扣除请假</th> 
       <th rowspan="2">全勤奖</th> 
@@ -44,28 +43,31 @@
     </tr>
     {if $salary}
     {foreach from=$salary item=val name=i}
-    <td>{$smarty.foreach.i.iteration}</td>
-    <td>{$val.staff_name}</td>
-    <td>{$val.base_salary}</td>
-    <td>{$val.station_allowance}</td>
-    <td>{$val.position_rank}</td>
-    <td>{$val.work_everyday}</td>
-    <td>{$val.decut_vacat}</td>
-    <td>{$val.attendance}</td>
-    <td>{$val.commission}</td>
-    <td>{$val.dormitory}</td>
-    <td>{$val.social_security}</td>
-    <td>{$val.ot_salary}</td>
-    <td>{$val.sales}</td>
-    <td>{$val.carriage}</td>
-    <td>{$val.actual_salary}</td>
-    <td>{$val.actual_commission}</td>
-    <td>{$val.summation}</td>
+    <tr>
+      <td>{$smarty.foreach.i.iteration}</td>
+      <td>{$val.staff_name}</td>
+      <td>{$val.base_salary}</td>
+      <td>{$val.station_allowance}</td>
+      <td>{$val.position_rank}</td>
+      <td>{$val.work_everyday}</td>
+      <td>{$val.decut_vacat}</td>
+      <td>{$val.attendance}</td>
+      <td>{$val.commission}</td>
+      <td>{$val.dormitory}</td>
+      <td>{$val.social_security}</td>
+      <td>{$val.ot_salary}</td>
+      <td>{$val.sales}</td>
+      <td>{$val.carriage}</td>
+      <td>{$val.actual_salary}</td>
+      <td>{$val.actual_commission}</td>
+      <td>{$val.summation}</td>
+    </tr>
     {/foreach}
     {else}
     <tr>
-      <td colspan="14"></td>
+      <td colspan="17">没有记录</td>
     </tr>
     {/if}
   </table>
 </div>
+{$footer}

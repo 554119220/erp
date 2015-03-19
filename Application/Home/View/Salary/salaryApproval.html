@@ -1,0 +1,80 @@
+{$header}
+{$nav}
+<div class="wd750 pd12px">
+  <div>
+    <form name="addForm" id="addForm" action="{$url}/addSalaryApproval" method="POST">
+      <table class="form single" style="width:100%">
+        <caption>工资审批设置 </caption>
+
+        <tr>
+          <th>部门</th>
+          <td>
+            {html_options name=role_id options=$role_list selected=1}
+          </td>
+          <td>
+            <span class="remind">该部门下的所有员工工资都由审批人审批</span>
+          </td>
+        </tr>
+        <tr>
+          <th width="10%">审批人</th>
+          <td width="5%">
+            <select name="admin_id" style="width:250px;" id="dept" class="dept_select"> 
+              {foreach from=$admin_list item=val}
+              <optgroup label="{$val.role_name}">
+                {foreach from=$val.admin_list item=v}
+                <option value="{$v.user_id}">{$v.user_name}</option>
+                {/foreach}
+              </optgroup>
+              {/foreach}
+            </select>
+          </td>
+          <td style="text-align:left;"></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td colspan="2">
+            <input type="submit" class="btn btn-primary btn-small" value="添加" />
+          </td>
+        </tr>
+      </table>
+    </form>
+    <form id="editForm" action="editSalaryApproval()"></form>
+    <table class="table-bordered gridtable erp-table">
+      <caption>工资审批设置</caption>
+      <tr>
+        <th width="10%">部门</th>
+        <th width="10%">审批人</th>
+        <th width="10%">添加时间</th>
+        <th width="10%">操作</th>
+      </tr>
+      {if $approval_list}
+      {foreach from=$approval_list item=val}
+      <tr>
+        <td>{$val.role_name}</td>
+        <td>{$val.admin_name}</td>
+        <td>{$val.add_time}</td>
+        <td>
+          <button class="btn btn-link" onclick="editSalaryApprovalForm({$val.approval_id})"
+            data-toggle="modal" 
+            data-target="#myModal"
+            >修改</button>
+          <button class="btn btn-link" 
+            href="{$url}/delSalaryApproval/item_id/{$val.approval_id}" onclick="delSalaryApproval()">
+            删除</button>
+        </td>
+      </tr>
+      {/foreach}
+      {else}
+      <tr>
+        <td colspan="5">还没设置工资审批人~</td>
+      </tr>
+      {/if}
+    </table>
+  </div>
+</div>
+{$footer}
+<script language="javascript" type="text/javascript">
+  $(function(){
+      $('.dept_select').chosen();
+      });
+</script>

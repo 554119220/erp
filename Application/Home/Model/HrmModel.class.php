@@ -164,15 +164,47 @@ class HrmModel extends PublicModel{
         return true;
     }
 
+    /*用于表单员工列表*/
+    public function staffListSelect($group=1,$part=0,$where='',$field=''){
+        $field .= 'staff_id,staff_name';
+        if ($where) { $where .= ' AND status=2'; }else{ $where = 'status=2'; }
+        if(1 == $part){
+            return M('oa_staff_records')->where($where)
+                ->order('convert(staff_name using gbk) ASC')
+                ->getField($field);
+            exit;
+        }
+
+        if ($group) {
+            $staffList = M('oa_staff_records')->where($where)
+                ->field($field.',role_id')
+                ->order('convert(staff_name using gbk) ASC')
+                ->select();
+            $roleList = M('role')->field('role_id,role_name')->select();
+            $roleList[] = array('role_id'=>0,'role_name'=>'未分配部门');
+            foreach($roleList as $key=>&$role){
+                foreach($staffList as &$staff){
+                    if ($role['role_id'] == $staff['role_id']) {
+                        $roleList[$key]['staff_list'][] = $staff;
+                    }
+                }
+            }
+            return $roleList;
+        }else{
+            return M('oa_staff_records')->field($field)->where($where)
+                ->order('convert(staff_name using gbk) ASC')->select();
+        }
+    }
+
     //员工列表
     public function staffList($where,$page){
         $fields = 's.staff_id,concat(s.greater,s.date_mark,s.staff_id) number,s.staff_name,s.sex,s.status,s.type,s.job_title,joined_date,r.role_name';
         $staffList = M('oa_staff_records')->alias('s')
             ->join(array(' LEFT JOIN __ADMIN_USER__ a ON a.user_id=s.user_id',
-            ' LEFT JOIN __ROLE__ r ON r.role_id=s.branch_id'))
-            ->field($fields)
-            ->where($where)->page($page)->order('joined_date DESC')
-            ->select();
+                ' LEFT JOIN __ROLE__ r ON r.role_id=s.branch_id'))
+                ->field($fields)
+                ->where($where)->page($page)->order('joined_date DESC')
+                ->select();
         if ($staffList) {
             foreach ($staffList as &$val) {
                 $val['joined_date'] = date('Y-m-d',$val['joined_date']);
@@ -225,9 +257,18 @@ class HrmModel extends PublicModel{
         return M('region')->where("region_id=$regionId")->getField('region_name');
     }
 
-    //提成系数列表
-    public function commissionList(){
-        return M('oa_commission')->select();
+    //提成系数模块列表
+    public function commissionTemplet($where){
+        $fields = "c.commission_id,concat(c.min_sales,'--',c.max_sales) increase,p.pay_name,".
+            "s.shipping_name,r.role_name as platform,c.commission,c.base_sales";
+        $res = M('oa_commission')->alias('c')
+            ->join(array('left join __SHIPPING__ s ON s.shipping_id=c.shipping',
+                'left join __PAYMENT__ p ON p.pay_id=c.payment',
+                'left join __ROLE__ r ON r.role_id=c.platform',
+            ))
+            ->field($fields)->where($where)->order('c.add_time DESC')->select();
+
+        return $res;
     }
 
     //修改人事档案
@@ -235,6 +276,27 @@ class HrmModel extends PublicModel{
         return M('oa_staff_records')->where("staff_id=$staffId")->save($data);
     }
 
+    //只查询staff_name,staff_id
+    public function simpleStaffInfo($where='',$change=false){
+        if ($change) {
+            $res = M('oa_staff_records')->alias('s')
+                ->join(array('LEFT JOIN __ROLE__ r ON s.branch_id=r.role_id'))
+                ->field('s.staff_id id,s.staff_name name,r.role_name')
+                ->where($where)->select();
+            if ($res) {
+                foreach($res as &$val){
+                   if ($val['role_name']) {
+                       $val['name'] .= "({$val['role_name']})";
+                   } 
+                }
+            }
+            return $res;
+        }else{
+            return M('oa_staff_records')->field('staff_id,staff_name')->where($where)->select();
+        }
+    }
+
+    /*清除数据*/
     public function truncateData($staffId,$table){
         if (M($table)->where("staff_id=$staffId")->count()) {
             return M($table)->where("staff_id=$staffId")->delete();
@@ -242,5 +304,36 @@ class HrmModel extends PublicModel{
             return true;
         }
     }
+
+    //查看提成设置
+    public function commission($where){ 
+        
+    }
+
+    //提成系统设置修改，更新
+    public function commissionControl($data,$action,$comId=0){
+        if ('save' == $action) {
+            return M('oa_commission')->where("commission_id=$comId")->save($data);
+        }elseif('add' == $action){
+            return M('oa_commission')->filter('strip_tags')->addAll($data,'');
+        }
+    }
+    //统计薪资列表记录数量
+    public function salaryCount($where=''){
+        return M('salary_records')->where($where)->count();
+    }
+    //薪资相关数据报表
+    public function salaryList($where=''){
+        return M('salary_records')->where($where)->select();
+    }
+    //员工职位级别列表
+    public function positionLevel($where=''){
+        return M('oa_position_level')->where($where)->order('level ASC')->select();
+    }
+    //添加，修改 职位级别
+    public function actPositionLevel($act){
+        return true;
+    }
 }
+
 ?>

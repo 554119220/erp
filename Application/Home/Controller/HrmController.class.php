@@ -371,5 +371,40 @@ class HrmController extends PublicController{
     function appraisal(){
 
     }
+
+    //搜索按员工名搜索，填充SELECT
+    function schStaff(){
+        $keyword = trim(I('get.keyword',''));
+        if (!empty($keyword)){
+            $where = "staff_name LIKE '%$keyword%'";
+            $res['list']   = D('Hrm')->simpleStaffInfo($where,true);
+            $res['target'] = 'staff_id';
+            $res['length'] = count($res['list']);
+        }
+        return $this->ajaxReturn($res);
+    }
+
+    /*员工职位级别*/
+    public function positionLevel(){
+        $act = I('b','view');
+        switch($act){
+        case 'view':
+            $this->assign('role',D('RoleManage')->roleList('','role_id,role_name'));
+            $this->assign('position_level',D('Hrm')->positionLevel());
+            $res['main'] = $this->fetch('positionLevel');
+            break;
+        }
+
+        return $this->ajaxReturn($res);
+    }
+
+    /*员工列表（搜索）*/
+    public function staffListForSelect(){
+        if ($_REQUEST['staff_name']) {
+            $staffName = mysql_real_escape_string($_REQUEST['staff_name']);
+            $where = " staff_name LIKE '%$staffName%'";
+        }
+        return $this->ajaxReturn(D('Hrm')->staffListSelect(false,true,$where),'JSON');
+    }
 }
 ?>

@@ -1,0 +1,64 @@
+{$header}
+{$nav}
+<div class="wd750 pd12px">
+  <form action="{$url}" method="POST" onsubmit="return validatValue(this)">
+    <table class="form single">
+      <caption>{$title}</caption>
+      <tr>
+        <th>类型</th>
+        <td>
+          <select name="type" required title="类型">
+            {foreach from=$typeList item=val}
+            <option value="{$val.type_id}">{$val.type_name}</option>
+            {/foreach}
+          </select>
+          <font class="red">*</font>
+        </td>
+      </tr>
+      <tr>
+        <th>审批人</th>
+        <td>
+          <input name="name" value="" onkeyup="checkZhValue(this)" datatype="Limit" min="1" max="50" msg="1~50字符" type="text" id="title" required>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <!--<input type="submit" name="submit" value="保存"/>-->
+          <button type="submit" class="btn btn-primary popover-show" 
+            data-toggle="popover" 
+            data-content="">
+            保存
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <table class="gridtable">
+    <caption class='title'>请假审批人列表</caption> 
+    <tr>
+      <th width="2%">序号</th>
+      <th width="10%">分类</th>
+      <th width="10%">审批人</th>
+      <th width="15%">操作</th>
+    </tr>
+    {if $leaveExamine}
+    {foreach from=$typeList item=val name=i}
+    <tr>
+      <td>{$smarty.foreach.i.iteration}</td>
+      <td>{$val.type_name}</td>
+      <td>{$val.admin_name}</td>
+      <td>
+        <input type="button" value="修改" onclick="controlVacate({$val.approve_id},'edit')"/>
+        <input type="button" value="删除" onclick="controlVacate({$val.approve_id},'del')"/>
+      </td>
+    </tr>
+    {/foreach}
+    {else}
+    <tr>
+      <td colspan="4">人事部忙碌中，暂时忘了添加记录</td>
+    </tr>
+    {/if}
+  </table>
+</div>
+{$footer}

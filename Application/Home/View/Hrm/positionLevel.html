@@ -1,0 +1,54 @@
+<br />
+<h3>职位级别</h3>
+<div class="wd750 bgfff">
+  <form name="position_form" action="{$editUrl}" method="POST">
+  <table>
+  	<tr>
+  		<th>部门</th>
+      <td>
+        <select name="role">
+          <option value="0">全部</option>
+          {foreach from=$role item=val}
+          <option value="{$val.role_id}">{$val.role_name}</option>
+          {/foreach}
+        </select>
+      </td>
+  		<td>
+        <input type="text" name="level_name" value="" required />
+      </td>
+      <td>
+        <input type="submit" value="添加" class="b_submit"/>
+      </td>
+  	</tr>
+  </table>
+  </form>
+</div>
+<div>
+  <select id="role" onchange="">
+    <option value="0">全部</option>
+    {foreach from=$role item=val}
+    {/foreach}
+  </select>
+  <div>
+    <table cellpadding="0" cellspacing="0" border="0" width="60%">
+      <caption>{$le.role_name}</caption>
+      <tr>
+        <th>级别</th>
+        <th>职称</th>
+        <th>描述</th>
+        <th>操作</th>
+      </tr>
+      {foreach from=$le.list item=val}
+      <tr>
+        <td>{$val.level}</td>
+        <td>{$val.level_name}</td>
+        <td>{$val.desc}</td>
+        <td>
+          <input type="button" value="删除"/>
+          <input type="button" value="删除"/>
+        </td>
+      </tr>
+      {/foreach}
+    </table>
+  </div>
+</div>

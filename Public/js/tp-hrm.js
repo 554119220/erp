@@ -1,14 +1,4 @@
-//
-//提成系数设置
 var tpUrl = '../../thinkphp/index.php?g=home'; //Tp 路径 
-function siteCommission(){
-  //var tpUrl = '../../thinkphp/index.php?g=home'; //Tp 路径 
-  Ajax.call(tpUrl+'&c=hrm&a=siteCommission','view='+true,fullSearchResponse,'GET','JSON');
-}
-
-function siteCommissionResp(res){
-}
-
 //搜索人事档案
 function searchStaff(obj){
   var staffName = obj.elements['staff_name'].value;

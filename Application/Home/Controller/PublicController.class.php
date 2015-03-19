@@ -13,6 +13,8 @@ class PublicController extends Controller {
     private $authorise = array ('all-', 'section-', 'group-', 'personage-');
 
     protected $conditions = array();
+    
+    protected $msg = array('req_msg' => true, 'timeout' => 2000, 'message' => '', 'redirectURL' => '');
 
     /**
      * @param mixed 
@@ -30,7 +32,6 @@ class PublicController extends Controller {
         $actionList = array_filter($actionList);
         $this->actionList = preg_replace('/_/', '', implode(',', $actionList));
         $this->checkAuthorise();
-        $this->initConstant();
     }
 
     // 全部             all
@@ -51,8 +52,7 @@ class PublicController extends Controller {
                 return;
             }
             foreach ($this->authorise as $key=>$val) {
-                //echo "$val$1",$_SERVER['PATH_INFO'].',';exit;
-                if (strpos(',,'.$this->actionList.',',','.preg_replace('/^\w+\/(\w+).*/',"$val$1",$_SERVER['PATH_INFO']).',')) {
+                if (strpos(',,'.$this->actionList.',',','.preg_replace('/^\w+\/(\w+).*/',"$val$1",strtolower($_SERVER['PATH_INFO'])).',')) {
                     $code = $val;
                     break;
                 }
@@ -69,12 +69,16 @@ class PublicController extends Controller {
                 break;
             case 'group-' :
                 $this->conditions['group_id'] = $this->groupId;
+                $this->conditions['role_id']  = $this->roleId;
                 break;
             case 'personage-' :
                 $this->conditions['admin_id'] = $this->adminId;
+                $this->conditions['group_id'] = $this->groupId;
+                $this->conditions['role_id']  = $this->roleId;
                 break;
             default :
-                $this->showMsg('对不起，您没有权限访问该页面');
+                $this->msg['message'] = '对不起，您没有权限访问该页面';
+                $this->showMsg();
                 return false;
             }
         }
@@ -137,7 +141,7 @@ class PublicController extends Controller {
             'regions' => $this->regionList(),
         );
         echo $this->ajaxReturn($result, 'JSON');
-        return;
+        return false;
     }
 
     /**
@@ -157,24 +161,15 @@ class PublicController extends Controller {
      * @return void
      */
     protected function showMsg($message, $redirectURL = '', $timeout = 2000) {
-        $msg = array (
-            'req_msg'     => true,
-            'timeout'     => $timeout,
-            'message'     => $message,
-            'redirectURL' => $redirectURL,
-        );
-        $this->ajaxReturn($msg, 'JSON');
-        return;
+        $this->ajaxReturn($$this->msg, 'JSON');
+	return;
     }
 
-    function initConstant(){
-        define('SALE', '1,9,13,27,28,29');
-        define('OFFLINE_SALE', '1,9,27,28,29');
-        define('ONLINE_SALE', 13);
-        define('ONLINE_STORE', '2,6,7,10,12,14,15,16,17,18,21,22,24,25,26');
-        define('MEMBER_SALE', '9,27,28');
-        define('ZHONGLAONIAN_SALE', '1,29');
-        define('TAOBAO_STORE', '21,22,26');
-        define('FINANCE', 8);
+    /*完整页面*/
+    public function fullpage(){
+        $this->assign('publicUrl', __ROOT__.'/Public');
+        $this->assign('nav',$this->fetch('Public:nav'));
+        $this->assign('header',$this->fetch('Public:bheader'));
+        $this->assign('footer',$this->fetch('Public:bfooter'));       
     }
 }

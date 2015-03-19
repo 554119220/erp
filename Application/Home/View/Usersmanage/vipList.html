@@ -9,7 +9,7 @@
         <ul>
           {foreach from=$rank_list item=val name=i}
           <li type="{$rank_id}" {if $rank_id eq $val.rank_id}class="o_select"{/if}>
-          <span><a href="{$url}&rank_id={$val.rank_id}">{$val.rank_name}</a></span>
+          <span><a href="{$url}/rank_id/{$val.rank_id}">{$val.rank_name}</a></span>
           </li>
           {/foreach}
         </ul>

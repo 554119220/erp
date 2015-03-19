@@ -1,0 +1,104 @@
+<div>
+  <ol class="breadcrumb" id="breadcrumb" style="margin-bottom:0px;">
+    {foreach from=$role_list item=val name=i}
+    <li>
+    <span href="{$url}/commissionList/type/wait/role_id/{$val.role_id}/from/search"
+      {if $role_id eq $val.role_id}style="color:#099921"{/if}>{$val.role_name}</span>
+    </li>
+    {if $smarty.foreach.i.iteration%6 eq 0}<br />{/if} 
+    {/foreach}
+  </ol>
+</div>
+<table class="table gridtable">
+  <caption class="title">平台提成信息</caption>
+  <tr>
+    <th width="10%">销量总额</th>
+    <th width="10%">提成比例</th>
+    <th width="10%">计算公式</th>
+    <th width="10%">提成金额</th>
+  </tr>
+  {if $role_commission}
+  {foreach from=$role_commission item=val}
+  <tr>
+    <td>{$val.final_amount}</td>
+    <td>{$val.commission_proportion}</td>
+    <td>{$val.final_amount}*({$val.commission_proportion}/100)</td>
+    <td>{$val.commission}</td>
+  </tr>
+  {/foreach}
+  {else}
+  <tr>
+    <td colspan="5">没有记录</td>
+  </tr>
+  {/if}
+</table>
+<table class="table gridtable">
+  <tr>
+    <td colspan="9" class="remind">
+      * 如果没有设置个人的或者职位级别的提成规则，系统默认将平台的提成平均分配给每个员工
+    </td>
+  </tr>
+  <tr>
+    <th width="8%">提成者</th>
+    <th width="8%">提成金额</th>
+    <th width="8%">系数</th>
+    <th width="12%">添加时间</th>
+    <th width="10%">月销量总额</th>
+    <th width="15%">退货金额</th>
+    <th width="8%">订单数</th>
+    <th width="8%">审核进展</th>
+    <th width="10%">操作</th>
+  </tr>
+  {if $commission_list}
+  {foreach from=$commission_list item=val}
+  <!--<tr><td colspan="2">{$val.role_name}</td></tr>-->
+  <tr>
+    <td>{$val.staff_name}</td>
+    <!--<td>{$val.participant}</td>-->
+    <td>{$val.commission}</td>
+    <td>{$val.commission_proportion}%</td>
+    <td>{$val.add_time}</td>
+    <td>{$val.final_amount}</td>
+    <td>{$val.status}</td>
+    <td>{$val.order_amount}</td>
+    <td></td>
+    <!--<td>{$val.final_amount}*({$val.commission_proportion}/100)</td>-->
+    <td>
+      <input type="button" class="link-btn" value="标记已发"/>
+    </td>
+  </tr>
+  {/foreach}
+  <tr>
+    <td>统计</td>
+    <td colspan="8">{$role_commission_statistics}</td>
+  </tr>
+  {if $type eq 'wait'}
+  <tr><td colspan="9" style="text-align:right;">
+      <a href="{$saveUrl}" class="btn btn-primary">保存</a>
+  </td></tr>
+  {/if}
+  {else}
+  <tr><td colspan="9">没有提成记录</td></tr>
+  {/if}
+</table>
+{literal}
+<script language="javascript" type="text/javascript">
+  var olObj  = document.getElementById('breadcrumb');
+  aList     = olObj.getElementsByTagName('span');
+  for (var i = 0; i < aList.length; i++) {
+    aList[i].onclick = function(){
+      var url = this.getAttribute('href');
+      $.ajax({
+type:'get',
+async:'false',
+url:url,
+success:function(res){
+$('#commissionListRes').html(res.main);
+return false;
+},
+dataType:'JSON'
+});
+}
+}
+</script>
+{/literal}

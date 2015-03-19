@@ -1,0 +1,107 @@
+{$header}
+{$nav}
+<div class="wd750 pd12px">
+  <div>提成设置</div>
+  <div class="panel-div left">
+    {foreach from=$switch_tag key=k item=val name=i}
+    <label><input type="radio" name="nav_switch"
+      form="commissionForm" {if $smarty.foreach.i.index eq 0 }checked{/if}
+      value="{$k}"/ onclick="switchTag(this)" url="{$url}/switchParticipant"> {$val}</label>
+    {/foreach} | 
+    <select name="participantSel" style="width:168px;" onchange="addChecked(this)">
+      <option value="0">部门</option>
+      {foreach from=$data key=k item=val}
+      <option value="{$k}">{$val}</option>
+      {/foreach}
+    </select>
+  </div>
+  <div class="main lf">
+    <input type="hidden" name="url" value="{$url}"/>
+    <form name="commissionForm" id="commissionForm" action="{$url}/addCommissionRule" 
+      method="POST" onsubmit="return addCommissionRule($(this))">
+      <div class="item-div" id="participantField"></div>
+      <table class="form">
+        <caption>必填</caption>
+        <tr>
+          <th>职位级别：</th>
+          <td>
+            <select name="position_level">
+              <option value="0">职位级别</option>
+              {foreach from=$position_level item=val}
+              <option value="{$val.level_id}">{$val.level_name}</option>
+              {/foreach}
+            </select>
+          </td>
+          <th>保底限量：</th>
+          <td>
+            <input type="number" name="base_sales" value="0" min="0" required class="number"/>
+          </td>
+          <th>工龄大于</th>
+          <td>
+            <input type="number" name="work_age" value="0" class="number" min="0"/>
+          </td>
+          <th>规则名称：</th>
+          <td colspan="5"><input type="text" name="rule_name" value=""
+            placeholder="规则名称" onkeyup="this.value=this.value.replace(/(^\s+)|\s+$/g,'');"/>
+          </td>
+        </tr>
+      </table>
+      <table class="form">
+        <caption>提成基数</caption>
+        <tr>
+          {foreach from=$sort1 key=k item=val}
+          <td>
+            <label><input type="radio" name="sort1" value="{$k}"
+              {if $k eq 1}checked{/if} onclick="getCardinalityType(this)"/> {$val}</label>
+          </td>
+          {/foreach}
+        </tr>
+      </table>
+      <table class="form">
+        <caption>提成比例</caption>
+        <tr>
+          {foreach from=$sort2 key=k item=val name=i}
+          <td><label><input type="radio" name="sort2" value="{$k}"
+              {if $smarty.foreach.i.index eq 0}checked{/if} 
+              onclick="switchRatio($(this))"/> {$val}</label></td>
+          {/foreach}
+          <td width="60%">
+          </tr>
+          <tr id="identical">
+            <td>提成比例</td>
+            <td colspan="3">
+              <input type="text" name="identical_commission" value="" /> %
+            </td> 
+          </tr>
+          <tr id="product">
+            <td>提成比例</td>
+            <td colspan="3">
+              <input type="text" name="product_commission" value=""/> %
+            </td> 
+          </tr>
+          <tr id="cumulative">
+            <td colspan="4">
+              {foreach from=$cumulativeNum item=v}
+              <div style="margin-bottom:4px;">
+                <input type="number" name="min_sale[]" min="0" placeholder="销量下限"/>
+                <input type="number" name="max_sale[]" min="0" placeholder="销量上限"/>
+                <input type="number" name="commission[]" value="0"/> %
+              </div>
+              {/foreach}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <input type="submit" value="保存" class="btn btn-primary"/>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+{$footer}
+<script language="javascript" type="text/javascript">
+  $('#product').css('display','none');
+  $('#cumulative').css('display','none');
+</script>

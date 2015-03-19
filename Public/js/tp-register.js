@@ -99,7 +99,7 @@ function formValidation () {
   var birthday = new Date(theForm.elements['birthday'].value);
   var d = new Date();
   var age = d.getFullYear()-birthday.getFullYear()-((d.getMonth()<birthday.getMonth()|| d.getMonth()==birthday.getMonth() && d.getDate()<birthday.getDate())?1:0);
-  if (age < 18) {
+  if (age < 16) {
     msg.message = '请认真核实您的年龄，确保符合国家法律法规规定的工作年龄！';
     showMsg(msg);
     theForm.elements['birthday'].focus();

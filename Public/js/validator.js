@@ -360,3 +360,24 @@ function joinItem(ItemList)
   }
   return OptionList.join(",");
 }
+
+/*检查中文输入*/
+function checkZhValue(obj){
+  obj.value.replace(/[^\{\}\d\.a-zA-Z\+\-\*\/\$\(\)\u4e00-\u9fa5]/g,'');
+}
+
+/*验证表单
+ * wyh 
+ * */
+function validatValue(obj){
+  var elements = obj.elements;
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].value.replace(/[ ]/g,""); 
+    if ((elements[i].required && elements[i].value == 0) || elements[i].value == ''){
+      document.getElementById(elements[i].name).style.display = '';
+      return false;
+    }
+  }
+
+  return true;
+}

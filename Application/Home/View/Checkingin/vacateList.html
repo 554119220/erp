@@ -1,0 +1,127 @@
+{$header}
+{$nav}
+<!--标签切换-->
+<div id="resource" class="wd750 pd12px">
+  <div class="bootstrap-table-title">{$title} 
+    {if $late}
+    <input type="hidden" name="url" value="{$formUrl}"/>
+    <button class="btn btn-link" data-toggle="modal" 
+      data-target="#myModal">
+      登记迟到
+    </button>
+    {elseif $report}
+    <a class="btn btn-link" href="{$url}">统计考勤报表于结算工资</a>
+    {/if}
+  </div>
+  {if $report_checkingin}
+  <div style="padding-top:12px;float:right;">
+    <form action="{$url}/checkinginReport/act/search" method="post" >
+      <input type="text" name="report_time" {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM'})"{/literal} placeholder="月份" value="{$report_time}"/>
+      <input type="submit" value="搜索"/>
+      &nbsp;&nbsp;<a href="{$url}">返回考勤汇总</a>
+    </form>
+  </div>
+  <table class="table gridtable erp-table">
+    <tr>
+      <th width="10%">序号</th>
+      <th width="10%">姓名</th>
+      <th width="10%">出勤天数</th>
+      <th width="10%">缺勤天数</th>
+      <th width="10%">迟到次数</th>
+      <th width="10%">迟到扣款</th>
+    </tr>
+    {if $report_list}
+    {foreach from=$report_list item=v name=i}
+    <tr>
+      <td>{$smarty.foreach.i.iteration}</td>
+      <td>{$v.staff_name}</td>
+      <td>{$v.working_days}</td>
+      <td>{if $v.outworking_days}{$v.outworking_days}{else}0{/if}</td>
+      <td>{if $v.late_times}{$v.late_times}{else}0{/if}</td>
+      <td>{$v.dedcut_late}</td>
+    </tr>
+    {/foreach}
+    {else}
+    <tr><td colspan="6">没有记录</td></tr>
+    {/if}
+    <tr>
+      <td colspan="6" style="text-align:right;border:0px;">
+        <a href="{$saveUrl}" class="btn btn-primary">保存</a>
+      </td>
+    </tr>
+  </table>
+  {else}
+  <table data-toggle="table" data-url="{$dataUrl}" data-search="true" data-height="699" data-show-refresh="true" data-show-toggle="true" data-pagination="true">
+    <thead>
+      <tr>
+        <th data-field="staff_name">申请人</th>
+        <th data-field="type_name">类型</th>
+        <th data-field="from_to">起止时间</th>
+        <th data-field="date">时长</th>
+        <th data-field="reason">原因</th>
+        <th data-field="checker">审批人</th>
+      </tr>
+    </thead>
+  </table>
+  {/if}
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+          data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">迟到登记</h4>
+      </div>
+      <div class="modal-body">
+        <form id="form" action="{$url}/lateRecord" onsubmit="return lateRecord()">
+          <table class="form single" style="width:100%">
+            <tr>
+              <th>员工姓名</th>
+              <td>
+                <select name="staff_id">
+                  <option value="0">姓名</option>
+                  {foreach from=$staff_list key=k item=v}
+                  <option value="{$k}">{$v}</option>
+                  {/foreach}
+                </select> <b class="red">*</b>
+              </td>
+              <th>日期</th>
+              <td>
+                <input type="text" name="start_time" required
+                {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"{/literal}/>
+              </td>
+            </tr>
+            <tr>
+              <th>迟到时长</th>
+              <td style="width: 7%;">
+                <input type="number" name="date" required />
+              </td>
+              <td style="padding-left:12px;">
+                <label><input type="radio" name="dateType" value="2" checked/> 分</label>
+                <label><input type="radio" name="dateType" value="1"/> 时</label>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>原因</th>
+              <td colspan="3">
+                <textarea name="reason" style="width:449px;" required></textarea>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <input type="submit" class="btn btn-primary" form='form' value="提交"/>
+      </div>
+    </div>
+  </div>
+</div>
+{$footer}

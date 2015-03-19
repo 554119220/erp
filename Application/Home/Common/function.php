@@ -83,8 +83,3 @@ function admin_priv($priv_str, $msg_type='' , $msg_output=true) {
         return true;
     }
 }
-
-//地址
-function getRegions(){
-
-}

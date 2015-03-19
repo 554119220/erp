@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default" style="margin-bottom:0px;" role="navigation">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="#">{$title}</a>
+   </div>
+   <div>
+     <ul class="nav navbar-nav">
+       {foreach from=$navlist item=nav}
+       {if $nav.child}
+       <li class="dropdown {if $nav.action_code eq $act}active{/if}">
+       <a href="#" class="dropdown-toggle " data-toggle="dropdown">{$nav.label}<b class="caret"></b></a>
+       <ul class="dropdown-menu">
+         {foreach from=$nav.child item=child}
+         <li><a href="{$url}/{$child.action_code}">{$child.label}</a></li>
+         {/foreach}
+       </ul>
+       </li>
+       {else}
+       <li {if $nav.action_code eq $act}class="active"{/if}><a href="{$url}/{$nav.action_code}">{$nav.label}</a></li>
+       {/if}
+       {/foreach}
+     </ul>
+   </div>
+   </nav>

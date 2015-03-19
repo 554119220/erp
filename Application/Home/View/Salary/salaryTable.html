@@ -1,0 +1,25 @@
+{$header}
+{$nav}
+<div class="pd12px">
+  <div>
+    <form name="{$url}" method="POST">
+      <table class="tool-table" style="width:50%">
+        <tr>
+          <td>
+            <select name="salaryClass" onchange="switchSalaryClass(this)" url={$url}>
+              <option value="0">请选择工资套账</option>
+              {foreach from=$salaryClass item=val}
+              <option value="{$val.class_id}">{$val.class_name}</option>
+              {/foreach}
+            </select>
+          </td>
+          <td class="caption">编辑 {$date} 月工资表</td>
+        </tr> 
+      </table>
+    </form>
+  </div>
+  <div id="resource">
+    {$classTable}
+  </div>
+</div>
+{$footer}

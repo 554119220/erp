@@ -1,0 +1,92 @@
+{$header}
+{$nav}
+<div class="wd750 pd12px">
+  <div>
+    <form name="itemForm" action="{$url}/addAdjustSalary" method="POST">
+      <input type="hidden" name="url" value="{$url}"/>
+      <table class="form single" style="width:100%">
+        <caption>调薪设置</caption>
+        <tr>
+        	<th>部门  </th>
+          <td>
+            <select id="role_id" name="">
+              <option value="0">部门</option>
+              {foreach from=$role_list item=val}
+              <option value="{$val.role_id}">{$val.role_name}</option>
+              {/foreach}
+            </select> 当没有选择员工，系统会默认把整个部门员工的工资调整
+          </td>
+        </tr>
+        <tr>
+          <th width="10%">员工</th>
+          <td>
+            <select class="chosen-select" name="staff_id" data-placeholder="选择员工" 
+              onchange="getOriginalSalary(this.value)">
+              {foreach from=$staff_list item=val}
+              <option value="{$val.staff_id}">{$val.staff_name}</option>
+              {/foreach}
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>原工资</th>
+          <td><span id="original_salary">0</span></td>
+        </tr>
+        <tr>
+          <th>现工资</td>
+          <td><input type="number" name="salary" value="" required/></td>
+        </tr>
+        <tr>
+          <th>生效日期</th>
+          <td><input type="text" name="start_time" 
+            {literal}onfocus="WdatePicker({dateFmt:'yyyy-M-dd'})"{/literal}/></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <input type="submit" class="btn btn-primary btn-small" value="添加" />
+          </td>
+        </tr>
+      </table>
+    </form>
+    <table class="table-bordered gridtable erp-table">
+      <caption>调薪列表</caption>
+      <tr>
+        <th width="10%">员工</th>
+        <th width="10%">原薪水</th>
+        <th width="10%">现薪水</th>
+        <th width="12%">生效时间</th>
+        <th width="10%">添加人</th>
+        <th width="12%">添加时间</th>
+        <th width="10%">进度</th>
+        <th width="20%">操作</th>
+      </tr>
+      {if $adjustSalary}
+      {foreach from=$adjustSalary item=val}
+      <tr>
+        <td>{$val.staff_name}</td>
+        <td>{$val.original_salary}</td>
+        <td>{$val.salary}</td>
+        <td>{$val.start_time}</td>
+        <td>{$val.user_name}</td>
+        <td>{$val.add_time}</td>
+        <td>{$val.status}</td>
+        <td>
+          <button class="btn btn-link" onclick="editSalaryItem(this)">修改</button>
+          <a class="btn btn-link" href="{$url}/delSalaryItem/item_id/{$val.item_id}">删除</a>
+        </td>
+      </tr>
+      {/foreach}
+      {else}
+      <tr><td colspan="8">没有调薪记录</td></tr>
+      {/if}
+    </table>
+  </div>
+</div>
+<div class="bottom_tip page" id="pageDiv"> {$page} </div>
+{$footer}
+<script language="javascript" type="text/javascript">
+  $(function(){
+      $('.chosen-select').chosen();
+      });
+    </script>

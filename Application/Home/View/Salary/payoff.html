@@ -1,0 +1,54 @@
+{$header}
+{$nav}
+<div class="pd12px">
+  <div id="schedule">
+  </div>
+  <div>
+    <form name="{$url}" method="POST">
+      <table class="tool-table" style="width:80%">
+        <tr>
+          <td class="caption">{$title}</td>
+          <td>
+            <input type="text" name="yearMonth"
+             {literal}onfocus="WdatePicker({dateFmt:'yyyy-M'})"{/literal} placeholder="年月"/>
+          </td>
+          <td>
+            <select name="role_id" style="height:28px;">
+              <option value="0">选择部门</option>
+              {foreach from=$role_list item=val}
+              <option value="{$val.role_id}">{$val.role_name}</option>
+              {/foreach}
+            </select>
+          </td>
+          <td>
+           <select name="group_id">
+             <option value="0">请选择小组</option>
+           </select> 
+          </td>
+          <td>
+            <input type="text" name="staff_name" placeholder="员工姓名"/>
+          </td>
+          <td>
+           <input type="submit" value="搜索"/> 
+          </td>
+        </tr> 
+      </table>
+    </form>
+  </div>
+  <div id="resource">
+    <table class="table gridtable">
+      {foreach from=$item_list item=val}
+      <th>{$val.item_name}</th>
+      {/foreach}
+      <th>应发提成</th>
+      <th>实发提成</th>
+      <th>应发工资</th>
+      <th>应扣工发</th>
+      <th>实发工资</th>
+      {if $salary_list}
+      {else}
+      {/if}
+    </table>
+  </div>
+</div>
+{$footer}

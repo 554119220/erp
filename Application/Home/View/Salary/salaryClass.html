@@ -1,0 +1,113 @@
+{$header}
+{$nav}
+<div class="wd750 pd12px">
+  <div>
+    <form name="itemForm" action="{$url}/addSalaryClass" method="POST" onsubmit="return addSalaryClass(this)">
+      <table class="form single" style="width:100%">
+        <caption>工资套账设置</caption>
+        <tr>
+          <th width="10%">套账名称</th>
+          <td>
+            <input type="text" name="class_name" required {literal}onkeyup="$(this).val($.trim($(this).val()));"{/literal}/>
+          </td>
+        </tr>
+        <tr>
+        	<th>基本工资</th>
+        	<td><input type="number" name="base_salary" value="0" required /></td>
+        </tr>
+        <tr>
+          <th>工资项</th>
+          <td>
+            {foreach from=$item_list item=val}
+            <label>
+              <input type="checkbox" name="item_list[]"
+              value="{$val.item_id}" {if $val.editable eq 0}checked onclick="return false"{/if}
+              /> {$val.item_name}
+            </label>
+            {/foreach}
+          </td>
+        </tr>
+        <tr>
+          <th>人员选择</th>
+          <td>
+            <label><input type="radio" name="type" value="0" checked
+              onclick="switchTr(this)" /> 部门所有用户调用</label>
+            <label><input type="radio" name="type" value="1" onclick="switchTr(this)"
+              /> 选择调用用户</label>
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td >
+            <table style="width:100%">
+              <tr id="roleSelect">
+                <td>
+                  <select name="role_id" id="role_id" onchange="getStaffForSalaryClass(this)">
+                    <option value="0">未分配部门</option>
+                    {foreach from=$role_list item=val}
+                    <option value="{$val.role_id}">{$val.role_name}</option>
+                    {/foreach}
+                  </select>
+                  <span class="remind"> 如果添加了员工，部门的选择将无效。</span>
+                </td>
+              </tr>
+              <tr style="display:none" id="staffSelect">
+                <td>
+                  <select name="participantSel" style="width:168px;" onchange="addChecked(this)">
+                    <option value="0">选择员工</option>
+                    {foreach from=$staff_list key=k item=v}
+                    <option value="{$k}">{$v}</option>
+                    {/foreach}
+                  </select>
+                  <div class="item-div" id="participantField"></div>
+                </td>
+              </tr> 
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <div id="staff_list" style="display:none"></div>
+            <input type="submit" class="btn btn-primary btn-small" value="保存" />
+          </td>
+        </tr>
+      </table>
+    </form>
+    <table class="table-bordered gridtable erp-table">
+      <caption>工资套账列表</caption>
+      <tr>
+        <th width="5%"></th>
+        <th width="10%">账套名称</th>
+        <th width="25%">工资项</th>
+        <th width="25%">人员选择</th>
+        <th width="10%">添加时间</th>
+        <th width="10%">操作</th>
+      </tr>
+      {if $salary_class}
+      {foreach from=$salary_class item=val name=i}
+      <tr>
+        <td>{$smarty.foreach.i.iteration}</td>
+        <td>{$val.class_name}</td>
+        <td>
+          {foreach from=$val.item_list item=i} {$i} {/foreach}
+        </td>
+        <td>
+          {foreach from=$val.participant item=p}{$p.staff_name} {/foreach}
+        </td>
+        <td>{$val.add_time}</td>
+        <td>
+          <button class="btn btn-link" onclick="editSalaryItem(this)">修改</button>
+          <a class="btn btn-link" href="{$url}/delSalaryTz/tz_id/{$val.tz_id}">删除</a>
+        </td>
+      </tr>
+      {/foreach}
+      {else}
+      <tr>
+        <td colspan="6">还没有添加工资套账~</td>
+      </tr>
+      {/if}
+    </table>
+  </div>
+</div>
+{$footer}

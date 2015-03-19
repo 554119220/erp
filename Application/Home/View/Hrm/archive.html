@@ -125,17 +125,19 @@
             <th>关系</th><td>{$archive.emergency2.relation}</td>
             <th>联系电话</th><td colspan="2">{$archive.emergency2.phone}</td>
           </tr>
-          <!--<tr><td colspan="7"></td></tr>-->
-          <!--<tr>-->
-          <!--  <th>证书</th>-->
-          <!--  <td colspan="6" style="padding-left:10px">-->
-          <!--    {if $archive.picList}-->
-          <!--    {foreach from=$archive.picList item=val}-->
-          <!--    <a style="{if $b eq 'print'}color:#ccc;padding-right:5px;{/if}" target="_blank" href="{$val.pic_url}">{$val.rec_id}</a>-->
-          <!--    {/foreach}-->
-          <!--    {/if}-->
-          <!--  </td>-->
-          <!--</tr>-->
+          {if $b neq 'print'}
+          <tr><td colspan="7"></td></tr>
+          <tr>
+            <th>证书</th>
+            <td colspan="6" style="padding-left:10px">
+              {if $archive.picList}
+              {foreach from=$archive.picList item=val}
+              <a style="{if $b eq 'print'}color:#ccc;padding-right:5px;{/if}" target="_blank" href="{$val.pic_url}">{$val.rec_id}</a>
+              {/foreach}
+              {/if}
+            </td>
+          </tr>
+          {/if}
           <tr><td colspan="7"></td></tr>
           <tr>
             <th style="height:65px">自我评价</th>

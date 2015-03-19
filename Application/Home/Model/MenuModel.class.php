@@ -45,4 +45,26 @@ class MenuModel extends Model {
 
         return array ('nav_1st'=>$nav_1st, 'nav_2nd'=>$nav_2nd, 'nav_3rd'=>$nav_3rd);
     }
+
+    /*导航*/
+    public function nav($act){
+        if ($act) {
+            $parentId = M('admin_action')->alias('a')->where("a.action_code='$act'")->getField('a.action_id');  
+            if ($parentId) {
+                $list = M('admin_action')->alias('a')->where("a.parent_id=$parentId")->field('a.action_id,a.action_code,a.label,a.action_level')->order('a.order ASC')->select();
+
+                if ($list) {
+                    $nav3rd = M('admin_action')->alias('a')->field('a.parent_id,a.action_code,a.label')->order('a.order ASC')->where('a.action_level=3')->select();
+                    foreach ($list as &$val) {
+                        foreach ($nav3rd as $rd) {
+                            if ($rd['parent_id']==$val['action_id']) {
+                                $val['child'][] = $rd;
+                            }
+                        }
+                    }
+                }
+            }
+            return $list;
+        }
+    }
 }
