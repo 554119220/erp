@@ -411,6 +411,15 @@ class SalaryController extends PublicController {
             $this->error(L('ACCESS_METHOD_ERROR'));
         }
     }
+    //公共提成
+    public function commonCommission(){
+        $this->nav();
+        $thlist = array('序号','姓名', '部门','提成系数','生效时间','修改人');
+        $this->assign('thlist',$thlist);
+        $this->assign('title',L('COMMON_COMMISSION'));
+        $this->assign('role_list',D('RoleManage')->roleList('','role_id,role_name'));
+        $this->display();
+    }
 
     //待发提成
     public function commissionWait(){
@@ -816,16 +825,19 @@ class SalaryController extends PublicController {
                 $memberSales = D('Salary')->SaleMemberSales($startTime,$endTime,$status);
                 $commissionRule = D('Salary')
                     ->commissionRule('c.participant_type=2','c.*'); 
-                print_r($commissionRule);exit;
                 if ($commissionRule) {
-                    //foreach ($commissionRule as &$v) {
-                    //    foreach ($memberSales as $k=>&$m) {
-                    //        if (in_array($m['admin_id'],$participant)) {
-                    //            $m['commission'] = $v['commission'];
-                    //        }
-                    //    }
-                    //}
+                    foreach ($commissionRule as &$v) {
+                        foreach ($memberSales as $k=>&$m) {
+                            if (in_array($m['admin_id'],$participant)) {
+                                $m['commission'] = $m['final_amount']*$v['commission'];
+                                $commissionList  = $m;
+                                unset($memberSales['key']);
+                            }
+                        }
+                    }
                 }
+
+                $memberSales = $commissionList;
                 return array('roleCommission'=>$res,$memberSales);
             }
         }else return false;

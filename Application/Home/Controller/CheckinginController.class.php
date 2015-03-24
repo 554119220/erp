@@ -128,7 +128,7 @@ class CheckinginController extends PublicController {
                 $data['dedcut_salary'] = $this->dedcutSalary($where,$data);
                 $code = D('Checkingin')->applyVacate($data); 
                 if ($code) {
-                    $this->success(L('APPLY_SUCCESS'),U('Home/Checkingin/vacateList'));
+                    $this->success(L('APPLY_SUCCESS'),__CONTROLLER__.'/vacateList');
                 }else{
                     $this->error(L('APPLY_ERROR'));
                 }
@@ -177,7 +177,7 @@ class CheckinginController extends PublicController {
         if (!$code) {
             $this->error(L('RECORD_ERROR'));
         }else{
-            $this->success(L('RECORD_SUCCESS'),U('Home/Checkingin/late'));
+            $this->success(L('RECORD_SUCCESS'),__CONTROLLER__.'/late');
         }
     }
 
@@ -249,7 +249,7 @@ class CheckinginController extends PublicController {
         }elseif('save' == $act){
             $reportList = S($reportTime.'_checkingin');
             if (M('oa_checkingin_report')->where("report_time=$reportTime")->count()) {
-                $this->error(L('ALREAD_ADD'),U('Home/Checkingin/checkinginReport'));
+                $this->error(L('ALREAD_ADD'),__CONTROLLER__.'/checkinginReport');
                 exit;
             }
             $reportList = $reportList ? $reportList : D('Checkingin')->reportCheckingin($reportTime); 
@@ -260,30 +260,84 @@ class CheckinginController extends PublicController {
                 if ($res) {
                     $this->success(L('ADD_SUCCESS'));
                 }else{
-                    $this->error(L('ADD_ERROR'),U('Home/Checkingin/checkinginReport'));
+                    $this->error(L('ADD_ERROR'),__CONTROLLER__.'/checkinginReport');
                 }
-            }else $this->error(L('ADD_ERROR'),U('Home/Checkingin/checkinginReport'));
+            }else $this->error(L('ADD_ERROR'),__CONTROLLER__.'/checkinginReport');
         }
     }
 
-    /*请假审批*/
+    /*考勤审批*/
     public function leaveApproval(){
         $this->nav();
         $this->assign('title',L('LEAVE_APPROVAL'));
-        $this->assign('typeList',D('checkingin')->typeList('parent_id=1'));
+        $this->assign('typeList',D('checkingin')->typeList('parent_id<>0'));
+        $this->assign('staff_list',D('Hrm')->staffListSelect(false,true));
+        $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
+        $this->assign('approval_list',D('Checkingin')->approvalList());
         $this->display('approval');
     }
 
-    /*加班审批*/
-    public function otApproval(){
-        $this->error(L('OTING')); 
+    /*添加考勤审批人*/
+    public function addApproval(){
+        $res = D('Checkingin')->addApproval();
+        if ($res) {
+            $this->success(L('ADD_SUCCESS'),__CONTROLLER__.'/leaveApproval');
+        }else{
+            $this->error(L('ADD_ERROR'));
+        }
     }
 
     /*加班记录*/
     public function checkinginOt(){
-        $this->error(L('OTING')); 
+        $this->nav();
+        $this->assign('title',L('RECORD_OT'));
+        $this->assign('staff_list',D('Hrm')->staffListSelect(false,true));
+        $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
+        $this->assign('status',array('待审核','通过审核'));
+        $where = "c.type_id=9";
+        if ($_POST['role_id']) {
+            $where .= sprintf(" AND c.role_id=%d",$_POST['role_id']);
+        }
+        if ($_POST['staff_name']) {
+            $where .= sprintf(" AND c.staff_name LIKE '%%%s%%'",$_POST['staff_name']);
+        }
+        if ($_POST['status']) {
+            $where .= sprintf(" AND c.status=%d",$_POST['status']);
+        }
+        if (empty($_POST['start_time'])&&empty($_POST['end_time'])) {
+            $_POST['start_time'] = strtotime(date('Y-m-1 00:00:00'));
+            $_POST['end_time']   = strtotime(date('Y-m-t 23:59:59'));
+        }else{
+            $_POST['start_time'] = strtotime($_POST['start_time']);
+            $_POST['end_time']   = strtotime($_POST['end_time']);
+        }
+        $where .= sprintf(" AND c.start_time BETWEEN %s AND %s",
+            $_POST['start_time'],$_POST['end_time']);
+
+        $this->assign('otList',D('Checkingin')->checkinginList($where));
+        $this->assign('url',__CONTROLLER__);
+        $this->display();
     }
 
+    //添加加班记录
+    public function addOtRecord(){
+        $do                 = M('oa_checkingin');
+        $_POST['add_time']  = $_SERVER['REQUEST_TIME'];
+        $_POST['date_type'] = 1;
+        $_POST['staff_name'] = M('oa_staff_records')->where("staff_id={$_POST['staff_id']}")
+          ->getField('staff_name');
+        $_POST['start_time'] = strtotime($_POST['start_time']);
+        $_POST['type_id']    = 9;
+        $_POST['class_id']   = 3;
+        $res = D('Checkingin')->addOtRecord();
+        if ($res) {
+            $this->success(L('ADD_SUCCESS'),__CONTROLLER__.'/checkinginOt');
+        }else{
+            $this->error(L('ADD_ERROR'));
+        }
+    }
+
+    //外勤
     public function checkinginOut(){
         $this->error(L('OTING')); 
     }

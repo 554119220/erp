@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-10 09:55:15
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-20 10:12:27
          compiled from ".\Application\Home\View\Usersmanage\healthFile.html" */ ?>
 <?php /*%%SmartyHeaderCode:3189554fe4f03a40832-18639193%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '94975df16e26cb80ef19c35da9a6a5cd87574c7f' => 
     array (
       0 => '.\\Application\\Home\\View\\Usersmanage\\healthFile.html',
-      1 => 1419835609,
+      1 => 1426758964,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_54fe4f03d97017_17665674',
   'variables' => 
   array (
     'user_health' => 0,
@@ -27,8 +29,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'user_id' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_54fe4f03d97017_17665674',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_54fe4f03d97017_17665674')) {function content_54fe4f03d97017_17665674($_smarty_tpl) {?><!-- 顾客健康档案 -->
 <div class="healthy_file">

@@ -7,7 +7,47 @@ class CheckinginModel extends PublicModel{
     public function applyVacate($data){
         return M('oa_checkingin')->filter('strip_tags')->add($data);
     }
-
+    //添加考勤审批
+    public function addApproval(){
+        if ($_POST['staff_id'] && $_POST['role_id']) {
+            $do = M('oa_checkingin_approval');
+            $_POST['class_id'] = M('oa_checkingin_type')->where("type_id={$_POST['type_id']}")
+                ->getField('class_id');
+            $_POST['add_time'] = $_SERVER['REQUEST_TIME'];
+            $do->create();
+            return $do->add();
+        }
+    }
+    //考勤审批设置
+    public function approvalList($where){
+        $res = M('oa_checkingin_approval')->alias('c')
+            ->join(array(' LEFT JOIN __OA_CHECKINGIN_TYPE__ t ON t.type_id=c.type_id',
+                ' LEFT JOIN __ROLE__ r ON r.role_id=c.role_id ',
+                ' LEFT JOIN __OA_STAFF_RECORDS__ u ON u.staff_id=c.staff_id'
+            ))
+            ->field('c.approval_id,c.add_time,c.type_id,r.role_name,t.type_name,u.staff_name')
+            ->where($where)->select();
+        //echo M('oa_checkingin_approval')->getLastSql();exit;
+        if ($res) {
+            foreach ($res as &$v) {
+                $v['add_time'] = date('Y-m-d',$v['add_time']);
+                if (!$v['type_id']) {
+                    $v['type_name'] = '所有';
+                }
+            }
+        }
+        return $res;  
+    }
+    /*添加加班记录*/
+    public function addOtRecord(){
+        if ($_POST['staff_id']) {
+            $do = M('oa_checkingin');
+            //加班补贴
+            $do->create();
+            $res = $do->add();
+            return $res;
+        }else return false;
+    }
     /*考勤类型列表*/
     public function typeList($where='',$list=false,$field='*'){
         if ($list) {
@@ -39,9 +79,10 @@ class CheckinginModel extends PublicModel{
     }
 
     //考勤汇总
-    public function checkinginList($where='',$field='c.*,t.type_name'){
+    public function checkinginList($where='',$field='c.*,t.type_name,r.role_name'){
         $res = M('oa_checkingin')->alias('c')
             ->join(' LEFT JOIN __OA_CHECKINGIN_TYPE__ t ON c.type_id=t.type_id')
+            ->join(' LEFT JOIN __ROLE__ r ON c.role_id=r.role_id')
             ->field($field)->where($where)->order('c.add_time DESC')->select();
         if ($res) {
             foreach ($res as &$val) {
@@ -51,9 +92,9 @@ class CheckinginModel extends PublicModel{
                 $val['from_to']    = "{$val['start_time']} 到 {$val['end_time']}";
 
                 switch ($val['dateType']) {
-                    case 0 : $val['date'] .= '天';break;
-                    case 1 : $val['date'] .= '小时';break;
-                    case 2 : $val['date'] .= '分钟';break;
+                case 0 : $val['date'] .= '天';break;
+                case 1 : $val['date'] .= '小时';break;
+                case 2 : $val['date'] .= '分钟';break;
                 }
             }
             return $res;

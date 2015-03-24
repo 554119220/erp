@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-09 11:47:24
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-20 16:10:29
          compiled from ".\Application\Home\View\Salary\salaryApproval.html" */ ?>
 <?php /*%%SmartyHeaderCode:2997854fd17ccf05378-16003537%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0543e4c93d5a4af97e088d386d1ba9909802fa56' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\salaryApproval.html',
-      1 => 1423626934,
+      1 => 1426838900,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_54fd17cd501bd2_52531383',
   'variables' => 
   array (
     'header' => 0,
@@ -28,8 +30,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'footer' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_54fd17cd501bd2_52531383',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_54fd17cd501bd2_52531383')) {function content_54fd17cd501bd2_52531383($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include 'D:\\xampp\\htdocs\\thinkphp\\ThinkPHP\\Library\\Vendor\\Smarty\\plugins\\function.html_options.php';
 ?><?php echo $_smarty_tpl->tpl_vars['header']->value;?>
@@ -42,7 +42,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 /addSalaryApproval" method="POST">
       <table class="form single" style="width:100%">
         <caption>工资审批设置 </caption>
-
         <tr>
           <th>部门</th>
           <td>

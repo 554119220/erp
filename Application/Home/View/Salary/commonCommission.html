@@ -1,0 +1,56 @@
+{$header}
+{$nav}
+<div class="pd12px">
+  <form action="{$url}" method="POST" >
+    <table class="tool-table" style="width:70%">
+      <tr>
+        <td class="caption">{$title}</td>
+        <td>
+          <select name="role_id">
+            <option value="0">全部</option>
+            {foreach from=$role_list item=v}
+            <option value="{$v.role_id}">{$v.role_name}</option>
+            {/foreach}
+          </select>
+        </td>
+        <td> 员工 </td>
+        <td> <input type="text" name="staff_name" value=""/> </td>
+        <td> 员工类型</td>
+        <td>
+          <select name="staff_type">
+            <option value="2"></option>
+            <option value="2"></option>
+            <option value="2"></option>
+          </select>
+        </td>
+        <td>
+          <input type="submit" value="搜索" class="b_submit"/>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div id="resource">
+  <table class='table gridtable' style="width:60%">
+    <tr>
+      {foreach from=$thlist key=k item=l}
+      <th >{$l}</th>
+      {/foreach}
+    </tr>
+    {if $staff_list}
+    {foreach from=$staff_list item=v name=i}
+    <tr>
+      <td>{$smarty.foreach.i.iterantion}</td>
+      <td>{$v.staff_name}</td>
+      <td>{$v.role_name}</td>
+      <td>{$v.common_commission}</td>
+      <td>{$v.start_time}</td>
+      <td>{$v.admin_id}</td>
+    </tr>
+    {/foreach}
+    {else}
+    <td colspan="6">没有记录</td>
+    {/if}
+  </table>
+</div>
+{$footer}

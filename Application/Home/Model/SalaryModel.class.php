@@ -267,5 +267,15 @@ class SalaryModel extends PublicModel{
            return $a;
        }else{ return $res; }
     }
+
+    //公共提成
+    public function commonCommission(){
+        
+    }
+
+    /*提成修改记录*/
+    public function commonCommissionLog(){
+        
+    }
 }
 ?>

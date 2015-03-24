@@ -1,13 +1,25 @@
 {$header}
 {$nav}
 <div class="wd750 pd12px">
-  <form action="{$url}" method="POST" onsubmit="return validatValue(this)">
+  <form action="{$url}/addApproval" method="POST" onsubmit="return validatValue(this)">
     <table class="form single">
       <caption>{$title}</caption>
       <tr>
+        <th>部门</th>
+        <td>
+          <select name="role_id">
+            <option value="0">请选择部门</option>
+            {foreach from=$role_list item=v}
+            <option value="{$v.role_id}">{$v.role_name}</option>
+            {/foreach}
+          </select>
+        </td>
+      </tr>
+      <tr>
         <th>类型</th>
         <td>
-          <select name="type" required title="类型">
+          <select name="type_id" required title="类型">
+            <option value="0">所有</option>
             {foreach from=$typeList item=val}
             <option value="{$val.type_id}">{$val.type_name}</option>
             {/foreach}
@@ -18,7 +30,12 @@
       <tr>
         <th>审批人</th>
         <td>
-          <input name="name" value="" onkeyup="checkZhValue(this)" datatype="Limit" min="1" max="50" msg="1~50字符" type="text" id="title" required>
+          <select name="staff_id" required>
+           <option value="0">请选择员工</option> 
+           {foreach from=$staff_list key=k item=v}
+           <option value="{$k}">{$v}</option>
+           {/foreach}
+          </select>
         </td>
       </tr>
       <tr>
@@ -40,17 +57,21 @@
       <th width="2%">序号</th>
       <th width="10%">分类</th>
       <th width="10%">审批人</th>
+      <th width="10%">添加时间</th>
       <th width="15%">操作</th>
     </tr>
-    {if $leaveExamine}
-    {foreach from=$typeList item=val name=i}
+    {if $approval_list}
+    {foreach from=$approval_list item=val name=i}
     <tr>
       <td>{$smarty.foreach.i.iteration}</td>
       <td>{$val.type_name}</td>
-      <td>{$val.admin_name}</td>
+      <td>{$val.staff_name}</td>
+      <td>{$val.add_time}</td>
       <td>
-        <input type="button" value="修改" onclick="controlVacate({$val.approve_id},'edit')"/>
-        <input type="button" value="删除" onclick="controlVacate({$val.approve_id},'del')"/>
+        <input type="button" value="修改" class="btn-link" 
+        onclick="controlVacate({$val.approve_id},'edit')"/>
+        <input type="button" value="删除" class="btn-link"
+         onclick="controlVacate({$val.approve_id},'del')"/>
       </td>
     </tr>
     {/foreach}

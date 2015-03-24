@@ -72,7 +72,10 @@
         <td>{$val.add_time}</td>
         <td>{$val.status}</td>
         <td>
+          {if $val.status eq 0}
+          <!--审核期间可以修改-->
           <button class="btn btn-link" onclick="editSalaryItem(this)">修改</button>
+          {/if}
           <a class="btn btn-link" href="{$url}/delSalaryItem/item_id/{$val.item_id}">删除</a>
         </td>
       </tr>
