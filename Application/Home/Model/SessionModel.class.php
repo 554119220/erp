@@ -6,6 +6,8 @@ class SessionModel extends PublicModel {
      * @return void
      */
     public function getSessionInfo() {
+        $map['expiry'] = $_SERVER['REQUEST_TIME'];
+        M('sessions')->where("sesskey='".substr($_COOKIE['ECSCP_ID'],0,32)."'")->save($map);
         $dba = new Model;
         $sql_select = 'SELECT u.user_id,u.role_id,u.group_id,u.action_list,u.user_name FROM'.
             ' `crm_sessions` s,`crm_admin_user` u WHERE s.adminid=u.user_id AND s.sesskey="'.

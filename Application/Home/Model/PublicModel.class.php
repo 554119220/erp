@@ -21,7 +21,7 @@ class PublicModel extends Model {
         return $Region->where($data)->getField('region_id,region_name');
         //return $Region->where($data)->field('region_id,region_name')->select();
     }
-    
+
     //获取表列名
     public function getTableColumn($table){
         $m = new Model();

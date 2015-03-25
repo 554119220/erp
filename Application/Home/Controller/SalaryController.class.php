@@ -134,6 +134,7 @@ class SalaryController extends PublicController {
                 }
             }else{
                 $res = M('oa_salary_item')->where("item_id=$itemId")->select(); 
+                //echo M('oa_salary_item')->getLastSql();exit;
                 if ($res) {
                     $res = $res[0];
                     if ($res['expression']) {
