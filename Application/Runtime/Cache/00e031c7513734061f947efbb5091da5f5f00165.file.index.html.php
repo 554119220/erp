@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 17:36:31
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-25 15:06:10
          compiled from ".\Application\Home\View\Erp\index.html" */ ?>
 <?php /*%%SmartyHeaderCode:371354f7aa3147b218-23917124%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '00e031c7513734061f947efbb5091da5f5f00165' => 
     array (
       0 => '.\\Application\\Home\\View\\Erp\\index.html',
-      1 => 1427189179,
+      1 => 1427267163,
       2 => 'file',
     ),
   ),
@@ -172,10 +172,10 @@ images/child/hr/ico_kq_03.gif" width="48" height="48"></a></div>
                   </div>
                   <div class="m_list">
                     <div class="ico"><a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-/checkingin/" target="_blank"><img border="0" src="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
+/checkingin/checkingin" target="_blank"><img border="0" src="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
 images/child/hr/ico_kq_04.gif" width="48" height="48"></a></div>
                     <div class="text"><a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-/checkingin/" target="_blank">考勤汇总</a></div>
+/checkingin/checkingin" target="_blank">考勤汇总</a></div>
                   </div>
                   <div class="clear"></div>
                   <?php if (0) {?>
@@ -245,13 +245,13 @@ images/child/hr/ico_da_02.gif" width="48" height="48"></a></div>
                     <div class="text"><a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 /hrm/staffList/tp/true" target="_blank">档案检索</a></div>
                   </div>
-                  <div class="m_list">
-                    <div class="ico"><a href="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
+                  <!--<div class="m_list">-->
+                  <!--  <div class="ico"><a href="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
 /manufacture/inc/Billlist.asp?orderid=1042" target="blank"><img border="0" src="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
-images/child/hr/ico_da_03.gif" width="48" height="48"></a></div>
-                    <div class="text"><a href="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
-/manufacture/inc/Billlist.asp?orderid=1042" target="blank">合同查询</a></div>
-                  </div>
+images/child/hr/ico_da_03.gif" width="48" height="48"></a></div>-->
+                  <!--  <div class="text"><a href="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
+/manufacture/inc/Billlist.asp?orderid=1042" target="blank">合同查询</a></div>-->
+                  <!--</div>-->
                   <div class="clear"></div>
                   <?php if (0) {?>
                   <div class="m_list">
@@ -275,13 +275,13 @@ images/child/hr/ico_dd_03.gif" width="48" height="48"></a></div>
                     <div class="text"><a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 /hrm/transfer" target="blank">员工离职</a></div>
                   </div>
-                  <div class="m_list">
-                    <div class="ico"><a href="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
+                  <!--<div class="m_list">-->
+                  <!--  <div class="ico"><a href="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
 /hrm/hzPersonLeave.asp" target="blank"><img border="0" src="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
-images/child/hr/ico_dd_04.gif" width="48" height="48"></a></div>
-                    <div class="text"><a href="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
-/hrm/hzPersonLeave.asp" target="blank">离职比例</a></div>
-                  </div>
+images/child/hr/ico_dd_04.gif" width="48" height="48"></a></div>-->
+                  <!--  <div class="text"><a href="<?php echo $_smarty_tpl->tpl_vars['public']->value;?>
+/hrm/hzPersonLeave.asp" target="blank">离职比例</a></div>-->
+                  <!--</div>-->
                   <?php }?>
                   <div class="clear"></div>
                 </div>
