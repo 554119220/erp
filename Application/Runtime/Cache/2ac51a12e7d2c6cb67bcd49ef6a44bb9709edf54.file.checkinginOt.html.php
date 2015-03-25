@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 16:28:49
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-25 09:56:02
          compiled from ".\Application\Home\View\Checkingin\checkinginOt.html" */ ?>
 <?php /*%%SmartyHeaderCode:9907550f71d87de295-46755956%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2ac51a12e7d2c6cb67bcd49ef6a44bb9709edf54' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\checkinginOt.html',
-      1 => 1427185700,
+      1 => 1427248535,
       2 => 'file',
     ),
   ),
@@ -100,7 +100,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
   <div>
     <div class="line-title">加班记录列表</div>
     <form action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-" method="POST"> 
+/checkinginOt" method="POST"> 
       <table width="100%" class="tool-bar">
         <td>
           <select name="role_id">

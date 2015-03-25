@@ -21,5 +21,9 @@ class ErpController extends PublicController{
         $res['main'] = $this->fetch('index'); 
         $this->ajaxReturn($res);
     }
+
+    public function erp(){
+        $this->index();
+    }
 }
 ?>

@@ -33,6 +33,10 @@ class CheckinginController extends PublicController {
         $this->checkinginAll();
     }
 
+    public function checkingin(){
+        $this->index();
+    }
+
     //考勤类型
     public function checkinginType(){
         $this->nav();
