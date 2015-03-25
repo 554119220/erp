@@ -406,5 +406,10 @@ class HrmController extends PublicController{
         }
         return $this->ajaxReturn(D('Hrm')->staffListSelect(false,true,$where),'JSON');
     }
+
+    //升职转正，职位评级
+    public function promotion(){
+       $this->display(); 
+    }
 }
 ?>
