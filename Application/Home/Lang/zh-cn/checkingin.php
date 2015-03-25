@@ -19,6 +19,7 @@ return array(
     'CHECKINGIN_ALL'          => '考勤汇总',
     'CHECKINGIN_REPORT'       => '考勤报表',
     'lEAVE_APPROVAL'          => '请假审批设置',
+    'CHECKINGIN_APPROVAL'     => '考勤审批设置',
     'RECORD_OT'               => '加班登记',
 );
 ?>

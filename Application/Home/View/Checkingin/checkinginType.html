@@ -2,7 +2,7 @@
 {$nav}
 <div class="wd750 pd12px">
   <input type="hidden" id="url" value="{$url}"/>
-  <form action="{$url}/addCheckinginType" method="POST" onsubmit="return validatValue(this)">
+  <form action="{$url}/addCheckinginType" method="POST">
     <table class="form single">
       <caption>添加考勤类型</caption>
       <tr>
@@ -67,7 +67,7 @@
       <td>
         <button class="btn-link" data-toggle="modal" data-target="#myModal"
           onclick="controlVacate({$val.type_id},'edit')">修改</button>
-        <button class="btn-link" onclick="controlVacate({$val.type_id},'del')">不启用</button>
+        <button class="btn-link" >不启用</button>
       </td>
     </tr>
     {/foreach}
@@ -140,6 +140,7 @@
         </button>
         <input type="submit" class="btn btn-primary" form="editForm"  value="提交更改">
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal -->
-  {$footer}
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+{$footer}

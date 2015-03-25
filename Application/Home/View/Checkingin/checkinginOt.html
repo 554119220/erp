@@ -1,6 +1,7 @@
 {$header}
 {$nav}
 <div class="pd12px wd750">
+  <input type="hidden" id="url" value="{$url}"/>
   <form action="{$url}/addOtRecord" method="POST" class="table-form bigform">
     <table>
       <caption class="title">加班登记</caption>
@@ -43,7 +44,7 @@
   </form>
   <div>
     <div class="line-title">加班记录列表</div>
-    <form action="{$url}/checkinginOt" method="POST"> 
+    <form action="{$url}" method="POST"> 
       <table width="100%" class="tool-bar">
         <td>
           <select name="role_id">
@@ -92,7 +93,8 @@
       <td>{$v.reason}</td>
       <td>{$v.status}</td>
       <td>
-        <input type="button" class="btn-link" value="修改"/>
+        <input type="button" class="btn-link" value="修改" data-toggle="modal" 
+        data-target="#myModal" onclick="editOt({$v.check_id})"/>
         <input type="button" class="btn-link" value="删除"/>
       </td>
       {/foreach}
@@ -116,8 +118,49 @@
         <h4 class="modal-title" id="myModalLabel"> 修改加班登记 </h4>
       </div>
       <div class="modal-body">
-        <form action="{$url}/editOt" method="POST">
-          <table>
+        <form action="{$url}/editOt/behave/save" method="POST" id="editForm">
+          <input type="hidden" name="check_id" value="0"/>
+          <table class="form single" style="width:100%">
+            <tr>
+              <th>部门</th>
+              <td>
+                <select name="role_id">
+                  {foreach from=$role_list item=v}
+                  <option value="{$v.role_id}" {if $v.role_id eq $role_id}selected{/if}>
+                  {$v.role_name}</option>
+                  {/foreach}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>员工</th>
+              <td>
+                <select name="staff_id">
+                  {foreach from=$staff_list key=k item=v}
+                  <option value="{$k}" {if $v eq $staff_id}selected{/if}> {$v}</option>
+                  {/foreach}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>开始时间</th>
+              <td>
+                <input type="text" name="start_time" value="{$start_time}"
+                {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"{/literal}/>
+              </td>
+            </tr>
+            <tr>
+              <th>加班时长</th>
+              <td>
+                <input type="text" name="date" value="0" required /> （小时）
+              </td>
+            </tr>
+            <tr>
+              <th>原因</th>
+              <td>
+                <textarea name="reason" style="width:452px;"></textarea>
+              </td>
+            </tr>
           </table>
         </form>
       </div>
@@ -125,7 +168,7 @@
         <button type="button" class="btn btn-default" 
           data-dismiss="modal">关闭
         </button>
-        <button type="button" class="btn btn-primary"> 提交更改 </button>
+        <button type="sumbit" class="btn btn-primary" form="editForm"> 提交更改 </button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal -->

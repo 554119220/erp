@@ -91,7 +91,7 @@ class CheckinginModel extends PublicModel{
                 $val['end_time']   = $val['end_time'] ? date('Y-m-d H:i',$val['end_time']):'-';
                 $val['from_to']    = "{$val['start_time']} 到 {$val['end_time']}";
 
-                switch ($val['dateType']) {
+                switch ($val['date_type']) {
                 case 0 : $val['date'] .= '天';break;
                 case 1 : $val['date'] .= '小时';break;
                 case 2 : $val['date'] .= '分钟';break;

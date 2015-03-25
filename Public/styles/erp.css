@@ -13,9 +13,14 @@
 .unresize{resize:none}
 .red{color:red}
 .lf{float:left}
+.al{text-align:left;}
+.ar{text-align:right;}
+.ac{text-align:center;}
 font.red{margin-left:5px;color:red;}
 span.remind,.remind{color:#777}
 input[type=number].number{width:60px;}
+/*带下划线的标题*/
+.line-title{border-bottom:1px solid #ccc;margin-bottom:6px;width:750px}
 
 /*存放多选*/
 .item-div label{float:left;cursor:pointer;margin:3px;font-weight:normal;color:#777}
@@ -99,7 +104,8 @@ table.gridtable td {
 .tool-table select{height:28px;}
 .tool-table{margin-bottom:3px;}
 .tool-table td.title{font-size:16px;}
-.tool-table td.caption{font-size:24px;}
+.tool-table td.caption{font-size:16px;}
+.tool-bar select,.tool-bar input {height:24px;}
 
 /*span按钮*/
 .breadcrumb li{width:118px;}

@@ -67,7 +67,7 @@ class CheckinginController extends PublicController {
                 if ($res) {
                     $res = $res['0'];
                     $res['salary_rule'] = explode(' ',$res['salary_rule']); 
-                    $this->ajaxReturn($res,JSON);
+                    $this->ajaxReturn($res,'JSON');
                 }else{
                     $this->error(L('NO_FIND_CHECKINGIN_TYPE'));
                 }
@@ -114,7 +114,7 @@ class CheckinginController extends PublicController {
                 'staff_id'   => intval($_REQUEST['staff_id']),
                 'reason'     => I('post.reason',''),
                 'date'       => I('post.date',''),
-                'dateType'   => I('post.dateType',0),
+                'date_type'   => I('post.date_type',0),
                 'class_id'      => 1,
                 'type_id'    => I('post.type_id',0),
                 'start_time' => strtotime(I('post.start_time','')),
@@ -269,7 +269,7 @@ class CheckinginController extends PublicController {
     /*考勤审批*/
     public function leaveApproval(){
         $this->nav();
-        $this->assign('title',L('LEAVE_APPROVAL'));
+        $this->assign('title',L('CHECKINGIN_APPROVAL'));
         $this->assign('typeList',D('checkingin')->typeList('parent_id<>0'));
         $this->assign('staff_list',D('Hrm')->staffListSelect(false,true));
         $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
@@ -285,6 +285,26 @@ class CheckinginController extends PublicController {
         }else{
             $this->error(L('ADD_ERROR'));
         }
+    }
+    //修改审批
+    public function editApproval(){
+      if ('edit' == $_REQUEST['behave']) {
+          $approvalId = intval($_GET['approval_id']);
+          $res = M('oa_checkingin_approval')->where("approval_id=$approvalId")->find(); 
+          $this->ajaxReturn($res,'JSON');
+      }elseif('save' == $_GET['behave']){
+          if ($_REQUEST['approval_id'] ) {
+              $_REQUEST['add_time'] = $_SERVER['add_time'];
+              $do = M('oa_checkingin_approval');
+              $do->create();
+              $res = $do->save();
+              if ($res) {
+                  $this->success(L('UPD_SUCCESS'),__CONTROLLER__.'/leaveApproval');
+              }else{
+                  $this->error(L('UPD_ERROR')); 
+              }
+          }
+      }  
     }
 
     /*加班记录*/
@@ -334,6 +354,31 @@ class CheckinginController extends PublicController {
             $this->success(L('ADD_SUCCESS'),__CONTROLLER__.'/checkinginOt');
         }else{
             $this->error(L('ADD_ERROR'));
+        }
+    }
+
+    /*加班登记修改*/
+    public function editOt(){
+        if ('edit' == $_GET['behave']) {
+            $checkId = intval($_GET['check_id']);
+            $res = M('oa_checkingin')->where("check_id=$checkId")->find();
+            if ($res) {
+                $res['start_time'] = date('Y-m-d H:i');
+            }
+            $this->ajaxReturn($res,'JSON');
+        }elseif('save' == $_GET['behave']){
+            $_POST['date_type'] = 1;
+            $_POST['start_time'] = strtotime($_POST['start_time']);
+            $_POST['staff_name'] = M('oa_staff_records')->WHERE("staff_id={$_POST['staff_id']}")
+                ->getField('staff_name');
+            $do = M('oa_checkingin');
+            $do->create();
+            $res = $do->save();
+            if ($res) {
+                $this->success(L('UPD_SUCCESS'),__CONTROLLER__.'/checkinginOt');
+            }else{
+                $this->error(L('UPD_ERROR'));
+            }
         }
     }
 

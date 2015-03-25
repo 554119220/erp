@@ -52,6 +52,7 @@ class PublicController extends Controller {
                 return;
             }
             foreach ($this->authorise as $key=>$val) {
+                echo preg_replace('/^\w+\/(\w+).*/',"$val$1",strtolower($_SERVER['PATH_INFO'])); exit;
                 if (strpos(',,'.$this->actionList.',',','.preg_replace('/^\w+\/(\w+).*/',"$val$1",strtolower($_SERVER['PATH_INFO'])).',')) {
                     $code = $val;
                     break;

@@ -1,7 +1,8 @@
 {$header}
 {$nav}
 <div class="wd750 pd12px">
-  <form action="{$url}/addApproval" method="POST" onsubmit="return validatValue(this)">
+  <input type="hidden" id="url" value="{$url}"/>
+  <form action="{$url}/addApproval" method="POST">
     <table class="form single">
       <caption>{$title}</caption>
       <tr>
@@ -68,10 +69,9 @@
       <td>{$val.staff_name}</td>
       <td>{$val.add_time}</td>
       <td>
-        <input type="button" value="修改" class="btn-link" 
-        onclick="controlVacate({$val.approve_id},'edit')"/>
-        <input type="button" value="删除" class="btn-link"
-         onclick="controlVacate({$val.approve_id},'del')"/>
+        <input type="button" value="修改" class="btn-link" data-toggle="modal"
+        onclick="editCheckinginApproal({$val.approval_id})" data-target="#myModal" />
+        <input type="button" value="删除" class="btn-link" />
       </td>
     </tr>
     {/foreach}
@@ -82,4 +82,66 @@
     {/if}
   </table>
 </div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+          data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel"> 考勤审批修改</h4>
+      </div>
+      <div class="modal-body">
+        <form action="{$url}/editApproval/behave/save" method="POST" id="editForm">
+          <table class="form single" style="width:100%;margin-top:0px;">
+            <tr>
+              <th>部门</th>
+              <td>
+                <select name="role_id">
+                  <option value="0">请选择部门</option>
+                  {foreach from=$role_list item=v}
+                  <option value="{$v.role_id}">{$v.role_name}</option>
+                  {/foreach}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>类型</th>
+              <td>
+                <select name="type_id" required title="类型">
+                  <option value="0">所有</option>
+                  {foreach from=$typeList item=val}
+                  <option value="{$val.type_id}">{$val.type_name}</option>
+                  {/foreach}
+                </select>
+                <font class="red">*</font>
+              </td>
+            </tr>
+            <tr>
+              <th>审批人</th>
+              <td>
+                <select name="staff_id" required>
+                  <option value="0">请选择员工</option> 
+                  {foreach from=$staff_list key=k item=v}
+                  <option value="{$k}">{$v}</option>
+                  {/foreach}
+                </select>
+              </td>
+            </tr>
+            <input type="hidden" name="approval_id" value="0"/>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" 
+          data-dismiss="modal">关闭
+        </button>
+        <input type="submit" class="btn btn-primary" form="editForm"  value="提交更改">
+      </div>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal -->
 {$footer}

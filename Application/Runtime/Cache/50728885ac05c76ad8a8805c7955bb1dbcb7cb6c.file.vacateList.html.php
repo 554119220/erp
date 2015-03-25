@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-23 14:25:18
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 16:50:18
          compiled from ".\Application\Home\View\Checkingin\vacateList.html" */ ?>
 <?php /*%%SmartyHeaderCode:2273354fcfe3df05378-26622274%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '50728885ac05c76ad8a8805c7955bb1dbcb7cb6c' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\vacateList.html',
-      1 => 1427078769,
+      1 => 1427186291,
       2 => 'file',
     ),
   ),
@@ -176,8 +176,8 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
                 <input type="number" name="date" required />
               </td>
               <td style="padding-left:12px;">
-                <label><input type="radio" name="dateType" value="2" checked/> 分</label>
-                <label><input type="radio" name="dateType" value="1"/> 时</label>
+                <label><input type="radio" name="date_type" value="2" checked/> 分</label>
+                <label><input type="radio" name="date_type" value="1"/> 时</label>
               </td>
               <td></td>
             </tr>

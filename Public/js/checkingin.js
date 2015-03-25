@@ -35,13 +35,70 @@ function controlVacate(typeId,act){
             });
             $("#editForm [name='salary_rule']").val(data.salary_rule[3]);
             $("#editForm [name='type_id']").val(data.type_id);
+            $("#editForm [name='check_id']").val(data.check_id);
           }
         });
   }
   return false; 
 }
 
-//登记迟到
-function lateRecord(){
-  return true;
+//修改加班设置
+function editOt(checkId){
+  if (checkId) {
+   $.get(
+       $('#url').val()+'/editOt/check_id/'+checkId+'/behave/edit',
+       function (data){
+        if (data) {
+          $("#editForm [name='role_id'] option").each(
+            function(){
+             if ($(this).val() == data.role_id) {
+               $(this).attr('selected',true);
+             } 
+            });
+          $("#editForm [name='staff_id'] option").each(
+            function(){
+              if ($(this).val() == data.staff_id) {
+                $(this).attr('selected',true);
+              }
+            });
+          $("#editForm [name='start_time']").val(data.start_time);
+          $("#editForm [name='date']").val(data.date);
+          $("#editForm [name='reason']").val(data.reason);
+          $("#editForm [name='check_id']").val(data.check_id);
+        }
+       }); 
+  }else{
+    return false;
+  }
+}
+
+/*修改*/
+function editCheckinginApproal(approvalId){
+  if (approvalId) {
+    $.get(
+        $('#url').val()+'/editApproval/behave/edit/approval_id/'+approvalId,
+        function(data){
+          if (data) {
+            $("#editForm [name='role_id'] option").each(
+              function(){
+                if ($(this).val() == data.role_id) {
+                  $(this).attr('selected',true);
+                }
+              });
+            $("#editForm [name='type_id'] option").each(
+              function(){
+                if ($(this).val() == data.type_id) {
+                  $(this).attr('selected',true);
+                }
+              });
+            $("#editForm [name='staff_id'] option").each(
+              function(){
+                if ($(this).val() == data.staff_id) {
+                  $(this).attr('selected',true);
+                }
+              });
+            $("#editForm [name='approval_id']").val(data.approval_id);
+          }
+        });
+  }
 }
