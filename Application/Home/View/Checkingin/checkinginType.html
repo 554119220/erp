@@ -19,31 +19,41 @@
       <tr>
         <th>名称</th>
         <td>
-          <input name="name" value="" onkeyup="checkZhValue(this)" datatype="Limit" min="1" max="50" msg="1~50字符" type="text" id="title" required>
+          <input name="name" value="" min="1" type="text" id="title" required>
         </td>
       </tr>
       <tr>
         <th>计薪规则</th>
         <td>
-         大于或等于<input type="number" name="times" value="1" class="number" min="1"> 次
-          <select name="operation">
+          <select name="relation_operator[]">
+            {foreach from=$relation_operator key=k item=v}
+            <option value="{$k}">{$v}</option>
+            {/foreach}
+          </select>
+          <input type="number" name="times[]" value="1" class="number" min="1"> 
+          <select name="unity[]" >
+            {foreach from=$unity key=k item=v}
+            <option value="{$k}" >{$v}</option>
+            {/foreach}
+          </select>
+          <select name="operation[]">
             {foreach from=$operation key=k item=v}
             <option value="{$k}">{$v}</option>
             {/foreach}
           </select> | 
-          <select name="rule_item">
-            <option value="0">固定值</option>
-            <option value="1">每日工资的百分之</option>
-            <option value="2">天数 * 每日工资的百分之</option>
+          <select name="rule_item[]">
+            {foreach from=$rule_item item=v key=k}
+            <option value="{$k}">{$v}</option>
+            {/foreach}
           </select>
-          <input type="number" name="salary_rule" value="0" class="number" min="0"/>
+          <input type="number" name="salary_rule[]" value="0" class="number" min="0"/>
+          <label class="btn-link" onclick="moreCheckinginRule(this)">继续添加</label>
         </td>
       </tr>
       <tr>
         <th></th>
         <td>
-          <button type="submit" class="btn btn-small btn-primary" data-toggle="popover" 
-            data-content=""> 保存 </button>
+          <button type="submit" class="btn btn-small btn-primary"> 保存 </button>
         </td>
       </tr>
     </table>
@@ -108,22 +118,32 @@
             <tr>
               <th>名称</th>
               <td>
-                <input name="name" value="" onkeyup="checkZhValue(this)" datatype="Limit" min="1" max="50" msg="1~50字符" type="text" id="title" required>
+                <input name="name" value="" min="1" type="text" id="title" required>
               </td>
             </tr>
             <tr>
               <th>计薪规则</th>
               <td>
-                大于或等于<input type="number" name="times" value="1" class="number" min="1"> 次
+                <select name="relation_operator">
+                  {foreach from=$relation_operator key=k item=v}
+                  <option value="{$k}">{$v}</option>
+                  {/foreach}
+                </select>
+                <input type="number" name="times" value="1" class="number" min="1"> 
+                <select name="unity[]" >
+                  {foreach from=$unity key=k item=v}
+                  <option value="{$k}" >{$v}</option>
+                  {/foreach}
+                </select>
                 <select name="operation">
                   {foreach from=$operation key=k item=v}
                   <option value="{$k}">{$v}</option>
                   {/foreach}
                 </select> | 
                 <select name="rule_item">
-                  <option value="0">固定值</option>
-                  <option value="1">每日工资的百分之</option>
-                  <option value="2">天数 * 每日工资的百分之</option>
+                  {foreach from=$rule_item item=v key=k}
+                  <option value="{$k}">{$v}</option>
+                  {/foreach}
                 </select>
                 <input type="number" name="salary_rule" value="0" class="number" min="0"/>
                 <input type="hidden" name="todo" value="true"/>

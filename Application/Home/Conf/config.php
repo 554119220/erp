@@ -19,6 +19,7 @@ return array(
     //'MULTI_MODULE'          =>  false,
     //'MODULE_ALLOW_LIST'      => array('Home'),
     //'DEFAULT_MODULE'         => 'Home', // 默认模块
+    'TMPL_CACHE_ON' => false,
 
     'SESSION_OPTIONS'      => array('cookie_path'=>__ROOT__),
     'DEFAULT_AJAX_RETURN' => 'JSON',

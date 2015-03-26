@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 17:29:30
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-26 14:50:44
          compiled from ".\Application\Home\View\Checkingin\checkinginType.html" */ ?>
 <?php /*%%SmartyHeaderCode:762754fcfe415f5e12-12119247%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a20c8e8ca6ae5a0e2aa0895dee3ffcd1e225f19d' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\checkinginType.html',
-      1 => 1427187584,
+      1 => 1427352641,
       2 => 'file',
     ),
   ),
@@ -24,9 +24,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url' => 0,
     'type' => 0,
     'val' => 0,
-    'operation' => 0,
+    'relation_operator' => 0,
     'k' => 0,
     'v' => 0,
+    'unity' => 0,
+    'operation' => 0,
+    'rule_item' => 0,
     'typeList' => 0,
     'footer' => 0,
   ),
@@ -63,14 +66,40 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
       <tr>
         <th>名称</th>
         <td>
-          <input name="name" value="" onkeyup="checkZhValue(this)" datatype="Limit" min="1" max="50" msg="1~50字符" type="text" id="title" required>
+          <input name="name" value="" min="1" type="text" id="title" required>
         </td>
       </tr>
       <tr>
         <th>计薪规则</th>
         <td>
-         大于或等于<input type="number" name="times" value="1" class="number" min="1"> 次
-          <select name="operation">
+          <select name="relation_operator[]">
+            <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['relation_operator']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+            <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+            <?php } ?>
+          </select>
+          <input type="number" name="times[]" value="1" class="number" min="1"> 
+          <select name="unity[]" >
+            <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['unity']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+            <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" ><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+            <?php } ?>
+          </select>
+          <select name="operation[]">
             <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['operation']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -83,19 +112,27 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 </option>
             <?php } ?>
           </select> | 
-          <select name="rule_item">
-            <option value="0">固定值</option>
-            <option value="1">每日工资的百分之</option>
-            <option value="2">天数 * 每日工资的百分之</option>
+          <select name="rule_item[]">
+            <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['rule_item']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+            <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+            <?php } ?>
           </select>
-          <input type="number" name="salary_rule" value="0" class="number" min="0"/>
+          <input type="number" name="salary_rule[]" value="0" class="number" min="0"/>
+          <label class="btn-link" onclick="moreCheckinginRule(this)">继续添加</label>
         </td>
       </tr>
       <tr>
         <th></th>
         <td>
-          <button type="submit" class="btn btn-small btn-primary" data-toggle="popover" 
-            data-content=""> 保存 </button>
+          <button type="submit" class="btn btn-small btn-primary"> 保存 </button>
         </td>
       </tr>
     </table>
@@ -178,13 +215,39 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
             <tr>
               <th>名称</th>
               <td>
-                <input name="name" value="" onkeyup="checkZhValue(this)" datatype="Limit" min="1" max="50" msg="1~50字符" type="text" id="title" required>
+                <input name="name" value="" min="1" type="text" id="title" required>
               </td>
             </tr>
             <tr>
               <th>计薪规则</th>
               <td>
-                大于或等于<input type="number" name="times" value="1" class="number" min="1"> 次
+                <select name="relation_operator">
+                  <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['relation_operator']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+                  <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+                  <?php } ?>
+                </select>
+                <input type="number" name="times" value="1" class="number" min="1"> 
+                <select name="unity[]" >
+                  <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['unity']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+                  <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" ><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+                  <?php } ?>
+                </select>
                 <select name="operation">
                   <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
@@ -199,9 +262,17 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
                   <?php } ?>
                 </select> | 
                 <select name="rule_item">
-                  <option value="0">固定值</option>
-                  <option value="1">每日工资的百分之</option>
-                  <option value="2">天数 * 每日工资的百分之</option>
+                  <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['rule_item']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+                  <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+                  <?php } ?>
                 </select>
                 <input type="number" name="salary_rule" value="0" class="number" min="0"/>
                 <input type="hidden" name="todo" value="true"/>

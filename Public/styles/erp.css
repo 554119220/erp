@@ -19,6 +19,8 @@
 font.red{margin-left:5px;color:red;}
 span.remind,.remind{color:#777}
 input[type=number].number{width:60px;}
+input.number{width:60px;}
+.text-align-right{text-align:right;}
 /*带下划线的标题*/
 .line-title{border-bottom:1px solid #ccc;margin-bottom:6px;width:750px}
 

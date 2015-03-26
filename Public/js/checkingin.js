@@ -102,3 +102,22 @@ function editCheckinginApproal(approvalId){
         });
   }
 }
+//继续添加考勤薪资规则
+function moreCheckinginRule(obj){
+  var trObj                   = obj.parentNode.parentNode;
+  var tableObj                = trObj.parentNode;
+  var index                   = trObj.rowIndex;
+  var insertTr                = tableObj.insertRow(index+1);
+  insertTr.innerHTML          = trObj.innerHTML;
+  var btn                     = insertTr.cells[1].getElementsByTagName('label');
+  insertTr.cells[0].innerHTML = '';
+  btn                         = btn[0];
+  btn.innerHTML               = '删除'
+  btn.onclick                 = function(){
+    removeTr(insertTr); 
+  }
+}
+//删除行
+function removeTr(obj){
+  obj.parentNode.deleteRow(obj.rowIndex);
+} 

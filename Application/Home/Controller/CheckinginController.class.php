@@ -40,11 +40,15 @@ class CheckinginController extends PublicController {
     //考勤类型
     public function checkinginType(){
         $this->nav();
-        $operation = array('扣','加','乘','除');
-        $overtakeDate = array('分','时','天');
+        $operation = array('减','加');
+        $unity = array('天','时','分','次');
+        $relationOperator = array( '小于','大于','等于','小于等于','大于等于');
+        $ruleitem = array('固定值', '每日工资 x','天数 x 每日工资 x','时长 x');
         $this->assign('operation',$operation);
-        $this->assign('overtake_date',$overtakeDate);
-        $this->assign('url',__CONTROLLER);
+        $this->assign('unity',$unity);
+        $this->assign('rule_item',$ruleitem);
+        $this->assign('relation_operator',$relationOperator);
+        $this->assign('url',__CONTROLLER__);
         $this->assign('typeList',D('checkingin')->typeList('',true));
         $this->assign('type',D('Checkingin')->typeList('parent_id=0'));
         $this->display(); 
@@ -87,7 +91,17 @@ class CheckinginController extends PublicController {
             'type_name' => trim(I('post.name','')),
         );
         if ($_REQUEST['salary_rule']) {
-            $data['salary_rule'] = "{$_REQUEST['times']} {$_REQUEST['operation']} {$_REQUEST['rule_item']} {$_REQUEST['salary_rule']}";
+            $num = count($_REQUEST['salary_rule']);
+            for ($i = 0; $i < $num; $i++) {
+                $salaryRule[]  = array(
+                    'relation_operator' => intval($_REQUEST['relation_operator'][i]),
+                    'times'             => floatval($_REQUEST['times'][i]),
+                    'unity'             => intval($_REQUEST['unity'][i]),
+                    'rule_item'         => intval($_REQUEST['rule_item'][i]),
+                    'salary_rule'       => intval($_REQUEST['salary_rule']),
+                );
+            }
+            $data['salary_rule'] = serialize($salaryRule);
         }
 
         $where = "parent={$data['parent']} AND type_name='{$data['type_name']}'";
@@ -96,12 +110,12 @@ class CheckinginController extends PublicController {
             $this->error(L('EXIST_TYPE'));
             exit;
         }else{
-           $code = D('Checkingin')->addCheckinginType($data); 
-           if ($code) {
-               $this->success(L('ADD_SUCCESS'), 'checkinginType');
-           }else{
-               $this->error(L('ADD_ERROR'));
-           }
+            $code = D('Checkingin')->addCheckinginType($data); 
+            if ($code) {
+                $this->success(L('ADD_SUCCESS'), 'checkinginType');
+            }else{
+                $this->error(L('ADD_ERROR'));
+            }
         }
     }
 
