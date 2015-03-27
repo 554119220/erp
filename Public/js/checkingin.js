@@ -22,18 +22,20 @@ function controlVacate(typeId,act){
                   $(this).attr('selected',true);
                 }
               });
-            $("#editForm [name='times']").val(data.salary_rule[0]);
-            $("#editForm [name='operation'] option").each(function(){
-              if ($(this).val() == data.salary_rule[1]) {
-                $(this).attr('selected',true);
-              }
-            });
-            $("#editForm [name='rule_item'] option").each(function(){
-              if ($(this).val() == data.salary_rule[2]) {
-                $(this).attr('selected',true);
-              }
-            });
-            $("#editForm [name='salary_rule']").val(data.salary_rule[3]);
+            for (var i in data.salary_rule) {
+              $("#editForm [name='times']").val(data.salary_rule[0]);
+              $("#editForm [name='operation'] option").each(function(){
+                if ($(this).val() == data.salary_rule[1]) {
+                  $(this).attr('selected',true);
+                }
+              });
+              $("#editForm [name='rule_item'] option").each(function(){
+                if ($(this).val() == data.salary_rule[2]) {
+                  $(this).attr('selected',true);
+                }
+              });
+              $("#editForm [name='salary_rule']").val(data.salary_rule[3]);
+            }
             $("#editForm [name='type_id']").val(data.type_id);
             $("#editForm [name='check_id']").val(data.check_id);
           }
@@ -45,28 +47,28 @@ function controlVacate(typeId,act){
 //修改加班设置
 function editOt(checkId){
   if (checkId) {
-   $.get(
-       $('#url').val()+'/editOt/check_id/'+checkId+'/behave/edit',
-       function (data){
-        if (data) {
-          $("#editForm [name='role_id'] option").each(
-            function(){
-             if ($(this).val() == data.role_id) {
-               $(this).attr('selected',true);
-             } 
-            });
-          $("#editForm [name='staff_id'] option").each(
-            function(){
-              if ($(this).val() == data.staff_id) {
-                $(this).attr('selected',true);
-              }
-            });
-          $("#editForm [name='start_time']").val(data.start_time);
-          $("#editForm [name='date']").val(data.date);
-          $("#editForm [name='reason']").val(data.reason);
-          $("#editForm [name='check_id']").val(data.check_id);
-        }
-       }); 
+    $.get(
+        $('#url').val()+'/editOt/check_id/'+checkId+'/behave/edit',
+        function (data){
+          if (data) {
+            $("#editForm [name='role_id'] option").each(
+              function(){
+                if ($(this).val() == data.role_id) {
+                  $(this).attr('selected',true);
+                } 
+              });
+            $("#editForm [name='staff_id'] option").each(
+              function(){
+                if ($(this).val() == data.staff_id) {
+                  $(this).attr('selected',true);
+                }
+              });
+            $("#editForm [name='start_time']").val(data.start_time);
+            $("#editForm [name='date']").val(data.date);
+            $("#editForm [name='reason']").val(data.reason);
+            $("#editForm [name='check_id']").val(data.check_id);
+          }
+        }); 
   }else{
     return false;
   }
@@ -112,10 +114,10 @@ function moreCheckinginRule(obj){
   var btn                     = insertTr.cells[1].getElementsByTagName('label');
   insertTr.cells[0].innerHTML = '';
   btn                         = btn[0];
-  btn.innerHTML               = '删除'
-  btn.onclick                 = function(){
-    removeTr(insertTr); 
-  }
+  btn.innerHTML               = '－'
+    btn.onclick                 = function(){
+      removeTr(insertTr); 
+    }
 }
 //删除行
 function removeTr(obj){

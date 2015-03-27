@@ -56,14 +56,27 @@ class CheckinginModel extends PublicModel{
             $res =  M('oa_checkingin_type')->alias('c')
                 ->join('LEFT JOIN __OA_CHECKINGIN_TYPE__ b ON c.parent_id=b.type_id')
                 ->field($field)->where($where)->select();
-            $operation = array('扣','加','乘','除');
-            $ruleItem = array('固定值','每天工资的百分之','天数*每天工资的百分之');
+            $operation = array('reduce'=>'减','add'=>'加');
+            $unity = array('d'=>'天','h'=>'时','m'=>'分','s'=>'次');
+            $relationOperator = array(
+                'lt'=>'小于','gt'=>'大于','eq'=>'等于','le'=>'小于等于','ge'=>'大于等于');
+            $ruleitem = array('固定值', '每日工资 x','时长 x');
             if ($res) {
                 foreach ($res as &$v) {
                     if ($v['salary_rule']) {
                         $rule = explode(' ',$v['salary_rule']);
-                        $v['salary_rule'] = "大于{$rule['0']}次，每次{$operation[$rule[1]]}"
-                            .$ruleItem[$rule[2]].$rule[3];
+                        foreach ($rule as &$r) {
+                            $r = unserialize($r);
+                            $r['relation_operator'] =
+                                $relationOperator[$r['relation_operator']]; 
+                            $r['unity'] = $unity[$r['unity']]; 
+                            $r['operation'] = $operation[$r['operation']];
+                            $r['rule_item'] = $ruleitem[$r['rule_item']];
+                            $ruleList[] = "{$r['relation_operator']} {$r['times']}{$r['unity']}"
+                                ." {$r['operation']} {$r['rule_item']} {$r['salary_rule']}";
+                        }
+                        $v['salary_rule'] = $ruleList;
+                        unset($ruleList);
                     }
                 }
             }

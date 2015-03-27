@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-26 14:50:44
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-27 10:30:56
          compiled from ".\Application\Home\View\Checkingin\checkinginType.html" */ ?>
 <?php /*%%SmartyHeaderCode:762754fcfe415f5e12-12119247%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a20c8e8ca6ae5a0e2aa0895dee3ffcd1e225f19d' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\checkinginType.html',
-      1 => 1427352641,
+      1 => 1427422026,
       2 => 'file',
     ),
   ),
@@ -111,8 +111,8 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 "><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
 </option>
             <?php } ?>
-          </select> | 
-          <select name="rule_item[]">
+          </select> 
+          | <select name="rule_item[]">
             <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['rule_item']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -126,7 +126,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
             <?php } ?>
           </select>
           <input type="number" name="salary_rule[]" value="0" class="number" min="0"/>
-          <label class="btn-link" onclick="moreCheckinginRule(this)">继续添加</label>
+          <label class="btn-link" onclick="moreCheckinginRule(this)">＋</label>
         </td>
       </tr>
       <tr>
@@ -140,7 +140,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
   <table class="gridtable">
     <caption class='title'>考勤类型列表</caption> 
     <tr>
-      <th width="2%">序号</th>
+      <th width="6%">序号</th>
       <th width="10%">分类</th>
       <th width="10%">名称</th>
       <th width="20">计薪规则</th>
@@ -161,8 +161,22 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 </td>
       <td><?php echo $_smarty_tpl->tpl_vars['val']->value['type_name'];?>
 </td>
-      <td><?php echo $_smarty_tpl->tpl_vars['val']->value['salary_rule'];?>
-</td>
+      <td>
+        <?php if ($_smarty_tpl->tpl_vars['val']->value['salary_rule']) {?>
+        <ol>
+          <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['val']->value['salary_rule']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+?>
+          <li><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</li>
+          <?php } ?>
+          <!--<?php echo $_smarty_tpl->tpl_vars['val']->value['salary_rule'];?>
+-->
+        </ol>
+        <?php }?>
+      </td>
       <td>
         <button class="btn-link" data-toggle="modal" data-target="#myModal"
           onclick="controlVacate(<?php echo $_smarty_tpl->tpl_vars['val']->value['type_id'];?>
@@ -194,7 +208,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
         <form action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 /controlCheckinginType" method="POST" 
           onsubmit="return validatValue(this)" id="editForm">
-          <table class="form single" style="width:100%;margin-top:0px;">
+          <table class="form single" style="width:102%;margin-top:0px;">
             <tr style="border-top:1px solid #ccc;">
               <th>所属分类</th>
               <td>
@@ -221,7 +235,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
             <tr>
               <th>计薪规则</th>
               <td>
-                <select name="relation_operator">
+                <select name="relation_operator[]">
                   <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['relation_operator']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -234,7 +248,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 </option>
                   <?php } ?>
                 </select>
-                <input type="number" name="times" value="1" class="number" min="1"> 
+                <input type="number" name="times[]" value="1" class="number" min="1"> 
                 <select name="unity[]" >
                   <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
@@ -248,7 +262,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 </option>
                   <?php } ?>
                 </select>
-                <select name="operation">
+                <select name="operation[]">
                   <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['operation']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -261,7 +275,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 </option>
                   <?php } ?>
                 </select> | 
-                <select name="rule_item">
+                <select name="rule_item[]">
                   <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['rule_item']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -274,13 +288,14 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 </option>
                   <?php } ?>
                 </select>
-                <input type="number" name="salary_rule" value="0" class="number" min="0"/>
-                <input type="hidden" name="todo" value="true"/>
-                <input type="hidden" name="act" value="edit"/>
-                <input type="hidden" name="type_id" value="0"/>
+                <input type="number" name="salary_rule[]" value="0" class="number" min="0"/>
+                <label class="btn-link" onclick="moreCheckinginRule(this)">＋</label>
               </td>
             </tr>
           </table>
+          <input type="hidden" name="todo" value="true"/>
+          <input type="hidden" name="act" value="edit"/>
+          <input type="hidden" name="type_id" value="0"/>
         </form>
       </div>
       <div class="modal-footer">

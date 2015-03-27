@@ -40,10 +40,11 @@ class CheckinginController extends PublicController {
     //考勤类型
     public function checkinginType(){
         $this->nav();
-        $operation = array('减','加');
-        $unity = array('天','时','分','次');
-        $relationOperator = array( '小于','大于','等于','小于等于','大于等于');
-        $ruleitem = array('固定值', '每日工资 x','天数 x 每日工资 x','时长 x');
+        $operation = array('reduce'=>'减','add'=>'加');
+        $unity = array('d'=>'天','h'=>'时','m'=>'分','s'=>'次');
+        $relationOperator = array(
+            'lt'=>'小于','gt'=>'大于','eq'=>'等于','le'=>'小于等于','ge'=>'大于等于');
+        $ruleitem = array('固定值', '每日工资 x','时长 x');
         $this->assign('operation',$operation);
         $this->assign('unity',$unity);
         $this->assign('rule_item',$ruleitem);
@@ -65,7 +66,7 @@ class CheckinginController extends PublicController {
                     'type_name' => trim(I('post.name','')),
                 );
                 if ($_REQUEST['salary_rule']) {
-                    $data['salary_rule'] = "{$_REQUEST['times']} {$_REQUEST['operation']} {$_REQUEST['rule_item']} {$_REQUEST['salary_rule']}";
+                    $data['salary_rule'] = $this->checkinginTypeRule();
                 }
                 $res = M('oa_checkingin_type')->where("type_id=$typeId")->save($data);
                 if ($res) { $this->success(L('UPD_SUCCESS'));
@@ -74,7 +75,13 @@ class CheckinginController extends PublicController {
                 $res = M('oa_checkingin_type')->where("type_id=$typeId")->select();
                 if ($res) {
                     $res = $res['0'];
-                    $res['salary_rule'] = explode(' ',$res['salary_rule']); 
+                    if ($res['salary_rule']) {
+                        $ruleList = explode(' ',$res['salary_rule']);
+                        foreach ($ruleList as &$v) {
+                            $v = unserialize($v);
+                        }
+                        $res['salary_rule'] = $ruleList;
+                    }
                     $this->ajaxReturn($res,'JSON');
                 }else{
                     $this->error(L('NO_FIND_CHECKINGIN_TYPE'));
@@ -91,17 +98,7 @@ class CheckinginController extends PublicController {
             'type_name' => trim(I('post.name','')),
         );
         if ($_REQUEST['salary_rule']) {
-            $num = count($_REQUEST['salary_rule']);
-            for ($i = 0; $i < $num; $i++) {
-                $salaryRule[]  = array(
-                    'relation_operator' => intval($_REQUEST['relation_operator'][i]),
-                    'times'             => floatval($_REQUEST['times'][i]),
-                    'unity'             => intval($_REQUEST['unity'][i]),
-                    'rule_item'         => intval($_REQUEST['rule_item'][i]),
-                    'salary_rule'       => intval($_REQUEST['salary_rule']),
-                );
-            }
-            $data['salary_rule'] = serialize($salaryRule);
+            $data['salary_rule'] = $this->checkinginTypeRule();
         }
 
         $where = "parent={$data['parent']} AND type_name='{$data['type_name']}'";
@@ -440,6 +437,24 @@ class CheckinginController extends PublicController {
         }
         $dedcutSalary = sprintf("%0.2f",$dedcutSalary);
         return $dedcutSalary;
+    }
+
+    //返回考勤薪资规则
+    function checkinginTypeRule(){
+        $num = count($_REQUEST['salary_rule']);
+        for ($i = 0; $i < $num; $i++) {
+            $salaryRule[]  = array(
+                'relation_operator' => ($_REQUEST['relation_operator'][$i]),
+                'times'             => floatval($_REQUEST['times'][$i]),
+                'unity'             => $_REQUEST['unity'][$i],
+                'operation'         => $_REQUEST['operation'][$i],
+                'rule_item'         => intval($_REQUEST['rule_item'][$i]),
+                'salary_rule'       => intval($_REQUEST['salary_rule'][$i]),
+            );
+            $salaryRule[$i] = serialize($salaryRule[$i]);
+        }
+        $rule = implode(' ',$salaryRule);
+        return $rule;
     }
 }
 ?>

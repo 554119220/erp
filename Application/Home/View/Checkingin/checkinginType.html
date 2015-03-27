@@ -40,14 +40,14 @@
             {foreach from=$operation key=k item=v}
             <option value="{$k}">{$v}</option>
             {/foreach}
-          </select> | 
-          <select name="rule_item[]">
+          </select> 
+          | <select name="rule_item[]">
             {foreach from=$rule_item item=v key=k}
             <option value="{$k}">{$v}</option>
             {/foreach}
           </select>
           <input type="number" name="salary_rule[]" value="0" class="number" min="0"/>
-          <label class="btn-link" onclick="moreCheckinginRule(this)">继续添加</label>
+          <label class="btn-link" onclick="moreCheckinginRule(this)">＋</label>
         </td>
       </tr>
       <tr>
@@ -61,7 +61,7 @@
   <table class="gridtable">
     <caption class='title'>考勤类型列表</caption> 
     <tr>
-      <th width="2%">序号</th>
+      <th width="6%">序号</th>
       <th width="10%">分类</th>
       <th width="10%">名称</th>
       <th width="20">计薪规则</th>
@@ -73,7 +73,16 @@
       <td>{$smarty.foreach.i.iteration}</td>
       <td>{$val.parent_id}</td>
       <td>{$val.type_name}</td>
-      <td>{$val.salary_rule}</td>
+      <td>
+        {if $val.salary_rule}
+        <ol>
+          {foreach from=$val.salary_rule item=v}
+          <li>{$v}</li>
+          {/foreach}
+          <!--{$val.salary_rule}-->
+        </ol>
+        {/if}
+      </td>
       <td>
         <button class="btn-link" data-toggle="modal" data-target="#myModal"
           onclick="controlVacate({$val.type_id},'edit')">修改</button>
@@ -103,7 +112,7 @@
       <div class="modal-body">
         <form action="{$url}/controlCheckinginType" method="POST" 
           onsubmit="return validatValue(this)" id="editForm">
-          <table class="form single" style="width:100%;margin-top:0px;">
+          <table class="form single" style="width:102%;margin-top:0px;">
             <tr style="border-top:1px solid #ccc;">
               <th>所属分类</th>
               <td>
@@ -121,37 +130,38 @@
                 <input name="name" value="" min="1" type="text" id="title" required>
               </td>
             </tr>
-            <tr>
+            <tr id="tr_salary_rule">
               <th>计薪规则</th>
               <td>
-                <select name="relation_operator">
+                <select name="relation_operator[]">
                   {foreach from=$relation_operator key=k item=v}
                   <option value="{$k}">{$v}</option>
                   {/foreach}
                 </select>
-                <input type="number" name="times" value="1" class="number" min="1"> 
+                <input type="number" name="times[]" value="1" class="number" min="1"> 
                 <select name="unity[]" >
                   {foreach from=$unity key=k item=v}
                   <option value="{$k}" >{$v}</option>
                   {/foreach}
                 </select>
-                <select name="operation">
+                <select name="operation[]">
                   {foreach from=$operation key=k item=v}
                   <option value="{$k}">{$v}</option>
                   {/foreach}
                 </select> | 
-                <select name="rule_item">
+                <select name="rule_item[]">
                   {foreach from=$rule_item item=v key=k}
                   <option value="{$k}">{$v}</option>
                   {/foreach}
                 </select>
-                <input type="number" name="salary_rule" value="0" class="number" min="0"/>
-                <input type="hidden" name="todo" value="true"/>
-                <input type="hidden" name="act" value="edit"/>
-                <input type="hidden" name="type_id" value="0"/>
+                <input type="number" name="salary_rule[]" value="0" class="number" min="0"/>
+                <label class="btn-link" onclick="moreCheckinginRule(this)">＋</label>
               </td>
             </tr>
           </table>
+          <input type="hidden" name="todo" value="true"/>
+          <input type="hidden" name="act" value="edit"/>
+          <input type="hidden" name="type_id" value="0"/>
         </form>
       </div>
       <div class="modal-footer">

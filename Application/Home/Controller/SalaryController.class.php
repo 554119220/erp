@@ -134,7 +134,6 @@ class SalaryController extends PublicController {
                 }
             }else{
                 $res = M('oa_salary_item')->where("item_id=$itemId")->select(); 
-                //echo M('oa_salary_item')->getLastSql();exit;
                 if ($res) {
                     $res = $res[0];
                     if ($res['expression']) {
@@ -823,7 +822,9 @@ class SalaryController extends PublicController {
                 foreach ($roleSales as &$v) {
                     $res['final_amount'] += $v['final_amount'];
                 }
+                //员工销量
                 $memberSales = D('Salary')->SaleMemberSales($startTime,$endTime,$status);
+                //print_r($memberSales);exit;
                 $commissionRule = D('Salary')
                     ->commissionRule('c.participant_type=2','c.*'); 
                 if ($commissionRule) {
@@ -838,6 +839,8 @@ class SalaryController extends PublicController {
                     }
                 }
 
+                echo '<pre>';
+                print_r($memberSales);exit;
                 $memberSales = $commissionList;
                 return array('roleCommission'=>$res,$memberSales);
             }

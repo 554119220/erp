@@ -25,7 +25,8 @@ return array(
     'DEFAULT_AJAX_RETURN' => 'JSON',
     'DEFAULT_FILTER'      => 'strip_tags,stripslashes',  //输入过滤
     'DATA_CACHE_TYPE'       =>  'Memcache',    // 数据缓存类型,支持:File|Db|Apc|Memcache|Shmop|Sqlite|Xcache|Apachenote|Eaccelerator
-    
+    //'URL_PATHINFO_FETCH' => 'ORIG_PATH_INFO,REDIRECT_URL',
+
     'SALE'                => '1,9,13,27,28,29',
     'OFFLINE_SALE'        => '1,9,27,28,29',
     'ONLINE_SALE'         => 13,
@@ -34,5 +35,4 @@ return array(
     'ZHONGLAONIAN_SALE'   => '1,29',
     'TAOBAO_STORE'        => '21,22,26',
     'FINANCE'             => 8,
-    //'URL_PATHINFO_FETCH' => 'ORIG_PATH_INFO,REDIRECT_URL',
 );

@@ -250,7 +250,7 @@ class SalaryModel extends PublicModel{
     /*员工销量*/
     public function SaleMemberSales($startTime,$endTime,$status){
         $field = 'platform,order_type,COUNT(*) order_number,SUM(final_amount) final_amount,'
-            .'SUM(goods_amount) goods_amount,SUM(shipping_fee) shipping_fee,admin_id ';
+            .'SUM(goods_amount) goods_amount,SUM(shipping_fee) shipping_fee,admin_id,admin_name ';
         $where = " add_time>=$startTime AND add_time<=$endTime AND $status";
         $res = M('order_info')->field($field)->where($where)->group('admin_id')
             ->select();
