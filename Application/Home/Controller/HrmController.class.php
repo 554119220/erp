@@ -15,6 +15,18 @@ use Think\Page;
 use Think\Model;
 
 class HrmController extends PublicController{
+    public function nav(){
+        $title = I('get.title',L('HRM_MANAGE'));
+        $act = $_REQUEST['act'] ? $_REQUEST['act'] : 'stafflist';
+        $Menu = D('Menu');
+        $navlist = $Menu->nav('hrm');
+        $url = substr(U(),0,strrpos(U(),'/'));
+        $this->assign('url',$url);
+        $this->assign('act',$_REQUEST['act']);
+        $this->assign('navlist',$navlist);
+        $this->assign('title',$title);
+        $this->controllerUrl = $this->fullpage();
+    }
     //人事档案
     public function archive(){
         $mHrm = D('Hrm');
@@ -404,12 +416,23 @@ class HrmController extends PublicController{
             $staffName = mysql_real_escape_string($_REQUEST['staff_name']);
             $where = " staff_name LIKE '%$staffName%'";
         }
+
+        if ($_REQUEST['role_id']) {
+            $where = ' role_id='.intval($_REQUEST['role_id']);
+        }
         return $this->ajaxReturn(D('Hrm')->staffListSelect(false,true,$where),'JSON');
     }
 
     //升职转正，职位评级
     public function promotion(){
-       $this->display(); 
+        $this->nav();
+        $this->display(); 
+    }
+
+    //职位评级管理
+    public function promotionLevel(){
+        $this->nav();
+        $this->display(); 
     }
 }
 ?>

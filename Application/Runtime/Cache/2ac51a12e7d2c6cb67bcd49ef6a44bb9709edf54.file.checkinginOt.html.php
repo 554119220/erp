@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-25 14:25:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 11:06:09
          compiled from ".\Application\Home\View\Checkingin\checkinginOt.html" */ ?>
 <?php /*%%SmartyHeaderCode:9907550f71d87de295-46755956%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2ac51a12e7d2c6cb67bcd49ef6a44bb9709edf54' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\checkinginOt.html',
-      1 => 1427251410,
+      1 => 1427511918,
       2 => 'file',
     ),
   ),
@@ -48,7 +48,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       <caption class="title">加班登记</caption>
       <tr>
         <td>
-          <select name="role_id">
+          <select name="role_id" onchange="getAdminList(this)">
             <option value="0">选择部门</option>
             <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['role_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -62,7 +62,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
           </select>
         </td>
         <td>
-          <select name="staff_id">
+          <select name="staff_id" id="staff_id">
             <option value="0">员工名</option>
             <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;

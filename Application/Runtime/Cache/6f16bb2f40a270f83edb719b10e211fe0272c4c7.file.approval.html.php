@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-24 16:50:39
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 11:42:41
          compiled from ".\Application\Home\View\Checkingin\approval.html" */ ?>
 <?php /*%%SmartyHeaderCode:1476054fcfe4629f631-04942548%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f16bb2f40a270f83edb719b10e211fe0272c4c7' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\approval.html',
-      1 => 1427186291,
+      1 => 1427514156,
       2 => 'file',
     ),
   ),
@@ -149,7 +149,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
     <?php } ?>
     <?php } else { ?>
     <tr>
-      <td colspan="4">人事部忙碌中，暂时忘了添加记录</td>
+      <td colspan="5">人事部忙碌中，暂时忘了添加记录</td>
     </tr>
     <?php }?>
   </table>
