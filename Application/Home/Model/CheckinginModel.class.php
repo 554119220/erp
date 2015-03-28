@@ -67,13 +67,14 @@ class CheckinginModel extends PublicModel{
                         $rule = explode(' ',$v['salary_rule']);
                         foreach ($rule as &$r) {
                             $r = unserialize($r);
-                            $r['relation_operator'] =
+                            $r['relation_operator_name'] =
                                 $relationOperator[$r['relation_operator']]; 
-                            $r['unity'] = $unity[$r['unity']]; 
-                            $r['operation'] = $operation[$r['operation']];
-                            $r['rule_item'] = $ruleitem[$r['rule_item']];
-                            $ruleList[] = "{$r['relation_operator']} {$r['times']}{$r['unity']}"
-                                ." {$r['operation']} {$r['rule_item']} {$r['salary_rule']}";
+                            $r['unity_name'] = $unity[$r['unity']]; 
+                            $r['operation_name'] = $operation[$r['operation']];
+                            $r['rule_item_name'] = $ruleitem[$r['rule_item']];
+                            $ruleList[] = "{$r['relation_operator_name']}".
+                                "{$r['times']}{$r['unity_name']}".
+                                " {$r['operation_name']} {$r['rule_item_name']} {$r['salary_rule']}";
                         }
                         $v['salary_rule'] = $ruleList;
                         unset($ruleList);

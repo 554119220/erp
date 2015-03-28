@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-27 10:30:56
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-27 17:17:02
          compiled from ".\Application\Home\View\Checkingin\checkinginType.html" */ ?>
 <?php /*%%SmartyHeaderCode:762754fcfe415f5e12-12119247%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a20c8e8ca6ae5a0e2aa0895dee3ffcd1e225f19d' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\checkinginType.html',
-      1 => 1427422026,
+      1 => 1427447736,
       2 => 'file',
     ),
   ),
@@ -69,7 +69,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           <input name="name" value="" min="1" type="text" id="title" required>
         </td>
       </tr>
-      <tr>
+      <tr id="tr_desk_rule">
         <th>计薪规则</th>
         <td>
           <select name="relation_operator[]">
@@ -181,7 +181,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
         <button class="btn-link" data-toggle="modal" data-target="#myModal"
           onclick="controlVacate(<?php echo $_smarty_tpl->tpl_vars['val']->value['type_id'];?>
 ,'edit')">修改</button>
-        <button class="btn-link" >不启用</button>
+        <!--<button class="btn-link" >不启用</button>-->
       </td>
     </tr>
     <?php } ?>
@@ -232,7 +232,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
                 <input name="name" value="" min="1" type="text" id="title" required>
               </td>
             </tr>
-            <tr>
+            <tr id="tr_salary_rule_0">
               <th>计薪规则</th>
               <td>
                 <select name="relation_operator[]">
@@ -300,7 +300,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" 
-          data-dismiss="modal">关闭
+          data-dismiss="modal" onclick="emptyRuleTr()">关闭
         </button>
         <input type="submit" class="btn btn-primary" form="editForm"  value="提交更改">
       </div>

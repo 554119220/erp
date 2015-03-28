@@ -72,7 +72,7 @@ class SalaryModel extends PublicModel{
             $res = M('oa_salary_item')->where($where)->order('item_id ASC,editable ASC')->select(); 
             if (1 == $type) {
                 $operationType = array('增项','减项','不操作');
-                $operation = array('加','减','乘','除');
+                $operation     = array('加','减','乘','除');
                 $salaryObject  = $this->salaryObject(1);
                 foreach($res as &$val){
                     $val['operation_type'] = $operationType[$val['operation_type']];

@@ -273,7 +273,7 @@ class SalaryController extends PublicController {
 
     /*切换平台，员工，小组*/
     public function switchParticipant(){
-        $tag = I('post.tag',0); 
+        $tag = intval($_POST['tag']);
         switch($tag){
         case 0:
             $data = D('RoleManage')->roleListSelect('','role_id,role_name');
@@ -839,8 +839,6 @@ class SalaryController extends PublicController {
                     }
                 }
 
-                echo '<pre>';
-                print_r($memberSales);exit;
                 $memberSales = $commissionList;
                 return array('roleCommission'=>$res,$memberSales);
             }

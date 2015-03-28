@@ -22,26 +22,72 @@ function controlVacate(typeId,act){
                   $(this).attr('selected',true);
                 }
               });
-            for (var i in data.salary_rule) {
-              $("#editForm [name='times']").val(data.salary_rule[0]);
-              $("#editForm [name='operation'] option").each(function(){
-                if ($(this).val() == data.salary_rule[1]) {
-                  $(this).attr('selected',true);
+
+            var deskTr   = document.getElementById('tr_desk_rule');
+            var trObj    = document.getElementById('tr_salary_rule_0');
+            if (data.salary_rule) {
+              var rowIndex = trObj.rowIndex;
+              var tableObj = trObj.parentNode;
+              for (var i in data.salary_rule) {
+                if (0 == i) {
+                  trObj = $('#tr_salary_rule_0');
+                  //trObj.attr('id','tr_salary_rule_'+i);
+                  trObj.html(deskTr.innerHTML);
+                }else{
+                  trObj = tableObj.insertRow(rowIndex+1);
+                  trObj.innerHTML = deskTr.innerHTML;
+                  trObj.setAttribute('id','tr_salary_rule_'+i);
+                  trObj.setAttribute('name','append_tr');
+                  var label = trObj.getElementsByTagName('label');
+                  label[0].innerHTML = '－';
+                  label[0].onclick = function(){
+                    removeTr(trObj);
+                  };
                 }
-              });
-              $("#editForm [name='rule_item'] option").each(function(){
-                if ($(this).val() == data.salary_rule[2]) {
-                  $(this).attr('selected',true);
-                }
-              });
-              $("#editForm [name='salary_rule']").val(data.salary_rule[3]);
+                $('#tr_salary_rule_'+i+" [name='times[]']").val(data.salary_rule[i].times);
+
+                $('#tr_salary_rule_'+i+" [name='relation_operator[]'] option").each(function(){
+                  if ($(this).val() == data.salary_rule[i].relation_operator) {
+                    $(this).attr('selected',true);
+                  }
+                  });
+
+                $('#tr_salary_rule_'+i+" [name='unity[]'] option").each(function(){
+                  if ($(this).val() == data.salary_rule[i].unity) {
+                    $(this).attr('selected',true);
+                  }
+                });
+
+                $('#tr_salary_rule_'+i+" [name='operation[]'] option").each(function(){
+                  if ($(this).val() == data.salary_rule[i].operation) {
+                    $(this).attr('selected',true);
+                  }
+                });
+
+                $('#tr_salary_rule_'+i+" [name='rule_item[]'] option").each(function(){
+                  if ($(this).val() == data.salary_rule[i].rule_item) {
+                    $(this).attr('selected',true);
+                  }
+                });
+                $('#tr_salary_rule_'+i+" [name='salary_rule[]']").val(data.salary_rule[i].salary_rule);
+              }  
+            }else{
+              trObj = $('#tr_salary_rule_0');
+              trObj.html(deskTr.innerHTML);
             }
+
             $("#editForm [name='type_id']").val(data.type_id);
             $("#editForm [name='check_id']").val(data.check_id);
           }
         });
   }
   return false; 
+}
+
+function emptyRuleTr(){
+  var trObj = document.getElementById('tr_salary_rule_0');
+  trObj.innerHTML = '';
+  $("[name='append_tr']").remove();
 }
 
 //修改加班设置
@@ -122,4 +168,5 @@ function moreCheckinginRule(obj){
 //删除行
 function removeTr(obj){
   obj.parentNode.deleteRow(obj.rowIndex);
+
 } 

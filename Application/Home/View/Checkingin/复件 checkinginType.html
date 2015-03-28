@@ -22,7 +22,7 @@
           <input name="name" value="" min="1" type="text" id="title" required>
         </td>
       </tr>
-      <tr id="tr_desk_rule">
+      <tr>
         <th>计薪规则</th>
         <td>
           <select name="relation_operator[]">
@@ -86,7 +86,7 @@
       <td>
         <button class="btn-link" data-toggle="modal" data-target="#myModal"
           onclick="controlVacate({$val.type_id},'edit')">修改</button>
-        <!--<button class="btn-link" >不启用</button>-->
+        <button class="btn-link" >不启用</button>
       </td>
     </tr>
     {/foreach}
@@ -130,7 +130,7 @@
                 <input name="name" value="" min="1" type="text" id="title" required>
               </td>
             </tr>
-            <tr id="tr_salary_rule_0">
+            <tr id="tr_salary_rule">
               <th>计薪规则</th>
               <td>
                 <select name="relation_operator[]">
@@ -166,7 +166,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" 
-          data-dismiss="modal" onclick="emptyRuleTr()">关闭
+          data-dismiss="modal">关闭
         </button>
         <input type="submit" class="btn btn-primary" form="editForm"  value="提交更改">
       </div>
