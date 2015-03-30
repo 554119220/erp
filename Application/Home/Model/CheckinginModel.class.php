@@ -60,7 +60,7 @@ class CheckinginModel extends PublicModel{
             $unity = array('d'=>'天','h'=>'时','m'=>'分','s'=>'次');
             $relationOperator = array(
                 'lt'=>'小于','gt'=>'大于','eq'=>'等于','le'=>'小于等于','ge'=>'大于等于');
-            $ruleitem = array('固定值', '每日工资 x','时长 x');
+            $ruleitem = array('固定值', '每日工资 x','每时工资 x','时长 x');
             if ($res) {
                 foreach ($res as &$v) {
                     if ($v['salary_rule']) {

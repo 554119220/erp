@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 11:06:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 11:02:54
          compiled from ".\Application\Home\View\Checkingin\checkinginOt.html" */ ?>
 <?php /*%%SmartyHeaderCode:9907550f71d87de295-46755956%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2ac51a12e7d2c6cb67bcd49ef6a44bb9709edf54' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\checkinginOt.html',
-      1 => 1427511918,
+      1 => 1427684572,
       2 => 'file',
     ),
   ),
@@ -28,9 +28,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'k' => 0,
     'status' => 0,
     'otList' => 0,
-    'role_id' => 0,
-    'staff_id' => 0,
-    'start_time' => 0,
     'footer' => 0,
   ),
   'has_nocache_code' => false,
@@ -77,18 +74,25 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
             <?php } ?>
           </select>
         </td>
-        <th>开始时间</th>
+        <td>
+          <select name="ot_type">
+            <option value="0">晚上加班</option>
+            <option value="1">正常加班</option>
+          </select>
+        </td>
         <td>
           <input type="text" name="start_time" value=""
-          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" required/>
+          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" required
+          placeholder="开始时间"/>
         </td>
-        <th> 加班时长（小时）</th>
         <td>
-          <input type="text" name="date" value="" required class="ac"/>
+          <input type="text" name="end_time" value=""
+          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" required
+          placeholder="结束时间"/>
         </td>
       </tr>
       <tr>
-        <td colspan="6">
+        <td colspan="7">
           <textarea name="reason" placeholder="加班原因" required></textarea>
         </td>
       </tr>
@@ -147,7 +151,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
         <th>序号</th>
         <th>部门</th>
         <th>员工</th>
-        <th>开始时间</th>
+        <th>起止时间</th>
         <th>加班工时</th>
         <th>原因</th>
         <th>审核进度</th>
@@ -161,26 +165,29 @@ foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v
 $_smarty_tpl->tpl_vars['v']->_loop = true;
  $_smarty_tpl->tpl_vars['smarty']->value['foreach']['i']['iteration']++;
 ?>
-      <td><?php echo $_smarty_tpl->getVariable('smarty')->value['foreach']['i']['iteration'];?>
+      <tr>
+        <td><?php echo $_smarty_tpl->getVariable('smarty')->value['foreach']['i']['iteration'];?>
 </td>
-      <td><?php echo $_smarty_tpl->tpl_vars['v']->value['role_name'];?>
+        <td><?php echo $_smarty_tpl->tpl_vars['v']->value['role_name'];?>
 </td>
-      <td><?php echo $_smarty_tpl->tpl_vars['v']->value['staff_name'];?>
+        <td><?php echo $_smarty_tpl->tpl_vars['v']->value['staff_name'];?>
 </td>
-      <td><?php echo $_smarty_tpl->tpl_vars['v']->value['start_time'];?>
+        <td><?php echo $_smarty_tpl->tpl_vars['v']->value['start_time'];?>
+到<?php echo $_smarty_tpl->tpl_vars['v']->value['end_time'];?>
 </td>
-      <td><?php echo $_smarty_tpl->tpl_vars['v']->value['date'];?>
+        <td><?php echo $_smarty_tpl->tpl_vars['v']->value['date'];?>
 </td>
-      <td><?php echo $_smarty_tpl->tpl_vars['v']->value['reason'];?>
+        <td><?php echo $_smarty_tpl->tpl_vars['v']->value['reason'];?>
 </td>
-      <td><?php echo $_smarty_tpl->tpl_vars['v']->value['status'];?>
+        <td><?php echo $_smarty_tpl->tpl_vars['v']->value['status'];?>
 </td>
-      <td>
-        <input type="button" class="btn-link" value="修改" data-toggle="modal" 
-        data-target="#myModal" onclick="editOt(<?php echo $_smarty_tpl->tpl_vars['v']->value['check_id'];?>
+        <td>
+          <input type="button" class="btn-link" value="修改" data-toggle="modal" 
+          data-target="#myModal" onclick="editOt(<?php echo $_smarty_tpl->tpl_vars['v']->value['check_id'];?>
 )"/>
-        <input type="button" class="btn-link" value="删除"/>
-      </td>
+          <input type="button" class="btn-link" value="删除"/>
+        </td>
+      </tr>
       <?php } ?>
       <?php } else { ?>
       <tr> <td colspan="8">没有加班记录</td> </tr>
@@ -216,7 +223,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v
 $_smarty_tpl->tpl_vars['v']->_loop = true;
 ?>
                   <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['role_id'];?>
-" <?php if ($_smarty_tpl->tpl_vars['v']->value['role_id']==$_smarty_tpl->tpl_vars['role_id']->value) {?>selected<?php }?>>
+">
                   <?php echo $_smarty_tpl->tpl_vars['v']->value['role_name'];?>
 </option>
                   <?php } ?>
@@ -235,24 +242,33 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
  $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
 ?>
                   <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
-" <?php if ($_smarty_tpl->tpl_vars['v']->value==$_smarty_tpl->tpl_vars['staff_id']->value) {?>selected<?php }?>> <?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+"> <?php echo $_smarty_tpl->tpl_vars['v']->value;?>
 </option>
                   <?php } ?>
                 </select>
               </td>
             </tr>
             <tr>
+              <th>加班类型</th>
+              <td>
+                <select name="ot_type">
+                  <option value="0">晚上加班</option>
+                  <option value="1">正常加班</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
               <th>开始时间</th>
               <td>
-                <input type="text" name="start_time" value="<?php echo $_smarty_tpl->tpl_vars['start_time']->value;?>
-"
+                <input type="text" name="start_time" value=""
                 onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"/>
               </td>
             </tr>
             <tr>
-              <th>加班时长</th>
+              <th>结束时间</th>
               <td>
-                <input type="text" name="date" value="0" required /> （小时）
+                <input type="text" name="end_time" value=""
+                onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"/>
               </td>
             </tr>
             <tr>

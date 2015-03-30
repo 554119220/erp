@@ -22,18 +22,25 @@
             {/foreach}
           </select>
         </td>
-        <th>开始时间</th>
+        <td>
+          <select name="ot_type">
+            <option value="0">晚上加班</option>
+            <option value="1">正常加班</option>
+          </select>
+        </td>
         <td>
           <input type="text" name="start_time" value=""
-          {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"{/literal} required/>
+          {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"{/literal} required
+          placeholder="开始时间"/>
         </td>
-        <th> 加班时长（小时）</th>
         <td>
-          <input type="text" name="date" value="" required class="ac"/>
+          <input type="text" name="end_time" value=""
+          {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"{/literal} required
+          placeholder="结束时间"/>
         </td>
       </tr>
       <tr>
-        <td colspan="6">
+        <td colspan="7">
           <textarea name="reason" placeholder="加班原因" required></textarea>
         </td>
       </tr>
@@ -77,7 +84,7 @@
         <th>序号</th>
         <th>部门</th>
         <th>员工</th>
-        <th>开始时间</th>
+        <th>起止时间</th>
         <th>加班工时</th>
         <th>原因</th>
         <th>审核进度</th>
@@ -85,18 +92,20 @@
       </tr>
       {if $otList}
       {foreach from=$otList item=v name=i}
-      <td>{$smarty.foreach.i.iteration}</td>
-      <td>{$v.role_name}</td>
-      <td>{$v.staff_name}</td>
-      <td>{$v.start_time}</td>
-      <td>{$v.date}</td>
-      <td>{$v.reason}</td>
-      <td>{$v.status}</td>
-      <td>
-        <input type="button" class="btn-link" value="修改" data-toggle="modal" 
-        data-target="#myModal" onclick="editOt({$v.check_id})"/>
-        <input type="button" class="btn-link" value="删除"/>
-      </td>
+      <tr>
+        <td>{$smarty.foreach.i.iteration}</td>
+        <td>{$v.role_name}</td>
+        <td>{$v.staff_name}</td>
+        <td>{$v.start_time}到{$v.end_time}</td>
+        <td>{$v.date}</td>
+        <td>{$v.reason}</td>
+        <td>{$v.status}</td>
+        <td>
+          <input type="button" class="btn-link" value="修改" data-toggle="modal" 
+          data-target="#myModal" onclick="editOt({$v.check_id})"/>
+          <input type="button" class="btn-link" value="删除"/>
+        </td>
+      </tr>
       {/foreach}
       {else}
       <tr> <td colspan="8">没有加班记录</td> </tr>
@@ -126,7 +135,7 @@
               <td>
                 <select name="role_id">
                   {foreach from=$role_list item=v}
-                  <option value="{$v.role_id}" {if $v.role_id eq $role_id}selected{/if}>
+                  <option value="{$v.role_id}">
                   {$v.role_name}</option>
                   {/foreach}
                 </select>
@@ -137,22 +146,32 @@
               <td>
                 <select name="staff_id">
                   {foreach from=$staff_list key=k item=v}
-                  <option value="{$k}" {if $v eq $staff_id}selected{/if}> {$v}</option>
+                  <option value="{$k}"> {$v}</option>
                   {/foreach}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>加班类型</th>
+              <td>
+                <select name="ot_type">
+                  <option value="0">晚上加班</option>
+                  <option value="1">正常加班</option>
                 </select>
               </td>
             </tr>
             <tr>
               <th>开始时间</th>
               <td>
-                <input type="text" name="start_time" value="{$start_time}"
+                <input type="text" name="start_time" value=""
                 {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"{/literal}/>
               </td>
             </tr>
             <tr>
-              <th>加班时长</th>
+              <th>结束时间</th>
               <td>
-                <input type="text" name="date" value="0" required /> （小时）
+                <input type="text" name="end_time" value=""
+                {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"{/literal}/>
               </td>
             </tr>
             <tr>

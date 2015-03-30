@@ -44,7 +44,7 @@ class CheckinginController extends PublicController {
         $unity = array('d'=>'天','h'=>'时','m'=>'分','s'=>'次');
         $relationOperator = array(
             'lt'=>'小于','gt'=>'大于','eq'=>'等于','le'=>'小于等于','ge'=>'大于等于');
-        $ruleitem = array('固定值', '每日工资 x','时长 x');
+        $ruleitem = array('固定值', '每日工资 x','每时工资 x','时长 x');
         $this->assign('operation',$operation);
         $this->assign('unity',$unity);
         $this->assign('rule_item',$ruleitem);
@@ -362,8 +362,11 @@ class CheckinginController extends PublicController {
         $_POST['staff_name'] = M('oa_staff_records')->where("staff_id={$_POST['staff_id']}")
           ->getField('staff_name');
         $_POST['start_time'] = strtotime($_POST['start_time']);
+        $_POST['end_time']   = strtotime($_POST['end_time']);
+        $_POST['date']       = floor(($_POST['end_time']-$_POST['start_time'])/3600);//加班时长
         $_POST['type_id']    = 9;
         $_POST['class_id']   = 3;
+
         $res = D('Checkingin')->addOtRecord();
         if ($res) {
             $this->success(L('ADD_SUCCESS'),__CONTROLLER__.'/checkinginOt');
@@ -378,7 +381,8 @@ class CheckinginController extends PublicController {
             $checkId = intval($_GET['check_id']);
             $res = M('oa_checkingin')->where("check_id=$checkId")->find();
             if ($res) {
-                $res['start_time'] = date('Y-m-d H:i');
+                $res['start_time'] = date('Y-m-d H:i',$res['start_time']);
+                $res['end_time'] = date('Y-m-d H:i',$res['end_time']);
             }
             $this->ajaxReturn($res,'JSON');
         }elseif('save' == $_GET['behave']){

@@ -110,6 +110,7 @@ function editOt(checkId){
                 }
               });
             $("#editForm [name='start_time']").val(data.start_time);
+            $("#editForm [name='end_time']").val(data.end_time);
             $("#editForm [name='date']").val(data.date);
             $("#editForm [name='reason']").val(data.reason);
             $("#editForm [name='check_id']").val(data.check_id);
