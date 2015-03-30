@@ -528,9 +528,9 @@ class SalaryController extends PublicController {
             }else{
                 //销售团队
               if ($memberSalerCommission) {
-                  $ruleCommissionRule = D('Salary')->commissionRule('participant_type=0');
-                  if ($ruleCommissionRule) {
-                      foreach ($ruleCommissionRule as $v) {
+                  $roleCommissionRule = D('Salary')->commissionRule('participant_type=0');
+                  if ($roleCommissionRule) {
+                      foreach ($roleCommissionRule as $v) {
                           $participant = unserialize($v['participant']);
                           if (in_array($roleId,$participant)) {
                               $commission = $v['commission'];
@@ -870,7 +870,7 @@ class SalaryController extends PublicController {
                 foreach ($roleSales as &$v) {
                     $res['final_amount'] += $v['final_amount'];
                 }
-                $staffList = salerCommisstion($staffList);
+                $staffList = $this->salerCommisstion($staffList);
                 //保存部门提成记录
                 $data = array(
                     'role_id'      => $roleId,

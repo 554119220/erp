@@ -388,6 +388,7 @@ class CheckinginController extends PublicController {
         }elseif('save' == $_GET['behave']){
             $_POST['date_type'] = 1;
             $_POST['start_time'] = strtotime($_POST['start_time']);
+            $_POST['end_time'] = strtotime($_POST['end_time']);
             $_POST['staff_name'] = M('oa_staff_records')->WHERE("staff_id={$_POST['staff_id']}")
                 ->getField('staff_name');
             $do = M('oa_checkingin');
@@ -459,6 +460,17 @@ class CheckinginController extends PublicController {
         }
         $rule = implode(' ',$salaryRule);
         return $rule;
+    }
+
+    //排班
+    public function arrangeGrade(){
+        return false;
+    }
+
+    //调休
+    public function lieu(){
+        $this->nav();
+        $this->display();
     }
 }
 ?>

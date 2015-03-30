@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-28 18:16:04
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 15:32:50
          compiled from ".\Application\Home\View\Public\bfooter.html" */ ?>
 <?php /*%%SmartyHeaderCode:483454f6c32094c5f8-40385666%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5f9579fd1fc44bf9d2d09edf15c9695da92405aa' => 
     array (
       0 => '.\\Application\\Home\\View\\Public\\bfooter.html',
-      1 => 1427537758,
+      1 => 1427700767,
       2 => 'file',
     ),
   ),
@@ -27,10 +27,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
  src="<?php echo $_smarty_tpl->tpl_vars['publicUrl']->value;?>
 /js/jquery-2.0.0.min.js" type="text/javascript"><?php echo '</script'; ?>
 >
-<?php echo '<script'; ?>
+<!--<?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['publicUrl']->value;?>
 /js/validator.js" type="text/javascript"><?php echo '</script'; ?>
->
+>-->
 <?php echo '<script'; ?>
  src="<?php echo $_smarty_tpl->tpl_vars['publicUrl']->value;?>
 /js/salary.js" type="text/javascript"><?php echo '</script'; ?>

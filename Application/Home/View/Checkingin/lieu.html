@@ -1,0 +1,86 @@
+{$header}
+{$nav}
+<div class="wd750 pd12px">
+  <form action="{$url}" method="POST">
+    <table class="form single">
+      <caption>添加调休</caption>
+      <tr>
+        <th>调休人</th>
+        <td>
+        <select name="staf_id">
+          <option value="0">员工</option>
+          {foreach from=$staff_list item=v}
+          <option value="{$v.staff_id}">{$v.staff_name}</option>
+          {/foreach}
+        </select>
+        </td>
+      </tr>
+      <tr>
+        <th>类型</th>
+        <td>
+          <select name="type">
+            {foreach from=$type_list item=v}
+            <option value="{$v.type_id}">{$v.type_name}</option>
+            {/foreach}
+          </select>
+        </td>
+      </tr>
+    </table>
+  </form> 
+  <div class="line-title">调休记录</div>
+  <form action="{$url}/checkinginOt" method="POST"> 
+    <table width="100%" class="tool-bar">
+      <td>
+        <select name="role_id">
+          <option value="0">选择部门</option>
+          {foreach from=$role_list item=v}
+          <option value="{$v.role_id}">{$v.role_name}</option>
+          {/foreach}
+        </select>
+      </td>
+      <td><input type="text" name="staff_name" placeholder="员工姓名"/> </td>
+      <td> <input type="text" name="start_time" value="" placeholder="起始"
+        {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"{/literal}/> </td>
+      <td> <input type="text" name="end_time" value="" placeholder="结束"
+        {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"{/literal}/> </td>
+      <td>
+        <select name="status">
+          <option value="0">进度选择</option>
+          {foreach from=$status key=k item=v}
+          <option value="{$k}">{$v}</option>
+          {/foreach}
+        </select>
+      </td>
+      <td>
+        <input type="submit" value="搜索"/>
+      </td>
+    </table>
+  </form>
+  <div id="resource">
+    <table class="gridtable" style="margin-top:4px;">
+      <tr>
+        <th>调休人</th>
+        <th>填写人</th>
+        <th>状态</th>
+        <th>调休类型</th>
+        <th>调休时间</th>
+        <th>创建时间</th>
+        <th>操作</th>
+      </tr>
+      {foreach from=$lieu_list item=v}
+      <tr>
+        <td>{$v.staff_name}</td>
+        <td>{$v.add_admin}</td>
+        <td>{$v.status}</td>
+        <td>{$v.start_time}至{$v.end_time}</td>
+        <td>{$v.add_time}</td>
+        <td>
+          <button class="btn-link">编辑</button>
+          <button class="btn-link">删除</button>
+        </td>
+      </tr>
+      {/foreach}
+    </table>
+  </div>
+</div>
+{$booter}

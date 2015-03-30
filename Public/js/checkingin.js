@@ -169,5 +169,16 @@ function moreCheckinginRule(obj){
 //删除行
 function removeTr(obj){
   obj.parentNode.deleteRow(obj.rowIndex);
-
 } 
+
+////切换考勤计薪参数
+//function changeRuleItem(obj,taget){
+//  var trIndex = obj.parentNode.parentNode.rowIndex;
+//  if (0 != obj.value) {
+//    document.getElementById(target+'second_rule_item_'+trIndex).style.display = '';
+//    document.getElementById(target+'second_fixed_'+trIndex).style.display = 'none';
+//  }else{
+//    document.getElementById(target+'second_rule_item_'+trIndex).style.display = 'none';
+//    document.getElementById(target+'second_fixed_'+trIndex).style.display = '';
+//  }
+//}
