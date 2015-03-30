@@ -442,7 +442,7 @@ class SalaryController extends PublicController {
             //$datetime = strtotime('-1 month'); //上个月
             $datetime = $_SERVER['REQUEST_TIME'];
             $where    .= " AND add_time=$datetime";
-            //$commissionList = $staffList;
+            $commissionList = $staffList;
             $this->assign('title',L('commission_wait'));
             $this->assign('datetime',date("Y-m",$datetime));
         }else{
@@ -472,12 +472,12 @@ class SalaryController extends PublicController {
         if (!$roleCommission) {
             //数据库没有平台上个月待发提成记录,就统计并保存
             $roleCommission = $this->computeCommission($staffList,$roleId); 
-            if($roleCommission &&in_array($roleId,$memberSaler)){
-                $roleCommission = $roleCommission['role_commission'];
-                $memberSalerCommission = $roleCommission['staff_list'];
+            if(!$roleCommission){
+                exit;
+            }elseif(in_array($roleId,$memberSaler)){
+                $memberSalerCommission = $roleCommission;
+                //dump($memberSalerCommission);exit;
             }
-        }elseif(in_array($roleId,$memberSaler)){
-            $memberSalerCommission = $this->salerCommisstion($staffList);
         }
         //else{
         //    $roleCommission = D('Salary')->roleCommissionList("role_id=$roleId");
@@ -528,24 +528,7 @@ class SalaryController extends PublicController {
             }else{
                 //销售团队
               if ($memberSalerCommission) {
-                  $ruleCommissionRule = D('Salary')->commissionRule('participant_type=0');
-                  if ($ruleCommissionRule) {
-                      foreach ($ruleCommissionRule as $v) {
-                          $participant = unserialize($v['participant']);
-                          if (in_array($roleId,$participant)) {
-                              $commission = $v['commission'];
-                          }
-                      }
-                  }
-                  foreach ($staffList as $v) {
-                      $data[] = array_merge(
-                          array(
-                              'commission' => sprintf("%0.2f",$v['final_amount']*$commission),
-                              'phase'      => $phase,
-                              'add_time'   => $_SERVER['REQUEST_TIME'],
-                              'commission_proportion' => $commission,
-                          ),$v);
-                  }
+
               }else{
                   //没有销量
               }
@@ -822,7 +805,7 @@ class SalaryController extends PublicController {
         return $res;
     }
     //计算提成并写入数据库
-    private function computeCommission($staffList=array(),$roleId){
+    private function computeCommission($staffIdList=array(),$roleId){
         $phase = strtotime(date('Y-m-1',strtotime('-1 month')));
         $onlineStore = C('ONLINE_STORE');
         $sale        = C('SALE');
@@ -870,7 +853,26 @@ class SalaryController extends PublicController {
                 foreach ($roleSales as &$v) {
                     $res['final_amount'] += $v['final_amount'];
                 }
-                $staffList = salerCommisstion($staffList);
+                //员工销量
+                $memberSales = D('Salary')->SaleMemberSales($startTime,$endTime,$status);
+                //是否有独立的提成规则
+                $commissionRule = D('Salary')
+                    ->commissionRule('c.participant_type=2','c.*'); 
+                foreach ($staffList as &$s) {
+                    foreach ($memberSales as $k=>&$m) {
+if ($m['admin_id'] == $staffList)) {
+    $m['commission'] = $m['final_amount']*$v['commission'];
+    $commissionList  = $m;
+    unset($memberSales['key']);
+}
+                    }
+
+                }
+                if ($commissionRule) {
+                    foreach ($commissionRule as &$v) {
+
+                    }
+                }
                 //保存部门提成记录
                 $data = array(
                     'role_id'      => $roleId,
@@ -878,34 +880,9 @@ class SalaryController extends PublicController {
                     'add_time'     => $_SERVER['REQUEST_TIME'],
                     'phase'        => $phase,
                 );
-                $roleCommissionId = M('oa_role_commission_list')->data($data)
-                    ->filter('strip_tags')->add(); 
-                return array('role_commission'=>$data,'staff_list'=>$staffList);
+                return $commissionList;
             }
         }else return false;
-    }
-
-    //销售员工提成
-    public function salerCommisstion($staffList){
-        //员工销量
-        $memberSales = D('Salary')->SaleMemberSales($startTime,$endTime,$status);
-        //是否有独立的提成规则
-        $commissionRule = D('Salary')
-            ->commissionRule('c.participant_type=2','c.*'); 
-        if ($commissionRule) {
-            foreach ($commissionRule as &$v) {
-                foreach ($memberSales as $k=>&$m) {
-                    foreach ($staffList as $t=>&$s) {
-                        if ($m['admin_id'] == $s['staff_id']) {
-                            $m['commission'] = $m['final_amount']*$v['commission'];
-                            $s = $m;
-                            unset($memberSales['key']);
-                        }
-                    }
-                }
-            }
-        }
-        return $staffList;
     }
 }
 ?>
