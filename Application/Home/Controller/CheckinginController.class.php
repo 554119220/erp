@@ -40,11 +40,12 @@ class CheckinginController extends PublicController {
     //考勤类型
     public function checkinginType(){
         $this->nav();
-        $operation = array('reduce'=>'减','add'=>'加');
-        $unity = array('d'=>'天','h'=>'时','m'=>'分','s'=>'次');
+        $operation  = array('reduce'=>'减','add'=>'加');
+        $unity      = array('d'=>'天','h'=>'时','m'=>'分','s'=>'次');
         $relationOperator = array(
             'lt'=>'小于','gt'=>'大于','eq'=>'等于','le'=>'小于等于','ge'=>'大于等于');
         $ruleitem = array('固定值', '每日工资 x','每时工资 x','时长 x');
+
         $this->assign('operation',$operation);
         $this->assign('unity',$unity);
         $this->assign('rule_item',$ruleitem);
@@ -65,16 +66,17 @@ class CheckinginController extends PublicController {
                     'parent_id' => I('post.type',0),
                     'type_name' => trim(I('post.name','')),
                 );
-                if ($_REQUEST['salary_rule']) {
+                if ($_REQUEST['salary_rule'][0]) {
                     $data['salary_rule'] = $this->checkinginTypeRule();
+                }else{
+                    $data['salary_rule'] = '';
                 }
                 $res = M('oa_checkingin_type')->where("type_id=$typeId")->save($data);
                 if ($res) { $this->success(L('UPD_SUCCESS'));
                 }else{ $this->error(L('UPD_ERROR')); }
             }else{
-                $res = M('oa_checkingin_type')->where("type_id=$typeId")->select();
+                $res = M('oa_checkingin_type')->where("type_id=$typeId")->find();
                 if ($res) {
-                    $res = $res['0'];
                     if ($res['salary_rule']) {
                         $ruleList = explode(' ',$res['salary_rule']);
                         foreach ($ruleList as &$v) {
@@ -97,8 +99,10 @@ class CheckinginController extends PublicController {
             'parent_id' => I('post.type',0),
             'type_name' => trim(I('post.name','')),
         );
-        if ($_REQUEST['salary_rule']) {
+        if ($_REQUEST['salary_rule'][0]){
             $data['salary_rule'] = $this->checkinginTypeRule();
+        }else{
+            $data['salary_rule'] = '';
         }
 
         $where = "parent={$data['parent']} AND type_name='{$data['type_name']}'";
@@ -472,8 +476,28 @@ class CheckinginController extends PublicController {
         $this->nav();
         $staffList = D('hrm')->staffListSelect(false,true);
         $this->assign('staff_list',$staffList);
-        $this->assign('type_id');
+        $this->assign('type_list',M('oa_checkingin_type')->where("parent_id=13")
+            ->getField('type_id,type_name'));
+        $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
+        $this->assign('status',array('审核中','已通过','未审核'));
+        $this->assign('url',__CONTROLLER__);
         $this->display();
+    }
+
+    //修改调休记录
+    public function eidtLieu(){
+        $behave = $_REQUEST['behave'] ? $_REQUEST['behave'] : 'edit';
+        if ('eidt' == $behave) {
+            $checkId = intval($_REQUEST['checkId']); 
+            if ($checkId) {
+                $res = D('Checkingin')->findCheckingin($checkId);
+                if ($res) {
+                    $this->ajaxReturn($res,'JSON');
+                }
+            }
+        }elseif ('save' == $behave){
+
+        }
     }
 }
 ?>

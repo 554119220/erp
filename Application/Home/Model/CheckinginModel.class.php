@@ -51,11 +51,11 @@ class CheckinginModel extends PublicModel{
     /*考勤类型列表*/
     public function typeList($where='',$list=false,$field='*'){
         if ($list) {
-            $where = $where ? $where.' AND c.parent_id<>0':'c.parent_id<>0';
-            $field = 'c.type_id,c.type_name,b.type_name AS parent_id,c.salary_rule';
-            $res =  M('oa_checkingin_type')->alias('c')
+            $where  = $where ? $where.' AND c.parent_id<>0':'c.parent_id<>0';
+            $field  = 'c.type_id,c.type_name,b.type_name AS parent_id,c.salary_rule';
+            $res    =  M('oa_checkingin_type')->alias('c')
                 ->join('LEFT JOIN __OA_CHECKINGIN_TYPE__ b ON c.parent_id=b.type_id')
-                ->field($field)->where($where)->select();
+                ->field($field)->where($where)->order('c.parent_id ASC')->select();
             $operation = array('reduce'=>'减','add'=>'加');
             $unity = array('d'=>'天','h'=>'时','m'=>'分','s'=>'次');
             $relationOperator = array(
@@ -166,6 +166,17 @@ class CheckinginModel extends PublicModel{
     public function getCheckinginReport($where){
         $data = M('oa_checkingin_report')->where($where)->select();
         return $data;
+    }
+
+    //查找一条考勤记录
+    public function findCheckingin($checkId){
+       $res = M('oa_checkingin')->where("checkId=$checkId")->find(); 
+       if ($res) {
+           $res['start_time'] = date('Y-m-d H:i',$res['start_time']);
+           $res['end_time']   = date('Y-m-d H:i',$res['end_time']);
+           $res['add_time']   = date('Y-m-d H:i',$res['add_time']);
+       }
+       return $res;
     }
 }
 ?>

@@ -171,6 +171,17 @@ function removeTr(obj){
   obj.parentNode.deleteRow(obj.rowIndex);
 } 
 
+//修改调休记录
+function editLieu('',checkId){
+  $.get(
+      url+'/check_id/'+checkId,
+      function(data){
+       if (data) {
+         
+       } 
+      });
+}
+
 ////切换考勤计薪参数
 //function changeRuleItem(obj,taget){
 //  var trIndex = obj.parentNode.parentNode.rowIndex;

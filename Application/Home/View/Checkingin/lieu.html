@@ -18,11 +18,31 @@
       <tr>
         <th>类型</th>
         <td>
-          <select name="type">
-            {foreach from=$type_list item=v}
-            <option value="{$v.type_id}">{$v.type_name}</option>
+          <select name="type_id">
+            {foreach from=$type_list key=k item=v}
+            <option value="{$k}">{$v}</option>
             {/foreach}
           </select>
+        </td>
+      </tr>
+      <tr>
+      	<th>开始时间</th>
+      	<td><input type="text" name="start_time" value=""/></td>
+      </tr>
+      <tr>
+      	<th>结束时间</th>
+      	<td><input type="text" name="end_time" value=""/></td>
+      </tr>
+      <tr>
+      	<th>调休原因</th>
+        <td>
+          <textarea name="reason" style="width:630px;height:48px;padding:3px;"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input type="submit" class='btn btn-primary' value="保存"/>
         </td>
       </tr>
     </table>
@@ -75,7 +95,9 @@
         <td>{$v.start_time}至{$v.end_time}</td>
         <td>{$v.add_time}</td>
         <td>
-          <button class="btn-link">编辑</button>
+          <button class="btn-link" data-toggle="modal" data-target="#myModal"
+          onclick="editLieu({$val.check_id},'edit')"
+            >修改</button>
           <button class="btn-link">删除</button>
         </td>
       </tr>
@@ -83,4 +105,76 @@
     </table>
   </div>
 </div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+          data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel"> 修改调休记录</h4>
+      </div>
+      <div class="modal-body">
+        <form action="{$url}/editLieu" method="POST" 
+          onsubmit="return validatValue(this)" id="editForm">
+          <table class="form single" style="margin-bottom:12px;">
+            <caption>添加调休</caption>
+            <tr>
+              <th>调休人</th>
+              <td>
+                <select name="staf_id">
+                  <option value="0">员工</option>
+                  {foreach from=$staff_list key=k item=v}
+                  <option value="{$k}">{$v}</option>
+                  {/foreach}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>类型</th>
+              <td>
+                <select name="type_id">
+                  {foreach from=$type_list key=k item=v}
+                  <option value="{$k}">{$v}</option>
+                  {/foreach}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>开始时间</th>
+              <td><input type="text" name="start_time" value=""/></td>
+            </tr>
+            <tr>
+              <th>结束时间</th>
+              <td><input type="text" name="end_time" value=""/></td>
+            </tr>
+            <tr>
+              <th>调休原因</th>
+              <td>
+                <textarea name="reason" style="width:630px;height:48px;padding:3px;"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <input type="submit" class='btn btn-primary' value="保存"/>
+              </td>
+            </tr>
+          </table>
+          <input type="hidden" name="behave" value="save"/>
+          <input type="hidden" name="check_id" value="0"/>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" 
+          data-dismiss="modal" onclick="emptyRuleTr()">关闭
+        </button>
+        <input type="submit" class="btn btn-primary" form="editForm"  value="提交更改">
+      </div>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal -->
 {$footer}
