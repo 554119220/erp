@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-26 08:41:46
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 09:19:33
          compiled from ".\Application\Home\View\Erp\index.html" */ ?>
 <?php /*%%SmartyHeaderCode:371354f7aa3147b218-23917124%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '00e031c7513734061f947efbb5091da5f5f00165' => 
     array (
       0 => '.\\Application\\Home\\View\\Erp\\index.html',
-      1 => 1427278137,
+      1 => 1427709205,
       2 => 'file',
     ),
   ),
@@ -47,7 +47,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                   <?php }?>
                   <div class="name">
                     <div class="a1">&nbsp;</div>
-                    <div class="t">考勤</div>
+                    <div class="t"><a target="_blank" href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+/checkingin/checkingin">考勤</a></div>
                   </div>
                   <?php if (0) {?>
                   <div class="name">

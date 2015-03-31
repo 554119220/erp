@@ -2,15 +2,15 @@
 {$nav}
 <div class="wd750 pd12px">
   <form action="{$url}" method="POST">
-    <table class="form single">
+    <table class="form single" style="margin-bottom:12px;">
       <caption>添加调休</caption>
       <tr>
         <th>调休人</th>
         <td>
         <select name="staf_id">
           <option value="0">员工</option>
-          {foreach from=$staff_list item=v}
-          <option value="{$v.staff_id}">{$v.staff_name}</option>
+          {foreach from=$staff_list key=k item=v}
+          <option value="{$k}">{$v}</option>
           {/foreach}
         </select>
         </td>
@@ -83,4 +83,4 @@
     </table>
   </div>
 </div>
-{$booter}
+{$footer}

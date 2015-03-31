@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 17:27:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 09:39:25
          compiled from ".\Application\Home\View\Checkingin\lieu.html" */ ?>
 <?php /*%%SmartyHeaderCode:5222551915c78583b2-42706097%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '844acc10c864fa85b3aeeeca946464128f90a8e2' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\lieu.html',
-      1 => 1427707617,
+      1 => 1427765963,
       2 => 'file',
     ),
   ),
@@ -22,12 +22,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'header' => 0,
     'nav' => 0,
     'url' => 0,
-    'role_list' => 0,
-    'v' => 0,
-    'status' => 0,
+    'staff_list' => 0,
     'k' => 0,
+    'v' => 0,
+    'type_list' => 0,
+    'role_list' => 0,
+    'status' => 0,
     'lieu_list' => 0,
-    'booter' => 0,
+    'footer' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -38,8 +40,43 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <div class="wd750 pd12px">
   <form action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 " method="POST">
-    <table>
-      
+    <table class="form single" style="margin-bottom:12px;">
+      <caption>添加调休</caption>
+      <tr>
+        <th>调休人</th>
+        <td>
+        <select name="staf_id">
+          <option value="0">员工</option>
+          <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['staff_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+          <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+          <?php } ?>
+        </select>
+        </td>
+      </tr>
+      <tr>
+        <th>类型</th>
+        <td>
+          <select name="type">
+            <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['type_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+?>
+            <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['type_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['type_name'];?>
+</option>
+            <?php } ?>
+          </select>
+        </td>
+      </tr>
     </table>
   </form> 
   <div class="line-title">调休记录</div>
@@ -123,6 +160,6 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
     </table>
   </div>
 </div>
-<?php echo $_smarty_tpl->tpl_vars['booter']->value;?>
+<?php echo $_smarty_tpl->tpl_vars['footer']->value;?>
 
 <?php }} ?>

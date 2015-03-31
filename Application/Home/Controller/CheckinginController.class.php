@@ -470,6 +470,9 @@ class CheckinginController extends PublicController {
     //调休
     public function lieu(){
         $this->nav();
+        $staffList = D('hrm')->staffListSelect(false,true);
+        $this->assign('staff_list',$staffList);
+        $this->assign('type_id');
         $this->display();
     }
 }
