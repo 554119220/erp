@@ -485,7 +485,7 @@ class CheckinginController extends PublicController {
     }
 
     //修改调休记录
-    public function eidtLieu(){
+    public function editLieu(){
         $behave = $_REQUEST['behave'] ? $_REQUEST['behave'] : 'edit';
         if ('eidt' == $behave) {
             $checkId = intval($_REQUEST['checkId']); 
@@ -497,6 +497,23 @@ class CheckinginController extends PublicController {
             }
         }elseif ('save' == $behave){
 
+        }
+    }
+
+    //添加调休记录
+    public function addLieu(){
+        $_POST['add_time']   = $_SERVER['REQUEST_TIME'];
+        $_POST['class_id']   = 13;
+        $_POST['staff_name'] = D('Hrm')->getStaffName(intval($_POST['staff_id']));
+        $_POST['start_time'] = strtotime($_POST['start_time']);
+        $_POST['end_time']   = strtotime($_POST['end_time']);
+        $do                  = M('oa_checkingin');
+        $do->creat();
+        $res = $do->filter('tag_filter')->add();
+        if ($res) {
+            $this->success(L('ADD_SUCCESS'));
+        }else{
+            $this->error(L('ADD_ERROR'));
         }
     }
 }

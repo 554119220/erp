@@ -172,15 +172,14 @@ function removeTr(obj){
 } 
 
 //修改调休记录
-function editLieu('',checkId){
-  $.get(
-      url+'/check_id/'+checkId,
-      function(data){
-       if (data) {
-         
-       } 
-      });
-}
+//function editLieu('',checkId){
+//  $.get(
+//      url+'/check_id/'+checkId,
+//      function(data){
+//       if (data) {
+//       }
+//      });
+//}
 
 ////切换考勤计薪参数
 //function changeRuleItem(obj,taget){

@@ -334,6 +334,11 @@ class HrmModel extends PublicModel{
     public function actPositionLevel($act){
         return true;
     }
+    //获得员工姓名
+    public function getStaffName($staffId){
+        return M('oa_staff_records')->
+            where('staff_id='.intval($staffId))->getField('staff_name');
+    }
 }
 
 ?>
