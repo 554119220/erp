@@ -1,18 +1,18 @@
 {$header}
 {$nav}
 <div class="wd750 pd12px">
-  <form action="{$url}" method="POST">
+  <input type="hidden" id="url" value="{$url}"/>
+  <form action="{$url}/addLieu" method="POST" onsubmit="return checking(this)">
     <table class="form single" style="margin-bottom:12px;">
       <caption>添加调休</caption>
       <tr>
         <th>调休人</th>
         <td>
-        <select name="staf_id">
-          <option value="0">员工</option>
+        <select name="staff_id" required='required'>
           {foreach from=$staff_list key=k item=v}
           <option value="{$k}">{$v}</option>
           {/foreach}
-        </select>
+        </select><font class="red">*</font>
         </td>
       </tr>
       <tr>
@@ -27,11 +27,13 @@
       </tr>
       <tr>
       	<th>开始时间</th>
-      	<td><input type="text" name="start_time" value=""/></td>
+        <td><input type="text" name="start_time" value=""
+          {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"{/literal}/></td>
       </tr>
       <tr>
       	<th>结束时间</th>
-      	<td><input type="text" name="end_time" value=""/></td>
+        <td><input type="text" name="end_time" value=""
+          {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"{/literal}/></td>
       </tr>
       <tr>
       	<th>调休原因</th>
@@ -90,13 +92,14 @@
       {foreach from=$lieu_list item=v}
       <tr>
         <td>{$v.staff_name}</td>
-        <td>{$v.add_admin}</td>
+        <td>{$v.admin_name}</td>
         <td>{$v.status}</td>
+        <td>{$v.type_name}</td>
         <td>{$v.start_time}至{$v.end_time}</td>
         <td>{$v.add_time}</td>
         <td>
           <button class="btn-link" data-toggle="modal" data-target="#myModal"
-          onclick="editLieu({$val.check_id},'edit')"
+          onclick="editLieu({$v.check_id},'edit')"
             >修改</button>
           <button class="btn-link">删除</button>
         </td>
@@ -118,14 +121,12 @@
         <h4 class="modal-title" id="myModalLabel"> 修改调休记录</h4>
       </div>
       <div class="modal-body">
-        <form action="{$url}/editLieu" method="POST" 
-          onsubmit="return validatValue(this)" id="editForm">
-          <table class="form single" style="margin-bottom:12px;">
-            <caption>添加调休</caption>
+        <form action="{$url}/editLieu" method="POST" id="editForm">
+          <table class="form single" style="width:100%" >
             <tr>
               <th>调休人</th>
               <td>
-                <select name="staf_id">
+                <select name="staff_id">
                   <option value="0">员工</option>
                   {foreach from=$staff_list key=k item=v}
                   <option value="{$k}">{$v}</option>
@@ -145,22 +146,18 @@
             </tr>
             <tr>
               <th>开始时间</th>
-              <td><input type="text" name="start_time" value=""/></td>
+              <td><input type="text" name="start_time" value=""
+                {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"{/literal}/></td>
             </tr>
             <tr>
               <th>结束时间</th>
-              <td><input type="text" name="end_time" value=""/></td>
+              <td><input type="text" name="end_time" value=""
+                {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"{/literal}/></td>
             </tr>
             <tr>
               <th>调休原因</th>
               <td>
-                <textarea name="reason" style="width:630px;height:48px;padding:3px;"></textarea>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <input type="submit" class='btn btn-primary' value="保存"/>
+                <textarea name="reason" style="width:430px;height:48px;padding:3px;"></textarea>
               </td>
             </tr>
           </table>
@@ -170,7 +167,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" 
-          data-dismiss="modal" onclick="emptyRuleTr()">关闭
+          data-dismiss="modal">关闭
         </button>
         <input type="submit" class="btn btn-primary" form="editForm"  value="提交更改">
       </div>

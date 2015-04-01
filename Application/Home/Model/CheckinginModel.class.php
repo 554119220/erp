@@ -107,8 +107,8 @@ class CheckinginModel extends PublicModel{
 
                 switch ($val['date_type']) {
                 case 0 : $val['date'] .= '天';break;
-                case 1 : $val['date'] .= '小时';break;
-                case 2 : $val['date'] .= '分钟';break;
+                case 1 : $val['date'] .= '时';break;
+                case 2 : $val['date'] .= '分';break;
                 }
             }
             return $res;
@@ -123,10 +123,16 @@ class CheckinginModel extends PublicModel{
         if (!$data) {
             $beginTime = strtotime(date('Y-m-01',$reportTime));
             $endTime   = strtotime(date('Y-m-t',$reportTime));
-            $where     = "start_time BETWEEN $beginTime AND $endTime";
-            $fields    = 'sum(dedcut_salary) as dedcut,count(type_id) as times,type_id,staff_id'
-                .',staff_name,sum(date) as date,role_id';
-            $res = M('oa_checkingin')->field($fields)->where($where)->group('staff_id,type_id')->select();
+            $where     .= " AND c.start_time BETWEEN $beginTime AND $endTime";
+            if ($_POST['role_id']) {
+                $where .= ' AND u.role_id='.intval($_POST['role_id']);
+            }
+            $fields    = 'sum(c.dedcut_salary) as dedcut,count(c.type_id) as times,'
+                .'c.type_id,c.staff_id,c.staff_name,sum(c.date) as date,r.role_id';
+            $res = M('oa_checkingin')->alias('c')
+                ->join(array('LEFT JOIN __OA_STAFF_RECORDS__ u on c.staff_id=u.staff_id',
+                'LEFT JOIN __ROLE__ r on r.role_id=u.role_id'))
+                ->field($fields)->where($where)->group('staff_id,type_id')->select();
             $checkingInType = $this->typeList('',false,'type_id,parent_id'); 
             foreach ($checkingInType as $t) {
                 if ($t['parent_id'] != 0) {
@@ -144,8 +150,20 @@ class CheckinginModel extends PublicModel{
                     //请假
                     $list[$v['staff_id']]['outworking_days'] += $v['date']; //缺勤天数
                     $list[$v['staff_id']]['dedcut_outwork'] = $v['dedcut'];
-                }elseif(in_array($v['type_id'],$typeList[2])){
+                }elseif(in_array($v['type_id'],$typeList[3])){
                     //加班
+                    if (9 == $v['type_id'] ) {
+                        $list[$v['staff_id']]['normal_ot'] += $v['date'];
+                    }elseif(14 == $v['type_id']){
+                        $list[$v['staff_id']]['night_ot'] += $v['date'];
+                    }
+
+                }elseif(in_array($v['type_id'],$typeList[11])){
+                    if (12 == $v['type_id']) {
+                        $list[$v['staff_id']]['ot_lieu'] += $v['date'];
+                    }elseif(13 == $v['type_id']){
+                        $list[$v['staff_id']]['year_lieu'] += $v['date'];
+                    }
                 }
                 $list[$v['staff_id']]['staff_name'] = $v['staff_name'];
                 $list[$v['staff_id']]['role_id'] = $v['role_id'];
@@ -170,13 +188,31 @@ class CheckinginModel extends PublicModel{
 
     //查找一条考勤记录
     public function findCheckingin($checkId){
-       $res = M('oa_checkingin')->where("checkId=$checkId")->find(); 
+       $res = M('oa_checkingin')->where("check_id=$checkId")->find(); 
        if ($res) {
            $res['start_time'] = date('Y-m-d H:i',$res['start_time']);
            $res['end_time']   = date('Y-m-d H:i',$res['end_time']);
            $res['add_time']   = date('Y-m-d H:i',$res['add_time']);
        }
        return $res;
+    }
+
+    public function getCheckingin($where){
+        $res = M('oa_checkingin')->alias('c')
+            ->join(array('LEFT JOIN __OA_CHECKINGIN_TYPE__ t ON c.type_id=t.type_id',
+                'LEFT JOIN __ADMIN_USER__ u ON u.user_id=c.add_admin'
+            ))
+            ->where($where)->field('c.*,t.type_name,u.user_name admin_name')->select();
+        if ($res) {
+            $status= array('审核中','已通过','未审核');
+            foreach ($res as &$v) {
+                $v['start_time'] = date('Y-m-d',$v['start_time']);
+                $v['end_time']   = date('Y-m-d',$v['end_time']);
+                $v['add_time']   = date('Y-m-d',$v['add_time']);
+                $v['status']     = $status[$v['status']];
+            }
+        }
+        return $res;
     }
 }
 ?>

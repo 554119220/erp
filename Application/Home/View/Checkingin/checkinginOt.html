@@ -23,9 +23,10 @@
           </select>
         </td>
         <td>
-          <select name="ot_type">
-            <option value="0">晚上加班</option>
-            <option value="1">正常加班</option>
+          <select name="type_id">
+            {foreach from=$type_list key=k item=v}
+            <option value="{$k}">{$v}</option>
+            {/foreach}
           </select>
         </td>
         <td>
@@ -81,14 +82,15 @@
     </form>
     <table class="gridtable" style="margin-top:4px;">
       <tr>
-        <th>序号</th>
-        <th>部门</th>
-        <th>员工</th>
-        <th>起止时间</th>
-        <th>加班工时</th>
-        <th>原因</th>
-        <th>审核进度</th>
-        <th>操作</th>
+        <th width="6%">序号</th>
+        <th width="8%">部门</th>
+        <th width="6%">员工</th>
+        <th width="8%">类型</th>
+        <th width="31%">起止时间</th>
+        <th width="7%">时长</th>
+        <th width="10%">原因</th>
+        <th width="5%">进度</th>
+        <th width="11%">操作</th>
       </tr>
       {if $otList}
       {foreach from=$otList item=v name=i}
@@ -96,6 +98,7 @@
         <td>{$smarty.foreach.i.iteration}</td>
         <td>{$v.role_name}</td>
         <td>{$v.staff_name}</td>
+        <td>{$v.type_name}</td>
         <td>{$v.start_time}到{$v.end_time}</td>
         <td>{$v.date}</td>
         <td>{$v.reason}</td>
@@ -108,7 +111,7 @@
       </tr>
       {/foreach}
       {else}
-      <tr> <td colspan="8">没有加班记录</td> </tr>
+      <tr> <td colspan="9">没有加班记录</td> </tr>
       {/if}
     </table>
   </div>
@@ -154,9 +157,10 @@
             <tr>
               <th>加班类型</th>
               <td>
-                <select name="ot_type">
-                  <option value="0">晚上加班</option>
-                  <option value="1">正常加班</option>
+                <select name="type_id">
+                  {foreach from=$type_list key=k item=v}
+                  <option value="{$k}">{$v}</option>
+                  {/foreach}
                 </select>
               </td>
             </tr>

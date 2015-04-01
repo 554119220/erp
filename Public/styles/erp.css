@@ -114,11 +114,13 @@ table.gridtable td {
 .breadcrumb li span{cursor:pointer;color:#428bca}
 .breadcrumb li span:hover{text-decoration:underline}
 
+/*考勤汇总*/
+.checkingin_report tr th[rowspan='2']{vertical-align:middle;}
+.checkingin_report tr th[colspan='2']{padding:2px;text-align:center}
+
 /*表格中的操作按钮*/
-.link-btn{color:#428bca;cursor:pointer;border:0px;background:transparent;display:inline;
-  margin-left:4px;
-}
+.link-btn{color:#428bca;cursor:pointer;border:0px;background:transparent;display:inline; margin-left:4px; }
 .link-btn:hover{text-decoration:underline}
 
 /*模态框表格*/
-.modal-body form table tr{border-top:1px solid #ccc};
+.modal-body form table tr{border-top:1px solid #ccc;}

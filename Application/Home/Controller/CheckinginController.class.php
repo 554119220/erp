@@ -133,8 +133,8 @@ class CheckinginController extends PublicController {
                 'staff_id'   => intval($_REQUEST['staff_id']),
                 'reason'     => I('post.reason',''),
                 'date'       => I('post.date',''),
-                'date_type'   => I('post.date_type',0),
-                'class_id'      => 1,
+                'date_type'  => I('post.date_type',0),
+                'class_id'   => 1,
                 'type_id'    => I('post.type_id',0),
                 'start_time' => strtotime(I('post.start_time','')),
                 'end_time'   => strtotime(I('post.end_time','')),
@@ -251,13 +251,18 @@ class CheckinginController extends PublicController {
         $reportTime = $_REQUEST['report_time']? $_REQUEST['report_time'] : date('Y-m');
         $reportTime = strtotime($reportTime);
         if (!$act || 'search' == $act) {
+            $where = ' 1 ';
+            if ($_POST['staff_name']) {
+                $where .= sprintf(" AND u.staff_name LIKE '%%%s%%'",$_POST['staff_name']);
+            }
+            $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
             $this->assign('title',L('CHECKINGIN_REPORT'));
             $this->assign('report_checkingin',true);
-            $reportList = S($reportTime.'_checkingin');
+            //$reportList = S($reportTime.'_checkingin');
             if (!$reportList) {
-                $reportList = D('Checkingin')->reportCheckingin($reportTime);
+                $reportList = D('Checkingin')->reportCheckingin($reportTime,$where);
                 if ($reportList) {
-                    S($reportTime.'_checkingin',$reportList,600);
+                    //S($reportTime.'_checkingin',$reportList,600);
                 }
             }
             $this->assign('saveUrl', __CONTROLLER__."/checkinginReport/act/save/report_time/"
@@ -333,6 +338,8 @@ class CheckinginController extends PublicController {
         $this->assign('staff_list',D('Hrm')->staffListSelect(false,true));
         $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
         $this->assign('status',array('待审核','通过审核'));
+        $this->assign('type_list',M('oa_checkingin_type')
+            ->where('parent_id=3')->getField('type_id,type_name'));
         $where = "c.type_id=9";
         if ($_POST['role_id']) {
             $where .= sprintf(" AND c.role_id=%d",$_POST['role_id']);
@@ -368,7 +375,6 @@ class CheckinginController extends PublicController {
         $_POST['start_time'] = strtotime($_POST['start_time']);
         $_POST['end_time']   = strtotime($_POST['end_time']);
         $_POST['date']       = floor(($_POST['end_time']-$_POST['start_time'])/3600);//加班时长
-        $_POST['type_id']    = 9;
         $_POST['class_id']   = 3;
 
         $res = D('Checkingin')->addOtRecord();
@@ -480,6 +486,8 @@ class CheckinginController extends PublicController {
             ->getField('type_id,type_name'));
         $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
         $this->assign('status',array('审核中','已通过','未审核'));
+        $where = 'class_id=11';
+        $this->assign('lieu_list',D('Checkingin')->getCheckingin($where));
         $this->assign('url',__CONTROLLER__);
         $this->display();
     }
@@ -487,8 +495,8 @@ class CheckinginController extends PublicController {
     //修改调休记录
     public function editLieu(){
         $behave = $_REQUEST['behave'] ? $_REQUEST['behave'] : 'edit';
-        if ('eidt' == $behave) {
-            $checkId = intval($_REQUEST['checkId']); 
+        if ('edit' == $behave) {
+            $checkId = intval($_REQUEST['check_id']); 
             if ($checkId) {
                 $res = D('Checkingin')->findCheckingin($checkId);
                 if ($res) {
@@ -496,24 +504,45 @@ class CheckinginController extends PublicController {
                 }
             }
         }elseif ('save' == $behave){
-
+            $_POST['add_time']   = $_SERVER['REQUEST_TIME'];
+            $_POST['add_admin']  = $_SESSION['admin_id'];
+            $_POST['start_time'] = strtotime($_POST['start_time']);
+            $_POST['end_time']   = strtotime($_POST['end_time']);
+            $_POST['date']       = ($_POST['end_time']-$_POST['start_time'])/(3600*24);
+            $_POST['date_type']  = 0;
+            $_POST['staff_name'] = D('Hrm')->getStaffName(intval($_POST['staff_id']));
+            if ($_POST['check_id']) {
+                $do = M('oa_checkingin');
+                $do->create();
+                $res = $do->where('check_id='.intval($_POST['check_id']))->save();
+                if ($res) {
+                    $this->success(L('UPD_SUCCESS'),__CONTROLLER__.'/lieu');
+                }else{
+                    $this->error(L('UPD_ERROR'));
+                }
+            }else{
+                $this->error(L('UPD_ERROR'));
+            }
         }
     }
 
     //添加调休记录
     public function addLieu(){
         $_POST['add_time']   = $_SERVER['REQUEST_TIME'];
-        $_POST['class_id']   = 13;
+        $_POST['class_id']   = M('oa_checkingin_type')->where("type_name='调休'")
+            ->getField('type_id');
         $_POST['staff_name'] = D('Hrm')->getStaffName(intval($_POST['staff_id']));
         $_POST['start_time'] = strtotime($_POST['start_time']);
         $_POST['end_time']   = strtotime($_POST['end_time']);
+        $_POST['date']       = ($_POST['end_time']-$_POST['start_time'])/(3600*24);
+        $_POST['date_type']  = 0;
         $do                  = M('oa_checkingin');
-        $do->creat();
+        $do->create();
         $res = $do->filter('tag_filter')->add();
         if ($res) {
             $this->success(L('ADD_SUCCESS'));
         }else{
-            $this->error(L('ADD_ERROR'));
+            $this->error(L('ADD_ERROR'),__CONTROLLER__.'/lieu');
         }
     }
 }

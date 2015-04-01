@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-31 18:06:58
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 14:31:52
          compiled from ".\Application\Home\View\Checkingin\lieu.html" */ ?>
 <?php /*%%SmartyHeaderCode:5222551915c78583b2-42706097%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '844acc10c864fa85b3aeeeca946464128f90a8e2' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\lieu.html',
-      1 => 1427796374,
+      1 => 1427869909,
       2 => 'file',
     ),
   ),
@@ -29,7 +29,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'role_list' => 0,
     'status' => 0,
     'lieu_list' => 0,
-    'val' => 0,
     'footer' => 0,
   ),
   'has_nocache_code' => false,
@@ -39,15 +38,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <?php echo $_smarty_tpl->tpl_vars['nav']->value;?>
 
 <div class="wd750 pd12px">
+  <input type="hidden" id="url" value="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+"/>
   <form action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-" method="POST">
+/addLieu" method="POST" onsubmit="return checking(this)">
     <table class="form single" style="margin-bottom:12px;">
       <caption>添加调休</caption>
       <tr>
         <th>调休人</th>
         <td>
-        <select name="staf_id">
-          <option value="0">员工</option>
+        <select name="staff_id" required='required'>
           <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['staff_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -59,7 +59,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 "><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
 </option>
           <?php } ?>
-        </select>
+        </select><font class="red">*</font>
         </td>
       </tr>
       <tr>
@@ -82,11 +82,13 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       </tr>
       <tr>
       	<th>开始时间</th>
-      	<td><input type="text" name="start_time" value=""/></td>
+        <td><input type="text" name="start_time" value=""
+          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"/></td>
       </tr>
       <tr>
       	<th>结束时间</th>
-      	<td><input type="text" name="end_time" value=""/></td>
+        <td><input type="text" name="end_time" value=""
+          onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"/></td>
       </tr>
       <tr>
       	<th>调休原因</th>
@@ -165,9 +167,11 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       <tr>
         <td><?php echo $_smarty_tpl->tpl_vars['v']->value['staff_name'];?>
 </td>
-        <td><?php echo $_smarty_tpl->tpl_vars['v']->value['add_admin'];?>
+        <td><?php echo $_smarty_tpl->tpl_vars['v']->value['admin_name'];?>
 </td>
         <td><?php echo $_smarty_tpl->tpl_vars['v']->value['status'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['v']->value['type_name'];?>
 </td>
         <td><?php echo $_smarty_tpl->tpl_vars['v']->value['start_time'];?>
 至<?php echo $_smarty_tpl->tpl_vars['v']->value['end_time'];?>
@@ -176,7 +180,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
 </td>
         <td>
           <button class="btn-link" data-toggle="modal" data-target="#myModal"
-          onclick="editLieu(<?php echo $_smarty_tpl->tpl_vars['val']->value['check_id'];?>
+          onclick="editLieu(<?php echo $_smarty_tpl->tpl_vars['v']->value['check_id'];?>
 ,'edit')"
             >修改</button>
           <button class="btn-link">删除</button>
@@ -200,14 +204,12 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       </div>
       <div class="modal-body">
         <form action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-/editLieu" method="POST" 
-          onsubmit="return validatValue(this)" id="editForm">
-          <table class="form single" style="margin-bottom:12px;">
-            <caption>添加调休</caption>
+/editLieu" method="POST" id="editForm">
+          <table class="form single" style="width:100%" >
             <tr>
               <th>调休人</th>
               <td>
-                <select name="staf_id">
+                <select name="staff_id">
                   <option value="0">员工</option>
                   <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
@@ -243,22 +245,18 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
             </tr>
             <tr>
               <th>开始时间</th>
-              <td><input type="text" name="start_time" value=""/></td>
+              <td><input type="text" name="start_time" value=""
+                onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"/></td>
             </tr>
             <tr>
               <th>结束时间</th>
-              <td><input type="text" name="end_time" value=""/></td>
+              <td><input type="text" name="end_time" value=""
+                onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"/></td>
             </tr>
             <tr>
               <th>调休原因</th>
               <td>
-                <textarea name="reason" style="width:630px;height:48px;padding:3px;"></textarea>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>
-                <input type="submit" class='btn btn-primary' value="保存"/>
+                <textarea name="reason" style="width:430px;height:48px;padding:3px;"></textarea>
               </td>
             </tr>
           </table>
@@ -268,7 +266,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" 
-          data-dismiss="modal" onclick="emptyRuleTr()">关闭
+          data-dismiss="modal">关闭
         </button>
         <input type="submit" class="btn btn-primary" form="editForm"  value="提交更改">
       </div>

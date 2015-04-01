@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-30 17:27:16
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 16:42:24
          compiled from ".\Application\Home\View\Checkingin\checkinginOt.html" */ ?>
 <?php /*%%SmartyHeaderCode:9907550f71d87de295-46755956%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2ac51a12e7d2c6cb67bcd49ef6a44bb9709edf54' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\checkinginOt.html',
-      1 => 1427707608,
+      1 => 1427877403,
       2 => 'file',
     ),
   ),
@@ -26,6 +26,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'v' => 0,
     'staff_list' => 0,
     'k' => 0,
+    'type_list' => 0,
     'status' => 0,
     'otList' => 0,
     'footer' => 0,
@@ -75,9 +76,18 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
           </select>
         </td>
         <td>
-          <select name="ot_type">
-            <option value="0">晚上加班</option>
-            <option value="1">正常加班</option>
+          <select name="type_id">
+            <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['type_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+            <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+            <?php } ?>
           </select>
         </td>
         <td>
@@ -148,14 +158,15 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
     </form>
     <table class="gridtable" style="margin-top:4px;">
       <tr>
-        <th>序号</th>
-        <th>部门</th>
-        <th>员工</th>
-        <th>起止时间</th>
-        <th>加班工时</th>
-        <th>原因</th>
-        <th>审核进度</th>
-        <th>操作</th>
+        <th width="6%">序号</th>
+        <th width="8%">部门</th>
+        <th width="6%">员工</th>
+        <th width="8%">类型</th>
+        <th width="31%">起止时间</th>
+        <th width="7%">时长</th>
+        <th width="10%">原因</th>
+        <th width="5%">进度</th>
+        <th width="11%">操作</th>
       </tr>
       <?php if ($_smarty_tpl->tpl_vars['otList']->value) {?>
       <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
@@ -171,6 +182,8 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
         <td><?php echo $_smarty_tpl->tpl_vars['v']->value['role_name'];?>
 </td>
         <td><?php echo $_smarty_tpl->tpl_vars['v']->value['staff_name'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['v']->value['type_name'];?>
 </td>
         <td><?php echo $_smarty_tpl->tpl_vars['v']->value['start_time'];?>
 到<?php echo $_smarty_tpl->tpl_vars['v']->value['end_time'];?>
@@ -190,7 +203,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       </tr>
       <?php } ?>
       <?php } else { ?>
-      <tr> <td colspan="8">没有加班记录</td> </tr>
+      <tr> <td colspan="9">没有加班记录</td> </tr>
       <?php }?>
     </table>
   </div>
@@ -251,9 +264,18 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
             <tr>
               <th>加班类型</th>
               <td>
-                <select name="ot_type">
-                  <option value="0">晚上加班</option>
-                  <option value="1">正常加班</option>
+                <select name="type_id">
+                  <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['type_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+                  <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+                  <?php } ?>
                 </select>
               </td>
             </tr>

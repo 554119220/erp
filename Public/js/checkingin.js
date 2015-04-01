@@ -18,9 +18,7 @@ function controlVacate(typeId,act){
             $("#editForm [name='name']").val(data.type_name);
             $("#editForm [name='type'] option ").each(
               function(){
-                if($(this).val() == data.parent_id){
-                  $(this).attr('selected',true);
-                }
+                setSelected($(this),data.parent_id);
               });
 
             var deskTr   = document.getElementById('tr_desk_rule');
@@ -99,15 +97,16 @@ function editOt(checkId){
           if (data) {
             $("#editForm [name='role_id'] option").each(
               function(){
-                if ($(this).val() == data.role_id) {
-                  $(this).attr('selected',true);
-                } 
+                setSelected($(this),data.role_id);
               });
             $("#editForm [name='staff_id'] option").each(
               function(){
-                if ($(this).val() == data.staff_id) {
-                  $(this).attr('selected',true);
-                }
+                setSelected($(this),data.staff_id);
+              });
+
+            $("#editForm [name='type_id'] option").each(
+              function(){
+                setSelected($(this),data.type_id);
               });
             $("#editForm [name='start_time']").val(data.start_time);
             $("#editForm [name='end_time']").val(data.end_time);
@@ -172,14 +171,33 @@ function removeTr(obj){
 } 
 
 //修改调休记录
-//function editLieu('',checkId){
-//  $.get(
-//      url+'/check_id/'+checkId,
-//      function(data){
-//       if (data) {
-//       }
-//      });
-//}
+function editLieu(checkId,behave){
+  var url = $('#url').val();
+  $.get(
+      url+'/editLieu/check_id/'+checkId+'/behave/'+behave,
+      function(data){
+       if (data) {
+         $("#editForm [name='type_id'] option").each(
+           function(){
+             setSelected($(this),data.type_id);
+           });
+         $("#editForm [name='staff_id'] option").each(
+           function(){
+             setSelected($(this),data.staff_id);
+           });
+         $("#editForm [name='start_time']").val(data.start_time);
+         $("#editForm [name='end_time']").val(data.end_time);
+         $("#editForm [name='reason']").val(data.reason);
+         $("#editForm [name='check_id'").val(data.check_id);
+       }
+      });
+}
+
+function setSelected(obj,value){
+  if (obj.val() == value) {
+    obj.attr('selected',true);
+  }
+}
 
 ////切换考勤计薪参数
 //function changeRuleItem(obj,taget){

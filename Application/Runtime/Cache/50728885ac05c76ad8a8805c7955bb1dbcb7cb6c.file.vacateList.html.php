@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-25 14:29:34
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 16:42:29
          compiled from ".\Application\Home\View\Checkingin\vacateList.html" */ ?>
 <?php /*%%SmartyHeaderCode:2273354fcfe3df05378-26622274%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '50728885ac05c76ad8a8805c7955bb1dbcb7cb6c' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\vacateList.html',
-      1 => 1427251413,
+      1 => 1427877396,
       2 => 'file',
     ),
   ),
@@ -27,9 +27,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'report' => 0,
     'url' => 0,
     'report_checkingin' => 0,
+    'role_list' => 0,
+    'v' => 0,
     'report_time' => 0,
     'report_list' => 0,
-    'v' => 0,
     'saveUrl' => 0,
     'dataUrl' => 0,
     'staff_list' => 0,
@@ -62,6 +63,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   <div style="padding-top:12px;float:right;">
     <form action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 /checkinginReport/act/search" method="post" >
+      <select name="role_id" style="padding:3.5px">
+        <option value="0">部门</option>
+        <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['role_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+?>
+        <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['role_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['role_name'];?>
+</option>
+        <?php } ?>
+      </select>
+      <input type="text" name="staff_name" value="" placeholder="员工姓名"/>
       <input type="text" name="report_time" onfocus="WdatePicker({dateFmt:'yyyy-MM'})" placeholder="月份" value="<?php echo $_smarty_tpl->tpl_vars['report_time']->value;?>
 "/>
       <input type="submit" value="搜索"/>
@@ -69,14 +83,23 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 /checkingin">返回考勤汇总</a>
     </form>
   </div>
-  <table class="table gridtable erp-table">
+  <table class="table gridtable erp-table checkingin_report">
     <tr>
-      <th width="10%">序号</th>
-      <th width="10%">姓名</th>
-      <th width="10%">出勤天数</th>
-      <th width="10%">缺勤天数</th>
-      <th width="10%">迟到次数</th>
-      <th width="10%">迟到扣款</th>
+      <th width="6%"  rowspan="2">序号</th>
+      <th width="10%" rowspan="2">姓名</th>
+      <th width="10%" rowspan="2">出勤天数</th>
+      <th width="10%" rowspan="2">缺勤天数</th>
+      <th width="10%" colspan="2">迟到（次）</th>
+      <th width="14%" colspan="2">调休（天）</th>
+      <th width="10%" colspan="2">加班（时）</th>
+    </tr>
+    <tr>
+      <th width="10%">次数</th>
+      <th width="10%">扣款</th>
+      <th width="10%">加班调休</th>
+      <th width="10%">年假调休</th>
+      <th width="10%">正常加班</th>
+      <th width="10%">晚上加班</th>
     </tr>
     <?php if ($_smarty_tpl->tpl_vars['report_list']->value) {?>
     <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
@@ -99,15 +122,28 @@ echo $_smarty_tpl->tpl_vars['v']->value['outworking_days'];
       <td><?php if ($_smarty_tpl->tpl_vars['v']->value['late_times']) {
 echo $_smarty_tpl->tpl_vars['v']->value['late_times'];
 } else { ?>0<?php }?></td>
-      <td><?php echo $_smarty_tpl->tpl_vars['v']->value['dedcut_late'];?>
-</td>
+      <td><?php if ($_smarty_tpl->tpl_vars['v']->value['dedcut_late']) {
+echo $_smarty_tpl->tpl_vars['v']->value['dedcut_late'];
+} else { ?>0.00<?php }?></td>
+      <td><?php if ($_smarty_tpl->tpl_vars['v']->value['ot_lieu']) {
+echo $_smarty_tpl->tpl_vars['v']->value['ot_lieu'];
+} else { ?>0<?php }?></td>
+      <td><?php if ($_smarty_tpl->tpl_vars['v']->value['year_lieu']) {
+echo $_smarty_tpl->tpl_vars['v']->value['year_lieu'];
+} else { ?>0<?php }?></td>
+      <td><?php if ($_smarty_tpl->tpl_vars['v']->value['normal_ot']) {
+echo $_smarty_tpl->tpl_vars['v']->value['normal_ot'];
+} else { ?>0<?php }?></td>
+      <td><?php if ($_smarty_tpl->tpl_vars['v']->value['night_ot']) {
+echo $_smarty_tpl->tpl_vars['v']->value['night_ot'];
+} else { ?>0<?php }?></td>
     </tr>
     <?php } ?>
     <?php } else { ?>
-    <tr><td colspan="6">没有记录</td></tr>
+    <tr><td colspan="10">没有记录</td></tr>
     <?php }?>
     <tr>
-      <td colspan="6" style="text-align:right;border:0px;">
+      <td colspan="10" style="text-align:right;border:0px;">
         <a href="<?php echo $_smarty_tpl->tpl_vars['saveUrl']->value;?>
 " class="btn btn-primary">保存</a>
       </td>
