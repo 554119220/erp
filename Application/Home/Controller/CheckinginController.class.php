@@ -476,7 +476,7 @@ class CheckinginController extends PublicController {
         $this->nav();
         $staffList = D('hrm')->staffListSelect(false,true);
         $this->assign('staff_list',$staffList);
-        $this->assign('type_list',M('oa_checkingin_type')->where("parent_id=13")
+        $this->assign('type_list',M('oa_checkingin_type')->where("parent_id=11")
             ->getField('type_id,type_name'));
         $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
         $this->assign('status',array('审核中','已通过','未审核'));
