@@ -933,5 +933,30 @@ class SalaryController extends PublicController {
         }
         return $staffList;
     }
+
+    //修改工资套账
+    public function editSalaryClass(){
+        if ($_REQUEST['class_id']) {
+            $do = M('oa_salary_class');
+            if ('edit' == $_REQUEST['behave']) {
+               $data = $do->where('class_id='.intval($_REQUEST['class_id']))->find();
+               if ($data) {
+                   $res['item_list'] = unserialize($res['item_list']);
+                   $this->assign('staff_list',D('hrm')->staffListSelect(0,1));
+                   $this->assign('role_list',D('RoleManage')->roleList('','role_id,role_name'));
+                   $this->assign('item_list',D('Salary')->salaryItem());
+                   $this->assign('salary_class',D('Salary')->salaryClass());
+                   $this->assign('url',__CONTROLLER__);
+                   $this->assign('info',$data);
+                   $res['main']      = $this->fetch('editSalaryClass');
+                   $this->ajaxReturn($res,'JSON');
+               }else{
+                   $this->error(L('UPD_ERROR'));
+               }
+            }elseif('save' == $_REQUEST['behave']){
+
+            }
+        }
+    }
 }
 ?>

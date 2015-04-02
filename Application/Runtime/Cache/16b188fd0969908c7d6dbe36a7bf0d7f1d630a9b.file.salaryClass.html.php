@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-20 09:14:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-02 16:06:44
          compiled from ".\Application\Home\View\Salary\salaryClass.html" */ ?>
 <?php /*%%SmartyHeaderCode:1542454fd076a8583b7-07741474%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '16b188fd0969908c7d6dbe36a7bf0d7f1d630a9b' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\salaryClass.html',
-      1 => 1426758964,
+      1 => 1427961896,
       2 => 'file',
     ),
   ),
@@ -39,8 +39,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 
 <?php echo $_smarty_tpl->tpl_vars['nav']->value;?>
 
-<div class="wd750 pd12px">
-  <div>
+<div class="pd12px">
+  <div id="resource">
+    <input type="hidden" id="url" value="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+"/>
     <form name="itemForm" action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 /addSalaryClass" method="POST" onsubmit="return addSalaryClass(this)">
       <table class="form single" style="width:100%">
@@ -52,8 +54,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
           </td>
         </tr>
         <tr>
-        	<th>基本工资</th>
-        	<td><input type="number" name="base_salary" value="0" required /></td>
+          <th>基本工资</th>
+          <td><input type="number" name="base_salary" value="0" required /></td>
         </tr>
         <tr>
           <th>工资项</th>
@@ -137,12 +139,12 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
     <table class="table-bordered gridtable erp-table">
       <caption>工资套账列表</caption>
       <tr>
-        <th width="5%"></th>
+        <th width="3%"></th>
         <th width="10%">账套名称</th>
-        <th width="25%">工资项</th>
+        <th width="37%">工资项</th>
         <th width="25%">人员选择</th>
-        <th width="10%">添加时间</th>
-        <th width="10%">操作</th>
+        <th width="8%">添加时间</th>
+        <th width="4%">操作</th>
       </tr>
       <?php if ($_smarty_tpl->tpl_vars['salary_class']->value) {?>
       <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
@@ -176,7 +178,9 @@ echo $_smarty_tpl->tpl_vars['p']->value['staff_name'];?>
         <td><?php echo $_smarty_tpl->tpl_vars['val']->value['add_time'];?>
 </td>
         <td>
-          <button class="btn btn-link" onclick="editSalaryItem(this)">修改</button>
+          <button class="btn btn-link" behave="edit" 
+            onclick="editSalaryItem(this,<?php echo $_smarty_tpl->tpl_vars['val']->value['class_id'];?>
+)"> 修改</button>
           <a class="btn btn-link" href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 /delSalaryTz/tz_id/<?php echo $_smarty_tpl->tpl_vars['val']->value['tz_id'];?>
 ">删除</a>

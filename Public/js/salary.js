@@ -243,6 +243,7 @@ function switchTr(obj){
   document.getElementById('role_id').options[0].selected = true;
 }
 
+//修改调薪记录
 function editAdjustSalary(logId){ 
   if (logId) {
     var url = $('#url').val();
@@ -264,4 +265,16 @@ function editAdjustSalary(logId){
          } 
         });
   }
+}
+
+//修改工资套账
+function editSalaryItem(obj,classId){
+  var url = $('#url').val();
+  $.get(
+      url+'/editSalaryClass/behave/'+obj.getAttribute('behave')+'/class_id/'+classId,
+      function(data){
+        if (data) {
+          $("#resource").html(data.main);
+        }
+      });
 }
