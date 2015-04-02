@@ -45,15 +45,25 @@ class SalaryController extends PublicController {
     }
     //修改调薪记录
     public function editAdjustSalary(){
-        if ($_GET['log_id']) {
+        if ($_REQUEST['log_id']) {
             if ('edit' == $_GET['behave']) {
                 $res = M('oa_adjustsalarylog')->where('log_id='.intval($_GET['log_id']))
                     ->find();
                 if ($res) {
+                    $res['start_time'] = date('Y-m-d',$res['start_time']);
                     $this->ajaxReturn($res,'JSON');
                 }
-            }elseif('save' == $_REQUEST['behave']){
-                $_POST['add_time'] = $_SERVER['REQUEST_TIME'];
+            }elseif('save' == $_POST['behave']){
+                $_POST['add_time']  = $_SERVER['REQUEST_TIME'];
+                $_POST['add_admin'] = $_SESSION['admin_id'];
+                $do = M('oa_adjustsalarylog');
+                $do->create();
+                $res = $do->save();
+                if ($res) {
+                    $this->success(L('UPD_SUCCESS'),__CONTROLLER__.'/adjustSalary');
+                }else{
+                    $this->error(L('UPD_ERROR'));
+                }
             }    
         }
     }

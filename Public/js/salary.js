@@ -250,11 +250,17 @@ function editAdjustSalary(logId){
         url+'/editAdjustSalary/behave/edit/log_id/'+logId,
         function(data){
          if (data) {
-           //$("#editForm [name='item_name']").val(data.item_name); 
             $("#editForm [name='staff_id'] option").each(
               function(){
                 setSelected($(this),data.staff_id);
               })
+            $("#editForm [name='role_id'] option").each(
+              function(){
+                setSelected($(this),data.role_id);
+              })
+            $("#editForm [name='salary']").val(data.salary);
+            $("#editForm [name='start_time']").val(data.start_time);
+            $("#editForm [name='log_id']").val(data.log_id);
          } 
         });
   }

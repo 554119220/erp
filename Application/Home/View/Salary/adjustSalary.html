@@ -21,12 +21,12 @@
         <tr>
           <th width="10%">员工</th>
           <td>
-            <select name="staff_id" id="staff_id" >
+            <select name="staff_id" id="staff_id" style="width:119px;">
               <option value="0">员工</option>
               {foreach from=$staff_list item=val}
               <option value="{$val.staff_id}">{$val.staff_name}</option>
               {/foreach}
-            </select>
+            </select> 默认部门全体员工
           </td>
         </tr>
         <tr>
@@ -139,6 +139,8 @@
                 {literal}onfocus="WdatePicker({dateFmt:'yyyy-M-dd'})"{/literal}/></td>
             </tr>
           </table>
+          <input type="hidden" name="log_id" value=""/>
+          <input type="hidden" name="behave" value="save"/>
         </form>
       </div>
       <div class="modal-footer">

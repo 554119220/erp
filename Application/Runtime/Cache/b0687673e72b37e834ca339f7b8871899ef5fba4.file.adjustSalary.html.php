@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-01 18:49:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-02 09:39:27
          compiled from ".\Application\Home\View\Salary\adjustSalary.html" */ ?>
 <?php /*%%SmartyHeaderCode:2893354f6c8bc0f4246-61352286%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b0687673e72b37e834ca339f7b8871899ef5fba4' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\adjustSalary.html',
-      1 => 1427885282,
+      1 => 1427938717,
       2 => 'file',
     ),
   ),
@@ -65,7 +65,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
         <tr>
           <th width="10%">员工</th>
           <td>
-            <select name="staff_id" id="staff_id" >
+            <select name="staff_id" id="staff_id" style="width:119px;">
               <option value="0">员工</option>
               <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['staff_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -76,7 +76,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 "><?php echo $_smarty_tpl->tpl_vars['val']->value['staff_name'];?>
 </option>
               <?php } ?>
-            </select>
+            </select> 默认部门全体员工
           </td>
         </tr>
         <tr>
@@ -217,6 +217,8 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
                 onfocus="WdatePicker({dateFmt:'yyyy-M-dd'})"/></td>
             </tr>
           </table>
+          <input type="hidden" name="log_id" value=""/>
+          <input type="hidden" name="behave" value="save"/>
         </form>
       </div>
       <div class="modal-footer">
