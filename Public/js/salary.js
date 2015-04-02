@@ -231,7 +231,7 @@ function getCardinalityType(obj){
   }else return;
 }
 
-/*部门所有有，部分员工*/
+/*部门所有或部分员工*/
 function switchTr(obj){
   if (obj.value == 0) {
     $('#roleSelect').css("display",'');
@@ -241,4 +241,21 @@ function switchTr(obj){
     $('#staffSelect').css("display",'');
   }
   document.getElementById('role_id').options[0].selected = true;
+}
+
+function editAdjustSalary(logId){ 
+  if (logId) {
+    var url = $('#url').val();
+    $.get(
+        url+'/editAdjustSalary/behave/edit/log_id/'+logId,
+        function(data){
+         if (data) {
+           //$("#editForm [name='item_name']").val(data.item_name); 
+            $("#editForm [name='staff_id'] option").each(
+              function(){
+                setSelected($(this),data.staff_id);
+              })
+         } 
+        });
+  }
 }

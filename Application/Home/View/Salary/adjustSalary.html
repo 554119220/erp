@@ -2,6 +2,7 @@
 {$nav}
 <div class="wd750 pd12px">
   <div>
+    <input type="hidden" id="url" value="{$url}"/>
     <form name="itemForm" action="{$url}/addAdjustSalary" method="POST">
       <input type="hidden" name="url" value="{$url}"/>
       <table class="form single" style="width:100%">
@@ -9,7 +10,7 @@
         <tr>
         	<th>部门  </th>
           <td>
-            <select id="role_id" name="">
+            <select id="role_id" name="role_id" onchange="getAdminList(this)">
               <option value="0">部门</option>
               {foreach from=$role_list item=val}
               <option value="{$val.role_id}">{$val.role_name}</option>
@@ -20,8 +21,8 @@
         <tr>
           <th width="10%">员工</th>
           <td>
-            <select class="chosen-select" name="staff_id" data-placeholder="选择员工" 
-              onchange="getOriginalSalary(this.value)">
+            <select name="staff_id" id="staff_id" >
+              <option value="0">员工</option>
               {foreach from=$staff_list item=val}
               <option value="{$val.staff_id}">{$val.staff_name}</option>
               {/foreach}
@@ -74,7 +75,8 @@
         <td>
           {if $val.status eq 0}
           <!--审核期间可以修改-->
-          <button class="btn btn-link" onclick="editSalaryItem(this)">修改</button>
+          <button class="btn btn-link" data-toggle="modal" data-target="#myModal"
+            onclick="editAdjustSalary({$val.log_id})">修改</button>
           {/if}
           <a class="btn btn-link" href="{$url}/delSalaryItem/item_id/{$val.item_id}">删除</a>
         </td>
@@ -87,9 +89,65 @@
   </div>
 </div>
 <div class="bottom_tip page" id="pageDiv"> {$page} </div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+          data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel"> 修改调薪记录</h4>
+      </div>
+      <div class="modal-body">
+        <form action="{$url}/editAdjustSalary" method="POST" id="editForm">
+          <table class="form single" style="width:100%;margin-top:0px;">
+            <tr>
+              <th>部门  </th>
+              <td>
+                <select id="role_id" name="role_id" >
+                  <option value="0">部门</option>
+                  {foreach from=$role_list item=val}
+                  <option value="{$val.role_id}">{$val.role_name}</option>
+                  {/foreach}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th width="10%">员工</th>
+              <td>
+                <select name="staff_id">
+                  {foreach from=$staff_list item=val}
+                  <option value="{$val.staff_id}">{$val.staff_name}</option>
+                  {/foreach}
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th>原工资</th>
+              <td><span id="original_salary">0</span></td>
+            </tr>
+            <tr>
+              <th>现工资</td>
+              <td><input type="number" name="salary" value="" required/></td>
+            </tr>
+            <tr>
+              <th>生效日期</th>
+              <td><input type="text" name="start_time" 
+                {literal}onfocus="WdatePicker({dateFmt:'yyyy-M-dd'})"{/literal}/></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" 
+          data-dismiss="modal">关闭
+        </button>
+        <input type="submit" class="btn btn-primary" form="editForm"  value="提交更改">
+      </div>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal -->
 {$footer}
-<script language="javascript" type="text/javascript">
-  $(function(){
-      $('.chosen-select').chosen();
-      });
-    </script>

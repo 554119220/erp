@@ -32,14 +32,30 @@ class SalaryController extends PublicController {
     public function adjustSalary(){
         $_REQUEST['act'] = 'adjustSalary';
         $p               = intval($_REQUEST['p'])? 1 : intval($_REQUEST['p']);
+
         $this->assign('staff_list',D('Hrm')->staffListSelect(0));
         $this->assign('role_list',D('RoleManage')->roleList('','role_id,role_name'));
+        $this->assign('url',__CONTROLLER__);
         $count = D('Salary')->countAdjustSalaryLog();
         $page  = new Page($count,15);
         $this->assign('adjustSalary',D('Salary')->adjustSalaryLog('',$p));
         $this->assign('page',$page->show());
         $this->nav();
         $this->display('adjustSalary');
+    }
+    //修改调薪记录
+    public function editAdjustSalary(){
+        if ($_GET['log_id']) {
+            if ('edit' == $_GET['behave']) {
+                $res = M('oa_adjustsalarylog')->where('log_id='.intval($_GET['log_id']))
+                    ->find();
+                if ($res) {
+                    $this->ajaxReturn($res,'JSON');
+                }
+            }elseif('save' == $_REQUEST['behave']){
+                $_POST['add_time'] = $_SERVER['REQUEST_TIME'];
+            }    
+        }
     }
 
     //查询原工资
