@@ -26,9 +26,10 @@ return array(
     'NO_SELECT_ROLE' => '没有选择部门',
 
     //提成
-    'COMMON_COMMISSION' => '公共提成设置',
-    'COMMISSION_WAIT' => '待发提成',
-    'COMMISSION_SEND' => '已发提成',
+    'COMMON_COMMISSION'       => '公共提成设置',
+    'COMMISSION_WAIT'         => '待发提成',
+    'COMMISSION_SEND'         => '已发提成',
     'NO_SITE_COMMISSION_RULE' => '没有设置提成规则',
+    'NO_SELECT_SALARY_CLASS'  => '没有选择工资套账',
     );
 ?>

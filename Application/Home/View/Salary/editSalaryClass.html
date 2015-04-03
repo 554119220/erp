@@ -1,76 +1,79 @@
-<form name="itemForm" action="{$url}/addSalaryClass" method="POST" onsubmit="return addSalaryClass(this)">
-      <table class="form single" style="width:100%">
-        <caption>修改工资套账设置 <a href="{$url}/salaryClass">返回套账列表</a></caption>
-        <tr>
-          <th width="10%">套账名称</th>
-          <td>
-            <input type="text" name="class_name" required {literal}onkeyup="$(this).val($.trim($(this).val()));"{/literal} value="{$info.class_name}"/>
-          </td>
-        </tr>
-        <tr>
-          <th>基本工资</th>
-          <td>
-            <input type="number" name="base_salary" value="{$info.base_salary}" required />
-          </td>
-        </tr>
-        <tr>
-          <th>工资项</th>
-          <td>
-            {foreach from=$item_list item=val}
-            <label>
-              <input type="checkbox" name="item_list[]"
-              value="{$val.item_id}" {if $val.editable eq 0}checked onclick="return false"{/if}
-              /> {$val.item_name}
-            </label>
-            {/foreach}
-          </td>
-        </tr>
-        <tr>
-          <th>人员选择</th>
-          <td>
-            <label><input type="radio" name="type" value="0" {if $info.type eq 0}checked{/if}
-              onclick="switchTr(this)" /> 部门所有用户调用</label>
-            <label><input type="radio" name="type" value="1"
-              {if $info.type eq 1}checked{/if} onclick="switchTr(this)"
-              /> 选择调用用户</label>
-          </td>
-        </tr>
-        <tr>
-          <th></th>
-          <td >
-            <table style="width:100%">
-              <tr id="roleSelect">
-                <td>
-                  <select name="role_id" id="role_id" onchange="getStaffForSalaryClass(this)">
-                    <option value="0">未分配部门</option>
-                    {foreach from=$role_list item=val}
-                    <option value="{$val.role_id}">{$val.role_name}</option>
-                    {/foreach}
-                  </select>
-                  <span class="remind"> 如果添加了员工，部门的选择将无效。</span>
-                </td>
-              </tr>
-              <tr style="display:none" id="staffSelect">
-                <td>
-                  <select name="participantSel" style="width:168px;" onchange="addChecked(this)">
-                    <option value="0">选择员工</option>
-                    {foreach from=$staff_list key=k item=v}
-                    <option value="{$k}">{$v}</option>
-                    {/foreach}
-                  </select>
-                  <div class="item-div" id="participantField"></div>
-                </td>
-              </tr> 
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <th></th>
-          <td>
-            <div id="staff_list" style="display:none"></div>
-            <input type="submit" class="btn btn-primary btn-small" value="修改" />
-            <input type="hidden" name="behave" value="save"/>
-          </td>
-        </tr>
-      </table>
-    </form>
+<form name="itemForm" action="{$url}/editSalaryClass" method="POST" onsubmit="return addSalaryClass(this)">
+  <table class="form single" style="width:100%">
+    <caption>修改工资套账设置 <a href="{$url}/salaryClass">返回套账列表</a></caption>
+    <tr>
+      <th width="10%">套账名称</th>
+      <td>
+        <input type="text" name="class_name" required {literal}onkeyup="$(this).val($.trim($(this).val()));"{/literal} value="{$info.class_name}"/>
+      </td>
+    </tr>
+    <tr>
+      <th>基本工资</th>
+      <td>
+        <input type="number" name="base_salary" value="{$info.base_salary}" required />
+      </td>
+    </tr>
+    <tr>
+      <th>工资项</th>
+      <td>
+        {foreach from=$item_list item=val}
+        <label>
+          <input type="checkbox" name="item_list[]"
+          value="{$val.item_id}" {if $val.editable eq 0}checked onclick="return false"{/if}
+          {if in_array($val.item_id,$info.item_list)}checked{/if}
+          /> {$val.item_name}
+        </label>
+        {/foreach}
+      </td>
+    </tr>
+    <tr>
+      <th>人员选择</th>
+      <td>
+        <label><input type="radio" name="type" value="0" {if $info.type eq 0}checked{/if}
+          onclick="switchTr(this)" /> 部门所有用户调用</label>
+        <label><input type="radio" name="type" value="1"
+          {if $info.type eq 1}checked{/if} onclick="switchTr(this)"
+          /> 选择调用用户</label>
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td >
+        <table style="width:100%">
+          <tr id="roleSelect" style="{if $info.type eq 1}display:none{/if}">
+            <td>
+              <select name="role_id" id="role_id" onchange="getStaffForSalaryClass(this)">
+                <option value="0">未分配部门</option>
+                {foreach from=$role_list item=val}
+                <option value="{$val.role_id}" {if $val.role_id eq $info.role_id}selected{/if}>
+                {$val.role_name}</option>
+                {/foreach}
+              </select>
+              <span class="remind"> 如果添加了员工，部门的选择将无效。</span>
+            </td>
+          </tr>
+          <tr style="{if $info.type eq 0}display:none{/if}" id="staffSelect">
+            <td>
+              <select name="participantSel" style="width:168px;" onchange="addChecked(this)">
+                <option value="0">选择员工</option>
+                {foreach from=$staff_list key=k item=v}
+                <option value="{$k}">{$v}</option>
+                {/foreach}
+              </select>
+              <div class="item-div" id="participantField"></div>
+            </td>
+          </tr> 
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>
+        <input type="hidden" name="behave" value="save"/>
+        <input type="hidden" name="class_id" value="{$info.class_id}"/>
+        <div id="staff_list" style="display:none"></div>
+        <input type="submit" class="btn btn-primary btn-small" value="修改" />
+      </td>
+    </tr>
+  </table>
+</form>

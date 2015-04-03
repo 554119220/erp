@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-02 16:06:44
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-03 09:58:49
          compiled from ".\Application\Home\View\Salary\salaryClass.html" */ ?>
 <?php /*%%SmartyHeaderCode:1542454fd076a8583b7-07741474%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '16b188fd0969908c7d6dbe36a7bf0d7f1d630a9b' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\salaryClass.html',
-      1 => 1427961896,
+      1 => 1428025806,
       2 => 'file',
     ),
   ),
@@ -181,9 +181,9 @@ echo $_smarty_tpl->tpl_vars['p']->value['staff_name'];?>
           <button class="btn btn-link" behave="edit" 
             onclick="editSalaryItem(this,<?php echo $_smarty_tpl->tpl_vars['val']->value['class_id'];?>
 )"> 修改</button>
-          <a class="btn btn-link" href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+          <!--<a class="btn btn-link" href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 /delSalaryTz/tz_id/<?php echo $_smarty_tpl->tpl_vars['val']->value['tz_id'];?>
-">删除</a>
+">删除</a>-->
         </td>
       </tr>
       <?php } ?>

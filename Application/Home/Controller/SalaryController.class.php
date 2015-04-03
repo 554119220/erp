@@ -198,57 +198,14 @@ class SalaryController extends PublicController {
 
     /*添加工资套账*/
     public function addSalaryClass(){
-        $data               = $_REQUEST;
-        $data = array(
-            'class_name' => $_REQUEST['class_name'],
-            'add_time'   => $_SERVER['REQUEST_TIME'],
-            'admin_name' => $_SESSION['admin_name'],
-            'admin_id'   => $_SESSION['admin_id'],
-            'item_list'  => $_REQUEST['item_list'],
-            'type'       => $_REQUEST['type'],
-            'role_id'    => $_REQUEST['role_id'],
-            'staff_id'   => $_REQUEST['participant'],
-            'base_salary' => $_REQUEST['base_salary'],
-        );
+        $data = $this->salaryClassCulumn();
         if (empty($data['item_list'])){
             $this->error(L('NOT_SALARY_ITEM'));
             exit;
         }
         $data['item_list'] = serialize($data['item_list']);
-        if (1 == $data['type']) { //调用员工
-            if($data['staff_id']){
-                $staff = join(',',$data['staff_id']);
-                $res = M('oa_staff_records')->field('staff_name,salary_class')
-                    ->where("staff_id IN($staff)")->select();
-                foreach ($res as $val) {
-                    if ($val['salary_class']) { $error[] = $val['staff_name']; }
-                }
-                if ($error) {
-                    $msg = join(',',$error).L('NO_ALLOCATION_MORE_SALARY_CLASS');
-                    $this->error($msg);
-                }else{
-                    $data['staff_id']   = serialize($data['staff_id']);
-                    $data['staff_list'] = $data['staff_id'];
-                    unset($data['staff_select'],$data['staff_id']);
-                    $code = D('Salary')->addSalaryClass($data);
-                }
-            }else{
-                $this->error(L('NO_SELECT_STAFF'));
-            }
-        }else{
-            if ($data['role_id']) {//部门所有员工
-                $exist = M('oa_salary_class')->where("role_id={$data['role_id']}")->find();
-                if ($exist) {
-                    $this->error(L('ONLY_SALARY_CLASS'));
-                }else{
-                    unset($data['staff_id']); 
-                    $code = D('Salary')->addSalaryClass($data);
-                }
-            }else{
-                $this->error(L('NO_SELECT_ROLE'));
-            }
-        }
-
+        $data = $this->validateSalaryClass($data);
+        $code = D('Salary')->addSalaryClass($data);
         if($code === false){
             $this->error(L('ADD_ERROR'));
         }else {
@@ -941,7 +898,7 @@ class SalaryController extends PublicController {
             if ('edit' == $_REQUEST['behave']) {
                $data = $do->where('class_id='.intval($_REQUEST['class_id']))->find();
                if ($data) {
-                   $res['item_list'] = unserialize($res['item_list']);
+                   $data['item_list'] = unserialize($data['item_list']);
                    $this->assign('staff_list',D('hrm')->staffListSelect(0,1));
                    $this->assign('role_list',D('RoleManage')->roleList('','role_id,role_name'));
                    $this->assign('item_list',D('Salary')->salaryItem());
@@ -954,9 +911,81 @@ class SalaryController extends PublicController {
                    $this->error(L('UPD_ERROR'));
                }
             }elseif('save' == $_REQUEST['behave']){
-
+                $data             = $this->salaryClassCulumn();
+                $data['class_id'] = intval($_POST['class_id']);
+                if (empty($data['item_list'])){
+                    $this->error(L('NOT_SALARY_ITEM'));
+                    exit;
+                }
+                $data['item_list'] = serialize($data['item_list']);
+                $data              = $this->validateSalaryClass($data);
+                $do                = M('oa_salary_class');
+                $res = $do->where('class_id='.$data['class_id'])->save($data); 
+                if ($res) {
+                    $this->success(L('UPD_SUCCESS'),__CONTROLLER__.'/salaryClass');
+                }else{
+                    $this->error(L('UPD_ERROR'));
+                }
             }
+        }else{
+            $this->error(L('NO_SELECT_SALARY_CLASS'));
         }
+    }
+
+    //工资套账字段
+    private function salaryClassCulumn(){
+        //$data = $_REQUEST;
+        $data = array(
+            'class_name'  => trim($_REQUEST['class_name']),
+            'add_time'    => $_SERVER['REQUEST_TIME'],
+            'admin_name'  => $_SESSION['admin_name'],
+            'admin_id'    => $_SESSION['admin_id'],
+            'item_list'   => $_REQUEST['item_list'],
+            'type'        => intval($_REQUEST['type']),
+            'role_id'     => intval($_REQUEST['role_id']),
+            'staff_id'    => intval($_REQUEST['participant']),
+            'base_salary' => floatval($_REQUEST['base_salary']),
+        );
+        return $data;
+    }
+
+    //工资套账添删改操作
+    private function validateSalaryClass($data){
+        if (1 == $data['type']) { //调用员工
+            if($data['staff_id']){
+                $staff = join(',',$data['staff_id']);
+                $res = M('oa_staff_records')->field('staff_name,salary_class')
+                    ->where("staff_id IN($staff)")->select();
+                foreach ($res as $val) {
+                    if ($val['salary_class']) { $error[] = $val['staff_name']; }
+                }
+                if ($error && $_REQUEST['behave'] != 'save') {
+                    $msg = join(',',$error).L('NO_ALLOCATION_MORE_SALARY_CLASS');
+                    $this->error($msg);
+                }else{
+                    $data['staff_id']   = serialize($data['staff_id']);
+                    $data['staff_list'] = $data['staff_id'];
+                    unset($data['staff_select'],$data['staff_id']);
+                    //$code = D('Salary')->addSalaryClass($data);
+                    return $data;
+                }
+            }else{
+                $this->error(L('NO_SELECT_STAFF'));
+            }
+        }else{
+            if ($data['role_id']) {//部门所有员工
+                $exist = M('oa_salary_class')->where("role_id={$data['role_id']}")->find();
+                if ($exist && $_REQUEST['behave'] != 'save') {
+                    $this->error(L('ONLY_SALARY_CLASS'));
+                }else{
+                    unset($data['staff_id']); 
+                    return $data;
+                    //$code = D('Salary')->addSalaryClass($data);
+                }
+            }else{
+                $this->error(L('NO_SELECT_ROLE'));
+            }
+        }       
     }
 }
 ?>
