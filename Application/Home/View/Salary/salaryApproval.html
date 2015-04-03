@@ -3,6 +3,7 @@
 <div class="wd750 pd12px">
   <div>
     <form name="addForm" id="addForm" action="{$url}/addSalaryApproval" method="POST">
+      <input type="hidden" id="url" value="{$url}"/>
       <table class="form single" style="width:100%">
         <caption>工资审批设置 </caption>
         <tr>
@@ -17,13 +18,9 @@
         <tr>
           <th width="10%">审批人</th>
           <td width="5%">
-            <select name="admin_id" style="width:250px;" id="dept" class="dept_select"> 
-              {foreach from=$admin_list item=val}
-              <optgroup label="{$val.role_name}">
-                {foreach from=$val.admin_list item=v}
-                <option value="{$v.user_id}">{$v.user_name}</option>
-                {/foreach}
-              </optgroup>
+            <select name="admin_id" id="dept" class="dept_select"> 
+              {foreach from=$admin_list item=v}
+              <option value="{$v.user_id}">{$v.user_name}</option>
               {/foreach}
             </select>
           </td>
@@ -37,7 +34,6 @@
         </tr>
       </table>
     </form>
-    <form id="editForm" action="editSalaryApproval()"></form>
     <table class="table-bordered gridtable erp-table">
       <caption>工资审批设置</caption>
       <tr>
@@ -71,9 +67,53 @@
     </table>
   </div>
 </div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+          data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel"> 修改工资审批设置</h4>
+      </div>
+      <div class="modal-body">
+        <form action="{$url}/editSalaryApproval" method="POST" id="editForm">
+          <table class="form single" style="width:100%;margin-top:0px;">
+            <tr>
+              <th>部门</th>
+              <td>
+                {html_options name=role_id options=$role_list selected=1}
+              </td>
+              <td>
+                <span class="remind">该部门下的所有员工工资都由审批人审批</span>
+              </td>
+            </tr>
+            <tr>
+              <th width="10%">审批人</th>
+              <td width="5%">
+                <select name="admin_id" id="dept" class="dept_select"> 
+                  {foreach from=$admin_list item=v}
+                  <option value="{$v.user_id}">{$v.user_name}</option>
+                  {/foreach}
+                </select>
+              </td>
+              <td style="text-align:left;"></td>
+            </tr>
+          </table>
+          <input type="hidden" name="approval_id" value=""/>
+          <input type="hidden" name="behave" value="save"/>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" 
+          data-dismiss="modal">关闭
+        </button>
+        <input type="submit" class="btn btn-primary" form="editForm"  value="提交更改">
+      </div>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal -->
 {$footer}
-<script language="javascript" type="text/javascript">
-  $(function(){
-      $('.dept_select').chosen();
-      });
-</script>

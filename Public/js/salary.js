@@ -100,7 +100,25 @@ function editSalaryItem(act,itemId){
 
 /*工资审批*/
 function editSalaryApprovalForm(id){
-  var act = $('#act').val();
+  var url = $('#url').val();
+  $.get(
+      url+'/editSalaryApproval/behave/edit/approval_id/'+id,
+      function(data){
+        if (data) {
+          $("#editForm [name='role_id'] option").each(function(){
+            if ($(this).val() == data.role_id) {
+              $(this).attr('selected',true);
+            } 
+          });
+          $("#editForm [name='admin_id'] option").each(function(){
+            if ($(this).val() == data.admin_id) {
+              $(this).attr('selected',true);
+            } 
+          });
+
+          $("#editForm [name='approval_id']").val(data.approval_id);
+        }
+      });
 }
 
 /*修改工资审批人*/

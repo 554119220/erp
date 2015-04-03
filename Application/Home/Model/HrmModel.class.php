@@ -178,8 +178,7 @@ class HrmModel extends PublicModel{
         if ($group) {
             $staffList = M('oa_staff_records')->where($where)
                 ->field($field.',role_id')
-                ->order('convert(staff_name using gbk) ASC')
-                ->select();
+                ->order('convert(staff_name using gbk) ASC') ->select();
             $roleList = M('role')->field('role_id,role_name')->select();
             $roleList[] = array('role_id'=>0,'role_name'=>'未分配部门');
             foreach($roleList as $key=>&$role){

@@ -770,12 +770,37 @@ class SalaryController extends PublicController {
     }
     /*工资审批设置*/
     public function salaryApproval(){
-        $_REQUEST['act'] = 'salarySet';
-        $this->assign('admin_list',D('Admin')->groupAdminList());
+        $this->assign('admin_list',D('Admin')->adminList());
         $this->assign('role_list',M('role')->getField('role_id,role_name'));
         $this->assign('approval_list',D('Salary')->salaryApproval());
         $this->nav();
         $this->display();
+    }
+    //修改工资审批
+    public function editSalaryApproval(){
+        $approvalId = intval($_REQUEST['approval_id']);
+        if ($approvalId) {
+            $do = M('oa_salary_approval');
+            if ('edit' == $_REQUEST['behave']) {
+                $res = $do->where("approval_id=$approvalId")->find();
+                if ($res) {
+                    $this->ajaxReturn($res);
+                }else{
+                    $this->error(L('NO_SELECT_APPROVAL'));
+                }
+            }elseif('save' == $_REQUEST['behave']){
+                $do->create();
+                $_POST['add_admin'] = $_SESSION['admin_id'];
+                $res = $do->where('approval_id='.intval($_POST['approval_id']))->save();
+                if ($res) {
+                    $this->success(L('UPD_SUCCESS'),__CONTROLLER__.'/salaryApproval');
+                }else{
+                    $this->error(L('UPD_ERROR'));
+                }
+            }
+        }else{
+            $this->error(L('NO_SELECT_APPROVAL'));
+        }
     }
     /*添加工资审批人*/
     public function addSalaryApproval(){

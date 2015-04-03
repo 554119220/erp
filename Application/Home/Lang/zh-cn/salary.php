@@ -31,5 +31,6 @@ return array(
     'COMMISSION_SEND'         => '已发提成',
     'NO_SITE_COMMISSION_RULE' => '没有设置提成规则',
     'NO_SELECT_SALARY_CLASS'  => '没有选择工资套账',
+    'NO_SELECT_APPROVAL' => '没有选择审批',
     );
 ?>

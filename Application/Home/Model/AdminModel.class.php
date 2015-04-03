@@ -21,7 +21,7 @@ class AdminModel extends Model{
      * @where 查询条件
      * $role  查询同一部门的管理员 
      * */
-    public function adminList($where,$role){
+    public function adminList($where=' 1',$role=0){
         if($role){
             $mRole = M('role');
             $action   = $mRole->where("role_id={$_SESSION['role_id']}")->getField('action');
@@ -34,7 +34,9 @@ class AdminModel extends Model{
             }
         }
         $where .= ' AND status>0 AND stats>0 AND user_id<>74 AND freeze=0 ';
-        $adminList = M('admin_user')->field('user_id,user_name')->where($where)->select();
+        $adminList = M('admin_user')->field('user_id,user_name')
+            ->order('convert(user_name using gbk) ASC')
+            ->where($where)->select();
         return $adminList;
     }
 

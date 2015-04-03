@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-20 16:10:29
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-03 17:37:59
          compiled from ".\Application\Home\View\Salary\salaryApproval.html" */ ?>
 <?php /*%%SmartyHeaderCode:2997854fd17ccf05378-16003537%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0543e4c93d5a4af97e088d386d1ba9909802fa56' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\salaryApproval.html',
-      1 => 1426838900,
+      1 => 1428053873,
       2 => 'file',
     ),
   ),
@@ -24,9 +24,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'url' => 0,
     'role_list' => 0,
     'admin_list' => 0,
-    'val' => 0,
     'v' => 0,
     'approval_list' => 0,
+    'val' => 0,
     'footer' => 0,
   ),
   'has_nocache_code' => false,
@@ -40,6 +40,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   <div>
     <form name="addForm" id="addForm" action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 /addSalaryApproval" method="POST">
+      <input type="hidden" id="url" value="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+"/>
       <table class="form single" style="width:100%">
         <caption>工资审批设置 </caption>
         <tr>
@@ -55,24 +57,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <tr>
           <th width="10%">审批人</th>
           <td width="5%">
-            <select name="admin_id" style="width:250px;" id="dept" class="dept_select"> 
-              <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
+            <select name="admin_id" id="dept" class="dept_select"> 
+              <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['admin_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
-$_smarty_tpl->tpl_vars['val']->_loop = true;
-?>
-              <optgroup label="<?php echo $_smarty_tpl->tpl_vars['val']->value['role_name'];?>
-">
-                <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['val']->value['admin_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
 $_smarty_tpl->tpl_vars['v']->_loop = true;
 ?>
-                <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['user_id'];?>
+              <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['user_id'];?>
 "><?php echo $_smarty_tpl->tpl_vars['v']->value['user_name'];?>
 </option>
-                <?php } ?>
-              </optgroup>
               <?php } ?>
             </select>
           </td>
@@ -86,7 +79,6 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
         </tr>
       </table>
     </form>
-    <form id="editForm" action="editSalaryApproval()"></form>
     <table class="table-bordered gridtable erp-table">
       <caption>工资审批设置</caption>
       <tr>
@@ -130,13 +122,63 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
     </table>
   </div>
 </div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+          data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel"> 修改工资审批设置</h4>
+      </div>
+      <div class="modal-body">
+        <form action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+/editSalaryApproval" method="POST" id="editForm">
+          <table class="form single" style="width:100%;margin-top:0px;">
+            <tr>
+              <th>部门</th>
+              <td>
+                <?php echo smarty_function_html_options(array('name'=>'role_id','options'=>$_smarty_tpl->tpl_vars['role_list']->value,'selected'=>1),$_smarty_tpl);?>
+
+              </td>
+              <td>
+                <span class="remind">该部门下的所有员工工资都由审批人审批</span>
+              </td>
+            </tr>
+            <tr>
+              <th width="10%">审批人</th>
+              <td width="5%">
+                <select name="admin_id" id="dept" class="dept_select"> 
+                  <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['admin_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+?>
+                  <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['user_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['user_name'];?>
+</option>
+                  <?php } ?>
+                </select>
+              </td>
+              <td style="text-align:left;"></td>
+            </tr>
+          </table>
+          <input type="hidden" name="approval_id" value=""/>
+          <input type="hidden" name="behave" value="save"/>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" 
+          data-dismiss="modal">关闭
+        </button>
+        <input type="submit" class="btn btn-primary" form="editForm"  value="提交更改">
+      </div>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal -->
 <?php echo $_smarty_tpl->tpl_vars['footer']->value;?>
 
-<?php echo '<script'; ?>
- language="javascript" type="text/javascript">
-  $(function(){
-      $('.dept_select').chosen();
-      });
-<?php echo '</script'; ?>
->
 <?php }} ?>
