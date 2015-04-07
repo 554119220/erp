@@ -127,8 +127,28 @@ function editSalaryApproval(obj){
 }
 
 /*删除工资审批人*/
-function delSalaryApproval(){
+function delSalaryApproval(obj){
+  var url = obj.getAttribute('href');
+  $.get(
+      url,
+      function (data){
+        alertFun(data);
+      });
+}
 
+//提醒
+function alertFun(data){
+  if (!data.res) {
+    $("#myAlert").removeClass('alert-success');
+    $("#myAlert").addClass('alert-warning');
+  }
+  $("#myAlert span").html(data.text);
+  $("#myAlert").css('display','inline-block');
+
+  setTimeout(function(){
+    $("#myAlert").css('display','none');
+    window.top.location.href = data.href;
+  },3000);
 }
 
 /*添加工资套账*/

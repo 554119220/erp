@@ -124,3 +124,7 @@ table.gridtable td {
 
 /*模态框表格*/
 .modal-body form table tr{border-top:1px solid #ccc;}
+
+/*JSON操作返回提醒*/
+.json-alert{display:none;margin-bottom:0px;margin-left:25%;padding: 3px; }
+

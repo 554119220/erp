@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-03 17:37:59
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-07 11:01:35
          compiled from ".\Application\Home\View\Salary\salaryApproval.html" */ ?>
 <?php /*%%SmartyHeaderCode:2997854fd17ccf05378-16003537%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0543e4c93d5a4af97e088d386d1ba9909802fa56' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\salaryApproval.html',
-      1 => 1428053873,
+      1 => 1428374902,
       2 => 'file',
     ),
   ),
@@ -80,7 +80,12 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       </table>
     </form>
     <table class="table-bordered gridtable erp-table">
-      <caption>工资审批设置</caption>
+      <caption>工资审批设置
+        <div id="myAlert" class="alert alert-success json-alert">
+          <a href="#" class="close" data-dismiss="alert">&times;</a>
+          <span></span>&nbsp;&nbsp;
+    </div>
+      </caption>
       <tr>
         <th width="10%">部门</th>
         <th width="10%">审批人</th>
@@ -108,8 +113,8 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
             >修改</button>
           <button class="btn btn-link" 
             href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-/delSalaryApproval/item_id/<?php echo $_smarty_tpl->tpl_vars['val']->value['approval_id'];?>
-" onclick="delSalaryApproval()">
+/delSalaryApproval/approval_id/<?php echo $_smarty_tpl->tpl_vars['val']->value['approval_id'];?>
+" onclick="delSalaryApproval(this)">
             删除</button>
         </td>
       </tr>

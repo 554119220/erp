@@ -35,7 +35,12 @@
       </table>
     </form>
     <table class="table-bordered gridtable erp-table">
-      <caption>工资审批设置</caption>
+      <caption>工资审批设置
+        <div id="myAlert" class="alert alert-success json-alert">
+          <a href="#" class="close" data-dismiss="alert">&times;</a>
+          <span></span>&nbsp;&nbsp;
+    </div>
+      </caption>
       <tr>
         <th width="10%">部门</th>
         <th width="10%">审批人</th>
@@ -54,7 +59,7 @@
             data-target="#myModal"
             >修改</button>
           <button class="btn btn-link" 
-            href="{$url}/delSalaryApproval/item_id/{$val.approval_id}" onclick="delSalaryApproval()">
+            href="{$url}/delSalaryApproval/approval_id/{$val.approval_id}" onclick="delSalaryApproval(this)">
             删除</button>
         </td>
       </tr>

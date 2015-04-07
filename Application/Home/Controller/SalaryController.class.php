@@ -1012,5 +1012,21 @@ class SalaryController extends PublicController {
             }
         }       
     }
+
+    //删除工资审批
+    public function delSalaryApproval(){
+        $approvalId = intval($_REQUEST['approval_id']); 
+        if ($approvalId) {
+            $res = M('oa_salary_approval')->where("approval_id=$approvalId")->delete();
+            $data['res'] = $res;
+            if ($data['res']) {
+                $data['text'] = L('DEL_SUCCESS');
+            }else{
+                $data['text'] = L('DEL_ERROR');
+            }
+            $data['href'] = __CONTROLLER__.'/salaryApproval';
+            $this->ajaxReturn($data,'JSON');
+        }
+    }
 }
 ?>
