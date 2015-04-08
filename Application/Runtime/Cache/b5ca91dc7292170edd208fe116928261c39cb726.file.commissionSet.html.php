@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 11:57:34
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 14:38:37
          compiled from ".\Application\Home\View\Salary\commissionSet.html" */ ?>
 <?php /*%%SmartyHeaderCode:26633552489ab6acfc3-00134939%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b5ca91dc7292170edd208fe116928261c39cb726' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\commissionSet.html',
-      1 => 1428465428,
+      1 => 1428475114,
       2 => 'file',
     ),
   ),
@@ -112,7 +112,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
         <tr>
           <th>职位级别：</th>
           <td>
-            <select name="position_level">
+            <select name="position_level" style="width:155px;">
               <option value="0">职位级别</option>
               <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['position_level']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -127,23 +127,25 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
               <?php } ?>
             </select>
           </td>
-          <th>保底限量：</th>
+          <th>保底销量：</th>
           <td>
-            <input type="number" name="base_sales"
+            <input type="number" name="base_sales" class='lage-number'
             value="<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['base_sales'];?>
 " min="0" required class="number"/>
           </td>
-          <th>工龄大于</th>
-          <td>
-            <input type="number" name="work_age" value="<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['work_age'];?>
-"
-            class="number" min="0"/>
-          </td>
+        </tr>
+        <tr>
           <th>规则名称：</th>
-          <td colspan="5"><input type="text" name="rule_name" 
+          <td><input type="text" name="rule_name" 
             value="<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['rule_name'];?>
 "
             placeholder="规则名称" onkeyup="this.value=this.value.replace(/(^\s+)|\s+$/g,'');"/>
+          </td>
+          <th>工龄大于：</th>
+          <td>
+            <input type="number" name="work_age" value="<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['work_age'];?>
+"
+            class="lage-number" min="0"/>
           </td>
         </tr>
       </table>

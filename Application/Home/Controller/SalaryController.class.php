@@ -343,7 +343,6 @@ class SalaryController extends PublicController {
             }else{
                 //累加比例
                 $res = $this->multipleCommission($data);
-                
             }
             if ($res) {
                 //修改参与者的提成类型
@@ -1015,6 +1014,28 @@ class SalaryController extends PublicController {
                 $this->assign('commissionRule',$commissionRule);
                 $this->commissionSet();
             }elseif('save' == $behave){
+                if ($_POST) {
+                    $ruleId = intval($_GET['rule_id']);
+                    $data = $this->commissionData();
+                    $do = M('oa_commission_rule'); 
+                    if (1 != $data['proportion_type']) {
+                        $data['commission'] = $_REQUEST[$_REQUEST['sort2'].'_commission'];
+                        $res = $do->where("rule_id=$ruleId")->save($data);
+                        //$res = D('Salary')->addCommissionRule($data);
+                    }else{
+                        //累加比例
+                        $res = $this->multipleCommission($data);
+                    }
+                    if ($res) {
+                        //修改参与者的提成类型
+                        $res = $this->modifyParticipantCommissionRule($ruleId,$data);
+                        $this->success(L('UPD_SUCCESS'),U('Home/Salary/commissionRule'));
+                    }else{
+                        $this->error(L('UPD_ERROR'));
+                    }
+                }else{
+                    $this->error(L('ACCESS_METHOD_ERROR'));
+                }
             }
         }else{
             $this->error(L('NO_SELECT_RULE'));
@@ -1034,22 +1055,22 @@ class SalaryController extends PublicController {
             'base_sales'       => intval($_REQUEST['base_sales']),//保底销量
             'add_time'         => $_SERVER['REQUEST_TIME'],
             'add_admin'        => $_SESSION['admin_id'],
-                'work_age'         => intval($_SESSION['work_age']),//工龄
-            );
+            'work_age'         => intval($_SESSION['work_age']),//工龄
+        );
 
-            if (1 == $_REQUEST['cardinalityType']) {
-                $data['platform'] = intval($_REQUEST['cardinalityType']);
-            }else{
-                $data['shipping'] = intval($_REQUEST['cardinalityType']);
-            }
+        if (1 == $_REQUEST['cardinalityType']) {
+            $data['platform'] = intval($_REQUEST['cardinalityType']);
+        }else{
+            $data['shipping'] = intval($_REQUEST['cardinalityType']);
+        }
 
-            /*提成比例类型*/
-            switch ($_REQUEST['sort2']) {
-            case 'identity'   : $data['proportion_type'] = 0; break; //同一比例
-            case 'cumulative' : $data['proportion_type'] = 1; break; //累加比例
-            case 'product'    : $data['proportion_type'] = 2; break; //产品比例
-            }
-            return $data;
+        /*提成比例类型*/
+        switch ($_REQUEST['sort2']) {
+        case 'identity'   : $data['proportion_type'] = 0; break; //同一比例
+        case 'cumulative' : $data['proportion_type'] = 1; break; //累加比例
+        case 'product'    : $data['proportion_type'] = 2; break; //产品比例
+        }
+        return $data;
     }
 
     //修改员工的所属提成系
@@ -1064,6 +1085,7 @@ class SalaryController extends PublicController {
         case 2 : $tableModel = M('oa_staff_records');
         $where = "staff_id IN($participant)"; break;
         }
+        $tableModel->where($where)->save(array('commission'=>0));
         $res = $tableModel->where($where)->save($map);       
         return $res;
     }

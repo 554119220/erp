@@ -39,7 +39,7 @@
         <tr>
           <th>职位级别：</th>
           <td>
-            <select name="position_level">
+            <select name="position_level" style="width:155px;">
               <option value="0">职位级别</option>
               {foreach from=$position_level item=val}
               <option value="{$val.level_id}"
@@ -48,20 +48,22 @@
               {/foreach}
             </select>
           </td>
-          <th>保底限量：</th>
+          <th>保底销量：</th>
           <td>
-            <input type="number" name="base_sales"
+            <input type="number" name="base_sales" class='lage-number'
             value="{$commissionRule.base_sales}" min="0" required class="number"/>
           </td>
-          <th>工龄大于</th>
-          <td>
-            <input type="number" name="work_age" value="{$commissionRule.work_age}"
-            class="number" min="0"/>
-          </td>
+        </tr>
+        <tr>
           <th>规则名称：</th>
-          <td colspan="5"><input type="text" name="rule_name" 
+          <td><input type="text" name="rule_name" 
             value="{$commissionRule.rule_name}"
             placeholder="规则名称" onkeyup="this.value=this.value.replace(/(^\s+)|\s+$/g,'');"/>
+          </td>
+          <th>工龄大于：</th>
+          <td>
+            <input type="number" name="work_age" value="{$commissionRule.work_age}"
+            class="lage-number" min="0"/>
           </td>
         </tr>
       </table>

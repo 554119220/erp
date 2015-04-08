@@ -21,6 +21,8 @@ span.remind,.remind{color:#777}
 input[type=number].number{width:60px;}
 input.number{width:60px;}
 .text-align-right{text-align:right;}
+.lage-number{width:150px;}
+
 /*带下划线的标题*/
 .line-title{border-bottom:1px solid #ccc;margin-bottom:6px;width:750px}
 
@@ -127,4 +129,3 @@ table.gridtable td {
 
 /*JSON操作返回提醒*/
 .json-alert{display:none;margin-bottom:0px;margin-left:25%;padding: 3px; }
-
