@@ -38,12 +38,17 @@ function addChecked(obj){
     divObj.html(html);
     divObj.find('label').each(function(){
       $(this).bind('click',function(){
-        value = $(this).find('input:checked').val();
-        obj.find("[value='"+value+"']").attr('disabled',false);
-        $(this).remove();
+        removeParticipant($(this),obj);
       });
     });
   }
+}
+
+//移除参与者
+function removeParticipant(item,obj){
+  var value = item.find('input:checked').val();
+  obj.find("[value='"+value+"']").attr('disabled',false);
+  item.remove();
 }
 
 /*套用工资套账*/

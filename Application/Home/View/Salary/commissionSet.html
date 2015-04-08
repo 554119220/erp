@@ -21,7 +21,16 @@
     <input type="hidden" name="url" value="{$url}"/>
     <form name="commissionForm" id="commissionForm" action="{$url}/addCommissionRule" 
       method="POST" onsubmit="return addCommissionRule($(this))">
-      <div class="item-div" id="participantField"></div>
+      <div class="item-div" id="participantField">
+        {foreach from=$commissionRule.participant_name item=v}
+        <label title="点击删除"
+          onclick="javascript:
+          var name=obj.getAttribute('name');var obj=$("[name='"+name+"']"); ">
+          <input name="participant[]" type="checkbox" value="{$v.id}" checked=""> {$v.name}
+          <input name="participant_name[]" type="checkbox" value="{$v.name}" checked="" style="display:none">
+        </label>
+        {/foreach}
+      </div>
       <table class="form">
         <caption>必填</caption>
         <tr>

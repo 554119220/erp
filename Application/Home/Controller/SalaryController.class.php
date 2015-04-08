@@ -1054,7 +1054,6 @@ class SalaryController extends PublicController {
                 }
                 $_POST['tag']  = $commissionRule['participant_type'];
                 $_POST['data'] = $this->switchParticipant();
-                dump($_POST['data']);exit;
                 //echo '<pre>';
                 //print_r($commissionRule);exit;
                 $this->assign('commissionRule',$commissionRule);
