@@ -36,7 +36,7 @@
             <td>
               <input type="text" name="job_title" value="" id="job_title" placeholder="应聘或当前职位"/></td>
             <td>
-              <input class="datePicker" type="text" name="joined_date" value="" placeholder="入职日期">
+              <input class="datePicker" type="text" name="joined_date" value="" onClick="WdatePicker()" placeholder="入职日期">
             </td>
             <th>公司宿舍</th>
             <td>
@@ -57,7 +57,7 @@
             </td>
             <th>出生日期</th>
             <td>
-              <input class="datePicker" type="text" name="birthday" value="" placeholder="农历" >
+              <input class="datePicker" type="text" name="birthday" value="" placeholder="农历" onClick="WdatePicker()">
             </td>
             <td rowspan="6" id="tdPhoto">
               <label for="avator">点击上传照片</label>
@@ -151,10 +151,10 @@
           </tr>
           <tr>
             <td>
-              <input class="datePicker" type="text" name="edu_start[]" value="" >
+              <input class="datePicker" type="text" name="edu_start[]" value="" onClick="WdatePicker()">
             </td>
             <td>
-              <input class="datePicker" type="text" name="edu_end[]" value="" >
+              <input class="datePicker" type="text" name="edu_end[]" value="" onClick="WdatePicker()">
             </td>
             <td colspan="2"><input type="text" name="school[]" value=""/></td>
             <td><input type="text" name="major[]" value=""/></td>
@@ -166,10 +166,10 @@
           </tr>
           <tr>
             <td>
-              <input class="datePicker" type="text" name="edu_start[]" value="" >
+              <input class="datePicker" type="text" name="edu_start[]" value="" onClick="WdatePicker()">
             </td>
             <td>
-              <input class="datePicker" type="text" name="edu_end[]" value="" >
+              <input class="datePicker" type="text" name="edu_end[]" value="" onClick="WdatePicker()">
             </td>
             <td colspan="2"><input type="text" name="school[]" value=""/></td>
             <td><input type="text" name="major[]" value=""/></td>
@@ -181,10 +181,10 @@
           </tr>
           <tr>
             <td>
-              <input class="datePicker" type="text" name="edu_start[]" value="" >
+              <input class="datePicker" type="text" name="edu_start[]" value="" onClick="WdatePicker()">
             </td>
             <td>
-              <input class="datePicker" type="text" name="edu_end[]" value="" >
+              <input class="datePicker" type="text" name="edu_end[]" value="" onClick="WdatePicker()">
             </td>
             <td colspan="2"><input type="text" name="school[]" value=""/></td>
             <td><input type="text" name="major[]" value=""/></td>
@@ -197,37 +197,47 @@
           <tr> <td colspan="7"> </td> </tr>
           <!-- 工作经历 -->
           <tr>
-            <th rowspan="5">工作经历</th>
-            <td colspan="6">
-              <span style="font-size:13px;color:#999;padding-left:12px;">
-                请务必详细填写以往工作经历，包括工作主要职责、具体工作内容和所取成绩</span>
-            </td>
+            <th rowspan="4">工作经历</th>
+            <th>开始日期</th>
+            <th>结束日期</th>
+            <th colspan="2">工作单位</th>
+            <th colspan="2">职位及职责</th>
           </tr>
           <tr>
-            <th>日期</th>
             <td>
-              <input class="datePicker" type="text" name="joined_date" value="" placeholder="日期">
+              <input class="datePicker" type="text" name="work_start[]" value="" onClick="WdatePicker()">
             </td>
-            <th>工作单位</th>
-            <td></td>
-            <th>职位及职责</th>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="6">
-              <textarea name=""></textarea>
+            <td>
+              <input class="datePicker" type="text" name="work_end[]" value="" onClick="WdatePicker()">
+            </td>
+            <td colspan="2"><input type="text" name="company[]" value="" placeholder="请填写公司全名"/> </td>
+            <td colspan="2"> 
+              <textarea name="position[]"></textarea>
             </td>
           </tr>
           <tr>
-            <th>日期</th>
-            <th></th>
-            <th>工作单位</th>
-            <td></td>
-            <th>职位及职责</th>
-            <td></td>
+            <td>
+              <input class="datePicker" type="text" name="work_start[]" value="" onClick="WdatePicker()">
+            </td>
+            <td>
+              <input class="datePicker" type="text" name="work_end[]" value="" onClick="WdatePicker()">
+            </td>
+            <td colspan="2"><input type="text" name="company[]" value="" placeholder="请填写公司全名"/></td>
+            <td colspan="2"> 
+              <textarea name="position[]"></textarea>
+            </td>
           </tr>
           <tr>
-            <td colspan="6"></td>
+            <td>
+              <input class="datePicker" type="text" name="work_start[]" value="" onClick="WdatePicker()">
+            </td>
+            <td>
+              <input class="datePicker" type="text" name="work_end[]" value="" onClick="WdatePicker()">
+            </td>
+            <td colspan="2"><input type="text" name="company[]" value="" placeholder="请填写公司全名"/> </td>
+            <td colspan="2"> 
+              <textarea name="position[]"></textarea>
+            </td>
           </tr>
           <tr> <td colspan="7"> </td> </tr>
           <!-- 紧急联系人 -->

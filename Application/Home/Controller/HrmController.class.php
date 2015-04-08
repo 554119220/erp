@@ -80,7 +80,7 @@ class HrmController extends PublicController{
                 if (!is_array($val)) {
                     $staffInfo[$key] = trim($val);
                 } else {
-                    $$key = trim($val);
+                    $$key = $val;
                 }
             }
             $staffInfo['habbit'] = trim($_REQUEST['habbit']);
