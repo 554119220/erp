@@ -165,11 +165,14 @@ class CheckinginController extends PublicController {
     /*迟到列表*/
     public function late(){
         $this->assign('late','late');
+        $this->nav();
         $this->assign('formUrl',__CONTROLLER__.'/lateRecord');
         $this->assign('staff_list',D('hrm')->staffListSelect(false,true)); 
         $hour = date('H') > 12 ? '08:00' : '14:00';
         $this->assign('hour',$hour);
-        $this->listData('2',L('LATE_LIST')); 
+        $this->assign('dataUrl',__CONTROLLER__."/checkinginList/class_id/2");
+        $this->assign('title',L('LATE_LIST'));
+        $this->display();
     }
 
     //迟到登记
