@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-02 09:12:09
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-07 14:54:59
          compiled from ".\Application\Home\View\Salary\commissionRule.html" */ ?>
 <?php /*%%SmartyHeaderCode:2162854f6c8ba5f5e11-11487839%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '3cfed6104ae0de11f810bb39a884bd84a557a8e9' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\commissionRule.html',
-      1 => 1427881043,
+      1 => 1428389679,
       2 => 'file',
     ),
   ),
@@ -128,15 +128,15 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       <tr>
         <th width="12%">参与者</th>
         <th width="10%">备注</th>
-        <th width="5%">保底</th>
-        <th width="10%">购买平台</th>
+        <th width="5%">保底销量</th>
+        <th width="9%">购买平台</th>
         <th width="9%">配送方式</th>
         <th width="8%">基数</th>
         <th width="6%">类型</th>
         <th width="8%">下限</th>
         <th width="8%">上限</th>
-        <th width="6%">比例</th>
-        <th width="8%">添加人</th>
+        <th width="5%">比例</th>
+        <th width="6%">添加人</th>
         <th width="10%">添加时间</th>
         <th width="10%">操作</th>
       </tr>
@@ -178,9 +178,9 @@ $_smarty_tpl->tpl_vars['p']->_loop = true;
         <td><?php echo $_smarty_tpl->tpl_vars['val']->value['add_time'];?>
 </td>
         <td>
-          <input type="button" class="btn-link" value="修改"
-          onclick="editCommissionRule(<?php echo $_smarty_tpl->tpl_vars['val']->value['rule_id'];?>
-)"/>
+          <a href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+/editCommissionRule/rule_id/<?php echo $_smarty_tpl->tpl_vars['val']->value['rule_id'];?>
+">修改</a>
         </td>
       </tr>
       <?php } ?>

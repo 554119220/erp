@@ -5,13 +5,15 @@
   <div class="panel-div left">
     {foreach from=$switch_tag key=k item=val name=i}
     <label><input type="radio" name="nav_switch"
-      form="commissionForm" {if $smarty.foreach.i.index eq 0 }checked{/if}
+      form="commissionForm"
+      {if $k eq $commissionRule.participant_type || $smarty.foreach.i.index eq 0}checked{/if}
       value="{$k}"/ onclick="switchTag(this)" url="{$url}/switchParticipant"> {$val}</label>
     {/foreach} | 
     <select name="participantSel" style="width:168px;" onchange="addChecked(this)">
-      <option value="0">部门</option>
       {foreach from=$data key=k item=val}
-      <option value="{$k}">{$val}</option>
+      <option value="{$k}"
+      {if in_array($k,$commissionRule.participant)}disabled{/if}
+      >{$val}</option>
       {/foreach}
     </select>
   </div>
@@ -34,7 +36,8 @@
           </td>
           <th>保底限量：</th>
           <td>
-            <input type="number" name="base_sales" value="0" min="0" required class="number"/>
+            <input type="number" name="base_sales"
+            value="{$commissionRule.base_sales}" min="0" required class="number"/>
           </td>
           <th>工龄大于</th>
           <td>

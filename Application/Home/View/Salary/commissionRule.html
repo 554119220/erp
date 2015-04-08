@@ -52,15 +52,15 @@
       <tr>
         <th width="12%">参与者</th>
         <th width="10%">备注</th>
-        <th width="5%">保底</th>
-        <th width="10%">购买平台</th>
+        <th width="5%">保底销量</th>
+        <th width="9%">购买平台</th>
         <th width="9%">配送方式</th>
         <th width="8%">基数</th>
         <th width="6%">类型</th>
         <th width="8%">下限</th>
         <th width="8%">上限</th>
-        <th width="6%">比例</th>
-        <th width="8%">添加人</th>
+        <th width="5%">比例</th>
+        <th width="6%">添加人</th>
         <th width="10%">添加时间</th>
         <th width="10%">操作</th>
       </tr>
@@ -82,8 +82,7 @@
         <td>{$val.add_admin}</td>
         <td>{$val.add_time}</td>
         <td>
-          <input type="button" class="btn-link" value="修改"
-          onclick="editCommissionRule({$val.rule_id})"/>
+          <a href="{$url}/editCommissionRule/rule_id/{$val.rule_id}">修改</a>
         </td>
       </tr>
       {/foreach}

@@ -227,7 +227,11 @@ class SalaryController extends PublicController {
         );
         $sort2 = array(
             'identical'=>'同一比例','cumulative'=>'累加比例','product'=>'产品比例');
-        $data = D('RoleManage')->roleListSelect('','role_id,role_name');
+        $data = $_POST['data'];
+        if (!$data) {
+            $data = D('RoleManage')->roleListSelect('','role_id,role_name');
+            array_unshift($data,'部门');
+        }
         $this->assign('data',$data);
         //$this->assign('url',U('Home/Salary'));
         $this->assign('url',self::$controllerUrl);
@@ -236,7 +240,7 @@ class SalaryController extends PublicController {
         $this->assign('position_level',D('Hrm')->positionLevel());
         $this->assign('cumulativeNum',range(0,5));
         $this->assign('switch_tag',$switchTag);
-        $this->display();
+        $this->display('commissionSet');
     }
 
     //提成基数类型（提成设置）
@@ -269,12 +273,16 @@ class SalaryController extends PublicController {
             $name = '员工';break;
         }
 
-        $optionList = "<option value=\"0\">$name</option>";
-        foreach ($data as $key=>&$val) {
-            $optionList.="<option value=\"$key\">{$val}</option>";
+        if (IS_AJAX) {
+            $optionList = "<option value=\"0\">$name</option>";
+            foreach ($data as $key=>&$val) {
+                $optionList.="<option value=\"$key\">{$val}</option>";
+            }
+            $returnData = array('name'=>$name,'html'=>$optionList);
+            return $this->ajaxReturn($returnData,'JSON');
+        }else{
+            return $data;
         }
-        $returnData = array('name'=>$name,'html'=>$optionList);
-        return $this->ajaxReturn($returnData,'JSON'); 
     }
 
     //提成规则
@@ -1026,6 +1034,35 @@ class SalaryController extends PublicController {
             }
             $data['href'] = __CONTROLLER__.'/salaryApproval';
             $this->ajaxReturn($data,'JSON');
+        }
+    }
+
+    //修改提成规则
+    public function editCommissionRule(){
+        $behave = $_REQUEST['behave'] ? $_REQUEST['behave'] : 'edit';
+        $ruleId = intval($_REQUEST['rule_id']);
+        if ($ruleId) {
+            if ('edit' == $behave) {
+                $commissionRule = M('oa_commission_rule')->where("rule_id=$ruleId")->find();
+                $commissionRule['participant'] = unserialize($commissionRule['participant']);
+                $commissionRule['participant_name']
+                    = unserialize($commissionRule['participant_name']);
+                foreach ($commissionRule['participant'] as $k=>$v) {
+                   $commissionRule['participant_name'][$k] =
+                       array('id'=>$v,
+                       'name'=>$commissionRule['participant_name'][$k]); 
+                }
+                $_POST['tag']  = $commissionRule['participant_type'];
+                $_POST['data'] = $this->switchParticipant();
+                dump($_POST['data']);exit;
+                //echo '<pre>';
+                //print_r($commissionRule);exit;
+                $this->assign('commissionRule',$commissionRule);
+                $this->commissionSet();
+            }elseif('save' == $behave){
+            }
+        }else{
+            $this->error(L('NO_SELECT_RULE'));
         }
     }
 }

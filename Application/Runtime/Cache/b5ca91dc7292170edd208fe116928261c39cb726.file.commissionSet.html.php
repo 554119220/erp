@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-20 08:37:36
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-07 18:02:26
          compiled from ".\Application\Home\View\Salary\commissionSet.html" */ ?>
 <?php /*%%SmartyHeaderCode:2033554f6c8b7e8b255-00263540%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b5ca91dc7292170edd208fe116928261c39cb726' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\commissionSet.html',
-      1 => 1426758964,
+      1 => 1428400944,
       2 => 'file',
     ),
   ),
@@ -23,6 +23,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'nav' => 0,
     'switch_tag' => 0,
     'k' => 0,
+    'commissionRule' => 0,
     'url' => 0,
     'val' => 0,
     'data' => 0,
@@ -51,14 +52,14 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
  $_smarty_tpl->tpl_vars['smarty']->value['foreach']['i']['index']++;
 ?>
     <label><input type="radio" name="nav_switch"
-      form="commissionForm" <?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['i']['index']==0) {?>checked<?php }?>
+      form="commissionForm"
+      <?php if ($_smarty_tpl->tpl_vars['k']->value==$_smarty_tpl->tpl_vars['commissionRule']->value['participant_type']||$_smarty_tpl->getVariable('smarty')->value['foreach']['i']['index']==0) {?>checked<?php }?>
       value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
 "/ onclick="switchTag(this)" url="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 /switchParticipant"> <?php echo $_smarty_tpl->tpl_vars['val']->value;?>
 </label>
     <?php } ?> | 
     <select name="participantSel" style="width:168px;" onchange="addChecked(this)">
-      <option value="0">部门</option>
       <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['data']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -67,7 +68,9 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
  $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['val']->key;
 ?>
       <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
-"><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+"
+      <?php if (in_array($_smarty_tpl->tpl_vars['k']->value,$_smarty_tpl->tpl_vars['commissionRule']->value['participant'])) {?>disabled<?php }?>
+      ><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
 </option>
       <?php } ?>
     </select>
@@ -99,7 +102,9 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           </td>
           <th>保底限量：</th>
           <td>
-            <input type="number" name="base_sales" value="0" min="0" required class="number"/>
+            <input type="number" name="base_sales"
+            value="<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['base_sales'];?>
+" min="0" required class="number"/>
           </td>
           <th>工龄大于</th>
           <td>
