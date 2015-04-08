@@ -23,8 +23,8 @@ function switchRatio(obj){
 }
 
 /*提成参与者*/
-function addChecked(obj){
-  var name  = obj.getAttribute('name');
+function addChecked(name){
+  //var name  = obj.getAttribute('name');
   var obj   = $("[name='"+name+"']");
   var value = obj.val();
   if (value != 0) {
@@ -38,14 +38,15 @@ function addChecked(obj){
     divObj.html(html);
     divObj.find('label').each(function(){
       $(this).bind('click',function(){
-        removeParticipant($(this),obj);
+        removeParticipant($(this),name);
       });
     });
   }
 }
 
 //移除参与者
-function removeParticipant(item,obj){
+function removeParticipant(item,name){
+  var obj   = $("[name='"+name+"']");
   var value = item.find('input:checked').val();
   obj.find("[value='"+value+"']").attr('disabled',false);
   item.remove();

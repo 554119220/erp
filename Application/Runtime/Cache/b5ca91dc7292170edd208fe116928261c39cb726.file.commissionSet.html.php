@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 09:55:50
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 11:57:34
          compiled from ".\Application\Home\View\Salary\commissionSet.html" */ ?>
 <?php /*%%SmartyHeaderCode:26633552489ab6acfc3-00134939%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b5ca91dc7292170edd208fe116928261c39cb726' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\commissionSet.html',
-      1 => 1428458135,
+      1 => 1428465428,
       2 => 'file',
     ),
   ),
@@ -26,6 +26,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'commissionRule' => 0,
     'url' => 0,
     'val' => 0,
+    'participantSelName' => 0,
     'data' => 0,
     'v' => 0,
     'position_level' => 0,
@@ -60,7 +61,9 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 /switchParticipant"> <?php echo $_smarty_tpl->tpl_vars['val']->value;?>
 </label>
     <?php } ?> | 
-    <select name="participantSel" style="width:168px;" onchange="addChecked(this)">
+    <select name="participantSel" style="width:168px;" onchange="addChecked(this.name)">
+      <option value="0"><?php echo $_smarty_tpl->tpl_vars['participantSelName']->value;?>
+</option>
       <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
  $_from = $_smarty_tpl->tpl_vars['data']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -79,8 +82,14 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
   <div class="main lf">
     <input type="hidden" name="url" value="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 "/>
-    <form name="commissionForm" id="commissionForm" action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-/addCommissionRule" 
+    <form name="commissionForm" id="commissionForm" 
+      action="<?php if ($_smarty_tpl->tpl_vars['commissionRule']->value) {?>
+      <?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+/editCommissionRule/behave/save/rule_id/<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['rule_id'];?>
+
+      <?php } else {
+echo $_smarty_tpl->tpl_vars['url']->value;?>
+/addCommissionRule<?php }?>" 
       method="POST" onsubmit="return addCommissionRule($(this))">
       <div class="item-div" id="participantField">
         <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
@@ -88,10 +97,14 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
 $_smarty_tpl->tpl_vars['v']->_loop = true;
 ?>
-        <label title="点击删除"><input name="participant[]" type="checkbox" value="<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
+        <label title="点击删除"
+          onclick="removeParticipant($(this),'participantSel')">
+          <input name="participant[]" type="checkbox" value="<?php echo $_smarty_tpl->tpl_vars['v']->value['id'];?>
 " checked=""> <?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
-<input name="participant_name[]" type="checkbox" value="<?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
-" checked="" style="display:none"></label>
+
+          <input name="participant_name[]" type="checkbox" value="<?php echo $_smarty_tpl->tpl_vars['v']->value['name'];?>
+" checked="" style="display:none">
+        </label>
         <?php } ?>
       </div>
       <table class="form">
@@ -107,7 +120,9 @@ foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars[
 $_smarty_tpl->tpl_vars['val']->_loop = true;
 ?>
               <option value="<?php echo $_smarty_tpl->tpl_vars['val']->value['level_id'];?>
-"><?php echo $_smarty_tpl->tpl_vars['val']->value['level_name'];?>
+"
+              <?php if ($_smarty_tpl->tpl_vars['commissionRule']->value['position_level']==$_smarty_tpl->tpl_vars['val']->value['level_id']) {?>selected<?php }?>>
+              <?php echo $_smarty_tpl->tpl_vars['val']->value['level_name'];?>
 </option>
               <?php } ?>
             </select>
@@ -120,10 +135,14 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           </td>
           <th>工龄大于</th>
           <td>
-            <input type="number" name="work_age" value="0" class="number" min="0"/>
+            <input type="number" name="work_age" value="<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['work_age'];?>
+"
+            class="number" min="0"/>
           </td>
           <th>规则名称：</th>
-          <td colspan="5"><input type="text" name="rule_name" value=""
+          <td colspan="5"><input type="text" name="rule_name" 
+            value="<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['rule_name'];?>
+"
             placeholder="规则名称" onkeyup="this.value=this.value.replace(/(^\s+)|\s+$/g,'');"/>
           </td>
         </tr>
@@ -141,7 +160,8 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           <td>
             <label><input type="radio" name="sort1" value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
 "
-              <?php if ($_smarty_tpl->tpl_vars['k']->value==1) {?>checked<?php }?> onclick="getCardinalityType(this)"/> <?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+              <?php if ($_smarty_tpl->tpl_vars['k']->value==$_smarty_tpl->tpl_vars['commissionRule']->value['cardinality']||$_smarty_tpl->tpl_vars['k']->value==1) {?>checked<?php }?>
+              onclick="getCardinalityType(this)"/> <?php echo $_smarty_tpl->tpl_vars['val']->value;?>
 </label>
           </td>
           <?php } ?>
@@ -161,7 +181,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 ?>
           <td><label><input type="radio" name="sort2" value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
 "
-              <?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['i']['index']==0) {?>checked<?php }?> 
+              <?php if ($_smarty_tpl->tpl_vars['k']->value==$_smarty_tpl->tpl_vars['commissionRule']->value['proportion_type']||$_smarty_tpl->getVariable('smarty')->value['foreach']['i']['index']==0) {?>checked<?php }?> 
               onclick="switchRatio($(this))"/> <?php echo $_smarty_tpl->tpl_vars['val']->value;?>
 </label></td>
           <?php } ?>
@@ -170,13 +190,17 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           <tr id="identical">
             <td>提成比例</td>
             <td colspan="3">
-              <input type="text" name="identical_commission" value="" /> %
+              <input type="text" name="identical_commission" 
+              value="<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['commission'];?>
+" /> %
             </td> 
           </tr>
           <tr id="product">
             <td>提成比例</td>
             <td colspan="3">
-              <input type="text" name="product_commission" value=""/> %
+              <input type="text" name="product_commission"
+              value="<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['commission'];?>
+"/> %
             </td> 
           </tr>
           <tr id="cumulative">
@@ -196,7 +220,8 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
           </tr>
           <tr>
             <td colspan="4">
-              <input type="submit" value="保存" class="btn btn-primary"/>
+              <input type="submit" 
+              value="<?php if ($_smarty_tpl->tpl_vars['commissionRule']->value) {?>修改<?php } else { ?>保存<?php }?>" class="btn btn-primary"/>
             </td>
           </tr>
         </table>

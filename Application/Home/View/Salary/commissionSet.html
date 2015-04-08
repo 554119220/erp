@@ -9,7 +9,8 @@
       {if $k eq $commissionRule.participant_type || $smarty.foreach.i.index eq 0}checked{/if}
       value="{$k}"/ onclick="switchTag(this)" url="{$url}/switchParticipant"> {$val}</label>
     {/foreach} | 
-    <select name="participantSel" style="width:168px;" onchange="addChecked(this)">
+    <select name="participantSel" style="width:168px;" onchange="addChecked(this.name)">
+      <option value="0">{$participantSelName}</option>
       {foreach from=$data key=k item=val}
       <option value="{$k}"
       {if in_array($k,$commissionRule.participant)}disabled{/if}
@@ -19,13 +20,15 @@
   </div>
   <div class="main lf">
     <input type="hidden" name="url" value="{$url}"/>
-    <form name="commissionForm" id="commissionForm" action="{$url}/addCommissionRule" 
+    <form name="commissionForm" id="commissionForm" 
+      action="{if $commissionRule}
+      {$url}/editCommissionRule/behave/save/rule_id/{$commissionRule.rule_id}
+      {else}{$url}/addCommissionRule{/if}" 
       method="POST" onsubmit="return addCommissionRule($(this))">
       <div class="item-div" id="participantField">
         {foreach from=$commissionRule.participant_name item=v}
         <label title="点击删除"
-          onclick="javascript:
-          var name=obj.getAttribute('name');var obj=$("[name='"+name+"']"); ">
+          onclick="removeParticipant($(this),'participantSel')">
           <input name="participant[]" type="checkbox" value="{$v.id}" checked=""> {$v.name}
           <input name="participant_name[]" type="checkbox" value="{$v.name}" checked="" style="display:none">
         </label>
@@ -39,7 +42,9 @@
             <select name="position_level">
               <option value="0">职位级别</option>
               {foreach from=$position_level item=val}
-              <option value="{$val.level_id}">{$val.level_name}</option>
+              <option value="{$val.level_id}"
+              {if $commissionRule.position_level eq $val.level_id}selected{/if}>
+              {$val.level_name}</option>
               {/foreach}
             </select>
           </td>
@@ -50,10 +55,12 @@
           </td>
           <th>工龄大于</th>
           <td>
-            <input type="number" name="work_age" value="0" class="number" min="0"/>
+            <input type="number" name="work_age" value="{$commissionRule.work_age}"
+            class="number" min="0"/>
           </td>
           <th>规则名称：</th>
-          <td colspan="5"><input type="text" name="rule_name" value=""
+          <td colspan="5"><input type="text" name="rule_name" 
+            value="{$commissionRule.rule_name}"
             placeholder="规则名称" onkeyup="this.value=this.value.replace(/(^\s+)|\s+$/g,'');"/>
           </td>
         </tr>
@@ -64,7 +71,8 @@
           {foreach from=$sort1 key=k item=val}
           <td>
             <label><input type="radio" name="sort1" value="{$k}"
-              {if $k eq 1}checked{/if} onclick="getCardinalityType(this)"/> {$val}</label>
+              {if $k eq $commissionRule.cardinality || $k eq 1}checked{/if}
+              onclick="getCardinalityType(this)"/> {$val}</label>
           </td>
           {/foreach}
         </tr>
@@ -74,7 +82,7 @@
         <tr>
           {foreach from=$sort2 key=k item=val name=i}
           <td><label><input type="radio" name="sort2" value="{$k}"
-              {if $smarty.foreach.i.index eq 0}checked{/if} 
+              {if $k eq $commissionRule.proportion_type ||$smarty.foreach.i.index eq 0}checked{/if} 
               onclick="switchRatio($(this))"/> {$val}</label></td>
           {/foreach}
           <td width="60%">
@@ -82,13 +90,15 @@
           <tr id="identical">
             <td>提成比例</td>
             <td colspan="3">
-              <input type="text" name="identical_commission" value="" /> %
+              <input type="text" name="identical_commission" 
+              value="{$commissionRule.commission}" /> %
             </td> 
           </tr>
           <tr id="product">
             <td>提成比例</td>
             <td colspan="3">
-              <input type="text" name="product_commission" value=""/> %
+              <input type="text" name="product_commission"
+              value="{$commissionRule.commission}"/> %
             </td> 
           </tr>
           <tr id="cumulative">
@@ -104,7 +114,8 @@
           </tr>
           <tr>
             <td colspan="4">
-              <input type="submit" value="保存" class="btn btn-primary"/>
+              <input type="submit" 
+              value="{if $commissionRule}修改{else}保存{/if}" class="btn btn-primary"/>
             </td>
           </tr>
         </table>

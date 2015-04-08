@@ -230,7 +230,7 @@ class SalaryController extends PublicController {
         $data = $_POST['data'];
         if (!$data) {
             $data = D('RoleManage')->roleListSelect('','role_id,role_name');
-            array_unshift($data,'部门');
+            $this->assign('participantSelName','部门');
         }
         $this->assign('data',$data);
         //$this->assign('url',U('Home/Salary'));
@@ -336,64 +336,18 @@ class SalaryController extends PublicController {
     /*添加提成规则*/
     public function addCommissionRule(){
         if ($_POST) {
-            $data = array(
-                'rule_name'        => trim($_REQUEST['rule_name']),
-                'participant_type' => $_REQUEST['nav_switch'],  //参与者类型
-                'participant'      => serialize($_REQUEST['participant']),   //参与者列表
-                'participant_name' => serialize($_REQUEST['participant_name']),//参与都名称
-                'cardinality'      => $_REQUEST['sort1'],    //提成基数
-                'position_level'   => $_REQUEST['position_level'],//职位等级
-                'payment'          => intval($_REQUEST['payment']),//支付方式
-                'base_sales'       => intval($_REQUEST['base_sales']),//保底销量
-                'add_time'         => $_SERVER['REQUEST_TIME'],
-                'add_admin'        => $_SESSION['admin_id'],
-                'work_age'         => intval($_SESSION['work_age']),//工龄
-            );
-
-            if (1 == $_REQUEST['cardinalityType']) {
-                $data['platform'] = intval($_REQUEST['cardinalityType']);
-            }else{
-                $data['shipping'] = intval($_REQUEST['cardinalityType']);
-            }
-
-            /*提成比例类型*/
-            switch ($_REQUEST['sort2']) {
-            case 'identity'   : $data['proportion_type'] = 0; break; //同一比例
-            case 'cumulative' : $data['proportion_type'] = 1; break; //累加比例
-            case 'product'    : $data['proportion_type'] = 2; break; //产品比例
-            }
-
+            $data = $this->commissionData();
             if (1 != $data['proportion_type']) {
                 $data['commission'] = $_REQUEST[$_REQUEST['sort2'].'_commission'];
                 $res = D('Salary')->addCommissionRule($data);
             }else{
                 //累加比例
-                $count = count($_REQUEST['commission']);
-                for ($i = 0; $i < $count; $i++) {
-                    if (intval($_REQUEST['commission'][$i])) {
-                        $data['min_sales']  = intval($_REQUEST['min_sale'][$i]);
-                        $data['max_sales']  = intval($_REQUEST['max_sale'][$i]);
-                        $data['commission'] = intval($_REQUEST['commission'][$i]);
-                        if (!D('Salary')->addCommissionRule($data)) {
-                            break;
-                        }
-                        $res = true;
-                    }
-                }
-                if ($i > $count) {$res = false; }
+                $res = $this->multipleCommission($data);
+                
             }
             if ($res) {
                 //修改参与者的提成类型
-                $participant = implode(',',$data['participant']);
-                switch ($_REQUEST['nav_switch']) {
-                    case 0 : $tableModel = M('role');
-                    $where = "role_id IN($participant)"; break;
-                    case 1 : $tableModel = M('group');
-                    $where = "group_id IN($participant)"; break;
-                    case 2 : $tableModel = M('oa_staff_records');
-                    $where = "staff_id IN($participant)"; break;
-                }
-                $res = $tableModel->where($where)->save($data);
+                $res = $this->modifyParticipantCommissionRule($res,$data);
                 $this->success(L('ADD_SUCCESS'),U('Home/Salary/commissionRule'));
             }else{
                 $this->error(L('ADD_ERROR'));
@@ -1053,6 +1007,8 @@ class SalaryController extends PublicController {
                        'name'=>$commissionRule['participant_name'][$k]); 
                 }
                 $_POST['tag']  = $commissionRule['participant_type'];
+                $item = array('部门','小组','员工');
+                $this->assign('participantSelName',$item[$_POST['tag']]);
                 $_POST['data'] = $this->switchParticipant();
                 //echo '<pre>';
                 //print_r($commissionRule);exit;
@@ -1063,6 +1019,73 @@ class SalaryController extends PublicController {
         }else{
             $this->error(L('NO_SELECT_RULE'));
         }
+    }
+
+    //薪资提成数据
+    private function commissionData(){
+        $data = array(
+            'rule_name'        => trim($_REQUEST['rule_name']),
+            'participant_type' => $_REQUEST['nav_switch'],  //参与者类型
+            'participant'      => serialize($_REQUEST['participant']),   //参与者列表
+            'participant_name' => serialize($_REQUEST['participant_name']),//参与都名称
+            'cardinality'      => $_REQUEST['sort1'],    //提成基数
+            'position_level'   => $_REQUEST['position_level'],//职位等级
+            'payment'          => intval($_REQUEST['payment']),//支付方式
+            'base_sales'       => intval($_REQUEST['base_sales']),//保底销量
+            'add_time'         => $_SERVER['REQUEST_TIME'],
+            'add_admin'        => $_SESSION['admin_id'],
+                'work_age'         => intval($_SESSION['work_age']),//工龄
+            );
+
+            if (1 == $_REQUEST['cardinalityType']) {
+                $data['platform'] = intval($_REQUEST['cardinalityType']);
+            }else{
+                $data['shipping'] = intval($_REQUEST['cardinalityType']);
+            }
+
+            /*提成比例类型*/
+            switch ($_REQUEST['sort2']) {
+            case 'identity'   : $data['proportion_type'] = 0; break; //同一比例
+            case 'cumulative' : $data['proportion_type'] = 1; break; //累加比例
+            case 'product'    : $data['proportion_type'] = 2; break; //产品比例
+            }
+            return $data;
+    }
+
+    //修改员工的所属提成系
+    private function modifyParticipantCommissionRule($ruleId,$data){
+        $map = array('commission'=>$ruleId);
+        $participant = implode(',',unserialize($data['participant']));
+        switch ($_REQUEST['nav_switch']) {
+        case 0 : $tableModel = M('role');
+        $where = "role_id IN($participant)"; break;
+        case 1 : $tableModel = M('group');
+        $where = "group_id IN($participant)"; break;
+        case 2 : $tableModel = M('oa_staff_records');
+        $where = "staff_id IN($participant)"; break;
+        }
+        $res = $tableModel->where($where)->save($map);       
+        return $res;
+    }
+
+    //累加提成比例
+    private function multipleCommission($data){
+        $count = count($_REQUEST['commission']);
+        for ($i = 0; $i < $count; $i++) {
+            if (intval($_REQUEST['commission'][$i])) {
+                $data['min_sales']  = intval($_REQUEST['min_sale'][$i]);
+                $data['max_sales']  = intval($_REQUEST['max_sale'][$i]);
+                $data['commission'] = intval($_REQUEST['commission'][$i]);
+                if (!D('Salary')->addCommissionRule($data)) {
+                    break;
+                }
+                $res = true;
+            }
+        }
+        if ($i > $count) {
+            return false;
+        }
+        return $res; 
     }
 }
 ?>
