@@ -1,73 +1,23 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 09:08:10
-         compiled from ".\Application\Home\View\Hrm\register.html" */ ?>
-<?php /*%%SmartyHeaderCode:1912655247f7a29f636-56919227%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
-$_valid = $_smarty_tpl->decodeProperties(array (
-  'file_dependency' => 
-  array (
-    'fa881af5abc555ac1a731009f4d3634accb7e6bf' => 
-    array (
-      0 => '.\\Application\\Home\\View\\Hrm\\register.html',
-      1 => 1421162236,
-      2 => 'file',
-    ),
-  ),
-  'nocache_hash' => '1912655247f7a29f636-56919227',
-  'function' => 
-  array (
-  ),
-  'variables' => 
-  array (
-    'publicUrl' => 0,
-    'formUrl' => 0,
-    'number' => 0,
-    'role_list' => 0,
-    'val' => 0,
-    'province_list' => 0,
-    'key' => 0,
-  ),
-  'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_55247f7a319750_70700822',
-),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_55247f7a319750_70700822')) {function content_55247f7a319750_70700822($_smarty_tpl) {?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>康健人生入职申请表</title>
     <meta charset="utf-8" />
-    <link type="text/css" href="<?php echo $_smarty_tpl->tpl_vars['publicUrl']->value;?>
-/styles/staff.css" rel="stylesheet" />
-    <?php echo '<script'; ?>
- src="<?php echo $_smarty_tpl->tpl_vars['publicUrl']->value;?>
-/js/tp-register.js" type="text/javascript"><?php echo '</script'; ?>
->
-    <?php echo '<script'; ?>
- src="<?php echo $_smarty_tpl->tpl_vars['publicUrl']->value;?>
-/js/tp-region.js" type="text/javascript"><?php echo '</script'; ?>
->
-    <?php echo '<script'; ?>
- src="<?php echo $_smarty_tpl->tpl_vars['publicUrl']->value;?>
-/js/tp-hrm.js" type="text/javascript"><?php echo '</script'; ?>
->
-    <?php echo '<script'; ?>
- src="<?php echo $_smarty_tpl->tpl_vars['publicUrl']->value;?>
-/js/tp-transport.js" type="text/javascript"><?php echo '</script'; ?>
->
-    <?php echo '<script'; ?>
- src="<?php echo $_smarty_tpl->tpl_vars['publicUrl']->value;?>
-/js/My97DatePicker/WdatePicker.js" type="text/javascript"><?php echo '</script'; ?>
->
+    <link type="text/css" href="{$publicUrl}/styles/staff.css" rel="stylesheet" />
+    <script src="{$publicUrl}/js/tp-register.js" type="text/javascript"></script>
+    <script src="{$publicUrl}/js/tp-region.js" type="text/javascript"></script>
+    <script src="{$publicUrl}/js/tp-hrm.js" type="text/javascript"></script>
+    <script src="{$publicUrl}/js/tp-transport.js" type="text/javascript"></script>
+    <script src="{$publicUrl}/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
   </head>
   <body>
-    <form action="<?php echo $_smarty_tpl->tpl_vars['formUrl']->value;?>
-" name="staff" id="staff" method="post" enctype="multipart/form-data" onsubmit="return formValidation()">
+    <form action="{$formUrl}" name="staff" id="staff" method="post" enctype="multipart/form-data" onsubmit="return formValidation()">
       <table border="1" cellspacing="0" cellpadding="0">
         <thead>
           <td colspan="9">
             康健人生入职申请表
-            <h6>编号：<?php echo $_smarty_tpl->tpl_vars['number']->value;?>
-&nbsp;</h6>
-            <input type="hidden" name="number" value="<?php echo $_smarty_tpl->tpl_vars['number']->value;?>
-"/>
+            <h6>编号：{$number}&nbsp;</h6>
+            <input type="hidden" name="number" value="{$number}"/>
           </td>
         </thead>
         <tbody>
@@ -77,22 +27,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <td>
               <select name="branch_id" id="branch_id">
                 <option value="0">请选择</option>
-                <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['role_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
-$_smarty_tpl->tpl_vars['val']->_loop = true;
-?>
-                <option value="<?php echo $_smarty_tpl->tpl_vars['val']->value['role_id'];?>
-" ><?php echo $_smarty_tpl->tpl_vars['val']->value['role_name'];?>
-</option>
-                <?php } ?>
+                {foreach from=$role_list item=val}
+                <option value="{$val.role_id}" >{$val.role_name}</option>
+                {/foreach}
               </select>
             </td>
             <th>应聘职位</th>
             <td>
               <input type="text" name="job_title" value="" id="job_title" placeholder="应聘或当前职位"/></td>
             <td>
-              <input class="datePicker" type="text" name="joined_date" value="" onClick="WdatePicker()" placeholder="入职日期">
+              <input class="datePicker" type="text" name="joined_date" value="" placeholder="入职日期">
             </td>
             <th>公司宿舍</th>
             <td>
@@ -113,7 +57,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
             </td>
             <th>出生日期</th>
             <td>
-              <input class="datePicker" type="text" name="birthday" value="" placeholder="农历" onClick="WdatePicker()">
+              <input class="datePicker" type="text" name="birthday" value="" placeholder="农历" >
             </td>
             <td rowspan="6" id="tdPhoto">
               <label for="avator">点击上传照片</label>
@@ -144,17 +88,9 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
             <td>
               <select name="native_province" onchange="region.changed(this, 2, 'native_city')">
                 <option value="0">选择省份</option>
-                <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
- $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable;
- $_from = $_smarty_tpl->tpl_vars['province_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
-$_smarty_tpl->tpl_vars['val']->_loop = true;
- $_smarty_tpl->tpl_vars['key']->value = $_smarty_tpl->tpl_vars['val']->key;
-?>
-                <option value="<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
-"><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
-</option>
-                <?php } ?>
+                {foreach from=$province_list key=k item=val}
+                <option value="{$k}">{$val}</option>
+                {/foreach}
               </select>
             </td>
             <td colspan="2">
@@ -173,17 +109,9 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
               <div class="address">
                 <select name="province" id="selProvinces" onchange="region.changed(this, 2, 'selCities')">
                   <option value="0">选择省份</option>
-                  <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
- $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable;
- $_from = $_smarty_tpl->tpl_vars['province_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
-$_smarty_tpl->tpl_vars['val']->_loop = true;
- $_smarty_tpl->tpl_vars['key']->value = $_smarty_tpl->tpl_vars['val']->key;
-?>
-                  <option value="<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
-"><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
-</option>
-                  <?php } ?>
+                  {foreach from=$province_list key=k item=$val}
+                  <option value="{$k}">{$val}</option>
+                  {/foreach}
                 </select>
               </div>
               <div class="address">
@@ -223,10 +151,10 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           </tr>
           <tr>
             <td>
-              <input class="datePicker" type="text" name="edu_start[]" value="" onClick="WdatePicker()">
+              <input class="datePicker" type="text" name="edu_start[]" value="" >
             </td>
             <td>
-              <input class="datePicker" type="text" name="edu_end[]" value="" onClick="WdatePicker()">
+              <input class="datePicker" type="text" name="edu_end[]" value="" >
             </td>
             <td colspan="2"><input type="text" name="school[]" value=""/></td>
             <td><input type="text" name="major[]" value=""/></td>
@@ -238,10 +166,10 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           </tr>
           <tr>
             <td>
-              <input class="datePicker" type="text" name="edu_start[]" value="" onClick="WdatePicker()">
+              <input class="datePicker" type="text" name="edu_start[]" value="" >
             </td>
             <td>
-              <input class="datePicker" type="text" name="edu_end[]" value="" onClick="WdatePicker()">
+              <input class="datePicker" type="text" name="edu_end[]" value="" >
             </td>
             <td colspan="2"><input type="text" name="school[]" value=""/></td>
             <td><input type="text" name="major[]" value=""/></td>
@@ -253,10 +181,10 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           </tr>
           <tr>
             <td>
-              <input class="datePicker" type="text" name="edu_start[]" value="" onClick="WdatePicker()">
+              <input class="datePicker" type="text" name="edu_start[]" value="" >
             </td>
             <td>
-              <input class="datePicker" type="text" name="edu_end[]" value="" onClick="WdatePicker()">
+              <input class="datePicker" type="text" name="edu_end[]" value="" >
             </td>
             <td colspan="2"><input type="text" name="school[]" value=""/></td>
             <td><input type="text" name="major[]" value=""/></td>
@@ -269,47 +197,37 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           <tr> <td colspan="7"> </td> </tr>
           <!-- 工作经历 -->
           <tr>
-            <th rowspan="4">工作经历</th>
-            <th>开始日期</th>
-            <th>结束日期</th>
-            <th colspan="2">工作单位</th>
-            <th colspan="2">职位及职责</th>
-          </tr>
-          <tr>
-            <td>
-              <input class="datePicker" type="text" name="work_start[]" value="" onClick="WdatePicker()">
-            </td>
-            <td>
-              <input class="datePicker" type="text" name="work_end[]" value="" onClick="WdatePicker()">
-            </td>
-            <td colspan="2"><input type="text" name="company[]" value="" placeholder="请填写公司全名"/> </td>
-            <td colspan="2"> 
-              <textarea name="position[]"></textarea>
+            <th rowspan="5">工作经历</th>
+            <td colspan="6">
+              <span style="font-size:13px;color:#999;padding-left:12px;">
+                请务必详细填写以往工作经历，包括工作主要职责、具体工作内容和所取成绩</span>
             </td>
           </tr>
           <tr>
+            <th>日期</th>
             <td>
-              <input class="datePicker" type="text" name="work_start[]" value="" onClick="WdatePicker()">
+              <input class="datePicker" type="text" name="joined_date" value="" placeholder="日期">
             </td>
-            <td>
-              <input class="datePicker" type="text" name="work_end[]" value="" onClick="WdatePicker()">
-            </td>
-            <td colspan="2"><input type="text" name="company[]" value="" placeholder="请填写公司全名"/></td>
-            <td colspan="2"> 
-              <textarea name="position[]"></textarea>
+            <th>工作单位</th>
+            <td></td>
+            <th>职位及职责</th>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="6">
+              <textarea name=""></textarea>
             </td>
           </tr>
           <tr>
-            <td>
-              <input class="datePicker" type="text" name="work_start[]" value="" onClick="WdatePicker()">
-            </td>
-            <td>
-              <input class="datePicker" type="text" name="work_end[]" value="" onClick="WdatePicker()">
-            </td>
-            <td colspan="2"><input type="text" name="company[]" value="" placeholder="请填写公司全名"/> </td>
-            <td colspan="2"> 
-              <textarea name="position[]"></textarea>
-            </td>
+            <th>日期</th>
+            <th></th>
+            <th>工作单位</th>
+            <td></td>
+            <th>职位及职责</th>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="6"></td>
           </tr>
           <tr> <td colspan="7"> </td> </tr>
           <!-- 紧急联系人 -->
@@ -360,4 +278,3 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
     </div>
   </body>
 </html>
-<?php }} ?>

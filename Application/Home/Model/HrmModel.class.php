@@ -284,9 +284,9 @@ class HrmModel extends PublicModel{
                 ->where($where)->select();
             if ($res) {
                 foreach($res as &$val){
-                   if ($val['role_name']) {
-                       $val['name'] .= "({$val['role_name']})";
-                   } 
+                    if ($val['role_name']) {
+                        $val['name'] .= "({$val['role_name']})";
+                    } 
                 }
             }
             return $res;
@@ -306,7 +306,7 @@ class HrmModel extends PublicModel{
 
     //查看提成设置
     public function commission($where){ 
-        
+
     }
 
     //提成系统设置修改，更新
