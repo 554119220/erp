@@ -246,11 +246,11 @@ class SalaryController extends PublicController {
     //提成基数类型（提成设置）
     public function getCardinalityType(){
         $type = intval($_REQUEST['type']);
-        if (1 == $type) {
+        if (2 == $type) {
             //按平台
             $res = M('role')->field('role_id AS value,role_name AS name')
                 ->where('role_id IN('.C('ONLINE_STORE').')')->select();
-        }elseif(2 == $type){
+        }elseif(3 == $type){
             //按配送方式
             $res = M('shipping')->field('shipping_id AS value,shipping_name AS name')
                 ->where('enabled<>0')->select();
