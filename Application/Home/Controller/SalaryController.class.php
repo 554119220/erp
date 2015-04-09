@@ -732,7 +732,8 @@ class SalaryController extends PublicController {
     /*工资审批设置*/
     public function salaryApproval(){
         $this->assign('admin_list',D('Admin')->adminList());
-        $this->assign('role_list',M('role')->getField('role_id,role_name'));
+        $this->assign('role_list',M('role')->order('convert(role_name using gbk) ASC')
+            ->getField('role_id,role_name'));
         $this->assign('approval_list',D('Salary')->salaryApproval());
         $this->nav();
         $this->display();
