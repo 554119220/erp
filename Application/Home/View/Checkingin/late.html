@@ -5,6 +5,10 @@
   <div class="bootstrap-table-title">{$title} 
     <input type="hidden" name="url" value="{$formUrl}"/>
     <button class="btn btn-link" data-toggle="modal" data-target="#myModal"> 登记迟到 </button>
+    <div class="alert alert-warning json-alert" style="display:">
+      <a href="#" class="close" data-dismiss="alert"> &times; </a>
+      <strong>警告！</strong>您的网络连接有问题。
+    </div>
   </div>
   <table data-toggle="table" data-url="{$dataUrl}" data-search="true" data-height="699" data-show-refresh="true" data-show-toggle="true" data-pagination="true">
     <thead>
