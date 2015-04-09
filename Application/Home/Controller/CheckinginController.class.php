@@ -185,9 +185,7 @@ class CheckinginController extends PublicController {
                     <input type="button" class="btn-link" value="修改"
 data-toggle="modal" data-target="#myModal"
 onclick="editLate({$v['check_id']},'edit')">
-<a href="/thinkphp/index.php/home/checkingin/editlate/behave/cancel/check_id/{$v['check_id']}"
-onclick="return confirmIt(this,'你确定要撤销这条请假记录?')">
-撤销</a>
+<input type="button" class="btn-link" value="撤销" onclick="editLate({$v['check_id']},'cancel')"
 EOF;
             }
         }

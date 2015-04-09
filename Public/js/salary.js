@@ -144,17 +144,19 @@ function delSalaryApproval(obj){
 
 //提醒
 function alertFun(data){
-  if (!data.res) {
-    $("#myAlert").removeClass('alert-success');
-    $("#myAlert").addClass('alert-warning');
+  if (data.status) {
+    $("#alert_success span").html(data.info);
+    $("#alert_success").css('display','block');
+  }else{
+    $("#alert_warning span").html(data.info);
+    $("#alert_warning").css('display','block');
   }
-  $("#myAlert span").html(data.text);
-  $("#myAlert").css('display','inline-block');
 
   setTimeout(function(){
-    $("#myAlert").css('display','none');
-    window.top.location.href = data.href;
-  },3000);
+    $("#alert-success").css('display','none');
+    $("#alert-warning").css('display','none');
+    window.top.location.href = data.url;
+  },2000);
 }
 
 /*添加工资套账*/

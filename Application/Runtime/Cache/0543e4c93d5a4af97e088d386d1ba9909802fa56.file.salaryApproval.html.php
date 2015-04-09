@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 15:49:23
-         compiled from ".\Application\Home\View\Salary\salaryApproval.html" */ ?>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 17:27:28
+         compiled from ".\Application\Home\View\Salary\salaryapproval.html" */ ?>
 <?php /*%%SmartyHeaderCode:116655524eb50cdfe69-65827088%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '0543e4c93d5a4af97e088d386d1ba9909802fa56' => 
     array (
-      0 => '.\\Application\\Home\\View\\Salary\\salaryApproval.html',
-      1 => 1428546013,
+      0 => '.\\Application\\Home\\View\\Salary\\salaryapproval.html',
+      1 => 1428571596,
       2 => 'file',
     ),
   ),
@@ -80,12 +80,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       </table>
     </form>
     <table class="table-bordered gridtable erp-table">
-      <caption>工资审批设置
-        <div id="myAlert" class="alert alert-success json-alert">
-          <a href="#" class="close" data-dismiss="alert">&times;</a>
-          <span></span>&nbsp;&nbsp;
-    </div>
-      </caption>
+      <caption>工资审批设置 </caption>
       <tr>
         <th width="10%">部门</th>
         <th width="10%">审批人</th>

@@ -23,6 +23,9 @@ input.number{width:60px;}
 .text-align-right{text-align:right;}
 .lage-number{width:150px;}
 
+/*提醒*/
+#alert_success,#alert_warning{margin-bottom:0px;display:none;}
+
 /*带下划线的标题*/
 .line-title{border-bottom:1px solid #ccc;margin-bottom:6px;width:750px}
 

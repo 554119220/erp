@@ -200,47 +200,47 @@ function setSelected(obj,value){
   }
 }
 
-//确认操作
-function confirmIt(obj,content){
-  if ('cancel' == behave) {
-    var r = confirm("你确定要摊销这条迟到记录吗");
-    if (!r) {
-      return false;
-    }
-  }
-}
+
 //编辑迟到记录
 function editLate(checkId,behave){
   if (checkId) {
-
+    if ('cancel' == behave) {
+      var r = confirm('你确定要摊销这条迟到记录吗？');
+      if (!r) {
+        return false;
+      }
+    }
     $.get(
         '/thinkphp/index.php/home/checkingin/editlate/behave/'+behave+'/check_id/'+checkId,
         function(data){
-          if (data) {
-            $("#form [name='staff_id'] option").each(
-              function(){
-                if ($(this).val() == data.staff_id ) {
-                  $(this).attr('selected',true);
-                }
-              });
-            $("#form [name='start_time']").val(data.start_time);
-            $("#form [name='reason']").val(data.reason);
-            $("#form [name='date']").val(data.date);
-            $("#form [name='date_type']").each(
-              function(){
-                if ($(this).val() == data.date_type) {
-                  $(this).attr('checked',true);
-                }
-              });
-            $("#form [name='behave']").val('save');
-            $("#form [name='check_id']").val(data.check_id);
-            $("#myModalLabel").html('修改迟到记录');
+          if (data.url) {
+            alertFun(data);
           }else{
-            return false;
+            if (data) {
+              $("#form [name='staff_id'] option").each(
+                function(){
+                  if ($(this).val() == data.staff_id ) {
+                    $(this).attr('selected',true);
+                  }
+                });
+              $("#form [name='start_time']").val(data.start_time);
+              $("#form [name='reason']").val(data.reason);
+              $("#form [name='date']").val(data.date);
+              $("#form [name='date_type']").each(
+                function(){
+                  if ($(this).val() == data.date_type) {
+                    $(this).attr('checked',true);
+                  }
+                });
+              $("#form [name='behave']").val('save');
+              $("#form [name='check_id']").val(data.check_id);
+              $("#myModalLabel").html('修改迟到记录');
+            }
           }
         });
   }
 }
+
 ////切换考勤计薪参数
 //function changeRuleItem(obj,taget){
 //  var trIndex = obj.parentNode.parentNode.rowIndex;

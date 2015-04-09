@@ -980,14 +980,19 @@ class SalaryController extends PublicController {
         $approvalId = intval($_REQUEST['approval_id']); 
         if ($approvalId) {
             $res = M('oa_salary_approval')->where("approval_id=$approvalId")->delete();
-            $data['res'] = $res;
-            if ($data['res']) {
-                $data['text'] = L('DEL_SUCCESS');
+            if ($res) {
+                $this->success(L('DEL_SUCCESS'),__CONTROLLER__.'/salaryApproval');
             }else{
-                $data['text'] = L('DEL_ERROR');
+                $this->error(L('DEL_ERROR'),__CONTROLLER__.'/salaryApproval');
             }
-            $data['href'] = __CONTROLLER__.'/salaryApproval';
-            $this->ajaxReturn($data,'JSON');
+            //$data['res'] = $res;
+            //if ($data['res']) {
+            //    $data['text'] = L('DEL_SUCCESS');
+            //}else{
+            //    $data['text'] = L('DEL_ERROR');
+            //}
+            //$data['href'] = __CONTROLLER__.'/salaryApproval';
+            //$this->ajaxReturn($data,'JSON');
         }
     }
 
