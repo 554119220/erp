@@ -34,12 +34,12 @@
         <h4 class="modal-title" id="myModalLabel">迟到登记</h4>
       </div>
       <div class="modal-body">
-        <form id="form" action="{$url}/lateRecord" method="POST">
+        <form id="form" name="form" action="{$url}/lateRecord" method="POST">
           <table class="form single" style="width:100%">
             <tr>
               <th>员工姓名</th>
               <td>
-                <select name="staff_id">
+                <select name="staff_id" style="width:123px;">
                   <option value="0">姓名</option>
                   {foreach from=$staff_list key=k item=v}
                   <option value="{$k}">{$v}</option>
@@ -82,3 +82,12 @@
   </div>
 </div>
 {$footer}
+<script language="javascript" type="text/javascript">
+  $(function () { $('#myModal').on('hide.bs.modal', function () {
+        document.forms['form'].reset();
+        document.forms['form'].elements['staff_id'].options[0].selected = true;
+        $("#myModalLabel").html('迟到登记');
+        })
+      }); 
+</script>
+

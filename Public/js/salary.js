@@ -312,7 +312,7 @@ function editAdjustSalary(logId){
 }
 
 //修改工资套账
-function editSalaryItem(obj,classId){
+function editSalaryClass(obj,classId){
   var url = $('#url').val();
   $.get(
       url+'/editSalaryClass/behave/'+obj.getAttribute('behave')+'/class_id/'+classId,

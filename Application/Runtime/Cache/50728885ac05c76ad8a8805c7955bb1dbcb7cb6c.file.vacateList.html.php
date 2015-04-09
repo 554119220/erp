@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 09:01:54
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 15:55:39
          compiled from ".\Application\Home\View\Checkingin\vacateList.html" */ ?>
 <?php /*%%SmartyHeaderCode:292235524dcd094c5f6-57192012%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '50728885ac05c76ad8a8805c7955bb1dbcb7cb6c' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\vacateList.html',
-      1 => 1428540301,
+      1 => 1428566019,
       2 => 'file',
     ),
   ),
@@ -22,8 +22,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'header' => 0,
     'nav' => 0,
     'title' => 0,
-    'late' => 0,
-    'formUrl' => 0,
     'report' => 0,
     'url' => 0,
     'report_checkingin' => 0,
@@ -47,14 +45,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <div id="resource" class="wd750 pd12px">
   <div class="bootstrap-table-title"><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
  
-    <?php if ($_smarty_tpl->tpl_vars['late']->value) {?>
-    <input type="hidden" name="url" value="<?php echo $_smarty_tpl->tpl_vars['formUrl']->value;?>
-"/>
-    <button class="btn btn-link" data-toggle="modal" 
-      data-target="#myModal">
-      登记迟到
-    </button>
-    <?php } elseif ($_smarty_tpl->tpl_vars['report']->value) {?>
+    <?php if ($_smarty_tpl->tpl_vars['report']->value) {?>
     <a class="btn btn-link" href="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 ">统计考勤报表于结算工资</a>
     <?php }?>

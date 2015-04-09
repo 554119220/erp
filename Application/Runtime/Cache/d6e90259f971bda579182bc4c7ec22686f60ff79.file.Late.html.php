@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 11:12:55
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 14:47:18
          compiled from ".\Application\Home\View\Checkingin\late.html" */ ?>
 <?php /*%%SmartyHeaderCode:72825524eee553ec68-05187812%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd6e90259f971bda579182bc4c7ec22686f60ff79' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\late.html',
-      1 => 1428549147,
+      1 => 1428561994,
       2 => 'file',
     ),
   ),
@@ -73,13 +73,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <h4 class="modal-title" id="myModalLabel">迟到登记</h4>
       </div>
       <div class="modal-body">
-        <form id="form" action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
+        <form id="form" name="form" action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 /lateRecord" method="POST">
           <table class="form single" style="width:100%">
             <tr>
               <th>员工姓名</th>
               <td>
-                <select name="staff_id">
+                <select name="staff_id" style="width:123px;">
                   <option value="0">姓名</option>
                   <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
@@ -130,5 +130,16 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
   </div>
 </div>
 <?php echo $_smarty_tpl->tpl_vars['footer']->value;?>
+
+<?php echo '<script'; ?>
+ language="javascript" type="text/javascript">
+  $(function () { $('#myModal').on('hide.bs.modal', function () {
+        document.forms['form'].reset();
+        document.forms['form'].elements['staff_id'].options[0].selected = true;
+        $("#myModalLabel").html('迟到登记');
+        })
+      }); 
+<?php echo '</script'; ?>
+>
 
 <?php }} ?>

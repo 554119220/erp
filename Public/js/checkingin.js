@@ -200,11 +200,21 @@ function setSelected(obj,value){
   }
 }
 
+//确认操作
+function confirmIt(obj,content){
+  if ('cancel' == behave) {
+    var r = confirm("你确定要摊销这条迟到记录吗");
+    if (!r) {
+      return false;
+    }
+  }
+}
 //编辑迟到记录
 function editLate(checkId,behave){
   if (checkId) {
+
     $.get(
-        '/thinkphp/index.php/home/checkingin/editlate/behave/edit/check_id/'+checkId,
+        '/thinkphp/index.php/home/checkingin/editlate/behave/'+behave+'/check_id/'+checkId,
         function(data){
           if (data) {
             $("#form [name='staff_id'] option").each(

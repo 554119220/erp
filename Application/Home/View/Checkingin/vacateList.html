@@ -3,13 +3,7 @@
 <!--标签切换-->
 <div id="resource" class="wd750 pd12px">
   <div class="bootstrap-table-title">{$title} 
-    {if $late}
-    <input type="hidden" name="url" value="{$formUrl}"/>
-    <button class="btn btn-link" data-toggle="modal" 
-      data-target="#myModal">
-      登记迟到
-    </button>
-    {elseif $report}
+    {if $report}
     <a class="btn btn-link" href="{$url}">统计考勤报表于结算工资</a>
     {/if}
   </div>

@@ -185,8 +185,9 @@ class CheckinginController extends PublicController {
                     <input type="button" class="btn-link" value="修改"
 data-toggle="modal" data-target="#myModal"
 onclick="editLate({$v['check_id']},'edit')">
-                    <input type="button" class="btn-link" value="撤销"
-onclick="editLate({$v['check_id']},'cancel')">
+<a href="/thinkphp/index.php/home/checkingin/editlate/behave/cancel/check_id/{$v['check_id']}"
+onclick="return confirmIt(this,'你确定要撤销这条请假记录?')">
+撤销</a>
 EOF;
             }
         }
@@ -195,7 +196,7 @@ EOF;
 
     //迟到登记
     public function lateRecord(){
-        if ($_POST['behave'] == 'save') {
+        if ($_POST['behave'] != 'add') {
             $this->editLate();
             exit;
         }else{
@@ -231,21 +232,27 @@ EOF;
     public function editLate(){
         $checkId = intval($_REQUEST['check_id']); 
         if ($checkId) {
-            $do = M('oa_checkingin');
+            $where = "check_id=$checkId";
+            $do    = M('oa_checkingin');
             if ('edit' == $_GET['behave']) {
-                $res = $do->where("check_id=$checkId")->find();
+                $res = $do->where($where)->find();
                 if ($res) {
-                    $res['start_time'] = date('Y-m-d H:i',$res['add_time']);
+                    $res['start_time'] = date('Y-m-d H:i',$res['start_time']);
                     $this->ajaxReturn($res,'JSON');
                 }
             }elseif('cancel' == $_GET['behave']){
-
+                $res = $do->where($where)->delete();
+                if ($res) {
+                    $this->success(L('DEL_SUCCESS'),__CONTROLLER__.'/late');
+                }else{
+                    $this->error(L('DEL_ERROR'),__CONTROLLER__.'/late');
+                }
             }elseif('save' == $_POST['behave']){
                 unset($_POST['behave']);
                 $_POST['start_time'] = strtotime($_POST['start_time']);
                 $_POST['add_time']   = $_SERVER['REQUEST_TIME'];
                 $do->create();
-                $res = $do->where("check_id=$checkId")->save();
+                $res = $do->where($where)->save();
                 if ($res) {
                     $this->success(L('UPD_SUCCESS'),__CONTROLLER__.'/late');
                 }else{
