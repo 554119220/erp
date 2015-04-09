@@ -170,9 +170,26 @@ class CheckinginController extends PublicController {
         $this->assign('staff_list',D('hrm')->staffListSelect(false,true)); 
         $hour = date('H') > 12 ? '08:00' : '14:00';
         $this->assign('hour',$hour);
-        $this->assign('dataUrl',__CONTROLLER__."/checkinginList/class_id/2");
+        $this->assign('dataUrl',__CONTROLLER__."/lateList/class_id/2");
         $this->assign('title',L('LATE_LIST'));
         $this->display();
+    }
+
+    //迟到数据
+    public function lateList(){
+        $where = 'class_id=2';
+        $res   = D('checkingin')->checkinginList($where);
+        if ($res) {
+            foreach ($res as &$v) {
+                $v['action'] = <<<EOF
+                    <input type="button" class="btn-link" value="修改"
+onclick="editLate({$v['check_id']},'edit')">
+                    <input type="button" class="btn-link" value="撤销"
+onclick="editLate({$v['check_id']},'cancel')">
+EOF;
+            }
+        }
+        return $this->ajaxReturn($res,'JSON');
     }
 
     //迟到登记
@@ -201,6 +218,23 @@ class CheckinginController extends PublicController {
         }else{
             $this->success(L('RECORD_SUCCESS'),__CONTROLLER__.'/late');
         }
+    }
+
+    //修改迟到记录
+    public function editLate(){
+       $checkId = intval($_GET['check_id']); 
+       if ($checkId) {
+           if ('eidt' == $_GET['behave']) {
+
+           }elseif('cancel' == $_GET['behave']){
+
+           }elseif('save' == $_GET['behave']){
+
+           }
+       }else{
+           $this->error(L('ERROR'));
+           //return $this->ajaxReturn($res,)
+       }
     }
 
     /*明列数据*/
@@ -282,7 +316,7 @@ class CheckinginController extends PublicController {
             $reportList = $reportList ? $reportList : D('Checkingin')->reportCheckingin($reportTime); 
             if ($reportList) {
                 foreach ($reportList as $v) {
-                   $res = M('oa_checkingin_report')->filter('strip_tags')->add($v);
+                    $res = M('oa_checkingin_report')->filter('strip_tags')->add($v);
                 }
                 if ($res) {
                     $this->success(L('ADD_SUCCESS'));

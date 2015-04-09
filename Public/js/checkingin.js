@@ -193,12 +193,23 @@ function editLieu(checkId,behave){
       });
 }
 
+//设置选中
 function setSelected(obj,value){
   if (obj.val() == value) {
     obj.attr('selected',true);
   }
 }
 
+//编辑迟到记录
+function editLate(checkId,behave){
+  if (checkId) {
+    $.get(
+        '/thinkphp/index.php/home/checkingin/editlate/check_id/'+checkId,
+        function(data){
+          
+        });
+  }
+}
 ////切换考勤计薪参数
 //function changeRuleItem(obj,taget){
 //  var trIndex = obj.parentNode.parentNode.rowIndex;

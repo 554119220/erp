@@ -9,64 +9,6 @@
       登记迟到
     </button>
   </div>
-  {if $report_checkingin}
-  <div style="padding-top:12px;float:right;">
-    <form action="{$url}/checkinginReport/act/search" method="post" >
-      <select name="role_id" style="padding:3.5px">
-        <option value="0">部门</option>
-        {foreach from=$role_list item=v}
-        <option value="{$v.role_id}">{$v.role_name}</option>
-        {/foreach}
-      </select>
-      <input type="text" name="staff_name" value="" placeholder="员工姓名"/>
-      <input type="text" name="report_time" {literal}onfocus="WdatePicker({dateFmt:'yyyy-MM'})"{/literal} placeholder="月份" value="{$report_time}"/>
-      <input type="submit" value="搜索"/>
-      &nbsp;&nbsp;<a href="{$url}/checkingin">返回考勤汇总</a>
-    </form>
-  </div>
-  <table class="table gridtable erp-table checkingin_report">
-    <tr>
-      <th width="6%"  rowspan="2">序号</th>
-      <th width="10%" rowspan="2">姓名</th>
-      <th width="10%" rowspan="2">出勤天数</th>
-      <th width="10%" rowspan="2">缺勤天数</th>
-      <th width="10%" colspan="2">迟到（次）</th>
-      <th width="14%" colspan="2">调休（天）</th>
-      <th width="10%" colspan="2">加班（时）</th>
-    </tr>
-    <tr>
-      <th width="10%">次数</th>
-      <th width="10%">扣款</th>
-      <th width="10%">加班调休</th>
-      <th width="10%">年假调休</th>
-      <th width="10%">正常加班</th>
-      <th width="10%">晚上加班</th>
-    </tr>
-    {if $report_list}
-    {foreach from=$report_list item=v name=i}
-    <tr>
-      <td>{$smarty.foreach.i.iteration}</td>
-      <td>{$v.staff_name}</td>
-      <td>{$v.working_days}</td>
-      <td>{if $v.outworking_days}{$v.outworking_days}{else}0{/if}</td>
-      <td>{if $v.late_times}{$v.late_times}{else}0{/if}</td>
-      <td>{if $v.dedcut_late}{$v.dedcut_late}{else}0.00{/if}</td>
-      <td>{if $v.ot_lieu}{$v.ot_lieu}{else}0{/if}</td>
-      <td>{if $v.year_lieu}{$v.year_lieu}{else}0{/if}</td>
-      <td>{if $v.normal_ot}{$v.normal_ot}{else}0{/if}</td>
-      <td>{if $v.night_ot}{$v.night_ot}{else}0{/if}</td>
-    </tr>
-    {/foreach}
-    {else}
-    <tr><td colspan="10">没有记录</td></tr>
-    {/if}
-    <tr>
-      <td colspan="10" style="text-align:right;border:0px;">
-        <a href="{$saveUrl}" class="btn btn-primary">保存</a>
-      </td>
-    </tr>
-  </table>
-  {else}
   <table data-toggle="table" data-url="{$dataUrl}" data-search="true" data-height="699" data-show-refresh="true" data-show-toggle="true" data-pagination="true">
     <thead>
       <tr>
@@ -76,10 +18,10 @@
         <th data-field="date">时长</th>
         <th data-field="reason">原因</th>
         <th data-field="checker">审批人</th>
+        <th data-field="action">操作</th>
       </tr>
     </thead>
   </table>
-  {/if}
 </div>
 
 <!-- 模态框（Modal） -->

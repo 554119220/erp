@@ -32,7 +32,6 @@ class SalaryController extends PublicController {
     public function adjustSalary(){
         $_REQUEST['act'] = 'adjustSalary';
         $p               = intval($_REQUEST['p'])? 1 : intval($_REQUEST['p']);
-
         $this->assign('staff_list',D('Hrm')->staffListSelect(0));
         $this->assign('role_list',D('RoleManage')->roleList('','role_id,role_name'));
         $this->assign('url',__CONTROLLER__);
@@ -54,9 +53,10 @@ class SalaryController extends PublicController {
                     $this->ajaxReturn($res,'JSON');
                 }
             }elseif('save' == $_POST['behave']){
-                $_POST['add_time']  = $_SERVER['REQUEST_TIME'];
-                $_POST['add_admin'] = $_SESSION['admin_id'];
-                $do = M('oa_adjustsalarylog');
+                $_POST['add_time']   = $_SERVER['REQUEST_TIME'];
+                $_POST['add_admin']  = $_SESSION['admin_id'];
+                $_POST['start_time'] = strtotime($_POST['start_time']);
+                $do                  = M('oa_adjustsalarylog');
                 $do->create();
                 $res = $do->save();
                 if ($res) {
