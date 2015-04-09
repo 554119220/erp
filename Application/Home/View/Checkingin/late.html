@@ -4,10 +4,7 @@
 <div id="resource" class="wd750 pd12px">
   <div class="bootstrap-table-title">{$title} 
     <input type="hidden" name="url" value="{$formUrl}"/>
-    <button class="btn btn-link" data-toggle="modal" 
-      data-target="#myModal">
-      登记迟到
-    </button>
+    <button class="btn btn-link" data-toggle="modal" data-target="#myModal"> 登记迟到 </button>
   </div>
   <table data-toggle="table" data-url="{$dataUrl}" data-search="true" data-height="699" data-show-refresh="true" data-show-toggle="true" data-pagination="true">
     <thead>
@@ -37,7 +34,7 @@
         <h4 class="modal-title" id="myModalLabel">迟到登记</h4>
       </div>
       <div class="modal-body">
-        <form id="form" action="{$url}/lateRecord" onsubmit="return lateRecord()">
+        <form id="form" action="{$url}/lateRecord" method="POST">
           <table class="form single" style="width:100%">
             <tr>
               <th>员工姓名</th>
@@ -73,6 +70,8 @@
               </td>
             </tr>
           </table>
+          <input type="hidden" name="behave" value="add"/>
+          <input type="hidden" name="check_id" value="0"/>
         </form>
       </div>
       <div class="modal-footer">

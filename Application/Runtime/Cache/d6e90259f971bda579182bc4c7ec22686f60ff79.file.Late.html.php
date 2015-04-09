@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 09:50:01
-         compiled from ".\Application\Home\View\Checkingin\Late.html" */ ?>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 11:12:55
+         compiled from ".\Application\Home\View\Checkingin\late.html" */ ?>
 <?php /*%%SmartyHeaderCode:72825524eee553ec68-05187812%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'd6e90259f971bda579182bc4c7ec22686f60ff79' => 
     array (
-      0 => '.\\Application\\Home\\View\\Checkingin\\Late.html',
-      1 => 1428540301,
+      0 => '.\\Application\\Home\\View\\Checkingin\\late.html',
+      1 => 1428549147,
       2 => 'file',
     ),
   ),
@@ -42,10 +42,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
  
     <input type="hidden" name="url" value="<?php echo $_smarty_tpl->tpl_vars['formUrl']->value;?>
 "/>
-    <button class="btn btn-link" data-toggle="modal" 
-      data-target="#myModal">
-      登记迟到
-    </button>
+    <button class="btn btn-link" data-toggle="modal" data-target="#myModal"> 登记迟到 </button>
   </div>
   <table data-toggle="table" data-url="<?php echo $_smarty_tpl->tpl_vars['dataUrl']->value;?>
 " data-search="true" data-height="699" data-show-refresh="true" data-show-toggle="true" data-pagination="true">
@@ -77,7 +74,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       </div>
       <div class="modal-body">
         <form id="form" action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
-/lateRecord" onsubmit="return lateRecord()">
+/lateRecord" method="POST">
           <table class="form single" style="width:100%">
             <tr>
               <th>员工姓名</th>
@@ -121,6 +118,8 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
               </td>
             </tr>
           </table>
+          <input type="hidden" name="behave" value="add"/>
+          <input type="hidden" name="check_id" value="0"/>
         </form>
       </div>
       <div class="modal-footer">

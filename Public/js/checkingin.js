@@ -204,9 +204,30 @@ function setSelected(obj,value){
 function editLate(checkId,behave){
   if (checkId) {
     $.get(
-        '/thinkphp/index.php/home/checkingin/editlate/check_id/'+checkId,
+        '/thinkphp/index.php/home/checkingin/editlate/behave/edit/check_id/'+checkId,
         function(data){
-          
+          if (data) {
+            $("#form [name='staff_id'] option").each(
+              function(){
+                if ($(this).val() == data.staff_id ) {
+                  $(this).attr('selected',true);
+                }
+              });
+            $("#form [name='start_time']").val(data.start_time);
+            $("#form [name='reason']").val(data.reason);
+            $("#form [name='date']").val(data.date);
+            $("#form [name='date_type']").each(
+              function(){
+                if ($(this).val() == data.date_type) {
+                  $(this).attr('checked',true);
+                }
+              });
+            $("#form [name='behave']").val('save');
+            $("#form [name='check_id']").val(data.check_id);
+            $("#myModalLabel").html('修改迟到记录');
+          }else{
+            return false;
+          }
         });
   }
 }

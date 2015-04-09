@@ -183,6 +183,7 @@ class CheckinginController extends PublicController {
             foreach ($res as &$v) {
                 $v['action'] = <<<EOF
                     <input type="button" class="btn-link" value="修改"
+data-toggle="modal" data-target="#myModal"
 onclick="editLate({$v['check_id']},'edit')">
                     <input type="button" class="btn-link" value="撤销"
 onclick="editLate({$v['check_id']},'cancel')">
@@ -194,6 +195,12 @@ EOF;
 
     //迟到登记
     public function lateRecord(){
+        if ($_POST['behave'] == 'save') {
+            $this->editLate();
+            exit;
+        }else{
+            unset($_POST['behave'],$_POST['check_id']);
+        }
         if (empty($_REQUEST['staff_id'])) {
             $this->error(L('NO_SELECT_STAFF'));
             exit;
@@ -222,19 +229,33 @@ EOF;
 
     //修改迟到记录
     public function editLate(){
-       $checkId = intval($_GET['check_id']); 
-       if ($checkId) {
-           if ('eidt' == $_GET['behave']) {
+        $checkId = intval($_REQUEST['check_id']); 
+        if ($checkId) {
+            $do = M('oa_checkingin');
+            if ('edit' == $_GET['behave']) {
+                $res = $do->where("check_id=$checkId")->find();
+                if ($res) {
+                    $res['start_time'] = date('Y-m-d H:i',$res['add_time']);
+                    $this->ajaxReturn($res,'JSON');
+                }
+            }elseif('cancel' == $_GET['behave']){
 
-           }elseif('cancel' == $_GET['behave']){
-
-           }elseif('save' == $_GET['behave']){
-
-           }
-       }else{
-           $this->error(L('ERROR'));
-           //return $this->ajaxReturn($res,)
-       }
+            }elseif('save' == $_POST['behave']){
+                unset($_POST['behave']);
+                $_POST['start_time'] = strtotime($_POST['start_time']);
+                $_POST['add_time']   = $_SERVER['REQUEST_TIME'];
+                $do->create();
+                $res = $do->where("check_id=$checkId")->save();
+                if ($res) {
+                    $this->success(L('UPD_SUCCESS'),__CONTROLLER__.'/late');
+                }else{
+                    $this->error(L('UPD_ERROR'),__CONTROLLER__.'/late');
+                }
+            }
+        }else{
+            $this->error(L('UPD_ERROR'),__CONTROLLER__.'/late');
+            //return $this->ajaxReturn($res,)
+        }
     }
 
     /*明列数据*/
