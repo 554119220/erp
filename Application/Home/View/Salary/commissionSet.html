@@ -50,8 +50,10 @@
           </td>
           <th>保底销量：</th>
           <td>
-            <input type="number" name="base_sales" class='lage-number'
-            value="{$commissionRule.base_sales}" min="0" required class="number"/>
+            <input type="text" name="base_sales" class='lage-number'
+            value="{$commissionRule.base_sales}" min="0" required class="number"
+            onblur="formatMoney(this)"
+            />
           </td>
         </tr>
         <tr>
@@ -84,26 +86,29 @@
         <tr>
           {foreach from=$sort2 key=k item=val name=i}
           <td><label><input type="radio" name="sort2" value="{$k}"
-              {if $k eq $commissionRule.proportion_type ||$smarty.foreach.i.index eq 0}checked{/if} 
+              {if $k eq $commissionRule.proportion_type || $smarty.foreach.i.index eq 0}checked{/if} 
               onclick="switchRatio($(this))"/> {$val}</label></td>
           {/foreach}
           <td width="60%">
           </tr>
-          <tr id="identical">
+          <tr id="identical" 
+            style="{if $commissionRule.proportion_type eq 0}display:block{/if}">
             <td>提成比例</td>
             <td colspan="3">
               <input type="text" name="identical_commission" 
               value="{$commissionRule.commission}" /> %
             </td> 
           </tr>
-          <tr id="product">
+          <tr id="product"
+            style="{if $commissionRule.proportion_type eq 2}display:block{/if}">
             <td>提成比例</td>
             <td colspan="3">
               <input type="text" name="product_commission"
               value="{$commissionRule.commission}"/> %
             </td> 
           </tr>
-          <tr id="cumulative">
+          <tr id="cumulative"
+            style="{if $commissionRule.proportion_type eq 1}display:block{/if}">
             <td colspan="4">
               {foreach from=$cumulativeNum item=v}
               <div style="margin-bottom:4px;">

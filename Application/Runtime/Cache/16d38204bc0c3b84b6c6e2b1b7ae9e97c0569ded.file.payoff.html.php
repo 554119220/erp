@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 10:49:06
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-10 17:56:26
          compiled from ".\Application\Home\View\Salary\payoff.html" */ ?>
 <?php /*%%SmartyHeaderCode:1504355249722764177-79220465%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '16d38204bc0c3b84b6c6e2b1b7ae9e97c0569ded' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\payoff.html',
-      1 => 1426840188,
+      1 => 1428658771,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_552497227de294_48201489',
   'variables' => 
   array (
     'header' => 0,
@@ -28,8 +30,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'footer' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_552497227de294_48201489',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_552497227de294_48201489')) {function content_552497227de294_48201489($_smarty_tpl) {?><?php echo $_smarty_tpl->tpl_vars['header']->value;?>
 
@@ -62,11 +62,6 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 </option>
               <?php } ?>
             </select>
-          </td>
-          <td>
-           <select name="group_id">
-             <option value="0">请选择小组</option>
-           </select> 
           </td>
           <td>
             <input type="text" name="staff_name" placeholder="员工姓名"/>

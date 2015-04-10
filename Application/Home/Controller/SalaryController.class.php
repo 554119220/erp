@@ -233,7 +233,6 @@ class SalaryController extends PublicController {
             $this->assign('participantSelName','部门');
         }
         $this->assign('data',$data);
-        //$this->assign('url',U('Home/Salary'));
         $this->assign('url',self::$controllerUrl);
         $this->assign('sort1',$sort1);
         $this->assign('sort2',$sort2);
@@ -985,14 +984,6 @@ class SalaryController extends PublicController {
             }else{
                 $this->error(L('DEL_ERROR'),__CONTROLLER__.'/salaryApproval');
             }
-            //$data['res'] = $res;
-            //if ($data['res']) {
-            //    $data['text'] = L('DEL_SUCCESS');
-            //}else{
-            //    $data['text'] = L('DEL_ERROR');
-            //}
-            //$data['href'] = __CONTROLLER__.'/salaryApproval';
-            //$this->ajaxReturn($data,'JSON');
         }
     }
 
@@ -1001,8 +992,22 @@ class SalaryController extends PublicController {
         $behave = $_REQUEST['behave'] ? $_REQUEST['behave'] : 'edit';
         $ruleId = intval($_REQUEST['rule_id']);
         if ($ruleId) {
+            $do = M('oa_commission_rule'); 
             if ('edit' == $behave) {
-                $commissionRule = M('oa_commission_rule')->where("rule_id=$ruleId")->find();
+                $commissionRule = $do->where("rule_id=$ruleId")->find();
+                if (1 == $commissionRule['proportion_type']) {
+                    //累加比例
+                    $multipleRule = $do->where("add_time={$commissionRule['add_time']}")
+                        ->select();
+                    foreach ($multipleRule as $v) {
+                        $multipleCommission[] = array(
+                            'min_sales'  => $v['min_sales'],
+                            'max_sales'  => $v['max_sales'],
+                            'commission' => $v['commission'],
+                        );
+                    }
+                    $commissionRule['commission'] = $multipleCommission; 
+                }
                 $commissionRule['participant'] = unserialize($commissionRule['participant']);
                 $commissionRule['participant_name']
                     = unserialize($commissionRule['participant_name']);
@@ -1022,8 +1027,7 @@ class SalaryController extends PublicController {
             }elseif('save' == $behave){
                 if ($_POST) {
                     $ruleId = intval($_GET['rule_id']);
-                    $data = $this->commissionData();
-                    $do = M('oa_commission_rule'); 
+                    $data   = $this->commissionData();
                     if (1 != $data['proportion_type']) {
                         $data['commission'] = $_REQUEST[$_REQUEST['sort2'].'_commission'];
                         $res = $do->where("rule_id=$ruleId")->save($data);

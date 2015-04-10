@@ -19,7 +19,7 @@ class AdminModel extends Model{
 
     /*查询管理员
      * @where 查询条件
-     * $role  查询同一部门的管理员 
+     * @role  查询同一部门的管理员 
      * */
     public function adminList($where=' 1',$role=0){
         if($role){

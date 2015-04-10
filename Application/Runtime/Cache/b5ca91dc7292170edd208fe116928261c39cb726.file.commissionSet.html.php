@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 08:45:07
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-10 18:02:22
          compiled from ".\Application\Home\View\Salary\commissionSet.html" */ ?>
 <?php /*%%SmartyHeaderCode:26633552489ab6acfc3-00134939%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b5ca91dc7292170edd208fe116928261c39cb726' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\commissionSet.html',
-      1 => 1428540301,
+      1 => 1428654534,
       2 => 'file',
     ),
   ),
@@ -129,9 +129,11 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           </td>
           <th>保底销量：</th>
           <td>
-            <input type="number" name="base_sales" class='lage-number'
+            <input type="text" name="base_sales" class='lage-number'
             value="<?php echo $_smarty_tpl->tpl_vars['commissionRule']->value['base_sales'];?>
-" min="0" required class="number"/>
+" min="0" required class="number"
+            onblur="formatMoney(this)"
+            />
           </td>
         </tr>
         <tr>
@@ -189,7 +191,8 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           <?php } ?>
           <td width="60%">
           </tr>
-          <tr id="identical">
+          <tr id="identical" 
+            style="<?php if ($_smarty_tpl->tpl_vars['commissionRule']->value['proportion_type']==0) {?>display:block<?php }?>">
             <td>提成比例</td>
             <td colspan="3">
               <input type="text" name="identical_commission" 
@@ -197,7 +200,8 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 " /> %
             </td> 
           </tr>
-          <tr id="product">
+          <tr id="product"
+            style="<?php if ($_smarty_tpl->tpl_vars['commissionRule']->value['proportion_type']==2) {?>display:block<?php }?>">
             <td>提成比例</td>
             <td colspan="3">
               <input type="text" name="product_commission"
@@ -205,7 +209,8 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 "/> %
             </td> 
           </tr>
-          <tr id="cumulative">
+          <tr id="cumulative"
+            style="<?php if ($_smarty_tpl->tpl_vars['commissionRule']->value['proportion_type']==1) {?>display:block<?php }?>">
             <td colspan="4">
               <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['cumulativeNum']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}

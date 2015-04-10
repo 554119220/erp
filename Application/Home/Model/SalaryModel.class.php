@@ -119,6 +119,7 @@ class SalaryModel extends PublicModel{
 
     /*添加提成规则*/
     function addCommissionRule($data){
+        $data['base_sales'] = str_replace(',','',$data['base_sales']);
         return M('oa_commission_rule')->filter('strip_tags')->add($data);
     }
 

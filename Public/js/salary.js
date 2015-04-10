@@ -324,3 +324,24 @@ function editSalaryClass(obj,classId){
         }
       });
 }
+
+
+//数字转成货币
+function formatMoney(obj, places, thousand, decimal) {
+  var number = obj.value;
+  number = number || 0;
+  number = number.replace(/,/,'');
+  if (!(/^[0-9]+.?[0-9]*$/.test(number))) {
+    obj.value = 0; 
+    return false;
+  }
+  places = !isNaN(places = Math.abs(places)) ? places : 2;
+  thousand = thousand || ",";
+  decimal = decimal || ".";
+  var negative = number < 0 ? "-" : "",
+      i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + "",
+      j = (j = i.length) > 3 ? j % 3 : 0;
+  var res = negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand);
+  //var res = negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
+  obj.value = res;
+}
