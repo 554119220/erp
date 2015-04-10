@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 09:08:42
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-10 09:13:36
          compiled from ".\Application\Home\View\Checkingin\checkinginOt.html" */ ?>
 <?php /*%%SmartyHeaderCode:220565524dcbaa7d8c5-85584704%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '2ac51a12e7d2c6cb67bcd49ef6a44bb9709edf54' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\checkinginOt.html',
-      1 => 1428540301,
+      1 => 1428628217,
       2 => 'file',
     ),
   ),
@@ -103,7 +103,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       </tr>
       <tr>
         <td colspan="7">
-          <textarea name="reason" placeholder="加班原因" required></textarea>
+          <textarea name="reason" placeholder="加班原因" required ></textarea>
         </td>
       </tr>
     </table>

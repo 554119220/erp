@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 16:45:29
-         compiled from ".\Application\Home\View\Checkingin\late.html" */ ?>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-10 09:13:14
+         compiled from ".\Application\Home\View\Checkingin\Late.html" */ ?>
 <?php /*%%SmartyHeaderCode:72825524eee553ec68-05187812%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'd6e90259f971bda579182bc4c7ec22686f60ff79' => 
     array (
-      0 => '.\\Application\\Home\\View\\Checkingin\\late.html',
-      1 => 1428569127,
+      0 => '.\\Application\\Home\\View\\Checkingin\\Late.html',
+      1 => 1428628189,
       2 => 'file',
     ),
   ),
@@ -118,7 +118,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
             <tr>
               <th>原因</th>
               <td colspan="3">
-                <textarea name="reason" style="width:449px;" required></textarea>
+                <textarea name="reason" style="width:449px;resize:vertical" required></textarea>
               </td>
             </tr>
           </table>

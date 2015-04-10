@@ -132,3 +132,5 @@ table.gridtable td {
 
 /*JSON操作返回提醒*/
 .json-alert{display:none;margin-bottom:0px;margin-left:25%;padding: 3px; }
+
+textarea[name='reason']{resize:vertical}
