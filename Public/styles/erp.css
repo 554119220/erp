@@ -101,6 +101,7 @@ table.gridtable td {
   border-color: #ccc;
   /*background-color: #ffffff;*/
 }
+
 /*================================*/
 
 /*bootstrap 复杂表格*/
@@ -126,6 +127,8 @@ table.gridtable td {
 /*表格中的操作按钮*/
 .link-btn{color:#428bca;cursor:pointer;border:0px;background:transparent;display:inline; margin-left:4px; }
 .link-btn:hover{text-decoration:underline}
+
+button.edit,button.remove{border:0px;background:transparent;color:#337ab7; }
 
 /*模态框表格*/
 .modal-body form table tr{border-top:1px solid #ccc;}

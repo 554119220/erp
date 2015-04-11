@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-10 09:13:14
-         compiled from ".\Application\Home\View\Checkingin\Late.html" */ ?>
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-11 11:40:29
+         compiled from ".\Application\Home\View\Checkingin\late.html" */ ?>
 <?php /*%%SmartyHeaderCode:72825524eee553ec68-05187812%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'd6e90259f971bda579182bc4c7ec22686f60ff79' => 
     array (
-      0 => '.\\Application\\Home\\View\\Checkingin\\Late.html',
-      1 => 1428628189,
+      0 => '.\\Application\\Home\\View\\Checkingin\\late.html',
+      1 => 1428723625,
       2 => 'file',
     ),
   ),
@@ -58,7 +58,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <th data-field="date">时长</th>
         <th data-field="reason">原因</th>
         <th data-field="checker">审批人</th>
-        <th data-field="action">操作</th>
+        <th data-field="action" data-formatter="operateFormatter" data-events="operateEvents">
+          操作</th>
+        <!--<th data-field="action">操作</th>-->
       </tr>
     </thead>
   </table>

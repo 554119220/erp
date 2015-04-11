@@ -199,8 +199,6 @@ function setSelected(obj,value){
     obj.attr('selected',true);
   }
 }
-
-
 //编辑迟到记录
 function editLate(checkId,behave){
   if (checkId) {

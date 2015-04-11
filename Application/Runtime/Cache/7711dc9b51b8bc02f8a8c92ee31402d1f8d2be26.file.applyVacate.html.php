@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-11 10:27:24
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-11 11:34:31
          compiled from ".\Application\Home\View\Checkingin\applyVacate.html" */ ?>
 <?php /*%%SmartyHeaderCode:114765524dcd26ea052-52651369%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7711dc9b51b8bc02f8a8c92ee31402d1f8d2be26' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\applyVacate.html',
-      1 => 1428719242,
+      1 => 1428722225,
       2 => 'file',
     ),
   ),
@@ -28,6 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'v' => 0,
     'role_list' => 0,
     'val' => 0,
+    'date_type' => 0,
     'vacate' => 0,
     'footer' => 0,
   ),
@@ -40,9 +41,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <div class="wd750 pd12px">
   <form action="<?php echo $_smarty_tpl->tpl_vars['url']->value;?>
 " method="POST" class="table-form bigform">
-    <input type="hidden" name="class" value="value"/>
     <table>
-      <caption class="title"><?php if (!$_smarty_tpl->tpl_vars['edit']->value) {?>请假申请<?php } else { ?>修改请假记录<?php }?></caption>
+      <caption class="title"><?php if (!$_smarty_tpl->tpl_vars['edit']->value) {?>请假申请<?php } else { ?>修改请假记录
+        <a class="btn-link" href="/thinkphp/index.php/home/checkingin/vacatelist">返回</a>
+        <?php }?></caption>
       <tr>
         <th>员工姓名</th>
         <td>
@@ -56,7 +58,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
  $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
 ?>
             <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
-" <?php if ($_smarty_tpl->tpl_vars['edit']->value['staff_id']==$_smarty_tpl->tpl_vars['v']->value) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+" <?php if ($_smarty_tpl->tpl_vars['edit']->value['staff_id']==$_smarty_tpl->tpl_vars['k']->value) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
 </option>
             <?php } ?>
           </select>
@@ -71,30 +73,47 @@ foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars[
 $_smarty_tpl->tpl_vars['val']->_loop = true;
 ?>
             <option value="<?php echo $_smarty_tpl->tpl_vars['val']->value['role_id'];?>
-"><?php echo $_smarty_tpl->tpl_vars['val']->value['role_name'];?>
+" 
+            <?php if ($_smarty_tpl->tpl_vars['edit']->value['role_id']==$_smarty_tpl->tpl_vars['val']->value['role_id']) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['val']->value['role_name'];?>
 </option>
             <?php } ?>
           </select>
         </td>
         <th>职务</th>
-        <td><input type="text" name="job_title" value=""/></td>
+        <td><input type="text" name="job_title" value="<?php echo $_smarty_tpl->tpl_vars['edit']->value['job_title'];?>
+"/></td>
         <th>请假时间</th>
-        <td> <input type="text" name="date" value="1" min="0" reqiured/> </td>
+        <td> <input type="text" name="date"
+          value="<?php if ($_smarty_tpl->tpl_vars['edit']->value['date']) {
+echo $_smarty_tpl->tpl_vars['edit']->value['date'];
+} else { ?>1<?php }?>" min="0" reqiured/> </td>
         <td class="item">
           <select name="date_type">
-            <option value="0">天</option>
-            <option value="1">时</option>
-            <option value="2">分</option>
+            <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['date_type']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+            <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" <?php if ($_smarty_tpl->tpl_vars['edit']->value['date_type']==$_smarty_tpl->tpl_vars['k']->value) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</option>
+            <?php } ?>
           </select>
         </td>
       </tr>
       <tr>
         <th>请假时间</th>
         <td colspan="4">
-          <input type="text" name="start_time" value="" placeholder="起始日期" required onfocus="WdatePicker({dateFmt:'yyyy-M-d HH:mm'})"/>
+          <input type="text" name="start_time" value="<?php echo $_smarty_tpl->tpl_vars['edit']->value['start_time'];?>
+"
+          placeholder="起始日期" required onfocus="WdatePicker({dateFmt:'yyyy-M-d HH:mm'})"/>
         </td>
         <td colspan="4">
-          <input type="text" name="end_time" value="" required placeholder="结束时间" onfocus="WdatePicker({dateFmt:'yyyy-M-d HH:mm'})"/>
+          <input type="text" name="end_time" value="<?php echo $_smarty_tpl->tpl_vars['edit']->value['end_time'];?>
+"
+          required placeholder="结束时间" onfocus="WdatePicker({dateFmt:'yyyy-M-d HH:mm'})"/>
         </td>
       </tr>
       <tr>
@@ -109,7 +128,9 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 ?>
           <label>
             <input type="radio" name="type_id" value="<?php echo $_smarty_tpl->tpl_vars['val']->value['type_id'];?>
-" <?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['i']['index']==0) {?>checked<?php }?>/><?php echo $_smarty_tpl->tpl_vars['val']->value['type_name'];?>
+"
+            <?php if ($_smarty_tpl->tpl_vars['edit']->value['type_id']==$_smarty_tpl->tpl_vars['val']->value['type_id']||$_smarty_tpl->getVariable('smarty')->value['foreach']['i']['index']==0) {?>
+            checked<?php }?>/><?php echo $_smarty_tpl->tpl_vars['val']->value['type_name'];?>
 
           </label>
           <?php } ?>
@@ -118,7 +139,9 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
       <tr>
         <th>请假原因</th>
         <td colspan="8">
-          <textarea name="reason" class="unresize" placeholder="详细说明请假原因" required></textarea>
+          <textarea name="reason" class="unresize" placeholder="详细说明请假原因"
+            required><?php echo $_smarty_tpl->tpl_vars['edit']->value['reason'];?>
+</textarea>
         </td>
       </tr>
       <tr>

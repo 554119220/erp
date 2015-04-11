@@ -2,16 +2,17 @@
 {$nav}
 <div class="wd750 pd12px">
   <form action="{$url}" method="POST" class="table-form bigform">
-    <input type="hidden" name="class" value="value"/>
     <table>
-      <caption class="title">{if !$edit}请假申请{else}修改请假记录{/if}</caption>
+      <caption class="title">{if !$edit}请假申请{else}修改请假记录
+        <a class="btn-link" href="/thinkphp/index.php/home/checkingin/vacatelist">返回</a>
+        {/if}</caption>
       <tr>
         <th>员工姓名</th>
         <td>
           <select name="staff_id">
             <option value="0">姓名</option>
             {foreach from=$staff_list key=k item=v}
-            <option value="{$k}" {if $edit.staff_id eq $v}selected{/if}>{$v}</option>
+            <option value="{$k}" {if $edit.staff_id eq $k}selected{/if}>{$v}</option>
             {/foreach}
           </select>
         </td>
@@ -26,24 +27,27 @@
           </select>
         </td>
         <th>职务</th>
-        <td><input type="text" name="job_title" value=""/></td>
+        <td><input type="text" name="job_title" value="{$edit.job_title}"/></td>
         <th>请假时间</th>
-        <td> <input type="text" name="date" value="1" min="0" reqiured/> </td>
+        <td> <input type="text" name="date"
+          value="{if $edit.date}{$edit.date}{else}1{/if}" min="0" reqiured/> </td>
         <td class="item">
           <select name="date_type">
-            <option value="0">天</option>
-            <option value="1">时</option>
-            <option value="2">分</option>
+            {foreach from=$date_type key=k item=v}
+            <option value="{$k}" {if $edit.date_type eq $k}selected{/if}>{$v}</option>
+            {/foreach}
           </select>
         </td>
       </tr>
       <tr>
         <th>请假时间</th>
         <td colspan="4">
-          <input type="text" name="start_time" value="" placeholder="起始日期" required {literal}onfocus="WdatePicker({dateFmt:'yyyy-M-d HH:mm'})"{/literal}/>
+          <input type="text" name="start_time" value="{$edit.start_time}"
+          placeholder="起始日期" required {literal}onfocus="WdatePicker({dateFmt:'yyyy-M-d HH:mm'})"{/literal}/>
         </td>
         <td colspan="4">
-          <input type="text" name="end_time" value="" required placeholder="结束时间" {literal}onfocus="WdatePicker({dateFmt:'yyyy-M-d HH:mm'})"{/literal}/>
+          <input type="text" name="end_time" value="{$edit.end_time}"
+          required placeholder="结束时间" {literal}onfocus="WdatePicker({dateFmt:'yyyy-M-d HH:mm'})"{/literal}/>
         </td>
       </tr>
       <tr>
@@ -51,7 +55,9 @@
         <td colspan="8" style="text-align:left;padding-left:12px;">
           {foreach from=$vacate item=val name=i}
           <label>
-            <input type="radio" name="type_id" value="{$val.type_id}" {if $smarty.foreach.i.index eq 0}checked{/if}/>{$val.type_name}
+            <input type="radio" name="type_id" value="{$val.type_id}"
+            {if $edit.type_id eq $val.type_id || $smarty.foreach.i.index eq 0}
+            checked{/if}/>{$val.type_name}
           </label>
           {/foreach}
         </td>
@@ -59,7 +65,8 @@
       <tr>
         <th>请假原因</th>
         <td colspan="8">
-          <textarea name="reason" class="unresize" placeholder="详细说明请假原因" required></textarea>
+          <textarea name="reason" class="unresize" placeholder="详细说明请假原因"
+            required>{$edit.reason}</textarea>
         </td>
       </tr>
       <tr>

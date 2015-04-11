@@ -156,6 +156,7 @@ class CheckinginController extends PublicController {
             $this->assign('url',__CONTROLLER__.'/applyVacate/act/add');
             $this->assign('vacate',D('Checkingin')->typeList('parent_id=1'));
             $staffList = D('hrm')->staffListSelect(false,true);
+            $this->assign('date_type',array('天','时','分'));
             $this->assign('staff_list',$staffList);
             $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
             $this->display();
@@ -177,15 +178,16 @@ class CheckinginController extends PublicController {
 
     //迟到数据
     public function lateList(){
-        $where = 'class_id=2';
+        $where = ' AND class_id=2';
         $res   = D('checkingin')->checkinginList($where);
         if ($res) {
             foreach ($res as &$v) {
                 $v['action'] = <<<EOF
-                    <input type="button" class="btn-link" value="修改"
-data-toggle="modal" data-target="#myModal"
-onclick="editLate({$v['check_id']},'edit')">
-<input type="button" class="btn-link" value="撤销" onclick="editLate({$v['check_id']},'cancel')"
+                    <button class="edit ml10" data-toggle="modal" data-target="#myModal"
+onclick="editLate({$v['check_id']},'edit')"><i class="glyphicon glyphicon-edit"></i></button>
+<button class="remove ml10" onclick="editLate({$v['check_id']},'cancel')">
+<i class="glyphicon glyphicon-remove"></i>
+</button>
 EOF;
             }
         }
@@ -295,9 +297,10 @@ EOF;
                     $res['end_time']   = date('Y-m-d H:i',$res['end_time']);
                     $staffList         = D('hrm')->staffListSelect(false,true);
                     $this->nav();
-                    dump($res);exit;
                     $this->assign('edit',$res);
-                    $this->assign('url',__CONTROLLER__.'/editVacate/behave/save');
+                    $this->assign('date_type',array('天','时','分'));
+                    $this->assign('url',
+                        __CONTROLLER__."/editVacate/behave/save/check_id/$checkId");
                     $this->assign('vacate',D('Checkingin')->typeList('parent_id=1'));
                     $this->assign('staff_list',$staffList);
                     $this->assign('role_list',
@@ -307,10 +310,13 @@ EOF;
                     $this->error(L('NO_RECORD'));
                 }
             }elseif('save' == $behave){
+                $_POST['class_id'] = 1;
+                $_POST['start_time'] = strtotime($_POST['start_time']);
+                $_POST['end_time'] = strtotime($_POST['end_time']);
                 $do->create();
                 $res = $do->where("check_id=$checkId")->save();
                 if ($res) {
-                    $this->success(L('UPD_SUCCESS'));
+                    $this->success(L('UPD_SUCCESS'),__CONTROLLER__.'/vacateList');
                 }else{
                     $this->error(L('UPD_ERROR'));
                 }
@@ -324,7 +330,7 @@ EOF;
     public function checkinginList(){
         $classId = I('get.class_id','');
         if ($classId) {
-            $where = "c.class_id=$classId";
+            $where = " AND c.class_id=$classId";
             $res = D('checkingin')->checkinginList($where);
         }else{
             //考勤汇总

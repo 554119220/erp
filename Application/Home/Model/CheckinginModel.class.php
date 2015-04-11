@@ -94,6 +94,7 @@ class CheckinginModel extends PublicModel{
 
     //考勤汇总
     public function checkinginList($where='',$field='c.*,t.type_name,r.role_name'){
+        $where = 'c.date>0 '.$where;
         $res = M('oa_checkingin')->alias('c')
             ->join(' LEFT JOIN __OA_CHECKINGIN_TYPE__ t ON c.type_id=t.type_id')
             ->join(' LEFT JOIN __ROLE__ r ON c.role_id=r.role_id')
