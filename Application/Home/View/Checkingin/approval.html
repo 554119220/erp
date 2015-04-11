@@ -31,10 +31,10 @@
       <tr>
         <th>审批人</th>
         <td>
-          <select name="staff_id" required>
+          <select name="admin_id" required>
            <option value="0">请选择员工</option> 
-           {foreach from=$staff_list key=k item=v}
-           <option value="{$k}">{$v}</option>
+           {foreach from=$admin_list item=v}
+           <option value="{$v.user_id}">{$v.user_name}</option>
            {/foreach}
           </select>
         </td>
@@ -42,12 +42,7 @@
       <tr>
         <th></th>
         <td>
-          <!--<input type="submit" name="submit" value="保存"/>-->
-          <button type="submit" class="btn btn-primary popover-show" 
-            data-toggle="popover" 
-            data-content="">
-            保存
-          </button>
+          <button type="submit" class="btn btn-primary"> 保存 </button>
         </td>
       </tr>
     </table>
@@ -55,8 +50,9 @@
   <table class="gridtable">
     <caption class='title'>请假审批人列表</caption> 
     <tr>
-      <th width="2%">序号</th>
+      <th width="5%">序号</th>
       <th width="10%">分类</th>
+      <th width="10%">部门</th>
       <th width="10%">审批人</th>
       <th width="10%">添加时间</th>
       <th width="15%">操作</th>
@@ -66,7 +62,8 @@
     <tr>
       <td>{$smarty.foreach.i.iteration}</td>
       <td>{$val.type_name}</td>
-      <td>{$val.staff_name}</td>
+      <td>{$val.role_name}</td>
+      <td>{$val.admin_name}</td>
       <td>{$val.add_time}</td>
       <td>
         <input type="button" value="修改" class="btn-link" data-toggle="modal"
@@ -123,10 +120,10 @@
             <tr>
               <th>审批人</th>
               <td>
-                <select name="staff_id" required>
+                <select name="admin_id" required>
                   <option value="0">请选择员工</option> 
-                  {foreach from=$staff_list key=k item=v}
-                  <option value="{$k}">{$v}</option>
+                  {foreach from=$admin_list item=v}
+                  <option value="{$v.user_id}">{$v.user_name}</option>
                   {/foreach}
                 </select>
               </td>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-10 09:42:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-11 14:45:19
          compiled from ".\Application\Home\View\Checkingin\approval.html" */ ?>
 <?php /*%%SmartyHeaderCode:319745524dccd57bcf7-18892818%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6f16bb2f40a270f83edb719b10e211fe0272c4c7' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\approval.html',
-      1 => 1428540301,
+      1 => 1428734675,
       2 => 'file',
     ),
   ),
@@ -27,8 +27,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'v' => 0,
     'typeList' => 0,
     'val' => 0,
-    'staff_list' => 0,
-    'k' => 0,
+    'admin_list' => 0,
     'approval_list' => 0,
     'footer' => 0,
   ),
@@ -84,17 +83,15 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
       <tr>
         <th>审批人</th>
         <td>
-          <select name="staff_id" required>
+          <select name="admin_id" required>
            <option value="0">请选择员工</option> 
            <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
- $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
- $_from = $_smarty_tpl->tpl_vars['staff_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_from = $_smarty_tpl->tpl_vars['admin_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
 $_smarty_tpl->tpl_vars['v']->_loop = true;
- $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
 ?>
-           <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
-"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+           <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['user_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['user_name'];?>
 </option>
            <?php } ?>
           </select>
@@ -103,12 +100,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       <tr>
         <th></th>
         <td>
-          <!--<input type="submit" name="submit" value="保存"/>-->
-          <button type="submit" class="btn btn-primary popover-show" 
-            data-toggle="popover" 
-            data-content="">
-            保存
-          </button>
+          <button type="submit" class="btn btn-primary"> 保存 </button>
         </td>
       </tr>
     </table>
@@ -116,8 +108,9 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
   <table class="gridtable">
     <caption class='title'>请假审批人列表</caption> 
     <tr>
-      <th width="2%">序号</th>
+      <th width="5%">序号</th>
       <th width="10%">分类</th>
+      <th width="10%">部门</th>
       <th width="10%">审批人</th>
       <th width="10%">添加时间</th>
       <th width="15%">操作</th>
@@ -135,7 +128,9 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 </td>
       <td><?php echo $_smarty_tpl->tpl_vars['val']->value['type_name'];?>
 </td>
-      <td><?php echo $_smarty_tpl->tpl_vars['val']->value['staff_name'];?>
+      <td><?php echo $_smarty_tpl->tpl_vars['val']->value['role_name'];?>
+</td>
+      <td><?php echo $_smarty_tpl->tpl_vars['val']->value['admin_name'];?>
 </td>
       <td><?php echo $_smarty_tpl->tpl_vars['val']->value['add_time'];?>
 </td>
@@ -208,17 +203,15 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
             <tr>
               <th>审批人</th>
               <td>
-                <select name="staff_id" required>
+                <select name="admin_id" required>
                   <option value="0">请选择员工</option> 
                   <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
- $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
- $_from = $_smarty_tpl->tpl_vars['staff_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_from = $_smarty_tpl->tpl_vars['admin_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
 $_smarty_tpl->tpl_vars['v']->_loop = true;
- $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
 ?>
-                  <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
-"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+                  <option value="<?php echo $_smarty_tpl->tpl_vars['v']->value['user_id'];?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value['user_name'];?>
 </option>
                   <?php } ?>
                 </select>

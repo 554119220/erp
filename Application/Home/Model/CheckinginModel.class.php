@@ -9,10 +9,10 @@ class CheckinginModel extends PublicModel{
     }
     //添加考勤审批
     public function addApproval(){
-        if ($_POST['staff_id'] && $_POST['role_id']) {
+        if ($_POST['admin_id'] && $_POST['role_id']) {
             $do = M('oa_checkingin_approval');
             $_POST['class_id'] = M('oa_checkingin_type')->where("type_id={$_POST['type_id']}")
-                ->getField('class_id');
+                ->getField('type_id');
             $_POST['add_time'] = $_SERVER['REQUEST_TIME'];
             $do->create();
             return $do->add();
@@ -23,11 +23,10 @@ class CheckinginModel extends PublicModel{
         $res = M('oa_checkingin_approval')->alias('c')
             ->join(array(' LEFT JOIN __OA_CHECKINGIN_TYPE__ t ON t.type_id=c.type_id',
                 ' LEFT JOIN __ROLE__ r ON r.role_id=c.role_id ',
-                ' LEFT JOIN __OA_STAFF_RECORDS__ u ON u.staff_id=c.staff_id'
+                ' LEFT JOIN __ADMIN_USER__ u ON u.user_id=c.admin_id'
             ))
-            ->field('c.approval_id,c.add_time,c.type_id,r.role_name,t.type_name,u.staff_name')
+            ->field('c.approval_id,c.add_time,c.type_id,r.role_name,t.type_name,u.user_name as admin_name')
             ->where($where)->select();
-        //echo M('oa_checkingin_approval')->getLastSql();exit;
         if ($res) {
             foreach ($res as &$v) {
                 $v['add_time'] = date('Y-m-d',$v['add_time']);

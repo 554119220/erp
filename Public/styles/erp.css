@@ -101,6 +101,7 @@ table.gridtable td {
   border-color: #ccc;
   /*background-color: #ffffff;*/
 }
+table.gridtable tr:hover {background: #EFEFEF;}
 
 /*================================*/
 

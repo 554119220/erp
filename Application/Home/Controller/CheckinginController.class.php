@@ -402,7 +402,7 @@ EOF;
         $this->nav();
         $this->assign('title',L('CHECKINGIN_APPROVAL'));
         $this->assign('typeList',D('checkingin')->typeList('parent_id<>0'));
-        $this->assign('staff_list',D('Hrm')->staffListSelect(false,true));
+        $this->assign('admin_list',D('Admin')->adminList());
         $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
         $this->assign('approval_list',D('Checkingin')->approvalList());
         $this->display('approval');
@@ -447,7 +447,7 @@ EOF;
         $this->assign('status',array('待审核','通过审核'));
         $this->assign('type_list',M('oa_checkingin_type')
             ->where('parent_id=3')->getField('type_id,type_name'));
-        $where = "c.type_id=9";
+        $where = " AND c.type_id=9";
         if ($_POST['role_id']) {
             $where .= sprintf(" AND c.role_id=%d",$_POST['role_id']);
         }

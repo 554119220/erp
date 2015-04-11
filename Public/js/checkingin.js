@@ -139,9 +139,9 @@ function editCheckinginApproal(approvalId){
                   $(this).attr('selected',true);
                 }
               });
-            $("#editForm [name='staff_id'] option").each(
+            $("#editForm [name='admin_id'] option").each(
               function(){
-                if ($(this).val() == data.staff_id) {
+                if ($(this).val() == data.admin_id) {
                   $(this).attr('selected',true);
                 }
               });
