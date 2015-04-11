@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 15:46:26
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-11 10:27:24
          compiled from ".\Application\Home\View\Checkingin\applyVacate.html" */ ?>
 <?php /*%%SmartyHeaderCode:114765524dcd26ea052-52651369%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7711dc9b51b8bc02f8a8c92ee31402d1f8d2be26' => 
     array (
       0 => '.\\Application\\Home\\View\\Checkingin\\applyVacate.html',
-      1 => 1427876793,
+      1 => 1428719242,
       2 => 'file',
     ),
   ),
@@ -15,11 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5524dcd27de298_13913067',
   'variables' => 
   array (
     'header' => 0,
     'nav' => 0,
     'url' => 0,
+    'edit' => 0,
     'staff_list' => 0,
     'k' => 0,
     'v' => 0,
@@ -29,8 +32,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'footer' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_5524dcd27de298_13913067',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5524dcd27de298_13913067')) {function content_5524dcd27de298_13913067($_smarty_tpl) {?><?php echo $_smarty_tpl->tpl_vars['header']->value;?>
 
@@ -41,7 +42,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 " method="POST" class="table-form bigform">
     <input type="hidden" name="class" value="value"/>
     <table>
-      <caption class="title">请假申请</caption>
+      <caption class="title"><?php if (!$_smarty_tpl->tpl_vars['edit']->value) {?>请假申请<?php } else { ?>修改请假记录<?php }?></caption>
       <tr>
         <th>员工姓名</th>
         <td>
@@ -55,7 +56,7 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
  $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
 ?>
             <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
-"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+" <?php if ($_smarty_tpl->tpl_vars['edit']->value['staff_id']==$_smarty_tpl->tpl_vars['v']->value) {?>selected<?php }?>><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
 </option>
             <?php } ?>
           </select>

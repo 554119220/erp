@@ -14,9 +14,6 @@ use Think\Model\RelationModel;
 use Think\Model;
 
 class AdminModel extends Model{
-    public function _cunstruct(){
-    }
-
     /*查询管理员
      * @where 查询条件
      * @role  查询同一部门的管理员 
@@ -29,7 +26,8 @@ class AdminModel extends Model{
             if($roleList){
                 $roleList = implode(',',$roleList);
                 $where .= "role_id IN($roleList) $append";
-                $adminList = M('admin_user')->field('user_id,user_name')->where($where)->select();
+                $adminList = M('admin_user')->field('user_id,user_name')
+                    ->where($where)->select();
                 return $adminList;
             }
         }

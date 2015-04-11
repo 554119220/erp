@@ -16,11 +16,11 @@ use Think\Page;
 class CheckinginController extends PublicController {
     //@class_id  1请假 2迟到
     public function nav(){
-        $title = I('get.title',L('CHECKINGIN_MANAGE'));
-        $act = $_REQUEST['act'] ? $_REQUEST['act'] : 'payoff';
-        $Menu = D('Menu');
+        $title   = I('get.title',L('CHECKINGIN_MANAGE'));
+        $act     = $_REQUEST['act'] ? $_REQUEST['act'] : 'payoff';
+        $Menu    = D('Menu');
         $navlist = $Menu->nav('CheckingIn');
-        $url = substr(U(),0,strrpos(U(),'/'));
+        $url     = substr(U(),0,strrpos(U(),'/'));
         $this->assign('url',$url);
         $this->assign('act',$_REQUEST['act']);
         $this->assign('navlist',$navlist);
@@ -282,6 +282,44 @@ EOF;
         $this->display();
     }
 
+    //修改请假记录
+    public function editVacate(){
+        $checkId = intval($_REQUEST['check_id']);
+        if ($checkId) {
+            $do = M('oa_checkingin');
+            $behave = !$_REQUEST['behave'] ? 'edit' : $_REQUEST['behave'];
+            if ('edit' == $behave) {
+                $res = $do->where("check_id=$checkId")->find();
+                if ($res) {
+                    $res['start_time'] = date('Y-m-d H:i',$res['start_time']);
+                    $res['end_time']   = date('Y-m-d H:i',$res['end_time']);
+                    $staffList         = D('hrm')->staffListSelect(false,true);
+                    $this->nav();
+                    dump($res);exit;
+                    $this->assign('edit',$res);
+                    $this->assign('url',__CONTROLLER__.'/editVacate/behave/save');
+                    $this->assign('vacate',D('Checkingin')->typeList('parent_id=1'));
+                    $this->assign('staff_list',$staffList);
+                    $this->assign('role_list',
+                        D('roleManage')->roleList('','role_id,role_name'));
+                    $this->display('applyVacate');
+                }else{
+                    $this->error(L('NO_RECORD'));
+                }
+            }elseif('save' == $behave){
+                $do->create();
+                $res = $do->where("check_id=$checkId")->save();
+                if ($res) {
+                    $this->success(L('UPD_SUCCESS'));
+                }else{
+                    $this->error(L('UPD_ERROR'));
+                }
+            }
+        }else{
+            $this->error(L('NO_RECORD'));
+        }
+    }
+
     //考勤检索
     public function checkinginList(){
         $classId = I('get.class_id','');
@@ -304,7 +342,7 @@ EOF;
         $this->assign('report_time',date('Y-m'));
         $this->assign('dataUrl',__CONTROLLER__.'/checkinginList/');
         $this->assign('url',__CONTROLLER__.'/checkinginReport');
-        $this->display('vacateList');
+        $this->display('report');
     }
 
     /*考勤报表（结算工资使用）*/
@@ -321,18 +359,18 @@ EOF;
             $this->assign('role_list',D('roleManage')->roleList('','role_id,role_name'));
             $this->assign('title',L('CHECKINGIN_REPORT'));
             $this->assign('report_checkingin',true);
-            //$reportList = S($reportTime.'_checkingin');
+            $reportList = S($reportTime.'_checkingin');
             if (!$reportList) {
                 $reportList = D('Checkingin')->reportCheckingin($reportTime,$where);
                 if ($reportList) {
-                    //S($reportTime.'_checkingin',$reportList,600);
+                    S($reportTime.'_checkingin',$reportList,120);
                 }
             }
             $this->assign('saveUrl', __CONTROLLER__."/checkinginReport/act/save/report_time/"
                 .date('Y-m',$reportTime));
             $this->assign('report_time',date('Y-m',$reportTime));
             $this->assign('report_list',$reportList);
-            $this->display('vacateList');   
+            $this->display('report');   
         }elseif('save' == $act){
             $reportList = S($reportTime.'_checkingin');
             if (M('oa_checkingin_report')->where("report_time=$reportTime")->count()) {
