@@ -22,10 +22,15 @@ class HrmModel extends PublicModel{
         $eduFields       = 'edu_start,edu_end,school,major,graduater';
         $emergencyFields = 'contacter,relation,phone';
 
+        //$originStaff = $mStaff->field('staff_id,branch_id')->select(); 
+        //foreach ($originStaff as $v) {
+        //    $saveData = array('role_id'=>$v['branch_id']); 
+        //    $mStaff->where("staff_id={$v['staff_id']}")->save($saveData);
+        //}
+
         $where = "staff_id=$staffId";
         $baseInfo = $mStaff->alias('s')
-            ->join(array('LEFT JOIN __ADMIN_USER__ u ON u.user_id=s.user_id',
-                'LEFT JOIN __ROLE__ r On s.branch_id=r.role_id',
+            ->join(array('LEFT JOIN __ROLE__ r On s.role_id=r.role_id',
             ))->where($where)->field($baseFields)->select();
         $baseInfo = $baseInfo[0];
 
@@ -123,7 +128,7 @@ class HrmModel extends PublicModel{
             $ecSalt .= $passwdStr[mt_rand(0, strlen($passwdStr))];
         }
         $password = md5(md5($passwd).$ecSalt);
-        $actionList = M('role')->where("role_id={$info['branch_id']}")->getField('action_list');
+        $actionList = M('role')->where("role_id={$info['role_id']}")->getField('action_list');
         $data = array(
             'user_name'   => $info['staff_name'],
             'password'    => $password,
@@ -133,7 +138,7 @@ class HrmModel extends PublicModel{
             'status'      => 1,
             'add_time'    => $_SERVER['REQUEST_TIME'],
             'action_list' => $actionList,
-            'role_id'     => $info['branch_id'],
+            'role_id'     => $info['role_id'],
             'assign'      => 0
         );
         $code = M('admin_user')->add($data);
@@ -200,7 +205,7 @@ class HrmModel extends PublicModel{
         $fields = 's.staff_id,concat(s.greater,s.date_mark,s.staff_id) number,s.staff_name,s.sex,s.status,s.type,s.job_title,joined_date,r.role_name';
         $staffList = M('oa_staff_records')->alias('s')
             ->join(array(' LEFT JOIN __ADMIN_USER__ a ON a.user_id=s.user_id',
-                ' LEFT JOIN __ROLE__ r ON r.role_id=s.branch_id'))
+                ' LEFT JOIN __ROLE__ r ON r.role_id=s.role_id'))
                 ->field($fields)
                 ->where($where)->page($page)->order('joined_date DESC')
                 ->select();
@@ -279,7 +284,7 @@ class HrmModel extends PublicModel{
     public function simpleStaffInfo($where='',$change=false){
         if ($change) {
             $res = M('oa_staff_records')->alias('s')
-                ->join(array('LEFT JOIN __ROLE__ r ON s.branch_id=r.role_id'))
+                ->join(array('LEFT JOIN __ROLE__ r ON s.role_id=r.role_id'))
                 ->field('s.staff_id id,s.staff_name name,r.role_name')
                 ->where($where)->select();
             if ($res) {

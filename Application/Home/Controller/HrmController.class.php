@@ -329,7 +329,8 @@ class HrmController extends PublicController{
             $map['staff_name'] = $staffName;
         }
         if($roleId){
-            $where .= " AND s.branch_id=$roleId"; 
+            //部门
+            $where .= " AND s.role_id=$roleId"; 
             $map['role_id'] = $roleId;
         }
 
