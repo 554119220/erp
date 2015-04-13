@@ -102,7 +102,7 @@ table.gridtable td {
   /*background-color: #ffffff;*/
 }
 table.gridtable tr:hover {background: #EFEFEF;}
-
+table.gridtable tr:nth-child(even) { background: #f8f8f8;}
 /*================================*/
 
 /*bootstrap 复杂表格*/

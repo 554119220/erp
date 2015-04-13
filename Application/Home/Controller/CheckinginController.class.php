@@ -281,7 +281,7 @@ EOF;
         $this->nav();
         $this->assign('title',L('VACATE_LIST'));
         $this->assign('dataUrl',__CONTROLLER__.'/checkinginList/class_id/1');
-        $this->display();
+        $this->display('vacateList');
     }
 
     //修改请假记录

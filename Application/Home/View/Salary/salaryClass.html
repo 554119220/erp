@@ -54,7 +54,8 @@
               </tr>
               <tr style="display:none" id="staffSelect">
                 <td>
-                  <select name="participantSel" style="width:168px;" onchange="addChecked(this)">
+                  <select name="participantSel" style="width:168px;" 
+                    onchange="addChecked(this.name)">
                     <option value="0">选择员工</option>
                     {foreach from=$staff_list key=k item=v}
                     <option value="{$k}">{$v}</option>
@@ -80,9 +81,11 @@
       <tr>
         <th width="3%"></th>
         <th width="10%">账套名称</th>
+        <th width="10%">基本工资</th>
         <th width="37%">工资项</th>
         <th width="25%">人员选择</th>
         <th width="8%">添加时间</th>
+        <th width="8%">添加人</th>
         <th width="4%">操作</th>
       </tr>
       {if $salary_class}
@@ -90,13 +93,11 @@
       <tr>
         <td>{$smarty.foreach.i.iteration}</td>
         <td>{$val.class_name}</td>
-        <td>
-          {foreach from=$val.item_list item=i} {$i} {/foreach}
-        </td>
-        <td>
-          {foreach from=$val.participant item=p}{$p.staff_name} {/foreach}
-        </td>
+        <td>{$val.base_salary}</td>
+        <td>{foreach from=$val.item_list item=i} {$i} {/foreach} </td>
+        <td>{foreach from=$val.participant item=p}{$p.staff_name} {/foreach} </td>
         <td>{$val.add_time}</td>
+        <td>{$val.admin_name}</td>
         <td>
           <button class="btn btn-link" behave="edit" 
             onclick="editSalaryClass(this,{$val.class_id})"> 修改</button>
@@ -106,7 +107,7 @@
       {/foreach}
       {else}
       <tr>
-        <td colspan="6">还没有添加工资套账~</td>
+        <td colspan="8">还没有添加工资套账~</td>
       </tr>
       {/if}
     </table>

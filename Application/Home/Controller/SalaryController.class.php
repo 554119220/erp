@@ -427,7 +427,7 @@ class SalaryController extends PublicController {
         //}
         //没有保存上个月的待发提成记录执行下面代码
         if (!$commissionList) {
-        //针对员工提成规则
+            //针对员工提成规则
             //推广平台和销售部门
             if (!in_array($roleId,$memberSaler)) {
                 $commissionRule = D('Salary')->commissionRule('participant_type=2','c.*'); 
@@ -470,28 +470,28 @@ class SalaryController extends PublicController {
                 }
             }else{
                 //销售团队
-              if ($memberSalerCommission) {
-                  $roleCommissionRule = D('Salary')->commissionRule('participant_type=0');
-                  if ($roleCommissionRule) {
-                      foreach ($roleCommissionRule as $v) {
-                          $participant = unserialize($v['participant']);
-                          if (in_array($roleId,$participant)) {
-                              $commission = $v['commission'];
-                          }
-                      }
-                  }
-                  foreach ($staffList as $v) {
-                      $data[] = array_merge(
-                          array(
-                              'commission' => sprintf("%0.2f",$v['final_amount']*$commission),
-                              'phase'      => $phase,
-                              'add_time'   => $_SERVER['REQUEST_TIME'],
-                              'commission_proportion' => $commission,
-                          ),$v);
-                  }
-              }else{
-                  //没有销量
-              }
+                if ($memberSalerCommission) {
+                    $roleCommissionRule = D('Salary')->commissionRule('participant_type=0');
+                    if ($roleCommissionRule) {
+                        foreach ($roleCommissionRule as $v) {
+                            $participant = unserialize($v['participant']);
+                            if (in_array($roleId,$participant)) {
+                                $commission = $v['commission'];
+                            }
+                        }
+                    }
+                    foreach ($staffList as $v) {
+                        $data[] = array_merge(
+                            array(
+                                'commission' => sprintf("%0.2f",$v['final_amount']*$commission),
+                                'phase'      => $phase,
+                                'add_time'   => $_SERVER['REQUEST_TIME'],
+                                'commission_proportion' => $commission,
+                            ),$v);
+                    }
+                }else{
+                    //没有销量
+                }
             }
             $this->assign('type','wait');
             $this->assign('saveUrl',
@@ -568,7 +568,7 @@ class SalaryController extends PublicController {
         if (!$classId) {
             $itemList = D('Salary')->salaryItem('',0);
         }else{
-            $salaryClass = S($classId.'_salary_class');
+            //$salaryClass = S($classId.'_salary_class');
             if ($salaryClass) {
                 $itemList     = S($classId.'_item_list');
             }else{
@@ -578,8 +578,8 @@ class SalaryController extends PublicController {
                 $itemList     = $salaryClass['item_list'];
                 $salaryClass  = $this->salaryListInfo($salaryClass);
                 if ($salaryClass) {
-                    S($classId.'_salary_class',$salaryClass,600);
-                    S($classId.'_item_list',$itemList,6000);
+                    //S($classId.'_salary_class',$salaryClass,600);
+                    //S($classId.'_item_list',$itemList,600);
                 }    
             }
             $this->assign('participant',$salaryClass['participant']);
@@ -882,20 +882,20 @@ class SalaryController extends PublicController {
         if ($_REQUEST['class_id']) {
             $do = M('oa_salary_class');
             if ('edit' == $_REQUEST['behave']) {
-               $data = $do->where('class_id='.intval($_REQUEST['class_id']))->find();
-               if ($data) {
-                   $data['item_list'] = unserialize($data['item_list']);
-                   $this->assign('staff_list',D('hrm')->staffListSelect(0,1));
-                   $this->assign('role_list',D('RoleManage')->roleList('','role_id,role_name'));
-                   $this->assign('item_list',D('Salary')->salaryItem());
-                   $this->assign('salary_class',D('Salary')->salaryClass());
-                   $this->assign('url',__CONTROLLER__);
-                   $this->assign('info',$data);
-                   $res['main']      = $this->fetch('editSalaryClass');
-                   $this->ajaxReturn($res,'JSON');
-               }else{
-                   $this->error(L('UPD_ERROR'));
-               }
+                $data = $do->where('class_id='.intval($_REQUEST['class_id']))->find();
+                if ($data) {
+                    $data['item_list'] = unserialize($data['item_list']);
+                    $this->assign('staff_list',D('hrm')->staffListSelect(0,1));
+                    $this->assign('role_list',D('RoleManage')->roleList('','role_id,role_name'));
+                    $this->assign('item_list',D('Salary')->salaryItem());
+                    $this->assign('salary_class',D('Salary')->salaryClass());
+                    $this->assign('url',__CONTROLLER__);
+                    $this->assign('info',$data);
+                    $res['main']      = $this->fetch('editSalaryClass');
+                    $this->ajaxReturn($res,'JSON');
+                }else{
+                    $this->error(L('UPD_ERROR'));
+                }
             }elseif('save' == $_REQUEST['behave']){
                 $data             = $this->salaryClassCulumn();
                 $data['class_id'] = intval($_POST['class_id']);
@@ -1012,9 +1012,9 @@ class SalaryController extends PublicController {
                 $commissionRule['participant_name']
                     = unserialize($commissionRule['participant_name']);
                 foreach ($commissionRule['participant'] as $k=>$v) {
-                   $commissionRule['participant_name'][$k] =
-                       array('id'=>$v,
-                       'name'=>$commissionRule['participant_name'][$k]); 
+                    $commissionRule['participant_name'][$k] =
+                        array('id'=>$v,
+                            'name'=>$commissionRule['participant_name'][$k]); 
                 }
                 $_POST['tag']  = $commissionRule['participant_type'];
                 $item = array('部门','小组','员工');

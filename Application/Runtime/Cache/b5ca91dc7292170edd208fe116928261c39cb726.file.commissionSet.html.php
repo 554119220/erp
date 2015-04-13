@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-10 18:48:33
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-11 18:07:09
          compiled from ".\Application\Home\View\Salary\commissionSet.html" */ ?>
 <?php /*%%SmartyHeaderCode:26633552489ab6acfc3-00134939%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'b5ca91dc7292170edd208fe116928261c39cb726' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\commissionSet.html',
-      1 => 1428660243,
+      1 => 1428746749,
       2 => 'file',
     ),
   ),
@@ -192,7 +192,7 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
           <td width="60%">
           </tr>
           <tr id="identical" 
-            style="<?php if ($_smarty_tpl->tpl_vars['commissionRule']->value['proportion_type']==0) {?>display:block<?php }?>">
+            style="<?php if ($_smarty_tpl->tpl_vars['commissionRule']->value['proportion_type']==0) {?>display:''<?php }?>">
             <td>提成比例</td>
             <td colspan="3">
               <input type="text" name="identical_commission" 

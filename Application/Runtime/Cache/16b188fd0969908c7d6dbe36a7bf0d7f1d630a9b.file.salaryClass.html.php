@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-09 17:14:35
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-11 16:04:26
          compiled from ".\Application\Home\View\Salary\salaryClass.html" */ ?>
 <?php /*%%SmartyHeaderCode:152885524eb02895442-08960416%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '16b188fd0969908c7d6dbe36a7bf0d7f1d630a9b' => 
     array (
       0 => '.\\Application\\Home\\View\\Salary\\salaryClass.html',
-      1 => 1428566023,
+      1 => 1428739123,
       2 => 'file',
     ),
   ),
@@ -107,7 +107,8 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
               </tr>
               <tr style="display:none" id="staffSelect">
                 <td>
-                  <select name="participantSel" style="width:168px;" onchange="addChecked(this)">
+                  <select name="participantSel" style="width:168px;" 
+                    onchange="addChecked(this.name)">
                     <option value="0">选择员工</option>
                     <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
  $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
@@ -141,9 +142,11 @@ $_smarty_tpl->tpl_vars['v']->_loop = true;
       <tr>
         <th width="3%"></th>
         <th width="10%">账套名称</th>
+        <th width="10%">基本工资</th>
         <th width="37%">工资项</th>
         <th width="25%">人员选择</th>
         <th width="8%">添加时间</th>
+        <th width="8%">添加人</th>
         <th width="4%">操作</th>
       </tr>
       <?php if ($_smarty_tpl->tpl_vars['salary_class']->value) {?>
@@ -159,23 +162,23 @@ $_smarty_tpl->tpl_vars['val']->_loop = true;
 </td>
         <td><?php echo $_smarty_tpl->tpl_vars['val']->value['class_name'];?>
 </td>
-        <td>
-          <?php  $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['i']->_loop = false;
+        <td><?php echo $_smarty_tpl->tpl_vars['val']->value['base_salary'];?>
+</td>
+        <td><?php  $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['i']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['val']->value['item_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['i']->key => $_smarty_tpl->tpl_vars['i']->value) {
 $_smarty_tpl->tpl_vars['i']->_loop = true;
 ?> <?php echo $_smarty_tpl->tpl_vars['i']->value;?>
- <?php } ?>
-        </td>
-        <td>
-          <?php  $_smarty_tpl->tpl_vars['p'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['p']->_loop = false;
+ <?php } ?> </td>
+        <td><?php  $_smarty_tpl->tpl_vars['p'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['p']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['val']->value['participant']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['p']->key => $_smarty_tpl->tpl_vars['p']->value) {
 $_smarty_tpl->tpl_vars['p']->_loop = true;
 echo $_smarty_tpl->tpl_vars['p']->value['staff_name'];?>
- <?php } ?>
-        </td>
+ <?php } ?> </td>
         <td><?php echo $_smarty_tpl->tpl_vars['val']->value['add_time'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['val']->value['admin_name'];?>
 </td>
         <td>
           <button class="btn btn-link" behave="edit" 
@@ -189,7 +192,7 @@ echo $_smarty_tpl->tpl_vars['p']->value['staff_name'];?>
       <?php } ?>
       <?php } else { ?>
       <tr>
-        <td colspan="6">还没有添加工资套账~</td>
+        <td colspan="8">还没有添加工资套账~</td>
       </tr>
       <?php }?>
     </table>

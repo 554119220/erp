@@ -127,11 +127,6 @@ function editSalaryApprovalForm(id){
       });
 }
 
-/*修改工资审批人*/
-function editSalaryApproval(obj){
-
-}
-
 /*删除工资审批人*/
 function delSalaryApproval(obj){
   var url = obj.getAttribute('href');
